@@ -14,14 +14,17 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#0b3122",
-                        'primary-light': "#194a36",
+                        primary: "#24692D",
+                        'primary-light': "#2e7d38",
+                        'primary-dark': "#1b5223",
+                        'btn-navy': "#16255c",
+                        'brand-blue': "#1e3a8a",
                         secondary: "#f1f5f9",
                         accent: "#10b981",
                         danger: "#ef4444",
                     },
                     fontFamily: {
-                        sans: ["Kantumruy Pro", "sans-serif"],
+                        sans: ["'Kantumruy Pro'", "sans-serif"],
                     }
                 }
             }
@@ -29,19 +32,20 @@
     </script>
     <link rel="stylesheet" href="../styles/custom.css">
 </head>
-<body class="bg-slate-50 font-sans text-gray-800 flex h-screen overflow-hidden">
+<body class="bg-slate-50 font-sans text-gray-800 flex h-screen overflow-hidden text-[16px]">
     
     <!-- Sidebar -->
-    <aside class="bg-primary text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex">
-        <div class="p-6">
-            <h1 class="text-2xl font-bold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
+    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex">
+        <!-- Brand Title -->
+        <div class="p-5 px-6 flex items-center border-b border-white/10">
+            <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
         </div>
         
-        <nav class="flex-1 px-4 space-y-1">
+        <nav class="flex-1 px-4 space-y-1.5">
             <!-- ផ្ទាំងគ្រប់គ្រង -->
-            <a href="dashboard.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
+            <a href="home/dashboard.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-border-all w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-sm">ផ្ទាំងគ្រប់គ្រង</span>
+                <span class="ml-3 text-base">ផ្ទាំងគ្រប់គ្រង</span>
             </a>
             
             <!-- ការលក់ និង ចំណូល -->
@@ -49,21 +53,21 @@
                 <button onclick="toggleMenu('menu-sell')" class="w-full flex items-center justify-between p-3 bg-primary-light rounded-xl font-medium whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-money-bill w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-sm">ការលក់ និង ចំណូល</span>
+                        <span class="ml-3 text-base">ការលក់ និង ចំណូល</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs opacity-50" id="icon-menu-sell"></i>
                 </button>
                 <div id="menu-sell" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 block">
-                    <a href="empty.html" class="flex items-center text-white font-medium py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-white font-medium py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-file-invoice-dollar w-5 text-center opacity-60 mr-2 text-xs"></i> វិក្កយបត្រលក់
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-file-alt w-5 text-center opacity-60 mr-2 text-xs"></i> តារាងតម្លៃ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-users w-5 text-center opacity-60 mr-2 text-xs"></i> បញ្ជីអតិថិជន
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-credit-card w-5 text-center opacity-60 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
                     </a>
                 </div>
@@ -74,18 +78,18 @@
                 <button onclick="toggleMenu('menu-buy')" class="w-full flex items-center justify-between p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-cart-shopping w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-sm">ការទិញ និង ចំណាយ</span>
+                        <span class="ml-3 text-base">ការទិញ និង ចំណាយ</span>
                     </div>
                     <i class="fas fa-chevron-right text-xs opacity-50" id="icon-menu-buy"></i>
                 </button>
                 <div id="menu-buy" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 hidden">
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-file-invoice w-5 text-center opacity-60 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-truck w-5 text-center opacity-60 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-money-check-alt w-5 text-center opacity-60 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
                 </div>
@@ -96,18 +100,18 @@
                 <button onclick="toggleMenu('menu-stock')" class="w-full flex items-center justify-between p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-boxes-stacked w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-sm">ឃ្លាំង និង ស្តុកទំនិញ</span>
+                        <span class="ml-3 text-base">ឃ្លាំង និង ស្តុកទំនិញ</span>
                     </div>
                     <i class="fas fa-chevron-right text-xs opacity-50" id="icon-menu-stock"></i>
                 </button>
                 <div id="menu-stock" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 hidden">
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-60 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-60 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-sm transition-colors whitespace-nowrap">
+                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-60 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
                 </div>
@@ -116,18 +120,18 @@
             <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
             <a href="empty.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-chart-line w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-sm">របាយការណ៍ហិរញ្ញវត្ថុ</span>
+                <span class="ml-3 text-base">របាយការណ៍ហិរញ្ញវត្ថុ</span>
             </a>
             
             <!-- ការកំណត់ប្រព័ន្ធ -->
             <a href="empty.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-gear w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-sm">ការកំណត់ប្រព័ន្ធ</span>
+                <span class="ml-3 text-base">ការកំណត់ប្រព័ន្ធ</span>
             </a>
         </nav>
         
         <div class="p-4 border-t border-primary-light">
-            <a href="../../index.html" class="flex items-center text-sm hover:text-red-400 transition-colors">
+            <a href="../../index.html" class="flex items-center text-base hover:text-red-400 transition-colors">
                 <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
             </a>
         </div>
@@ -137,15 +141,9 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header -->
         <header class="bg-white px-8 py-4 flex justify-between items-center shadow-sm z-10">
-            <h2 class="text-xl font-bold text-gray-800">ទំព័រទទេ</h2>
+            <h2 class="text-xl font-semibold text-gray-800">ទំព័រទទេ</h2>
             
-            <div class="flex items-center space-x-6">
-                <!-- Language Switcher -->
-                <div class="flex bg-gray-100 rounded-full p-1 text-sm font-medium">
-                    <button class="bg-primary text-white px-3 py-1 rounded-full shadow">KH ខ្មែរ</button>
-                    <button class="text-gray-500 px-3 py-1 rounded-full hover:text-gray-700">EN</button>
-                </div>
-                
+            <div class="flex items-center space-x-4">
                 <!-- Create Button -->
                 <button class="bg-primary text-white px-4 py-2 rounded-lg flex items-center shadow hover:bg-primary-light transition">
                     <i class="fas fa-plus mr-2"></i> បង្កើត
@@ -160,15 +158,12 @@
                     </span>
                 </button>
                 
-                <!-- User Profile -->
-                <div class="flex items-center space-x-3 border-l pl-6">
-                    <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
-                        S
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold">Sarah Chen</p>
-                        <p class="text-xs text-gray-500">Administrator</p>
-                    </div>
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
                 </div>
             </div>
         </header>

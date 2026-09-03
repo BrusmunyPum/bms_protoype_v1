@@ -1,45 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMS Prototype - Login</title>
+    <title>ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម - ចូលប្រព័ន្ធ</title>
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: "#1d4ed8", // Customize your primary color
+                        primary: "#14213d",
+                        'brand-blue': "#1e3a8a",
+                        'btn-navy': "#16255c",
+                        'btn-hover': "#0f1a44",
+                    },
+                    fontFamily: {
+                        sans: ["'Kantumruy Pro'", "sans-serif"],
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="./src/styles/custom.css">
+    <style>
+        .custom-input-box {
+            position: relative;
+        }
+
+        .custom-input-box legend {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            padding: 0 6px;
+            margin-left: 10px;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">BMS Login</h2>
-        <form action="./src/pages/dashboard.html" method="GET">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="admin" required>
+
+<body class="bg-[#24692D] min-h-screen font-sans flex flex-col p-4 md:p-8 select-none">
+
+    <!-- Header / Brand Title -->
+    <header class="w-full flex items-center gap-3.5 mb-4 md:mb-6">
+        <!-- Modern Logo Icon -->
+        <div class="relative w-12 h-12 flex-shrink-0">
+            <img src="./src/assets/logo.svg" alt="Logo" class="w-full h-full rounded-full shadow-md object-contain" />
+        </div>
+
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-semibold text-white tracking-tight leading-[36px] drop-shadow-sm">
+                ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម
+            </h1>
+            <p class="text-[11px] md:text-xs font-normal text-white/90 tracking-wider uppercase mt-0.5">
+                BUSINESS MANAGEMENT SYSTEM
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content / Login Modal -->
+    <main class="flex-1 flex items-center justify-center">
+        <div
+            class="bg-white rounded-2xl shadow-xl border border-emerald-100/60 overflow-hidden w-full max-w-4xl grid grid-cols-1 md:grid-cols-2">
+
+            <!-- Left Side: City Skyline at Night -->
+            <div class="relative h-64 md:h-auto min-h-[360px] bg-slate-900 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80"
+                    alt="City Skyline"
+                    class="w-full h-full object-cover object-center transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
             </div>
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" required>
+
+            <!-- Right Side: Login Form -->
+            <div class="p-6 md:p-10 flex flex-col justify-between bg-slate-100">
+
+                <!-- Form Top Header -->
+                <div class="flex items-center justify-end">
+                    <!-- Cambodia Flag -->
+                    <div class="w-7 h-5 rounded overflow-hidden shadow-sm border border-gray-200" title="Cambodia">
+                        <svg viewBox="0 0 16 10" class="w-full h-full">
+                            <rect width="16" height="10" fill="#032ea6" />
+                            <rect y="2.5" width="16" height="5" fill="#e00025" />
+                            <!-- Angkor Wat Silhouette -->
+                            <g fill="#ffffff" transform="translate(5, 3) scale(0.6)">
+                                <path d="M5 0 L6 2 L6 6 L4 6 L4 2 Z" />
+                                <path d="M2 2 L3 3.5 L3 6 L1 6 L1 3.5 Z" />
+                                <path d="M8 2 L9 3.5 L9 6 L7 6 L7 3.5 Z" />
+                                <rect x="0" y="6" width="10" height="2" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Avatar & Welcome Title -->
+                <div class="text-center my-6">
+                    <div
+                        class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-slate-700 mb-3 shadow-sm border border-slate-200">
+                        <i class="fas fa-user text-2xl"></i>
+                    </div>
+                    <h2 class="text-xl font-semibold text-slate-800 mb-1">
+                        ចូលគណនីរបស់អ្នក
+                    </h2>
+                    <p class="text-xs font-normal text-slate-500">
+                        សូមបញ្ចូលលេខទូរស័ព្ទ ឬអ៊ីមែល និងពាក្យសម្ងាត់របស់លោកអ្នក
+                    </p>
+                </div>
+
+                <!-- Login Form -->
+                <form action="./src/pages/home/dashboard.html" method="GET" class="space-y-4">
+
+                    <!-- Username/Phone/Email Field -->
+                    <fieldset
+                        class="border border-slate-300 rounded-lg px-3.5 pb-2 pt-1 bg-white focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 transition-all shadow-sm">
+                        <legend class="text-[13px] text-slate-500 px-1 font-normal bg-white rounded">ទូរស័ព្ទ ឬអ៊ីមែល*</legend>
+                        <div class="flex items-center gap-2.5 pt-0.5">
+                            <i class="fas fa-user text-slate-400 text-base"></i>
+                            <input type="text" id="username" name="username" value="087600064"
+                                placeholder="បញ្ចូលលេខទូរស័ព្ទ ឬអ៊ីមែល" required
+                                class="w-full text-[16px] text-slate-800 outline-none bg-transparent font-normal" />
+                        </div>
+                    </fieldset>
+
+                    <!-- Password Field -->
+                    <fieldset
+                        class="border border-slate-300 rounded-lg px-3.5 pb-2 pt-1 bg-white focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 transition-all shadow-sm">
+                        <legend class="text-[13px] text-slate-500 px-1 font-normal bg-white rounded">ពាក្យសម្ងាត់*</legend>
+                        <div class="flex items-center gap-2.5 pt-0.5">
+                            <i class="fas fa-lock text-slate-400 text-base"></i>
+                            <input type="password" id="password" name="password" value="password123"
+                                placeholder="បញ្ចូលពាក្យសម្ងាត់" required
+                                class="w-full text-[16px] text-slate-800 outline-none bg-transparent tracking-widest font-normal" />
+                            <button type="button" id="togglePasswordBtn"
+                                class="text-slate-400 hover:text-slate-600 focus:outline-none"
+                                aria-label="បង្ហាញពាក្យសម្ងាត់">
+                                <i class="fas fa-eye text-base" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    <!-- Forgot Password Link -->
+                    <div class="flex justify-end pt-0.5">
+                        <a href="#"
+                            class="text-[14px] font-normal text-blue-600 hover:text-blue-700 transition-colors">
+                            ភ្លេចពាក្យសម្ងាត់?
+                        </a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit"
+                            class="w-full bg-btn-navy hover:bg-btn-hover text-white font-normal py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-[16px] flex items-center justify-center gap-2">
+                            <span>ចូលប្រព័ន្ធ</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-4"></div>
             </div>
-            <div class="flex items-center justify-between">
-                <button class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
-                    Sign In
-                </button>
-            </div>
-        </form>
-    </div>
-    
-    <!-- ES6 Module for Logic -->
-    <script type="module" src="./src/scripts/main.js"></script>
+        </div>
+    </main>
+
+    <!-- Interactive script for password toggle -->
+    <script>
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (togglePasswordBtn && passwordInput && eyeIcon) {
+            togglePasswordBtn.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                eyeIcon.classList.toggle('fa-eye', !isPassword);
+                eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+            });
+        }
+    </script>
 </body>
+
 </html>
