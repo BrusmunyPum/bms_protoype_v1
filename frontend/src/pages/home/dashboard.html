@@ -45,88 +45,88 @@
         
         <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
             <!-- ផ្ទាំងគ្រប់គ្រង -->
-            <a href="dashboard.html" class="flex items-center p-3 bg-primary rounded-xl font-normal whitespace-nowrap shadow-sm text-white">
+            <a href="dashboard.html" data-nav="dashboard" class="nav-item flex items-center p-3 bg-primary rounded-xl font-medium whitespace-nowrap shadow-sm text-white transition-colors">
                 <i class="fas fa-border-all w-6 text-center opacity-90"></i>
                 <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
             </a>
             
-            <!-- ការលក់ និង ចំណូល -->
+            <!-- ការលក់ -->
             <div>
-                <button onclick="toggleMenu('menu-sell')" class="w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-primary hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
-                        <span class="ml-3 text-[16px]">ការលក់ និង ចំណូល</span>
+                        <span class="ml-3 text-[16px]">ការលក់</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60" id="icon-menu-sell"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-sell"></i>
                 </button>
-                <div id="menu-sell" class="pl-11 pr-2 py-2 space-y-1 border-l border-white/15 ml-6 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../sales/invoices.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=sell-prices" data-nav="sell-prices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=sell-customers" data-nav="sell-customers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=sell-receipts" data-nav="sell-receipts" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
                     </a>
                 </div>
             </div>
 
-            <!-- ការទិញ និង ចំណាយ -->
+            <!-- ការទិញ -->
             <div>
-                <button onclick="toggleMenu('menu-buy')" class="w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-primary hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
-                        <span class="ml-3 text-[16px]">ការទិញ និង ចំណាយ</span>
+                        <span class="ml-3 text-[16px]">ការទិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60" id="icon-menu-buy"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-buy"></i>
                 </button>
-                <div id="menu-buy" class="pl-11 pr-2 py-2 space-y-1 border-l border-white/15 ml-6 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../empty.html?nav=buy-invoices" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=buy-suppliers" data-nav="buy-suppliers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=buy-expenses" data-nav="buy-expenses" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
                 </div>
             </div>
 
-            <!-- ឃ្លាំង និង ស្តុកទំនិញ -->
+            <!-- ស្តុកទំនិញ -->
             <div>
-                <button onclick="toggleMenu('menu-stock')" class="w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-primary hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <button id="btn-menu-stock" onclick="toggleMenu('menu-stock')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-boxes-stacked w-6 text-center opacity-80"></i>
-                        <span class="ml-3 text-[16px]">ឃ្លាំង និង ស្តុកទំនិញ</span>
+                        <span class="ml-3 text-[16px]">ស្តុកទំនិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60" id="icon-menu-stock"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-stock"></i>
                 </button>
-                <div id="menu-stock" class="pl-11 pr-2 py-2 space-y-1 border-l border-white/15 ml-6 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                <div id="menu-stock" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../empty.html?nav=stock-balance" data-nav="stock-balance" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=stock-catalog" data-nav="stock-catalog" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="../empty.html" class="flex items-center text-emerald-100/70 hover:text-white py-2 transition-colors whitespace-nowrap">
+                    <a href="../empty.html?nav=stock-movements" data-nav="stock-movements" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
                 </div>
             </div>
 
             <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
-            <a href="../empty.html" class="flex items-center p-3 text-emerald-100 hover:bg-primary hover:text-white rounded-xl transition-colors whitespace-nowrap">
+            <a href="../empty.html?nav=reports" data-nav="reports" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
                 <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
             </a>
             
             <!-- ការកំណត់ប្រព័ន្ធ -->
-            <a href="../empty.html" class="flex items-center p-3 text-emerald-100 hover:bg-primary hover:text-white rounded-xl transition-colors whitespace-nowrap">
+            <a href="../empty.html?nav=settings" data-nav="settings" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-gear w-6 text-center opacity-80"></i>
                 <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
             </a>
@@ -143,18 +143,13 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         
         <!-- Top Header -->
-        <header class="bg-white px-6 py-3.5 flex justify-between items-center shadow-sm z-10">
+        <header class="bg-white px-6 py-3.5 flex justify-between items-center shadow-sm z-10 min-h-[72px]">
             <div>
-                <h2 class="text-xl font-semibold text-gray-800">ផ្ទាំងគ្រប់គ្រងទូទៅ</h2>
+                <h2 class="text-xl font-semibold text-gray-800">ផ្ទាំងគ្រប់គ្រង</h2>
                 <p class="text-sm font-normal text-gray-500 mt-0.5">ស្វាគមន៍មកកាន់ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម BMS DigiTech</p>
             </div>
             
             <div class="flex items-center space-x-3 md:space-x-4">
-                <!-- Quick Create Button -->
-                <button onclick="openModal('createInvoiceModal')" class="bg-primary text-white px-4 py-2 rounded-xl flex items-center shadow hover:bg-primary-light transition text-[16px] font-normal">
-                    <i class="fas fa-plus mr-2 text-sm"></i> បង្កើតថ្មី
-                </button>
-                
                 <!-- Notification Bell -->
                 <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bell text-xl"></i>
@@ -176,7 +171,7 @@
 
         <!-- Dashboard Content Scrollable Area -->
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
-            <div class="max-w-[1400px] mx-auto w-full space-y-4">
+            <div class="w-full space-y-4">
 
                 <!-- Quick Action Bar -->
                 <div class="bg-white rounded-2xl p-3 px-4 shadow-sm border border-slate-100 flex flex-wrap items-center justify-between gap-3">
@@ -499,7 +494,7 @@
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
                                 <h3 class="font-semibold text-base text-slate-800">ការជូនដំណឹងស្តុកទំនិញជិតអស់</h3>
                             </div>
-                            <a href="../empty.html" class="text-sm font-normal text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
+                            <a href="../empty.html?nav=stock-balance" class="text-sm font-normal text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
                                 <span>មើលស្តុកទាំងអស់</span>
                                 <i class="fas fa-chevron-right text-xs"></i>
                             </a>
@@ -1034,23 +1029,11 @@
         </div>
     </div>
 
+    <!-- Sidebar Script -->
+    <script src="../../scripts/sidebar.js"></script>
+
     <!-- UI Scripts -->
     <script>
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            const icon = document.getElementById('icon-' + menuId);
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('block');
-                icon.classList.remove('fa-chevron-right');
-                icon.classList.add('fa-chevron-down');
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-right');
-            }
-        }
 
         function openModal(id) {
             const modal = document.getElementById(id);
