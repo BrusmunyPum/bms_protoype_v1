@@ -9,3 +9,48 @@ html, body, input, button, select, textarea {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* =========================================================
+   Hide all horizontal and vertical scrollbars application-wide
+   while keeping smooth scrolling functionality intact
+   ========================================================= */
+* {
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;     /* Firefox */
+}
+
+*::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar,
+table::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+/* =========================================================
+   Custom Dropdown Smooth Animation & Elevation
+   ========================================================= */
+.bms-custom-select {
+    position: relative;
+}
+
+.bms-custom-select-menu {
+    animation: bmsDropdownPop 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: top center;
+}
+
+@keyframes bmsDropdownPop {
+    0% {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

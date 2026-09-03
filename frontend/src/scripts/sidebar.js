@@ -215,6 +215,16 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Quotes / Price List
+            if (navId === 'sell-prices') {
+                try { sessionStorage.setItem('bms_active_nav', 'sell-prices'); } catch(err){}
+                if (window.location.pathname.endsWith('quotes.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('sell-prices');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -245,13 +255,16 @@ function initSidebarNav() {
 
     const isDashboard = window.location.pathname.endsWith('dashboard.html');
     const isInvoices = window.location.pathname.endsWith('invoices.html');
+    const isQuotes = window.location.pathname.endsWith('quotes.html');
     
-    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (savedNav || 'sell-invoices')));
+    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (savedNav || 'sell-invoices'))));
     
     if (isDashboard && !urlParam) {
         initialNav = 'dashboard';
     } else if (isInvoices && !urlParam) {
         initialNav = 'sell-invoices';
+    } else if (isQuotes && !urlParam) {
+        initialNav = 'sell-prices';
     }
     
     setActiveNavItem(initialNav);
