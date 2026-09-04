@@ -34,7 +34,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="../../styles/custom.css">
+    <link rel="stylesheet" href="../../../styles/custom.css">
 </head>
 
 <body class="bg-slate-50 font-sans text-gray-800 text-[16px] flex h-screen overflow-hidden select-none">
@@ -42,13 +42,13 @@
     <!-- Sidebar Navigation -->
     <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex flex-shrink-0">
         <!-- Brand Title -->
-        <div class="p-5 px-6 flex items-center border-b border-white/10">
+        <div class="h-[72px] px-6 flex items-center border-b border-white/10 flex-shrink-0">
             <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
         </div>
 
         <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
             <!-- ផ្ទាំងគ្រប់គ្រង -->
-            <a href="../home/dashboard.html" data-nav="dashboard"
+            <a href="../../home/dashboard.html" data-nav="dashboard"
                 class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl font-normal whitespace-nowrap transition-colors">
                 <i class="fas fa-border-all w-6 text-center opacity-90"></i>
                 <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
@@ -67,19 +67,19 @@
                 </button>
                 <div id="menu-sell"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
-                    <a href="invoices.html" data-nav="sell-invoices"
+                    <a href="invoice.html" data-nav="sell-invoices"
                         class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white font-medium rounded-xl shadow-sm transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice-dollar w-5 text-center mr-2 text-xs"></i> វិក្កយបត្រលក់
                     </a>
-                    <a href="quotes.html" data-nav="sell-prices"
+                    <a href="../quote/quote.html" data-nav="sell-prices"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
                     </a>
-                    <a href="../empty.html?nav=sell-customers" data-nav="sell-customers"
+                    <a href="../../empty.html?nav=sell-customers" data-nav="sell-customers"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
                     </a>
-                    <a href="../empty.html?nav=sell-receipts" data-nav="sell-receipts"
+                    <a href="../../empty.html?nav=sell-receipts" data-nav="sell-receipts"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
                     </a>
@@ -99,15 +99,15 @@
                 </button>
                 <div id="menu-buy"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../empty.html?nav=buy-invoices" data-nav="buy-invoices"
+                    <a href="../../empty.html?nav=buy-invoices" data-nav="buy-invoices"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="../empty.html?nav=buy-suppliers" data-nav="buy-suppliers"
+                    <a href="../../empty.html?nav=buy-suppliers" data-nav="buy-suppliers"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="../empty.html?nav=buy-expenses" data-nav="buy-expenses"
+                    <a href="../../empty.html?nav=buy-expenses" data-nav="buy-expenses"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
@@ -127,15 +127,15 @@
                 </button>
                 <div id="menu-stock"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../empty.html?nav=stock-balance" data-nav="stock-balance"
+                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="../empty.html?nav=stock-catalog" data-nav="stock-catalog"
+                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="../empty.html?nav=stock-movements" data-nav="stock-movements"
+                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
@@ -143,14 +143,14 @@
             </div>
 
             <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
-            <a href="../empty.html?nav=reports" data-nav="reports"
+            <a href="../../empty.html?nav=reports" data-nav="reports"
                 class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
                 <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
             </a>
 
             <!-- ការកំណត់ប្រព័ន្ធ -->
-            <a href="../empty.html?nav=settings" data-nav="settings"
+            <a href="../../empty.html?nav=settings" data-nav="settings"
                 class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                 <i class="fas fa-gear w-6 text-center opacity-80"></i>
                 <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
@@ -158,7 +158,7 @@
         </nav>
 
         <div class="p-4 border-t border-white/10">
-            <a href="../../../index.html"
+            <a href="../../../../index.html"
                 class="flex items-center text-[16px] text-emerald-100 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-primary">
                 <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
             </a>
@@ -169,19 +169,19 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header with Back Navigation -->
-        <header class="bg-white px-6 py-3.5 flex justify-between items-center shadow-sm z-10 min-h-[72px]">
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
             <div class="flex items-center gap-3">
-                <a href="invoices.html" class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" title="ត្រឡប់ទៅវិក្កយបត្រ">
+                <a href="invoice.html" class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" title="ត្រឡប់ទៅវិក្កយបត្រ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">បង្កើតវិក្កយបត្រលក់ថ្មី</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">បង្កើតវិក្កយបត្រលក់ថ្មី</h2>
                 </div>
             </div>
 
             <!-- Top Action Buttons -->
             <div class="flex items-center space-x-2.5">
-                <a href="invoices.html"
+                <a href="invoice.html"
                     class="h-10 px-4 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center">
                     បោះបង់
                 </a>
@@ -484,7 +484,7 @@
 
                 <!-- Bottom Action Buttons -->
                 <div class="flex items-center justify-end gap-3 pt-2 pb-6">
-                    <a href="invoices.html"
+                    <a href="invoice.html"
                         class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
                         បោះបង់
                     </a>
@@ -675,15 +675,15 @@
             showToast(msg, 'success');
 
             setTimeout(() => {
-                window.location.href = 'invoices.html';
+                window.location.href = 'invoice.html';
             }, 1000);
         }
     </script>
 
     <!-- Custom UI Components Script -->
-    <script src="../../scripts/ui-components.js"></script>
+    <script src="../../../scripts/ui-components.js"></script>
     <!-- Unified Sidebar Script -->
-    <script src="../../scripts/sidebar.js"></script>
+    <script src="../../../scripts/sidebar.js"></script>
 </body>
 
 </html>

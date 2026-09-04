@@ -208,7 +208,7 @@ function initSidebarNav() {
             // If user clicked Sales Invoices
             if (navId === 'sell-invoices') {
                 try { sessionStorage.setItem('bms_active_nav', 'sell-invoices'); } catch(err){}
-                if (window.location.pathname.endsWith('invoices.html')) {
+                if (window.location.pathname.endsWith('invoice.html') || window.location.pathname.endsWith('invoices.html')) {
                     e.preventDefault();
                     setActiveNavItem('sell-invoices');
                 }
@@ -218,7 +218,7 @@ function initSidebarNav() {
             // If user clicked Quotes / Price List
             if (navId === 'sell-prices') {
                 try { sessionStorage.setItem('bms_active_nav', 'sell-prices'); } catch(err){}
-                if (window.location.pathname.endsWith('quotes.html')) {
+                if (window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html')) {
                     e.preventDefault();
                     setActiveNavItem('sell-prices');
                 }
@@ -254,8 +254,8 @@ function initSidebarNav() {
     try { savedNav = sessionStorage.getItem('bms_active_nav'); } catch(e) {}
 
     const isDashboard = window.location.pathname.endsWith('dashboard.html');
-    const isInvoices = window.location.pathname.endsWith('invoices.html');
-    const isQuotes = window.location.pathname.endsWith('quotes.html');
+    const isInvoices = window.location.pathname.includes('/invoice/') || window.location.pathname.endsWith('invoice.html') || window.location.pathname.endsWith('invoices.html');
+    const isQuotes = window.location.pathname.includes('/quote/') || window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html');
     
     let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (savedNav || 'sell-invoices'))));
     
