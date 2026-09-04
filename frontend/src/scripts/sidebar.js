@@ -961,18 +961,44 @@ function initGlobalNotifications() {
 
             flyout.innerHTML = `
                 <!-- Header -->
-                <div class="p-3.5 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
+                <div class="p-3 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-bold text-slate-800">ការជូនដំណឹង</h4>
-                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">4 ថ្មី</span>
+                        <div class="w-7 h-7 rounded-lg bg-emerald-100/70 text-primary flex items-center justify-center text-xs">
+                            <i class="fas fa-bolt-lightning"></i>
+                        </div>
+                        <h4 class="text-xs font-bold text-slate-800">មជ្ឈមណ្ឌលសកម្មភាព</h4>
                     </div>
-                    <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] font-medium text-primary hover:underline transition">
-                        <i class="fas fa-check-double mr-1"></i> អានទាំងអស់
+                    <button type="button" onclick="window.BMSActionTracker && window.BMSActionTracker.resetToDefault()" 
+                        class="text-[11px] font-medium text-slate-500 hover:text-rose-600 transition flex items-center gap-1.5 px-2 py-1 rounded-lg hover:bg-rose-50 cursor-pointer" 
+                        title="កំណត់ទិន្នន័យ និងសកម្មភាពត្រឡប់ទៅសភាពដើមដំបូង">
+                        <i class="fas fa-rotate-left text-[10px]"></i>
+                        <span>កំណត់ឡើងវិញ</span>
                     </button>
                 </div>
 
-                <!-- Notification List -->
-                <div class="divide-y divide-slate-50 max-h-96 overflow-y-auto">
+                <!-- Segmented Tabs (Action Timeline vs Notifications) -->
+                <div class="flex border-b border-slate-100 bg-slate-50/50">
+                    <button type="button" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
+                        class="flex-1 py-2 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fas fa-clock-rotate-left text-xs"></i>
+                        <span>ដំណើរការសកម្មភាព</span>
+                        <span id="bmsActionCountBadge" class="px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800">3 សកម្មភាព</span>
+                    </button>
+                    <button type="button" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
+                        class="flex-1 py-2 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fas fa-bell text-xs"></i>
+                        <span>ការជូនដំណឹង</span>
+                        <span id="bmsNotifCountBadge" class="px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">4 ថ្មី</span>
+                    </button>
+                </div>
+
+                <!-- Tab 1: Action Timeline List -->
+                <div id="bmsActionTimelineList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto">
+                    <!-- Injected dynamically by BMSActionTracker -->
+                </div>
+
+                <!-- Tab 2: Notification List -->
+                <div id="bmsNotificationItemsList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto hidden">
                     <!-- Notification 1 -->
                     <a href="${invoiceUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
                         <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
@@ -1039,11 +1065,14 @@ function initGlobalNotifications() {
                 </div>
 
                 <!-- Footer -->
-                <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 text-center">
-                    <a href="${allNotifsUrl}" class="text-xs font-semibold text-primary hover:text-primary-dark transition flex items-center justify-center gap-1.5">
-                        <span>មើលការជូនដំណឹងទាំងអស់</span>
-                        <i class="fas fa-arrow-right text-[10px]"></i>
-                    </a>
+                <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                    <span class="flex items-center gap-1.5 text-slate-500">
+                        <i class="fas fa-rotate text-emerald-600 text-[10px]"></i>
+                        <span>ទិន្នន័យនឹងវិលទៅដើមពេល Refresh (F5)</span>
+                    </span>
+                    <button type="button" onclick="window.BMSActionTracker && window.BMSActionTracker.resetToDefault()" class="text-rose-600 hover:underline font-medium cursor-pointer">
+                        កំណត់ឡើងវិញ
+                    </button>
                 </div>
             `;
             wrapper.appendChild(flyout);
@@ -1062,6 +1091,10 @@ function initGlobalNotifications() {
             if (isHidden) {
                 flyout.classList.remove('hidden');
                 btn.setAttribute('aria-expanded', 'true');
+                if (window.BMSActionTracker) {
+                    window.BMSActionTracker.renderTimeline('bmsActionTimelineList');
+                    window.BMSActionTracker.updateBadge();
+                }
             } else {
                 flyout.classList.add('hidden');
                 btn.setAttribute('aria-expanded', 'false');

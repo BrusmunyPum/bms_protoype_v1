@@ -1458,6 +1458,21 @@
             }
         }
 
+        window.resetInvoicesToDefault = function() {
+            INVOICES_DATA[0].paid = 1250; INVOICES_DATA[0].status = 'paid';
+            INVOICES_DATA[1].paid = 0; INVOICES_DATA[1].status = 'pending';
+            INVOICES_DATA[2].paid = 0; INVOICES_DATA[2].status = 'overdue';
+            INVOICES_DATA[3].paid = 450; INVOICES_DATA[3].status = 'pending';
+            INVOICES_DATA[4].paid = 0; INVOICES_DATA[4].status = 'draft';
+            resetFilters();
+        };
+
+        window.addEventListener('bmsActionReset', () => {
+            if (typeof window.resetInvoicesToDefault === 'function') {
+                window.resetInvoicesToDefault();
+            }
+        });
+
         // On Page Load
         document.addEventListener('DOMContentLoaded', () => {
             renderCalendarGrid();

@@ -947,6 +947,15 @@
 
             pendingRemaining = Math.max(0, pendingRemaining - 1);
             updatePendingDisplay();
+            if (window.BMSActionTracker) {
+                window.BMSActionTracker.record({
+                    type: 'approve',
+                    title: `បានអនុម័តសំណើ៖ ${name}`,
+                    detail: `ប្រតិបត្តិការ #${rowId} ត្រូវបានអនុម័តដោយ សុខ ចាន់ថន`,
+                    badge: 'បានអនុម័ត',
+                    badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                });
+            }
             showToast(`បានអនុម័ត ${name} ដោយជោគជ័យ`, 'success');
         }
 
@@ -973,6 +982,16 @@
 
                     pendingRemaining = Math.max(0, pendingRemaining - 1);
                     updatePendingDisplay();
+
+                    if (window.BMSActionTracker) {
+                        window.BMSActionTracker.record({
+                            type: 'reject',
+                            title: `បានបដិសេធសំណើ៖ ${name}`,
+                            detail: `ប្រតិបត្តិការ #${rowId} ត្រូវបានបដិសេធដោយ សុខ ចាន់ថន`,
+                            badge: 'បានបដិសេធ',
+                            badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200/60'
+                        });
+                    }
                     showToast(`បានបដិសេធ ${name} រួចរាល់`, 'error');
                 }
             });
@@ -999,6 +1018,16 @@
                     });
                     pendingRemaining = 0;
                     updatePendingDisplay();
+
+                    if (window.BMSActionTracker) {
+                        window.BMSActionTracker.record({
+                            type: 'approve_all',
+                            title: 'បានអនុម័តរាល់ប្រតិបត្តិការទាំងអស់',
+                            detail: 'បានអនុម័ត 5 សំណើដែលកំពុងរង់ចាំក្នុងពេលតែមួយ',
+                            badge: 'អនុម័តទាំងអស់',
+                            badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                        });
+                    }
                     showToast('បានអនុម័តរាល់ប្រតិបត្តិការទាំងអស់ដោយជោគជ័យ!', 'success');
                 }
             });
@@ -1008,11 +1037,44 @@
             const kpi = document.getElementById('kpiPendingCount');
             if (kpi) kpi.textContent = `${pendingRemaining} ប្រតិបត្តិការ`;
             const btn = document.getElementById('btnApproveAll');
-            if (btn && pendingRemaining === 0) {
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            if (btn) {
+                if (pendingRemaining === 0) {
+                    btn.disabled = true;
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
             }
         }
+
+        window.resetApprovalsToDefault = function() {
+            pendingRemaining = 5;
+            APPROVALS_DATA.forEach((item, index) => {
+                item.status = index === 5 ? 'rejected' : 'pending';
+                const row = document.getElementById('row-' + item.id);
+                if (row) {
+                    const badge = row.querySelector('.status-badge');
+                    if (badge) {
+                        if (item.status === 'pending') {
+                            badge.className = 'status-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200/60';
+                            badge.innerHTML = '<i class="fas fa-hourglass-half text-[10px]"></i> រង់ចាំពិនិត្យ';
+                        } else if (item.status === 'rejected') {
+                            badge.className = 'status-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-rose-50 text-rose-700 border border-rose-200/60';
+                            badge.innerHTML = '<i class="fas fa-xmark text-[10px]"></i> បានបដិសេធ';
+                        }
+                    }
+                }
+            });
+            updatePendingDisplay();
+        };
+
+        window.addEventListener('bmsActionReset', () => {
+            if (typeof window.resetApprovalsToDefault === 'function') {
+                window.resetApprovalsToDefault();
+            }
+        });
+
 
         // Date Picker Implementation (Standard DIGITECHKH)
         let currentCalMonth = 8; // September (0-indexed)
