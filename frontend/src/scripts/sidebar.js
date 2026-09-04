@@ -225,6 +225,16 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Customers
+            if (navId === 'sell-customers') {
+                try { sessionStorage.setItem('bms_active_nav', 'sell-customers'); } catch(err){}
+                if (window.location.pathname.endsWith('customer.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('sell-customers');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -256,8 +266,9 @@ function initSidebarNav() {
     const isDashboard = window.location.pathname.endsWith('dashboard.html');
     const isInvoices = window.location.pathname.includes('/invoice/') || window.location.pathname.endsWith('invoice.html') || window.location.pathname.endsWith('invoices.html');
     const isQuotes = window.location.pathname.includes('/quote/') || window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html');
+    const isCustomers = window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html');
     
-    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (savedNav || 'sell-invoices'))));
+    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (savedNav || 'sell-customers')))));
     
     if (isDashboard && !urlParam) {
         initialNav = 'dashboard';
@@ -265,6 +276,8 @@ function initSidebarNav() {
         initialNav = 'sell-invoices';
     } else if (isQuotes && !urlParam) {
         initialNav = 'sell-prices';
+    } else if (isCustomers && !urlParam) {
+        initialNav = 'sell-customers';
     }
     
     setActiveNavItem(initialNav);
