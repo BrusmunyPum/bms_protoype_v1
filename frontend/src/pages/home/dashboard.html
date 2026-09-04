@@ -707,36 +707,6 @@
         </div>
     </div>
 
-    <!-- Notification Drawer / Flyout -->
-    <div id="notificationDrawer" class="fixed top-16 right-8 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 p-4 z-50 hidden animate-in slide-in-from-top-2 duration-200 text-[16px]">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <h4 class="text-base font-semibold text-slate-800">ការជូនដំណឹង (៣)</h4>
-            <button onclick="toggleNotifications()" class="text-gray-400 hover:text-gray-600 text-sm">បិទ</button>
-        </div>
-        <div class="py-2 divide-y divide-slate-50 text-sm font-normal space-y-2">
-            <div class="pt-2 flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                <div>
-                    <p class="text-slate-700 font-normal">វិក្កយបត្រ #893758 ត្រូវបានទូទាត់ $12,800</p>
-                    <span class="text-xs text-gray-400">១០ នាទីមុន</span>
-                </div>
-            </div>
-            <div class="pt-2 flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
-                <div>
-                    <p class="text-slate-700 font-normal">ស្តុក iPhone 15 Pro Max នៅសល់តែ ៣ គ្រឿង</p>
-                    <span class="text-xs text-gray-400">១ ម៉ោងមុន</span>
-                </div>
-            </div>
-            <div class="pt-2 flex items-start gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></span>
-                <div>
-                    <p class="text-slate-700 font-normal">អតិថិជនថ្មី Emma Thompson បានចុះឈ្មោះ</p>
-                    <span class="text-xs text-gray-400">៣ ម៉ោងមុន</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Sidebar Script -->
     <script src="../../scripts/sidebar.js"></script>
@@ -760,10 +730,6 @@
             }
         }
 
-        function toggleNotifications() {
-            const drawer = document.getElementById('notificationDrawer');
-            drawer.classList.toggle('hidden');
-        }
 
         function showDialog(message, title = 'ជោគជ័យ', type = 'success') {
             const dialogTitle = document.getElementById('dialogTitle');
