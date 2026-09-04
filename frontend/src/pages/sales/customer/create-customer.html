@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMS DigiTech - បង្កើតអតិថិជនថ្មី</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#24692D",
+                        'primary-light': "#2e7d38",
+                        'primary-dark': "#1b5223",
+                        'btn-navy': "#16255c",
+                        'brand-blue': "#1e3a8a",
+                        secondary: "#f1f5f9",
+                        accent: "#10b981",
+                        danger: "#ef4444",
+                    },
+                    fontFamily: {
+                        sans: ["'Kantumruy Pro'", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../../styles/custom.css">
+</head>
+<body class="bg-slate-50 font-sans text-gray-800 flex h-screen overflow-hidden text-[16px]">
+    
+    <!-- Sidebar -->
+    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex flex-shrink-0">
+        <!-- Brand Header: Fixed 72px -->
+        <div class="h-[72px] px-6 flex items-center border-b border-white/10 flex-shrink-0">
+            <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
+        </div>
+        
+        <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
+            <!-- ផ្ទាំងគ្រប់គ្រង -->
+            <a href="../../home/dashboard.html" data-nav="dashboard" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl font-normal whitespace-nowrap transition-colors">
+                <i class="fas fa-border-all w-6 text-center opacity-90"></i>
+                <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
+            </a>
+            
+            <!-- ការលក់ -->
+            <div>
+                <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')" class="nav-parent w-full flex items-center justify-between p-3 text-white bg-white/10 rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការលក់</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-200" id="icon-menu-sell"></i>
+                </button>
+                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
+                    <a href="../invoice/invoice.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
+                    </a>
+                    <a href="../quote/quote.html" data-nav="sell-prices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
+                    </a>
+                    <a href="customer.html" data-nav="sell-customers" class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white rounded-xl font-medium shadow-sm transition-all whitespace-nowrap">
+                        <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
+                    </a>
+                    <a href="../../empty.html?nav=sell-receipts" data-nav="sell-receipts" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
+                    </a>
+                </div>
+            </div>
+
+            <!-- ការទិញ -->
+            <div>
+                <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការទិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-buy"></i>
+                </button>
+                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=buy-invoices" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
+                    </a>
+                    <a href="../../empty.html?nav=buy-suppliers" data-nav="buy-suppliers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
+                    </a>
+                    <a href="../../empty.html?nav=buy-expenses" data-nav="buy-expenses" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
+                    </a>
+                </div>
+            </div>
+
+            <!-- ស្តុកទំនិញ -->
+            <div>
+                <button id="btn-menu-stock" onclick="toggleMenu('menu-stock')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-boxes-stacked w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ស្តុកទំនិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-stock"></i>
+                </button>
+                <div id="menu-stock" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
+                    </a>
+                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
+                    </a>
+                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
+                    </a>
+                </div>
+            </div>
+
+            <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
+            <a href="../../empty.html?nav=reports" data-nav="reports" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
+            </a>
+            
+            <!-- ការកំណត់ប្រព័ន្ធ -->
+            <a href="../../empty.html?nav=settings" data-nav="settings" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-gear w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
+            </a>
+        </nav>
+        
+        <div class="p-4 border-t border-white/10">
+            <a href="../../../../index.html" class="flex items-center text-[16px] text-emerald-100 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-primary">
+                <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Top Header: Fixed 72px -->
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
+            <div class="flex items-center gap-3">
+                <a href="customer.html" class="w-10 h-10 rounded-xl hover:bg-slate-100 text-slate-600 flex items-center justify-center transition cursor-pointer" title="ត្រឡប់ក្រោយ">
+                    <i class="fas fa-arrow-left text-base"></i>
+                </a>
+                <div>
+                    <h2 class="text-xl font-medium text-slate-800 leading-tight">បង្កើតអតិថិជនថ្មី</h2>
+                    <p class="text-[14px] font-normal text-slate-400 mt-0.5">បញ្ចូលព័ត៌មានអតិថិជន និងព័ត៌មានលម្អិតទំនាក់ទំនង</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <!-- Notification Bell -->
+                <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </button>
+                
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-3 md:pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Form Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
+            <div class="w-full space-y-5">
+                
+                <!-- Section 1: Customer Type & General Info -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <h3 class="text-[17px] font-medium text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+                        <i class="fas fa-user-tag text-primary text-sm"></i>
+                        <span>១. ព័ត៌មានទូទៅរបស់អតិថិជន</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- Customer Code -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">លេខកូដអតិថិជន <span class="text-rose-500">*</span></label>
+                            <input type="text" id="customerCode" value="CUS-2026-009" readonly
+                                class="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-[16px] text-slate-700 font-mono font-normal focus:outline-none cursor-not-allowed">
+                        </div>
+
+                        <!-- Customer Type Custom Dropdown -->
+                        <div class="relative bms-custom-select" id="createCustomerTypeContainer">
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">ប្រភេទអតិថិជន <span class="text-rose-500">*</span></label>
+                            <input type="hidden" id="custTypeInput" value="company">
+                            <button type="button" onclick="toggleCustomDropdown('createCustomerTypeContainer')"
+                                class="w-full h-11 px-4 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-[16px] flex items-center justify-between transition focus:outline-none focus:border-primary cursor-pointer">
+                                <span class="selected-label text-slate-800 font-normal flex items-center gap-2">
+                                    <i class="fas fa-building text-blue-500 text-sm"></i> ក្រុមហ៊ុន / សហគ្រាស
+                                </span>
+                                <i class="fas fa-chevron-down text-slate-400 text-xs bms-custom-select-arrow transition-transform"></i>
+                            </button>
+
+                            <div class="bms-custom-select-menu absolute left-0 top-full mt-1.5 w-full bg-white rounded-2xl shadow-xl border border-slate-100 py-1.5 z-50 hidden text-[15px]">
+                                <button type="button" onclick="selectCustomOption('createCustomerTypeContainer', 'company', 'ក្រុមហ៊ុន / សហគ្រាស')" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-normal">
+                                    <span class="flex items-center gap-2.5"><i class="fas fa-building text-blue-500 w-4 text-center"></i> ក្រុមហ៊ុន / សហគ្រាស</span>
+                                    <i class="fas fa-check text-primary text-sm checkmark"></i>
+                                </button>
+                                <button type="button" onclick="selectCustomOption('createCustomerTypeContainer', 'individual', 'បុគ្គលទូទៅ')" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-normal">
+                                    <span class="flex items-center gap-2.5"><i class="fas fa-user text-emerald-500 w-4 text-center"></i> បុគ្គលទូទៅ</span>
+                                    <i class="fas fa-check text-primary text-sm checkmark opacity-0"></i>
+                                </button>
+                                <button type="button" onclick="selectCustomOption('createCustomerTypeContainer', 'vip', 'អតិថិជន VIP / ដៃគូ')" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-normal">
+                                    <span class="flex items-center gap-2.5"><i class="fas fa-crown text-amber-500 w-4 text-center"></i> អតិថិជន VIP / ដៃគូ</span>
+                                    <i class="fas fa-check text-primary text-sm checkmark opacity-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Status Custom Dropdown -->
+                        <div class="relative bms-custom-select" id="createStatusContainer">
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">ស្ថានភាព <span class="text-rose-500">*</span></label>
+                            <input type="hidden" id="custStatusInput" value="active">
+                            <button type="button" onclick="toggleCustomDropdown('createStatusContainer')"
+                                class="w-full h-11 px-4 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-[16px] flex items-center justify-between transition focus:outline-none focus:border-primary cursor-pointer">
+                                <span class="selected-label text-emerald-700 font-normal flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> សកម្ម
+                                </span>
+                                <i class="fas fa-chevron-down text-slate-400 text-xs bms-custom-select-arrow transition-transform"></i>
+                            </button>
+
+                            <div class="bms-custom-select-menu absolute left-0 top-full mt-1.5 w-full bg-white rounded-2xl shadow-xl border border-slate-100 py-1.5 z-50 hidden text-[15px]">
+                                <button type="button" onclick="selectCustomOption('createStatusContainer', 'active', 'សកម្ម')" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-normal">
+                                    <span class="flex items-center gap-2.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> សកម្ម</span>
+                                    <i class="fas fa-check text-primary text-sm checkmark"></i>
+                                </button>
+                                <button type="button" onclick="selectCustomOption('createStatusContainer', 'inactive', 'អសកម្ម')" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-normal">
+                                    <span class="flex items-center gap-2.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> អសកម្ម</span>
+                                    <i class="fas fa-check text-primary text-sm checkmark opacity-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Customer Full Name -->
+                        <div class="md:col-span-2">
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">ឈ្មោះអតិថិជន / ឈ្មោះក្រុមហ៊ុន <span class="text-rose-500">*</span></label>
+                            <input type="text" id="customerName" placeholder="ឧទាហរណ៍៖ ក្រុមហ៊ុន សុខា ត្រេឌីង ឯ.ក"
+                                class="w-full h-11 px-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-normal">
+                        </div>
+
+                        <!-- Tax Identification Number (VATTIN) -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">លេខសម្គាល់ពន្ធ (VATTIN)</label>
+                            <input type="text" id="customerTaxId" placeholder="ឧទាហរណ៍៖ K001-90234857"
+                                class="w-full h-11 px-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-mono font-normal">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Contact Information & Address -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <h3 class="text-[17px] font-medium text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+                        <i class="fas fa-address-book text-primary text-sm"></i>
+                        <span>២. ព័ត៌មានទំនាក់ទំនង និងអាសយដ្ឋាន</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Phone Number -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">លេខទូរស័ព្ទទំនាក់ទំនង <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="text" id="customerPhone" placeholder="012 345 678"
+                                    class="w-full h-11 pl-11 pr-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">អាសយដ្ឋានអ៊ីមែល</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="email" id="customerEmail" placeholder="example@company.com"
+                                    class="w-full h-11 pl-11 pr-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Full Address -->
+                        <div class="md:col-span-2">
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">អាសយដ្ឋានលម្អិត</label>
+                            <textarea id="customerAddress" rows="3" placeholder="ផ្ទះលេខ, ផ្លូវ, សង្កាត់/ឃុំ, ខណ្ឌ/ស្រុក, រាជធានី/ខេត្ត..."
+                                class="w-full p-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-normal"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Financial & Credit Terms -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <h3 class="text-[17px] font-medium text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+                        <i class="fas fa-credit-card text-primary text-sm"></i>
+                        <span>៣. លក្ខខណ្ឌឥណទាន និងចំណាំ</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Credit Limit -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">កម្រិតកំណត់ឥណទាន ($)</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">$</span>
+                                <input type="number" id="customerCreditLimit" placeholder="0.00" value="5000"
+                                    class="w-full h-11 pl-9 pr-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 focus:outline-none focus:border-primary transition font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Payment Term Days -->
+                        <div>
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">រយៈពេលទូទាត់អនុញ្ញាត (ថ្ងៃ)</label>
+                            <div class="relative">
+                                <input type="number" id="customerPaymentTerms" placeholder="30" value="30"
+                                    class="w-full h-11 px-4 pr-12 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 focus:outline-none focus:border-primary transition font-normal">
+                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-[15px] font-normal">ថ្ងៃ</span>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="md:col-span-2">
+                            <label class="block text-[15px] font-normal text-slate-700 mb-2">កំណត់ចំណាំបន្ថែម</label>
+                            <textarea id="customerNotes" rows="2" placeholder="ព័ត៌មានបន្ថែម ឬលក្ខខណ្ឌពិសេស..."
+                                class="w-full p-4 bg-white border border-slate-200 rounded-xl text-[16px] text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary transition font-normal"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Action Buttons at Bottom -->
+                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                    <a href="customer.html" class="h-11 px-6 bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 rounded-xl flex items-center transition text-[16px] font-medium cursor-pointer">
+                        <span>បោះបង់</span>
+                    </a>
+                    <button onclick="saveCustomerForm()" class="h-11 px-7 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm transition text-[16px] font-medium cursor-pointer">
+                        <span>រក្សាទុកទិន្នន័យ</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../../scripts/sidebar.js"></script>
+    <script src="../../../scripts/ui-components.js"></script>
+    <script>
+        function saveCustomerForm() {
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+
+            if (!name) {
+                showToast('សូមបញ្ចូលឈ្មោះអតិថិជន ឬក្រុមហ៊ុន', 'warning');
+                document.getElementById('customerName').focus();
+                return;
+            }
+
+            if (!phone) {
+                showToast('សូមបញ្ចូលលេខទូរស័ព្ទទំនាក់ទំនង', 'warning');
+                document.getElementById('customerPhone').focus();
+                return;
+            }
+
+            showToast('បានបង្កើតអតិថិជនថ្មីដោយជោគជ័យ!', 'success');
+            setTimeout(() => {
+                window.location.href = 'customer.html';
+            }, 900);
+        }
+    </script>
+</body>
+</html>

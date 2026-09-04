@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMS DigiTech - បញ្ជីអតិថិជន</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#24692D",
+                        'primary-light': "#2e7d38",
+                        'primary-dark': "#1b5223",
+                        'btn-navy': "#16255c",
+                        'brand-blue': "#1e3a8a",
+                        secondary: "#f1f5f9",
+                        accent: "#10b981",
+                        danger: "#ef4444",
+                    },
+                    fontFamily: {
+                        sans: ["'Kantumruy Pro'", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../../styles/custom.css">
+</head>
+<body class="bg-slate-50 font-sans text-gray-800 flex h-screen overflow-hidden text-[16px]">
+    
+    <!-- Sidebar -->
+    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex flex-shrink-0">
+        <!-- Brand Header: Fixed 72px to match Content Header exactly -->
+        <div class="h-[72px] px-6 flex items-center border-b border-white/10 flex-shrink-0">
+            <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
+        </div>
+        
+        <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
+            <!-- ផ្ទាំងគ្រប់គ្រង -->
+            <a href="../../home/dashboard.html" data-nav="dashboard" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl font-normal whitespace-nowrap transition-colors">
+                <i class="fas fa-border-all w-6 text-center opacity-90"></i>
+                <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
+            </a>
+            
+            <!-- ការលក់ -->
+            <div>
+                <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')" class="nav-parent w-full flex items-center justify-between p-3 text-white bg-white/10 rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការលក់</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-200" id="icon-menu-sell"></i>
+                </button>
+                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
+                    <a href="../invoice/invoice.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
+                    </a>
+                    <a href="../quote/quote.html" data-nav="sell-prices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
+                    </a>
+                    <a href="customer.html" data-nav="sell-customers" class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white rounded-xl font-medium shadow-sm transition-all whitespace-nowrap">
+                        <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
+                    </a>
+                    <a href="../../empty.html?nav=sell-receipts" data-nav="sell-receipts" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
+                    </a>
+                </div>
+            </div>
+
+            <!-- ការទិញ -->
+            <div>
+                <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការទិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-buy"></i>
+                </button>
+                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=buy-invoices" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
+                    </a>
+                    <a href="../../empty.html?nav=buy-suppliers" data-nav="buy-suppliers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
+                    </a>
+                    <a href="../../empty.html?nav=buy-expenses" data-nav="buy-expenses" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
+                    </a>
+                </div>
+            </div>
+
+            <!-- ស្តុកទំនិញ -->
+            <div>
+                <button id="btn-menu-stock" onclick="toggleMenu('menu-stock')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-boxes-stacked w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ស្តុកទំនិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-stock"></i>
+                </button>
+                <div id="menu-stock" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
+                    </a>
+                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
+                    </a>
+                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
+                    </a>
+                </div>
+            </div>
+
+            <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
+            <a href="../../empty.html?nav=reports" data-nav="reports" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
+            </a>
+            
+            <!-- ការកំណត់ប្រព័ន្ធ -->
+            <a href="../../empty.html?nav=settings" data-nav="settings" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-gear w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
+            </a>
+        </nav>
+        
+        <div class="p-4 border-t border-white/10">
+            <a href="../../../../index.html" class="flex items-center text-[16px] text-emerald-100 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-primary">
+                <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Top Header: Fixed 72px -->
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
+            <div>
+                <h2 class="text-xl font-medium text-slate-800 leading-tight">បញ្ជីអតិថិជន</h2>
+                <p class="text-[14px] font-normal text-slate-400 mt-0.5">គ្រប់គ្រងទិន្នន័យ និងព័ត៌មានទំនាក់ទំនងអតិថិជន</p>
+            </div>
+            
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <!-- Notification Bell -->
+                <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </button>
+                
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-3 md:pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
+            <div class="w-full space-y-4">
+                
+                <!-- 1. Search & Filter Toolbar -->
+                <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-100 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2.5">
+                        
+                        <!-- Search Bar with Integrated Filter Icon -->
+                        <div class="relative flex-1 min-w-[260px] max-w-md bms-custom-select" id="customerTypeDropdownContainer">
+                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="customerSearchInput" oninput="filterCustomers()"
+                                placeholder="ស្វែងរកតាមឈ្មោះ, លេខកូដ, ទូរស័ព្ទ, ក្រុមហ៊ុន..."
+                                class="w-full h-9 pl-9 pr-10 bg-slate-50 border border-slate-200 rounded-xl text-[14px] text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition font-normal" />
+                            
+                            <!-- Integrated Filter Icon Button (hugeicons:filter-horizontal) -->
+                            <input type="hidden" id="filterCustomerType" value="all" onchange="filterCustomers()">
+                            <button type="button" id="filterIconBtn" onclick="toggleCustomDropdown('customerTypeDropdownContainer')" title="តម្រងប្រភេទអតិថិជន"
+                                class="absolute right-1.5 top-1/2 -translate-y-1/2 h-7 w-7 rounded-lg hover:bg-slate-200/70 text-slate-500 hover:text-primary flex items-center justify-center transition cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500 hover:text-primary transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h3M3 17h6m9 0h3M15 7h6"/>
+                                    <path d="M6 7c0-.932 0-1.398.152-1.765a2 2 0 0 1 1.083-1.083C7.602 4 8.068 4 9 4s1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C12 5.602 12 6.068 12 7s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C10.398 10 9.932 10 9 10s-1.398 0-1.765-.152a2 2 0 0 1-1.083-1.083C6 8.398 6 7.932 6 7Zm6 10c0-.932 0-1.398.152-1.765a2 2 0 0 1 1.083-1.083C13.602 14 14.068 14 15 14s1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C18 15.602 18 16.068 18 17s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C16.398 20 15.932 20 15 20s-1.398 0-1.765-.152a2 2 0 0 1-1.083-1.083C12 18.398 12 17.932 12 17Z"/>
+                                </svg>
+                            </button>
+
+                            <!-- Filter Dropdown Popover Menu -->
+                            <div class="bms-custom-select-menu absolute right-0 top-full mt-1.5 w-60 bg-white rounded-2xl shadow-xl border border-slate-100 py-1.5 z-50 hidden text-[14px]">
+                                <div class="px-3.5 py-1.5 border-b border-slate-100 text-xs font-semibold text-slate-400">
+                                    តម្រងតាមប្រភេទអតិថិជន
+                                </div>
+                                <button type="button" onclick="selectFilterOption('all', 'គ្រប់ប្រភេទអតិថិជន')" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-700 font-medium">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-layer-group text-slate-400 w-4 text-center text-xs"></i> គ្រប់ប្រភេទអតិថិជន
+                                    </span>
+                                    <i class="fas fa-check text-primary text-xs checkmark" id="check-all"></i>
+                                </button>
+                                <button type="button" onclick="selectFilterOption('company', 'ក្រុមហ៊ុន / សហគ្រាស')" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-700">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-building text-blue-500 w-4 text-center text-xs"></i> ក្រុមហ៊ុន / សហគ្រាស
+                                    </span>
+                                    <i class="fas fa-check text-primary text-xs checkmark opacity-0" id="check-company"></i>
+                                </button>
+                                <button type="button" onclick="selectFilterOption('individual', 'បុគ្គលទូទៅ')" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-700">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-user text-emerald-500 w-4 text-center text-xs"></i> បុគ្គលទូទៅ
+                                    </span>
+                                    <i class="fas fa-check text-primary text-xs checkmark opacity-0" id="check-individual"></i>
+                                </button>
+                                <button type="button" onclick="selectFilterOption('vip', 'អតិថិជន VIP / ដៃគូ')" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 flex items-center justify-between text-slate-700">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-crown text-amber-500 w-4 text-center text-xs"></i> អតិថិជន VIP / ដៃគូ
+                                    </span>
+                                    <i class="fas fa-check text-primary text-xs checkmark opacity-0" id="check-vip"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons (Right side of toolbar) -->
+                        <div class="flex items-center gap-2.5">
+                            <!-- Create Customer Button -->
+                            <a href="create-customer.html" class="h-9 px-3.5 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-[14px] font-medium gap-1.5">
+                                <i class="fas fa-plus text-xs"></i>
+                                <span>បង្កើតអតិថិជនថ្មី</span>
+                            </a>
+
+                            <!-- Export Report Button -->
+                            <button onclick="exportCustomersData()" class="h-9 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-[14px] font-medium gap-1.5 cursor-pointer">
+                                <i class="fas fa-file-export text-xs text-slate-500"></i>
+                                <span>ទាញយករបាយការណ៍</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Status Tabs Filter with counts -->
+                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[13px] border-t border-slate-100 pt-2.5">
+                        <span class="text-slate-400 mr-1 flex items-center gap-1.5 font-medium text-[13px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h3M3 17h6m9 0h3M15 7h6"/>
+                                <path d="M6 7c0-.932 0-1.398.152-1.765a2 2 0 0 1 1.083-1.083C7.602 4 8.068 4 9 4s1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C12 5.602 12 6.068 12 7s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C10.398 10 9.932 10 9 10s-1.398 0-1.765-.152a2 2 0 0 1-1.083-1.083C6 8.398 6 7.932 6 7Zm6 10c0-.932 0-1.398.152-1.765a2 2 0 0 1 1.083-1.083C13.602 14 14.068 14 15 14s1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C18 15.602 18 16.068 18 17s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C16.398 20 15.932 20 15 20s-1.398 0-1.765-.152a2 2 0 0 1-1.083-1.083C12 18.398 12 17.932 12 17Z"/>
+                            </svg>
+                            ស្ថានភាព៖
+                        </span>
+                        <button onclick="setStatusFilter('all')" id="tab-all"
+                            class="status-tab px-3 py-1 rounded-lg bg-primary text-white font-medium shadow-sm transition">
+                            ទាំងអស់ (<span id="count-all">8</span>)
+                        </button>
+                        <button onclick="setStatusFilter('active')" id="tab-active"
+                            class="status-tab px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">
+                            សកម្ម (<span id="count-active">6</span>)
+                        </button>
+                        <button onclick="setStatusFilter('inactive')" id="tab-inactive"
+                            class="status-tab px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">
+                            អសកម្ម (<span id="count-inactive">1</span>)
+                        </button>
+                        <button onclick="setStatusFilter('debt')" id="tab-debt"
+                            class="status-tab px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition">
+                            មានបំណុលជំពាក់ (<span id="count-debt">3</span>)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Customers Data Table (Listing - Full Left & Right Fit) -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse" id="customersTable">
+                            <thead>
+                                <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[14px] font-medium text-slate-700 whitespace-nowrap">
+                                    <th class="py-3 px-3 font-medium">លេខកូដ</th>
+                                    <th class="py-3 px-3 font-medium min-w-[180px]">ឈ្មោះអតិថិជន / ក្រុមហ៊ុន</th>
+                                    <th class="py-3 px-3 font-medium min-w-[170px]">ទំនាក់ទំនង & អ៊ីមែល</th>
+                                    <th class="py-3 px-3 font-medium min-w-[180px]">អាសយដ្ឋាន / ខេត្ត-ក្រុង</th>
+                                    <th class="py-3 px-3 text-center font-medium whitespace-nowrap">ការបញ្ជាទិញ</th>
+                                    <th class="py-3 px-3 text-right font-medium whitespace-nowrap">ទិញសរុប</th>
+                                    <th class="py-3 px-3 text-right font-medium whitespace-nowrap">សមតុល្យជំពាក់</th>
+                                    <th class="py-3 px-3 text-center font-medium whitespace-nowrap">ស្ថានភាព</th>
+                                    <th class="py-3 px-3 text-center w-12 font-medium">សកម្មភាព</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-[14px] font-normal text-slate-800" id="customersTableBody">
+                                <!-- Dynamic Customer Rows inserted via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Pagination Footer -->
+                    <div class="p-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-[16px] text-slate-600 bg-white">
+                        <div id="tableRecordCount">បង្ហាញ <strong class="text-slate-900" id="shownCount">8</strong> នៃ <strong class="text-slate-900" id="totalCount">8</strong> អតិថិជន</div>
+                        <div class="flex items-center space-x-1.5">
+                            <button class="px-3.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-sm text-slate-600 disabled:opacity-50" disabled>មុន</button>
+                            <button class="px-3.5 py-1.5 rounded-lg bg-primary text-white text-sm font-semibold">1</button>
+                            <button class="px-3.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-sm text-slate-600">2</button>
+                            <button class="px-3.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-sm text-slate-600">បន្ទាប់</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: View Customer Detail Profile (`customerDetailModal`) -->
+    <div id="customerDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden select-none animate-in fade-in duration-200 text-[16px]">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-2xl w-full overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="p-5 px-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-normal" id="modalCustomerAvatar">
+                        ស
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="text-[18px] font-medium text-slate-900" id="modalCustomerName">ក្រុមហ៊ុន សុខា ត្រេឌីង ឯ.ក</h3>
+                            <span id="modalCustomerTypeBadge" class="text-[14px] px-3 py-0.5 rounded-full font-normal bg-blue-50 text-blue-700 border border-blue-100">ក្រុមហ៊ុន</span>
+                        </div>
+                        <p class="text-[15px] text-slate-400 mt-0.5 font-normal" id="modalCustomerCode">កូដ៖ CUS-2026-001</p>
+                    </div>
+                </div>
+                <button onclick="closeCustomerModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-xl hover:bg-slate-100 transition">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1">
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-center">
+                        <p class="text-[15px] text-slate-500 font-normal mb-1">ការបញ្ជាទិញសរុប</p>
+                        <p class="text-[20px] font-normal text-slate-800" id="modalTotalOrders">12 លើក</p>
+                    </div>
+                    <div class="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-100/60 text-center">
+                        <p class="text-[15px] text-emerald-700 font-normal mb-1">ទឹកប្រាក់ទិញសរុប</p>
+                        <p class="text-[20px] font-normal text-emerald-700" id="modalTotalSpent">$42,500.00</p>
+                    </div>
+                    <div class="bg-rose-50/60 rounded-2xl p-4 border border-rose-100/60 text-center">
+                        <p class="text-[15px] text-rose-600 font-normal mb-1">សមតុល្យជំពាក់</p>
+                        <p class="text-[20px] font-normal text-rose-600" id="modalDebt">$3,200.00</p>
+                    </div>
+                </div>
+
+                <!-- Contact & Business Information -->
+                <div class="bg-slate-50/60 rounded-2xl p-5 border border-slate-100 space-y-3.5">
+                    <h4 class="text-[16px] font-normal text-slate-700">ព័ត៌មានលម្អិតទំនាក់ទំនង</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-[16px]">
+                        <div class="flex items-center gap-2.5 text-slate-700">
+                            <i class="fas fa-phone text-slate-400 w-4"></i>
+                            <span class="text-slate-400 font-normal">ទូរស័ព្ទ៖</span>
+                            <span class="font-normal text-slate-800" id="modalPhone">012 888 999</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 text-slate-700">
+                            <i class="fas fa-envelope text-slate-400 w-4"></i>
+                            <span class="text-slate-400 font-normal">អ៊ីមែល៖</span>
+                            <span class="font-normal text-slate-800" id="modalEmail">sokha@trading.com</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 text-slate-700">
+                            <i class="fas fa-id-card text-slate-400 w-4"></i>
+                            <span class="text-slate-400 font-normal">លេខសម្គាល់ពន្ធ (VATTIN)៖</span>
+                            <span class="font-normal text-slate-800" id="modalTaxId">K001-90234857</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 text-slate-700">
+                            <i class="fas fa-circle-check text-slate-400 w-4"></i>
+                            <span class="text-slate-400 font-normal">ស្ថានភាព៖</span>
+                            <span class="font-normal text-emerald-600" id="modalStatus">សកម្ម</span>
+                        </div>
+                        <div class="flex items-start gap-2.5 text-slate-700 md:col-span-2">
+                            <i class="fas fa-location-dot text-slate-400 w-4 mt-0.5"></i>
+                            <span class="text-slate-400 font-normal whitespace-nowrap">អាសយដ្ឋាន៖</span>
+                            <span class="font-normal text-slate-800" id="modalAddress">ផ្ទះលេខ 45B មហាវិថីព្រះមុនីវង្ស សង្កាត់ស្រះចក ខណ្ឌដូនពេញ រាជធានីភ្នំពេញ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Invoices of this Customer -->
+                <div>
+                    <h4 class="text-[16px] font-normal text-slate-700 mb-2.5">ប្រវត្តិវិក្កយបត្រចុងក្រោយ</h4>
+                    <div class="border border-slate-100 rounded-2xl overflow-hidden text-[16px]">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-slate-700 font-medium border-b border-slate-100">
+                                <tr>
+                                    <th class="p-3.5 px-4 font-medium">លេខវិក្កយបត្រ</th>
+                                    <th class="p-3.5 px-4 font-medium">កាលបរិច្ឆេទ</th>
+                                    <th class="p-3.5 px-4 text-right font-medium">ទឹកប្រាក់</th>
+                                    <th class="p-3.5 px-4 text-center font-medium">ស្ថានភាព</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-800 font-normal" id="modalInvoicesList">
+                                <tr>
+                                    <td class="p-3.5 px-4 font-normal text-primary font-mono">INV-2026-004</td>
+                                    <td class="p-3.5 px-4 font-normal">01 កញ្ញា 2026</td>
+                                    <td class="p-3.5 px-4 text-right font-normal">$8,450.00</td>
+                                    <td class="p-3.5 px-4 text-center"><span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[14px] font-normal">បានបង់</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 px-4 font-normal text-primary font-mono">INV-2026-008</td>
+                                    <td class="p-3.5 px-4 font-normal">15 កញ្ញា 2026</td>
+                                    <td class="p-3.5 px-4 text-right font-normal">$3,200.00</td>
+                                    <td class="p-3.5 px-4 text-center"><span class="px-3 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[14px] font-normal">រង់ចាំបង់</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 px-6 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between text-[16px]">
+                <button onclick="closeCustomerModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-[16px] font-normal transition cursor-pointer">
+                    បិទផ្ទាំង
+                </button>
+                <div class="flex items-center gap-2.5">
+                    <a id="modalEditLink" href="edit-customer.html?id=1" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-[16px] font-normal transition flex items-center gap-2 cursor-pointer">
+                        <i class="fas fa-edit text-sm"></i> កែប្រែព័ត៌មាន
+                    </a>
+                    <a href="../invoice/create-invoice.html" class="px-5 py-2.5 bg-primary hover:bg-primary-light text-white rounded-xl text-[16px] font-normal shadow-sm transition flex items-center gap-2 cursor-pointer">
+                        <i class="fas fa-file-invoice text-sm"></i> បង្កើតវិក្កយបត្រថ្មី
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../../scripts/sidebar.js"></script>
+    <script src="../../../scripts/ui-components.js"></script>
+    <script>
+        // Sample Customer Mock Data
+        let customersData = [
+            {
+                id: 1,
+                code: 'CUS-2026-001',
+                name: 'ក្រុមហ៊ុន សុខា ត្រេឌីង ឯ.ក',
+                type: 'company',
+                typeName: 'ក្រុមហ៊ុន',
+                phone: '012 888 999',
+                email: 'contact@sokhatrading.com.kh',
+                address: 'ផ្ទះលេខ 45B មហាវិថីព្រះមុនីវង្ស សង្កាត់ស្រះចក ខណ្ឌដូនពេញ រាជធានីភ្នំពេញ',
+                taxId: 'K001-90234857',
+                totalOrders: 14,
+                totalSpent: 48500.00,
+                debt: 3200.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-02'
+            },
+            {
+                id: 2,
+                code: 'CUS-2026-002',
+                name: 'លោក គង់ វិសាល',
+                type: 'individual',
+                typeName: 'បុគ្គល',
+                phone: '098 776 554',
+                email: 'visal.kong@gmail.com',
+                address: 'ផ្ទះលេខ 12 ផ្លូវ 271 សង្កាត់បឹងទំពុន ខណ្ឌមានជ័យ រាជធានីភ្នំពេញ',
+                taxId: '-',
+                totalOrders: 8,
+                totalSpent: 12400.00,
+                debt: 0.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-05'
+            },
+            {
+                id: 3,
+                code: 'CUS-2026-003',
+                name: 'សហគ្រាស អង្គរ តិចណូឡូជី',
+                type: 'vip',
+                typeName: 'VIP / ដៃគូ',
+                phone: '015 334 455',
+                email: 'info@angkor-tech.com',
+                address: 'អគារកាណាឌីយ៉ា ជាន់ទី 8 មហាវិថីព្រះមុនីវង្ស រាជធានីភ្នំពេញ',
+                taxId: 'K002-11928374',
+                totalOrders: 26,
+                totalSpent: 96800.00,
+                debt: 7500.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-08'
+            },
+            {
+                id: 4,
+                code: 'CUS-2026-004',
+                name: 'អ្នកស្រី ចាន់ ធីតា',
+                type: 'individual',
+                typeName: 'បុគ្គល',
+                phone: '085 223 344',
+                email: 'thida.chan@yahoo.com',
+                address: 'ភូមិវត្តបូព៌ ឃុំសាលាកំរើក ក្រុងសៀមរាប ខេត្តសៀមរាប',
+                taxId: '-',
+                totalOrders: 5,
+                totalSpent: 6250.00,
+                debt: 0.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-10'
+            },
+            {
+                id: 5,
+                code: 'CUS-2026-005',
+                name: 'ក្រុមហ៊ុន បាយ័ន ភេសជ្ជៈ អ៊ិនធើណេសិនណល',
+                type: 'company',
+                typeName: 'ក្រុមហ៊ុន',
+                phone: '023 888 123',
+                email: 'supply@bayonbeverage.com',
+                address: 'ផ្លូវជាតិលេខ 4 សង្កាត់ចោមចៅ ខណ្ឌពោធិ៍សែនជ័យ រាជធានីភ្នំពេញ',
+                taxId: 'K003-88741256',
+                totalOrders: 19,
+                totalSpent: 64200.00,
+                debt: 4150.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-12'
+            },
+            {
+                id: 6,
+                code: 'CUS-2026-006',
+                name: 'លោក ហេង វុទ្ធី',
+                type: 'individual',
+                typeName: 'បុគ្គល',
+                phone: '077 990 011',
+                email: 'vuthy.heng@outlook.com',
+                address: 'ផ្លូវលេខ 3 ភូមិកម្មករ សង្កាត់ស្វាយប៉ោ ក្រុងបាត់ដំបង ខេត្តបាត់ដំបង',
+                taxId: '-',
+                totalOrders: 3,
+                totalSpent: 3800.00,
+                debt: 0.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-15'
+            },
+            {
+                id: 7,
+                code: 'CUS-2026-007',
+                name: 'សិប្បកម្ម ខ្មែរ ហត្ថកម្មទំនើប',
+                type: 'company',
+                typeName: 'ក្រុមហ៊ុន',
+                phone: '016 445 566',
+                email: 'sales@khmerhandicraft.com',
+                address: 'ផ្លូវជាតិលេខ 6 ស្រុកពួក ខេត្តសៀមរាប',
+                taxId: 'K008-33492811',
+                totalOrders: 2,
+                totalSpent: 2100.00,
+                debt: 0.00,
+                status: 'inactive',
+                statusName: 'អសកម្ម',
+                dateCreated: '2026-09-18'
+            },
+            {
+                id: 8,
+                code: 'CUS-2026-008',
+                name: 'ក្រុមហ៊ុន មេគង្គ ឡូជីស្ទីក & ត្រេនស្ព័ត',
+                type: 'vip',
+                typeName: 'VIP / ដៃគូ',
+                phone: '092 112 233',
+                email: 'admin@mekonglogistics.com.kh',
+                address: 'តំបន់សេដ្ឋកិច្ចពិសេស ក្រុងព្រះសីហនុ ខេត្តព្រះសីហនុ',
+                taxId: 'K009-44589012',
+                totalOrders: 22,
+                totalSpent: 82000.00,
+                debt: 0.00,
+                status: 'active',
+                statusName: 'សកម្ម',
+                dateCreated: '2026-09-22'
+            }
+        ];
+
+        let currentStatusFilter = 'all';
+        let currentTypeFilter = 'all';
+
+        // Render Customers Table
+        function renderCustomersTable(dataToRender = customersData) {
+            const tbody = document.getElementById('customersTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (dataToRender.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="9" class="py-12 text-center text-slate-400 bg-white">
+                            <div class="w-16 h-16 rounded-3xl bg-slate-50 flex items-center justify-center mx-auto mb-3 text-slate-300 text-2xl border border-slate-100">
+                                <i class="fas fa-users-slash"></i>
+                            </div>
+                            <p class="text-sm font-medium text-slate-600 mb-1">រកមិនឃើញទិន្នន័យអតិថិជនឡើយ</p>
+                            <p class="text-xs text-slate-400">សូមសាកល្បងផ្លាស់ប្តូរពាក្យស្វែងរក ឬសម្អាតតម្រង</p>
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('shownCount').textContent = '0';
+                return;
+            }
+
+            dataToRender.forEach(customer => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/80 transition-colors group';
+
+                // Type Badge Styling
+                let typeBadge = '';
+                if (customer.type === 'company') {
+                    typeBadge = '<span class="text-[12px] px-2 py-0.5 rounded-full font-normal bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-1 w-fit"><i class="fas fa-building text-[10px]"></i> ក្រុមហ៊ុន</span>';
+                } else if (customer.type === 'vip') {
+                    typeBadge = '<span class="text-[12px] px-2 py-0.5 rounded-full font-normal bg-amber-50 text-amber-700 border border-amber-100 flex items-center gap-1 w-fit"><i class="fas fa-crown text-[10px]"></i> VIP</span>';
+                } else {
+                    typeBadge = '<span class="text-[12px] px-2 py-0.5 rounded-full font-normal bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center gap-1 w-fit"><i class="fas fa-user text-[10px]"></i> បុគ្គល</span>';
+                }
+
+                // Status Badge Styling
+                let statusBadge = '';
+                if (customer.status === 'active') {
+                    statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/60"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> សកម្ម</span>';
+                } else {
+                    statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-slate-100 text-slate-600 border border-slate-200/60"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> អសកម្ម</span>';
+                }
+
+                // Debt format
+                let debtHtml = '';
+                if (customer.debt > 0) {
+                    debtHtml = `<span class="font-medium text-rose-600 text-[14px]">$${customer.debt.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>`;
+                } else {
+                    debtHtml = `<span class="text-slate-400 font-normal text-[14px]">$0.00</span>`;
+                }
+
+                const firstLetter = customer.name.replace(/^(ក្រុមហ៊ុន|លោក|អ្នកស្រី|សហគ្រាស|សិប្បកម្ម)\s+/, '').charAt(0) || 'អ';
+
+                tr.innerHTML = `
+                    <td class="py-3 px-3 font-medium text-[14px] text-primary font-mono whitespace-nowrap">
+                        ${customer.code}
+                    </td>
+                    <td class="py-3 px-3 min-w-[180px]">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-medium text-xs flex-shrink-0 border border-slate-200">
+                                ${firstLetter}
+                            </div>
+                            <div class="min-w-0">
+                                <a href="javascript:void(0)" onclick="viewCustomerDetail(${customer.id})" class="font-medium text-slate-800 hover:text-primary transition text-[14px] block truncate" title="${customer.name}">
+                                    ${customer.name}
+                                </a>
+                                <div class="mt-0.5">${typeBadge}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-3 px-3 text-[14px] whitespace-nowrap min-w-[170px]">
+                        <div class="font-medium text-slate-800 flex items-center gap-1.5 text-[13px]"><i class="fas fa-phone text-slate-400 text-[10px]"></i> ${customer.phone}</div>
+                        <div class="text-slate-400 mt-0.5 flex items-center gap-1.5 text-[13px] font-normal truncate" title="${customer.email}"><i class="fas fa-envelope text-slate-300 text-[10px]"></i> ${customer.email}</div>
+                    </td>
+                    <td class="py-3 px-3 text-[13px] text-slate-600 max-w-[220px] truncate font-normal" title="${customer.address}">
+                        ${customer.address}
+                    </td>
+                    <td class="py-3 px-3 text-center text-[14px] font-normal text-slate-800 whitespace-nowrap">
+                        ${customer.totalOrders} លើក
+                    </td>
+                    <td class="py-3 px-3 text-right font-medium text-slate-800 text-[14px] whitespace-nowrap">
+                        $${customer.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2})}
+                    </td>
+                    <td class="py-3 px-3 text-right text-[14px] whitespace-nowrap">
+                        ${debtHtml}
+                    </td>
+                    <td class="py-3 px-3 text-center whitespace-nowrap">
+                        ${statusBadge}
+                    </td>
+                    <td class="py-2.5 px-3 text-center relative w-12">
+                        <div class="relative inline-block text-left">
+                            <button onclick="toggleActionMenu(event, ${customer.id})" class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition">
+                                <i class="fas fa-ellipsis-vertical text-sm"></i>
+                            </button>
+                            <div id="actionMenu-${customer.id}" class="action-dropdown-menu absolute right-0 top-full mt-1 w-44 bg-white rounded-2xl shadow-xl border border-slate-100 py-1.5 z-30 hidden text-[14px] font-normal">
+                                <a href="javascript:void(0)" onclick="viewCustomerDetail(${customer.id})" class="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-primary transition">
+                                    <i class="fas fa-eye w-4 text-center text-slate-400 text-xs"></i> មើលព័ត៌មាន
+                                </a>
+                                <a href="edit-customer.html?id=${customer.id}" class="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-primary transition">
+                                    <i class="fas fa-edit w-4 text-center text-slate-400 text-xs"></i> កែប្រែទិន្នន័យ
+                                </a>
+                                <a href="../invoice/create-invoice.html?customerId=${customer.id}" class="flex items-center gap-2.5 px-3.5 py-2 text-slate-700 hover:bg-slate-50 hover:text-primary transition">
+                                    <i class="fas fa-file-invoice w-4 text-center text-slate-400 text-xs"></i> ចេញវិក្កយបត្រ
+                                </a>
+                                <div class="border-t border-slate-100 my-1"></div>
+                                <button onclick="deleteCustomer(${customer.id})" class="w-full flex items-center gap-2.5 px-3.5 py-2 text-rose-600 hover:bg-rose-50 transition text-left">
+                                    <i class="fas fa-trash-can w-4 text-center text-xs"></i> លុបអតិថិជន
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('shownCount').textContent = dataToRender.length;
+            document.getElementById('totalCount').textContent = customersData.length;
+            updateCounts();
+        }
+
+        // Action Dropdown Menu
+        function toggleActionMenu(event, id) {
+            event.stopPropagation();
+            const targetMenu = document.getElementById(`actionMenu-${id}`);
+            const isHidden = targetMenu.classList.contains('hidden');
+            
+            document.querySelectorAll('.action-dropdown-menu').forEach(m => m.classList.add('hidden'));
+            
+            if (isHidden) {
+                targetMenu.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.action-dropdown-menu').forEach(m => m.classList.add('hidden'));
+        });
+
+        // Filter Logic
+        function filterCustomers() {
+            const query = (document.getElementById('customerSearchInput').value || '').toLowerCase().trim();
+            const typeFilter = document.getElementById('filterCustomerType').value || 'all';
+
+            const filtered = customersData.filter(item => {
+                const matchQuery = 
+                    item.name.toLowerCase().includes(query) ||
+                    item.code.toLowerCase().includes(query) ||
+                    item.phone.toLowerCase().includes(query) ||
+                    item.email.toLowerCase().includes(query) ||
+                    item.address.toLowerCase().includes(query);
+
+                const matchType = (typeFilter === 'all' || item.type === typeFilter);
+
+                let matchStatus = true;
+                if (currentStatusFilter === 'active') matchStatus = item.status === 'active';
+                if (currentStatusFilter === 'inactive') matchStatus = item.status === 'inactive';
+                if (currentStatusFilter === 'debt') matchStatus = item.debt > 0;
+
+                return matchQuery && matchType && matchStatus;
+            });
+
+            renderCustomersTable(filtered);
+        }
+
+        function setStatusFilter(status) {
+            currentStatusFilter = status;
+            document.querySelectorAll('.status-tab').forEach(tab => {
+                tab.classList.remove('bg-primary', 'text-white', 'font-medium', 'shadow-sm');
+                tab.classList.add('bg-slate-100', 'text-slate-700', 'font-normal');
+            });
+            const activeTab = document.getElementById(`tab-${status}`);
+            if (activeTab) {
+                activeTab.classList.remove('bg-slate-100', 'text-slate-700', 'font-normal');
+                activeTab.classList.add('bg-primary', 'text-white', 'font-medium', 'shadow-sm');
+            }
+            filterCustomers();
+        }
+
+        function selectFilterOption(value, displayText) {
+            const hiddenInput = document.getElementById('filterCustomerType');
+            if (hiddenInput) {
+                hiddenInput.value = value;
+            }
+            
+            // Update checkmarks
+            ['all', 'company', 'individual', 'vip'].forEach(type => {
+                const el = document.getElementById('check-' + type);
+                if (el) {
+                    if (type === value) el.classList.remove('opacity-0');
+                    else el.classList.add('opacity-0');
+                }
+            });
+            
+            const filterBtn = document.getElementById('filterIconBtn');
+            if (filterBtn) {
+                if (value !== 'all') {
+                    filterBtn.classList.add('bg-emerald-100', 'text-primary');
+                    filterBtn.classList.remove('text-slate-400');
+                } else {
+                    filterBtn.classList.remove('bg-emerald-100', 'text-primary');
+                    filterBtn.classList.add('text-slate-400');
+                }
+            }
+            
+            const menu = document.querySelector('#customerTypeDropdownContainer .bms-custom-select-menu');
+            if (menu) menu.classList.add('hidden');
+            
+            filterCustomers();
+        }
+
+        function filterByType(type) {
+            selectFilterOption(type, type === 'all' ? 'គ្រប់ប្រភេទអតិថិជន' : (type === 'company' ? 'ក្រុមហ៊ុន / សហគ្រាស' : 'បុគ្គលទូទៅ'));
+        }
+
+        function filterByStatus(status) {
+            setStatusFilter(status);
+        }
+
+        function resetFilters() {
+            document.getElementById('customerSearchInput').value = '';
+            selectFilterOption('all', 'គ្រប់ប្រភេទអតិថិជន');
+            setStatusFilter('all');
+            showToast('បានកំណត់តម្រងទាំងអស់ឡើងវិញ');
+        }
+
+        function updateCounts() {
+            const allCount = customersData.length;
+            const activeCount = customersData.filter(c => c.status === 'active').length;
+            const inactiveCount = customersData.filter(c => c.status === 'inactive').length;
+            const debtCount = customersData.filter(c => c.debt > 0).length;
+
+            if (document.getElementById('count-all')) document.getElementById('count-all').textContent = allCount;
+            if (document.getElementById('count-active')) document.getElementById('count-active').textContent = activeCount;
+            if (document.getElementById('count-inactive')) document.getElementById('count-inactive').textContent = inactiveCount;
+            if (document.getElementById('count-debt')) document.getElementById('count-debt').textContent = debtCount;
+        }
+
+        // View Customer Detail Modal
+        function viewCustomerDetail(id) {
+            const customer = customersData.find(c => c.id === id);
+            if (!customer) return;
+
+            document.getElementById('modalCustomerName').textContent = customer.name;
+            document.getElementById('modalCustomerCode').textContent = `កូដ៖ ${customer.code}`;
+            document.getElementById('modalPhone').textContent = customer.phone;
+            document.getElementById('modalEmail').textContent = customer.email;
+            document.getElementById('modalAddress').textContent = customer.address;
+            document.getElementById('modalTaxId').textContent = customer.taxId;
+            document.getElementById('modalStatus').textContent = customer.statusName;
+            document.getElementById('modalTotalOrders').textContent = `${customer.totalOrders} លើក`;
+            document.getElementById('modalTotalSpent').textContent = `$${customer.totalSpent.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            document.getElementById('modalDebt').textContent = `$${customer.debt.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            document.getElementById('modalEditLink').href = `edit-customer.html?id=${customer.id}`;
+
+            const firstLetter = customer.name.replace(/^(ក្រុមហ៊ុន|លោក|អ្នកស្រី|សហគ្រាស|សិប្បកម្ម)\s+/, '').charAt(0) || 'អ';
+            document.getElementById('modalCustomerAvatar').textContent = firstLetter;
+
+            const modal = document.getElementById('customerDetailModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeCustomerModal() {
+            document.getElementById('customerDetailModal').classList.add('hidden');
+        }
+
+        // Delete Customer with Custom Confirm
+        function deleteCustomer(id) {
+            const customer = customersData.find(c => c.id === id);
+            if (!customer) return;
+
+            showCustomConfirm({
+                title: 'លុបអតិថិជន',
+                message: `តើលោកអ្នកពិតជាចង់លុបអតិថិជន «${customer.name}» នេះមែនទេ? សកម្មភាពនេះមិនអាចត្រឡប់ក្រោយវិញបានឡើយ។`,
+                confirmText: 'យល់ព្រមលុប',
+                cancelText: 'បោះបង់',
+                type: 'danger',
+                onConfirm: () => {
+                    customersData = customersData.filter(c => c.id !== id);
+                    renderCustomersTable();
+                    showToast(`បានលុបអតិថិជន ${customer.name} ដោយជោគជ័យ`, 'success');
+                }
+            });
+        }
+
+        function toggleSelectAll(master) {
+            document.querySelectorAll('.customer-row-checkbox').forEach(cb => cb.checked = master.checked);
+        }
+
+        function exportCustomersData() {
+            showToast('កំពុងទាញយកទិន្នន័យអតិថិជនជាទម្រង់ Excel...', 'info');
+        }
+
+        // Initialize Table on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCustomersTable();
+        });
+    </script>
+</body>
+</html>
