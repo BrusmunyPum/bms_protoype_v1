@@ -122,15 +122,15 @@
                 </button>
                 <div id="menu-buy"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../empty.html?nav=buy-invoices" data-nav="buy-invoices"
+                    <a href="../../buy/bills/bills.html" data-nav="buy-invoices"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="../../empty.html?nav=buy-suppliers" data-nav="buy-suppliers"
+                    <a href="../../buy/suppliers/suppliers.html" data-nav="buy-suppliers"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="../../empty.html?nav=buy-expenses" data-nav="buy-expenses"
+                    <a href="../../buy/disbursement/disbursement.html" data-nav="buy-expenses"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
@@ -450,7 +450,7 @@
     </div>
 
     <!-- Floating Row Action Dropdown Menu -->
-    <div id="rowActionDropdown" class="fixed z-[9999] hidden bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/80 p-1.5 min-w-[220px] text-xs transition-all">
+    <div id="rowActionDropdown" class="fixed z-[9999] hidden bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/80 p-1.5 w-[280px] text-xs transition-all select-none">
     </div>
 
     <!-- Modal: View Quote Detail (មើលព័ត៌មានលម្អិត) -->
@@ -710,15 +710,19 @@
             }
 
             dropdown.innerHTML = `
-                <div class="px-3 py-2.5 mb-1 bg-slate-50/90 rounded-xl border border-slate-100/90 flex items-center justify-between gap-2">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <img src="${q.avatar}" alt="${q.customer}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0" />
-                        <div class="min-w-0">
-                            <div class="text-xs font-bold text-slate-800 tracking-tight leading-none">${q.number}</div>
-                            <div class="text-[11px] text-slate-500 truncate mt-1">${q.customer}</div>
+                <div class="px-3 py-2.5 mb-1.5 bg-slate-50/90 rounded-xl border border-slate-100/90 mx-0.5">
+                    <div class="flex items-start gap-2.5">
+                        <img src="${q.avatar}" alt="${q.customer}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0 mt-0.5" />
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center justify-between gap-1.5 mb-1">
+                                <span class="text-xs font-bold text-slate-800 tracking-tight leading-none">${q.number}</span>
+                                <div class="flex-shrink-0">${statusBadge}</div>
+                            </div>
+                            <div class="text-[11px] font-medium text-slate-600 leading-snug break-words">
+                                ${q.customer}
+                            </div>
                         </div>
                     </div>
-                    ${statusBadge}
                 </div>
                 <div class="space-y-0.5">
                     <button onclick="closeRowActionMenu(); viewQuoteDetail('${q.id}')"
@@ -766,16 +770,20 @@
 
             const btn = event.currentTarget;
             const rect = btn.getBoundingClientRect();
-            const dropdownWidth = 220;
+            const dropdownWidth = dropdown.offsetWidth || 280;
             const dropdownHeight = dropdown.offsetHeight || 190;
 
             let left = rect.right - dropdownWidth;
-            if (left < 10) left = 10;
+            if (left + dropdownWidth > window.innerWidth - 16) {
+                left = window.innerWidth - dropdownWidth - 16;
+            }
+            if (left < 16) left = 16;
 
             let top = rect.bottom + 6;
-            if (top + dropdownHeight > window.innerHeight) {
+            if (top + dropdownHeight > window.innerHeight - 16) {
                 top = rect.top - dropdownHeight - 6;
             }
+            if (top < 16) top = 16;
 
             dropdown.style.left = `${left}px`;
             dropdown.style.top = `${top}px`;

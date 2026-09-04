@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMS DigiTech - វិក្កយបត្រលក់ និងប្រាក់ចំណេញ</title>
+    <title>BMS DigiTech - វិក្កយបត្របញ្ញាទិញ</title>
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,10 +40,10 @@
             body * {
                 visibility: hidden;
             }
-            #printableInvoiceArea, #printableInvoiceArea * {
+            #printableBillArea, #printableBillArea * {
                 visibility: visible;
             }
-            #printableInvoiceArea {
+            #printableBillArea {
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -80,29 +80,29 @@
             <!-- ការលក់ -->
             <div>
                 <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')"
-                    class="nav-parent w-full flex items-center justify-between p-3 bg-white/10 text-white font-medium rounded-xl transition-colors whitespace-nowrap">
+                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
                         <span class="ml-3 text-[16px]">ការលក់</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-200"
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200"
                         id="icon-menu-sell"></i>
                 </button>
                 <div id="menu-sell"
-                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
-                    <a href="invoice.html" data-nav="sell-invoices"
-                        class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white font-medium rounded-xl shadow-sm transition-all whitespace-nowrap">
-                        <i class="fas fa-file-invoice-dollar w-5 text-center mr-2 text-xs"></i> វិក្កយបត្រលក់
+                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../sales/invoice/invoice.html" data-nav="sell-invoices"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
                     </a>
-                    <a href="../quote/quote.html" data-nav="sell-prices"
+                    <a href="../../sales/quote/quote.html" data-nav="sell-prices"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
                     </a>
-                    <a href="../customer/customer.html" data-nav="sell-customers"
+                    <a href="../../sales/customer/customer.html" data-nav="sell-customers"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
                     </a>
-                    <a href="../payment/payment.html" data-nav="sell-receipts"
+                    <a href="../../sales/payment/payment.html" data-nav="sell-receipts"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
                     </a>
@@ -112,25 +112,25 @@
             <!-- ការទិញ -->
             <div>
                 <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')"
-                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    class="nav-parent w-full flex items-center justify-between p-3 bg-white/10 text-white font-medium rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
                         <span class="ml-3 text-[16px]">ការទិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200"
+                    <i class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-200"
                         id="icon-menu-buy"></i>
                 </button>
                 <div id="menu-buy"
-                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../buy/bills/bills.html" data-nav="buy-invoices"
-                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
-                        <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
+                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
+                    <a href="bills.html" data-nav="buy-invoices"
+                        class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white font-medium rounded-xl shadow-sm transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice w-5 text-center mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="../../buy/suppliers/suppliers.html" data-nav="buy-suppliers"
+                    <a href="../suppliers/suppliers.html" data-nav="buy-suppliers"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="../../buy/disbursement/disbursement.html" data-nav="buy-expenses"
+                    <a href="../disbursement/disbursement.html" data-nav="buy-expenses"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
@@ -194,20 +194,20 @@
         <!-- Top Header -->
         <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
             <div>
-                <h2 class="text-xl font-semibold text-gray-800 leading-tight">វិក្កយបត្រលក់</h2>
-                <p class="text-xs font-normal text-gray-500 mt-0.5">គ្រប់គ្រងវិក្កយបត្រលក់ និងការចេញវិក្កយបត្រ</p>
+                <h2 class="text-xl font-semibold text-gray-800 leading-tight">វិក្កយបត្របញ្ញាទិញ</h2>
+                <p class="text-xs font-normal text-gray-500 mt-0.5">គ្រប់គ្រងការបញ្ជាទិញ និងវិក្កយបត្រពីអ្នកផ្គត់ផ្គង់</p>
             </div>
 
             <div class="flex items-center space-x-3 md:space-x-4">
-                <!-- Create Invoice Button -->
-                <a href="create-invoice.html"
+                <!-- Create Bill Button -->
+                <a href="create-bills.html"
                     class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
                     <i class="fas fa-plus mr-2 text-xs"></i>
-                    <span>បង្កើតវិក្កយបត្រថ្មី</span>
+                    <span>បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</span>
                 </a>
 
                 <!-- Export Report Button -->
-                <button onclick="exportInvoicesData()"
+                <button onclick="exportBillsData()"
                     class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
                     <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
                     <span>ទាញយករបាយការណ៍</span>
@@ -239,53 +239,52 @@
                 <!-- KPI Cards -->
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
 
-                    <!-- Card 1: ចំណូលលក់សរុប -->
+                    <!-- Card 1: ចំណាយទិញសរុប -->
                     <div onclick="setStatusFilter('all')" role="button" tabindex="0"
                         class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
-                        <!-- Badge top-right -->
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-emerald-600 flex items-center gap-0.5">
-                            <i class="fas fa-arrow-up text-[8px]"></i> 12.5%
+                            <i class="fas fa-arrow-up text-[8px]"></i> 8.4%
                         </span>
-                        <!-- Content -->
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ចំណូលលក់សរុប</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$128,450</p>
-                        <p class="text-xs text-slate-400">វិក្កយបត្រ ៥៤ ច្បាប់</p>
+                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ចំណាយទិញទំនិញសរុប</p>
+                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$94,820</p>
+                        <p class="text-xs text-slate-400">វិក្កយបត្រ ៤៦ ច្បាប់</p>
                     </div>
 
-                    <!-- Card 2: ប្រាក់ចំណេញដុល -->
-                    <div class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-200 hover:shadow-sm transition-all duration-200 group">
-                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-slate-400">32.4%</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ប្រាក់ចំណេញដុល</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$41,620</p>
-                        <div class="space-y-1">
-                            <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
-                                <div class="bg-indigo-400 h-[3px] rounded-full" style="width: 32.4%"></div>
-                            </div>
-                            <p class="text-xs text-slate-400">ថ្លៃដើម $86,830</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: បានទូទាត់រួច -->
+                    <!-- Card 2: បានទូទាត់រួចរាល់ -->
                     <div onclick="setStatusFilter('paid')" role="button" tabindex="0"
                         class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
-                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-slate-400">74.8%</span>
+                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-slate-400">76.5%</span>
                         <p class="text-[11px] text-slate-400 font-medium mb-1.5">បានទូទាត់រួចរាល់</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$96,200</p>
+                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$72,500</p>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
-                                <div class="bg-teal-400 h-[3px] rounded-full" style="width: 74.8%"></div>
+                                <div class="bg-teal-500 h-[3px] rounded-full" style="width: 76.5%"></div>
                             </div>
-                            <p class="text-xs text-slate-400">ABA · KHQR · សាច់ប្រាក់</p>
+                            <p class="text-xs text-slate-400">ABA · ធនាគារ · សាច់ប្រាក់</p>
                         </div>
                     </div>
 
-                    <!-- Card 4: នៅសល់ -->
+                    <!-- Card 3: នៅសល់ត្រូវទូទាត់ -->
+                    <div onclick="setStatusFilter('pending')" role="button" tabindex="0"
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-amber-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-amber-600">៦ ច្បាប់</span>
+                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">នៅសល់ត្រូវទូទាត់</p>
+                        <p class="text-[22px] font-bold text-amber-600 leading-none mb-3">$22,320</p>
+                        <div class="space-y-1">
+                            <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
+                                <div class="bg-amber-400 h-[3px] rounded-full" style="width: 23.5%"></div>
+                            </div>
+                            <p class="text-xs text-slate-400">បំណុលអ្នកផ្គត់ផ្គង់</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: ហួសកាលកំណត់ -->
                     <div onclick="setStatusFilter('overdue')" role="button" tabindex="0"
                         class="relative bg-white border border-rose-100 rounded-xl p-4 hover:border-rose-300 hover:shadow-sm transition-all duration-200 cursor-pointer group">
-                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-rose-400">៥ ច្បាប់</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">នៅសល់មិនទាន់បង់</p>
-                        <p class="text-[22px] font-bold text-rose-500 leading-none mb-3">$32,250</p>
-                        <p class="text-xs text-rose-400">ហួសកំណត់ · ត្រូវតាមដាន</p>
+                        <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-rose-500">២ ច្បាប់</span>
+                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ហួសកាលកំណត់</p>
+                        <p class="text-[22px] font-bold text-rose-500 leading-none mb-3">$5,400</p>
+                        <p class="text-xs text-rose-400">ហួសកាលបរិច្ឆេទ · ត្រូវទូទាត់</p>
                     </div>
 
                 </div>
@@ -297,12 +296,12 @@
                         <!-- Search Bar -->
                         <div class="relative flex-1 min-w-[280px] max-w-md">
                             <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                            <input type="text" id="invoiceSearchInput" oninput="filterInvoices()"
-                                placeholder="ស្វែងរកតាមលេខវិក្កយបត្រ, អតិថិជន, ទូរស័ព្ទ..."
+                            <input type="text" id="billSearchInput" oninput="filterBills()"
+                                placeholder="ស្វែងរកតាមលេខវិក្កយបត្រ, អ្នកផ្គត់ផ្គង់, លេខយោង..."
                                 class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
 
-                        <!-- Dashboard-style Date Range Picker -->
+                        <!-- Date Range Picker Standard -->
                         <div class="flex items-center gap-2">
                             <span class="text-xs text-slate-400 hidden sm:inline">កាលបរិច្ឆេទ:</span>
                             
@@ -315,7 +314,7 @@
                                     <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5" id="datePickerChevron"></i>
                                 </button>
 
-                                <!-- Date Range Picker Popover Dropdown -->
+                                <!-- Date Range Picker Popover Dropdown (480px) -->
                                 <div id="datePickerPopover" onclick="event.stopPropagation()"
                                     class="absolute right-0 top-full mt-2 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 hidden overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                                     <div class="grid grid-cols-12 divide-x divide-slate-100">
@@ -409,24 +408,24 @@
                     </div>
                 </div>
 
-                <!-- 3. Invoices Data Table -->
+                <!-- 3. Bills Data Table -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse" id="invoicesTable">
+                        <table class="w-full text-left border-collapse" id="billsTable">
                             <thead>
                                 <tr class="bg-slate-50/70 border-b border-slate-100 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                                     <th class="py-3 px-4">លេខវិក្កយបត្រ</th>
-                                    <th class="py-3 px-4">អតិថិជន</th>
+                                    <th class="py-3 px-4">អ្នកផ្គត់ផ្គង់</th>
                                     <th class="py-3 px-4">កាលបរិច្ឆេទចេញ / ផុតកំណត់</th>
                                     <th class="py-3 px-4 text-right">ទឹកប្រាក់សរុប</th>
                                     <th class="py-3 px-4 text-right">បានបង់ / នៅសល់</th>
-                                    <th class="py-3 px-4 text-right">ប្រាក់ចំណេញ</th>
+                                    <th class="py-3 px-4 text-center">ចូលស្តុក</th>
                                     <th class="py-3 px-4 text-center">ស្ថានភាព</th>
                                     <th class="py-3 px-4 text-center w-16">សកម្មភាព</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-100 text-[15px] font-normal" id="invoicesTableBody">
-                                <!-- Dynamic Invoice Rows inserted via JS -->
+                            <tbody class="divide-y divide-slate-100 text-[15px] font-normal" id="billsTableBody">
+                                <!-- Dynamic Bill Rows inserted via JS -->
                             </tbody>
                         </table>
                     </div>
@@ -447,13 +446,13 @@
         </main>
     </div>
 
-    <!-- Modal: View / Print Invoice Detail Modal (`invoiceDetailModal`) -->
-    <div id="invoiceDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
+    <!-- Modal: View / Print Bill Detail Modal (`billDetailModal`) -->
+    <div id="billDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-3xl w-full p-6 md:p-8 my-6 text-[16px] animate-in fade-in zoom-in-95 duration-200">
             <!-- Modal Actions Bar -->
             <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 no-print">
                 <div class="flex items-center gap-2.5">
-                    <h3 class="text-lg font-bold text-slate-800" id="previewInvoiceTitle">វិក្កយបត្រ #INV-2026-0042</h3>
+                    <h3 class="text-lg font-bold text-slate-800" id="previewBillTitle">វិក្កយបត្របញ្ញាទិញ #BILL-2026-0082</h3>
                     <span id="previewStatusBadge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
                         បានទូទាត់
                     </span>
@@ -462,14 +461,14 @@
                     <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
                         <i class="fas fa-print"></i> បោះពុម្ព
                     </button>
-                    <button onclick="closeModal('invoiceDetailModal')" class="text-slate-400 hover:text-slate-600 p-2 rounded-xl hover:bg-slate-100">
+                    <button onclick="closeModal('billDetailModal')" class="text-slate-400 hover:text-slate-600 p-2 rounded-xl hover:bg-slate-100">
                         <i class="fas fa-xmark text-base"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Printable Invoice Paper Card -->
-            <div id="printableInvoiceArea" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 text-slate-800 space-y-6">
+            <!-- Printable Bill Paper Card -->
+            <div id="printableBillArea" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 text-slate-800 space-y-6">
                 <!-- Header -->
                 <div class="flex flex-wrap justify-between items-start gap-4 border-b border-slate-200 pb-6">
                     <div>
@@ -484,29 +483,30 @@
                         <p class="text-xs text-slate-500">លេខទូរស័ព្ទ: 012 345 678 | អ៊ីមែល: info@bmsdigitech.com</p>
                     </div>
                     <div class="text-right">
-                        <h2 class="text-2xl font-extrabold text-primary uppercase tracking-wide">វិក្កយបត្រលក់</h2>
-                        <p class="text-xs text-slate-400 font-semibold">វិក្កយបត្រពន្ធ</p>
+                        <h2 class="text-2xl font-extrabold text-primary uppercase tracking-wide">វិក្កយបត្របញ្ញាទិញ</h2>
+                        <p class="text-xs text-slate-400 font-semibold">ឯកសារទិញទំនិញចូលស្តុក</p>
                         <div class="mt-2 text-xs space-y-1 text-slate-600">
-                            <p><strong>លេខវិក្កយបត្រ:</strong> <span id="pvNumber">INV-2026-0042</span></p>
-                            <p><strong>កាលបរិច្ឆេទចេញ:</strong> <span id="pvDate">01/09/2026</span></p>
-                            <p><strong>កាលបរិច្ឆេទផុតកំណត់:</strong> <span id="pvDueDate">15/09/2026</span></p>
+                            <p><strong>លេខវិក្កយបត្រ:</strong> <span id="pvBillNumber">BILL-2026-0082</span></p>
+                            <p><strong>លេខយោងអ្នកផ្គត់ផ្គង់:</strong> <span id="pvSupplierRef">SUP-INV-9921</span></p>
+                            <p><strong>កាលបរិច្ឆេទចេញ:</strong> <span id="pvBillDate">01/09/2026</span></p>
+                            <p><strong>កាលបរិច្ឆេទផុតកំណត់:</strong> <span id="pvBillDueDate">15/09/2026</span></p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Billed To & Payment Info -->
+                <!-- Supplier Info & Payment Status -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-50 p-4 rounded-xl text-xs">
                     <div>
-                        <h4 class="font-semibold text-slate-700 uppercase mb-1">ចេញជូនអតិថិជន:</h4>
-                        <p class="font-bold text-sm text-slate-900" id="pvCustomer">Heng Vicheka</p>
-                        <p class="text-slate-600 mt-0.5" id="pvPhone">លេខទូរស័ព្ទ: 012 345 678</p>
-                        <p class="text-slate-600">អាសយដ្ឋាន: ខណ្ឌទួលគោក, រាជធានីភ្នំពេញ</p>
+                        <h4 class="font-semibold text-slate-700 uppercase mb-1">អ្នកផ្គត់ផ្គង់:</h4>
+                        <p class="font-bold text-sm text-slate-900" id="pvSupplier">ក្រុមហ៊ុន បច្ចេកវិទ្យា ខេមបូឌា ត្រេឌីង ឯ.ក</p>
+                        <p class="text-slate-600 mt-0.5" id="pvSupplierContact">អ្នកទំនាក់ទំនង: លោក ចាន់ វិចិត្រ (012 888 999)</p>
+                        <p class="text-slate-600">អាសយដ្ឋាន: មហាវិថីសហព័ន្ធរុស្ស៊ី, រាជធានីភ្នំពេញ</p>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-slate-700 uppercase mb-1">ព័ត៌មានទូទាត់:</h4>
-                        <p class="text-slate-600">វិធីសាស្ត្រទូទាត់: <span class="font-semibold text-slate-900" id="pvMethod">ABA KHQR</span></p>
-                        <p class="text-slate-600">គណនី ABA: <strong>000 123 456 (BMS DIGITECH)</strong></p>
-                        <p class="text-slate-600">ស្ថានភាព: <strong class="text-emerald-700" id="pvStatusText">បានទូទាត់រួចរាល់</strong></p>
+                        <h4 class="font-semibold text-slate-700 uppercase mb-1">ព័ត៌មានទូទាត់ និងស្តុក:</h4>
+                        <p class="text-slate-600">ស្ថានភាពទំនិញ: <strong class="text-emerald-700" id="pvStockText">បានចូលស្តុកពេញលេញ</strong></p>
+                        <p class="text-slate-600">វិធីសាស្ត្រទូទាត់: <span class="font-semibold text-slate-900" id="pvPaymentMethod">ផ្ទេរតាមធនាគារ ABA</span></p>
+                        <p class="text-slate-600">ស្ថានភាពទូទាត់: <strong class="text-emerald-700" id="pvStatusText">បានទូទាត់រួចរាល់</strong></p>
                     </div>
                 </div>
 
@@ -518,28 +518,12 @@
                                 <th class="py-2.5 px-3">#</th>
                                 <th class="py-2.5 px-3">បរិយាយមុខទំនិញ</th>
                                 <th class="py-2.5 px-3 text-center">ចំនួន</th>
-                                <th class="py-2.5 px-3 text-right">តម្លៃឯកតា</th>
+                                <th class="py-2.5 px-3 text-right">ថ្លៃដើមឯកតា</th>
                                 <th class="py-2.5 px-3 text-right">បញ្ចុះតម្លៃ</th>
                                 <th class="py-2.5 px-3 text-right">សរុប</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100" id="pvLinesBody">
-                            <tr>
-                                <td class="py-2.5 px-3 text-slate-400">1</td>
-                                <td class="py-2.5 px-3 font-medium text-slate-800">iPhone 15 Pro Max 256GB</td>
-                                <td class="py-2.5 px-3 text-center">2</td>
-                                <td class="py-2.5 px-3 text-right">$1,250.00</td>
-                                <td class="py-2.5 px-3 text-right">0%</td>
-                                <td class="py-2.5 px-3 text-right font-semibold">$2,500.00</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2.5 px-3 text-slate-400">2</td>
-                                <td class="py-2.5 px-3 font-medium text-slate-800">iPad Air 11-inch M2</td>
-                                <td class="py-2.5 px-3 text-center">1</td>
-                                <td class="py-2.5 px-3 text-right">$699.00</td>
-                                <td class="py-2.5 px-3 text-right">0%</td>
-                                <td class="py-2.5 px-3 text-right font-semibold">$699.00</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -549,19 +533,19 @@
                     <div class="w-64 space-y-1.5 text-xs">
                         <div class="flex justify-between text-slate-600">
                             <span>សរុបរង:</span>
-                            <span class="font-semibold text-slate-800" id="pvSubtotal">$3,199.00</span>
+                            <span class="font-semibold text-slate-800" id="pvSubtotal">$0.00</span>
                         </div>
                         <div class="flex justify-between text-slate-600">
                             <span>អាករលើតម្លៃបន្ថែម (អតប ១០%):</span>
-                            <span class="font-semibold text-slate-800" id="pvVat">$51.00</span>
+                            <span class="font-semibold text-slate-800" id="pvVat">$0.00</span>
                         </div>
                         <div class="border-t border-slate-300 pt-2 flex justify-between text-sm font-bold text-slate-900">
                             <span>សរុបចុងក្រោយ:</span>
-                            <span class="text-primary font-bold text-base" id="pvGrandTotal">$3,250.00</span>
+                            <span class="text-primary font-bold text-base" id="pvGrandTotal">$0.00</span>
                         </div>
                         <div class="flex justify-between text-emerald-700 font-semibold pt-1">
                             <span>បានទូទាត់:</span>
-                            <span id="pvPaid">$3,250.00</span>
+                            <span id="pvPaid">$0.00</span>
                         </div>
                         <div class="flex justify-between text-slate-600 font-semibold border-t border-slate-200 pt-1">
                             <span>នៅសល់ត្រូវទូទាត់:</span>
@@ -573,70 +557,77 @@
                 <!-- Signatures -->
                 <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-200 text-center text-xs text-slate-500">
                     <div>
-                        <p class="mb-14">ហត្ថលេខា និងឈ្មោះអ្នករៀបចំ</p>
-                        <p class="border-t border-slate-300 pt-1 w-48 mx-auto font-medium text-slate-700">បុគ្គលិកផ្នែកលក់</p>
+                        <p class="mb-14">ហត្ថលេខា និងឈ្មោះអ្នកទទួលទំនិញ</p>
+                        <p class="border-t border-slate-300 pt-1 w-48 mx-auto font-medium text-slate-700">ផ្នែកគ្រប់គ្រងស្តុក</p>
                     </div>
                     <div>
-                        <p class="mb-14">ហត្ថលេខា និងឈ្មោះអ្នកទទួល</p>
-                        <p class="border-t border-slate-300 pt-1 w-48 mx-auto font-medium text-slate-700">អតិថិជន</p>
+                        <p class="mb-14">ហត្ថលេខា និងឈ្មោះអ្នកអនុម័ត</p>
+                        <p class="border-t border-slate-300 pt-1 w-48 mx-auto font-medium text-slate-700">ប្រធានផ្នែកលទ្ធកម្ម</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal 3: Quick Record Payment (`recordPaymentModal`) -->
+    <!-- Modal 2: Quick Record Payment (`recordPaymentModal`) -->
     <div id="recordPaymentModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-md w-full p-6 text-[16px] animate-in fade-in zoom-in-95 duration-200">
             <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                <h3 class="text-lg font-bold text-slate-800">កត់ត្រាការទូទាត់ប្រាក់</h3>
+                <h3 class="text-lg font-bold text-slate-800">កត់ត្រាការទូទាត់ចំណាយ</h3>
                 <button onclick="closeModal('recordPaymentModal')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100">
                     <i class="fas fa-xmark"></i>
                 </button>
             </div>
 
             <form onsubmit="handleRecordPaymentSubmit(event)" class="space-y-3.5 text-sm">
-                <input type="hidden" id="payInvoiceId" value="" />
+                <input type="hidden" id="payBillId" value="" />
                 <div>
-                    <label class="block text-xs font-medium text-slate-600 mb-1">វិក្កយបត្រ</label>
-                    <input type="text" id="payInvoiceNumber" disabled class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700" />
+                    <label class="block text-xs font-medium text-slate-600 mb-1">វិក្កយបត្របញ្ញាទិញ</label>
+                    <input type="text" id="payBillNumber" disabled class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700" />
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-600 mb-1">ទឹកប្រាក់ដែលនៅសល់ ($)</label>
-                    <input type="text" id="payBalanceDue" disabled class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-rose-600" />
+                    <label class="block text-xs font-medium text-slate-600 mb-1">អ្នកផ្គត់ផ្គង់</label>
+                    <input type="text" id="paySupplierName" disabled class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-700" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">ទឹកប្រាក់នៅសល់</label>
+                        <input type="text" id="payBalanceDue" disabled class="w-full bg-rose-50 border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-rose-600" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">ទឹកប្រាក់ទូទាត់ ($) *</label>
+                        <input type="number" step="0.01" min="0.01" id="payAmount" required
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-primary" />
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-600 mb-1">ចំនួនទឹកប្រាក់បង់ជាក់ស្តែង ($) *</label>
-                    <input type="number" step="0.01" id="payAmount" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-none focus:bg-white focus:border-primary" />
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-600 mb-1">វិធីសាស្ត្រទូទាត់</label>
+                    <label class="block text-xs font-medium text-slate-600 mb-1">វិធីសាស្ត្រទូទាត់ *</label>
                     <div class="relative bms-custom-select" id="payMethodDropdown">
-                        <input type="hidden" id="payMethodSelect" value="ABA KHQR" />
+                        <input type="hidden" id="payMethodSelect" value="ABA Bank" required />
                         <button type="button" onclick="toggleCustomDropdown('payMethodDropdown')"
-                            class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
-                            <span class="selected-label text-slate-800 font-medium">ABA KHQR</span>
-                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
+                            class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
+                            <span class="selected-label font-medium text-slate-800">ABA Bank</span>
+                            <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
                         </button>
-                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden text-xs space-y-0.5">
-                            <div onclick="selectCustomOption('payMethodDropdown', 'ABA KHQR', 'ABA KHQR')"
+                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden text-xs">
+                            <div onclick="selectCustomOption('payMethodDropdown', 'ABA Bank', 'ABA Bank')"
                                 class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
-                                <span>ABA KHQR</span>
-                                <i class="fas fa-check text-xs text-emerald-600 checkmark"></i>
+                                <span>ABA Bank</span>
+                                <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                             </div>
-                            <div onclick="selectCustomOption('payMethodDropdown', 'Bank Transfer', 'ផ្ទេរប្រាក់តាមធនាគារ')"
+                            <div onclick="selectCustomOption('payMethodDropdown', 'ACLEDA Bank', 'ACLEDA Bank')"
                                 class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
-                                <span>ផ្ទេរប្រាក់តាមធនាគារ</span>
+                                <span>ACLEDA Bank</span>
+                                <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                            </div>
+                            <div onclick="selectCustomOption('payMethodDropdown', 'Wing Bank', 'Wing Bank')"
+                                class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
+                                <span>Wing Bank</span>
                                 <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                             </div>
                             <div onclick="selectCustomOption('payMethodDropdown', 'Cash', 'សាច់ប្រាក់សុទ្ធ')"
                                 class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
                                 <span>សាច់ប្រាក់សុទ្ធ</span>
-                                <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
-                            </div>
-                            <div onclick="selectCustomOption('payMethodDropdown', 'Wing', 'Wing Bank')"
-                                class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
-                                <span>Wing Bank</span>
                                 <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                             </div>
                         </div>
@@ -645,10 +636,10 @@
                 <div>
                     <label class="block text-xs font-medium text-slate-600 mb-1">កាលបរិច្ឆេទបង់ប្រាក់</label>
                     <div class="relative bms-date-picker">
-                        <input type="hidden" id="payDate" value="2026-09-03" />
+                        <input type="hidden" id="payDate" value="2026-09-04" />
                         <button type="button" onclick="toggleSingleDatePicker('payDate')"
                             class="w-full h-10 px-3.5 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 rounded-xl text-xs text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition group cursor-pointer">
-                            <span id="payDate-display" class="bms-date-label font-medium text-slate-800">03/09/2026</span>
+                            <span id="payDate-display" class="bms-date-label font-medium text-slate-800">04/09/2026</span>
                             <i class="fas fa-calendar-days text-primary text-xs opacity-75 group-hover:opacity-100 transition"></i>
                         </button>
                         <div id="payDate-popover" onclick="event.stopPropagation()"
@@ -693,140 +684,152 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // Sample Invoices Dataset with Sales and Profit Metrics
-        let INVOICES_DATA = [
+        // Sample Bills Dataset with Purchasing, Supplier & Stock Metrics
+        let BILLS_DATA = [
             {
-                id: 'inv-42',
-                number: 'INV-2026-0042',
-                customer: 'ហេង វិច្ឆិកា',
-                company: 'ក្រុមហ៊ុន វិច្ឆិកា ត្រេឌីង ឯ.ក',
-                phone: '012 345 678',
-                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-82',
+                number: 'BILL-2026-0082',
+                supplierRef: 'SUP-INV-9921',
+                supplier: 'ក្រុមហ៊ុន បច្ចេកវិទ្យា ខេមបូឌា ត្រេឌីង ឯ.ក',
+                contactPerson: 'ចាន់ វិចិត្រ',
+                phone: '012 888 999',
+                avatar: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=128&q=80',
                 date: '01/09/2026',
                 dueDate: '15/09/2026',
-                total: 3250.00,
-                cost: 2200.00,
-                paid: 3250.00,
-                status: 'paid', // paid, pending, overdue, draft
+                total: 14500.00,
+                paid: 14500.00,
+                stockStatus: 'received',
+                status: 'paid',
                 items: [
-                    { name: 'iPhone 15 Pro Max 256GB', qty: 2, price: 1250, cost: 950 },
-                    { name: 'iPad Air 11-inch M2', qty: 1, price: 699, cost: 520 }
+                    { name: 'MacBook Air M3 15-inch', qty: 10, cost: 1100, discount: 0 },
+                    { name: 'iPhone 15 Pro Max 256GB', qty: 3, cost: 950, discount: 0 },
+                    { name: 'iPad Air 11-inch M2', qty: 1, cost: 650, discount: 0 }
                 ]
             },
             {
-                id: 'inv-41',
-                number: 'INV-2026-0041',
-                customer: 'ចាន់ សុភា',
-                company: 'ហាងលក់ទំនិញ សុភា សែនសុខ',
-                phone: '098 765 432',
-                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-81',
+                number: 'BILL-2026-0081',
+                supplierRef: 'SUP-INV-8734',
+                supplier: 'ហាងលក់ដុំ អេឡិចត្រូនិក រាជធានី',
+                contactPerson: 'សេង ហុង',
+                phone: '098 333 444',
+                avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=128&q=80',
                 date: '02/09/2026',
                 dueDate: '16/09/2026',
-                total: 8400.00,
-                cost: 5720.00,
-                paid: 4000.00,
+                total: 6800.00,
+                paid: 3000.00,
+                stockStatus: 'received',
                 status: 'pending',
                 items: [
-                    { name: 'MacBook Air M3 15-inch', qty: 5, price: 1450, cost: 1100 },
-                    { name: 'Sony WH-1000XM5 Headphone', qty: 3, price: 380, cost: 280 }
+                    { name: 'Sony WH-1000XM5 Headphone', qty: 10, cost: 280, discount: 0 },
+                    { name: 'iPad Air 11-inch M2', qty: 5, cost: 520, discount: 0 },
+                    { name: 'Network Switch 24 Ports Gigabit', qty: 4, cost: 350, discount: 0 }
                 ]
             },
             {
-                id: 'inv-40',
-                number: 'INV-2026-0040',
-                customer: 'លី ម៉េងហុង',
-                company: 'អតិថិជនបុគ្គល',
-                phone: '077 112 233',
-                avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-80',
+                number: 'BILL-2026-0080',
+                supplierRef: 'SUP-INV-7650',
+                supplier: 'ក្រុមហ៊ុន ឌីជីថល សឹបផ្លាយ ឯ.ក',
+                contactPerson: 'កែវ ពិសិដ្ឋ',
+                phone: '077 555 666',
+                avatar: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=128&q=80',
                 date: '20/08/2026',
                 dueDate: '03/09/2026',
-                total: 4150.00,
-                cost: 2830.00,
+                total: 5400.00,
                 paid: 0.00,
+                stockStatus: 'received',
                 status: 'overdue',
                 items: [
-                    { name: 'MacBook Air M3 15-inch', qty: 2, price: 1450, cost: 1100 },
-                    { name: 'iPhone 15 Pro Max 256GB', qty: 1, price: 1250, cost: 950 }
+                    { name: 'Wi-Fi 6 Access Point Router', qty: 15, cost: 180, discount: 0 },
+                    { name: 'Network Switch 24 Ports Gigabit', qty: 6, cost: 350, discount: 0 },
+                    { name: 'ខ្សែបណ្តាញ Network Cat6 305m', qty: 6, cost: 100, discount: 0 }
                 ]
             },
             {
-                id: 'inv-39',
-                number: 'INV-2026-0039',
-                customer: 'គឹម សុផល',
-                company: 'ក្រុមហ៊ុន សុផល អាហរ័ណ នីហរ័ណ',
-                phone: '015 998 877',
-                avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-79',
+                number: 'BILL-2026-0079',
+                supplierRef: 'SUP-INV-6612',
+                supplier: 'ក្រុមហ៊ុន អាហរ័ណ នីហរ័ណ សុវណ្ណភូមិ',
+                contactPerson: 'ម៉ៅ វណ្ណឌី',
+                phone: '015 222 111',
+                avatar: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=128&q=80',
                 date: '03/09/2026',
                 dueDate: '17/09/2026',
-                total: 12800.00,
-                cost: 8600.00,
-                paid: 12800.00,
+                total: 24200.00,
+                paid: 24200.00,
+                stockStatus: 'received',
                 status: 'paid',
                 items: [
-                    { name: 'MacBook Air M3 15-inch', qty: 8, price: 1450, cost: 1100 },
-                    { name: 'សេវាដំឡើងប្រព័ន្ធ Network & Wi-Fi', qty: 4, price: 250, cost: 50 }
+                    { name: 'MacBook Air M3 15-inch', qty: 15, cost: 1100, discount: 0 },
+                    { name: 'iPhone 15 Pro Max 256GB', qty: 8, cost: 950, discount: 0 },
+                    { name: 'Apple Magic Mouse 2', qty: 1, cost: 100, discount: 0 }
                 ]
             },
             {
-                id: 'inv-38',
-                number: 'INV-2026-0038',
-                customer: 'សួស ធីតា',
-                company: 'ហាងកាហ្វេ និងនំបុ័ង ធីតា',
-                phone: '085 445 566',
-                avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-78',
+                number: 'BILL-2026-0078',
+                supplierRef: 'SUP-INV-5520',
+                supplier: 'ហាងផ្គត់ផ្គង់គ្រឿងបន្លាស់ ទំនើប',
+                contactPerson: 'នួន ថាវី',
+                phone: '085 777 888',
+                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=128&q=80',
                 date: '03/09/2026',
                 dueDate: '10/09/2026',
-                total: 1650.00,
-                cost: 1130.00,
+                total: 3600.00,
                 paid: 0.00,
+                stockStatus: 'pending',
                 status: 'pending',
                 items: [
-                    { name: 'Sony WH-1000XM5 Headphone', qty: 3, price: 380, cost: 280 },
-                    { name: 'iPad Air 11-inch M2', qty: 1, price: 699, cost: 520 }
+                    { name: 'USB-C Multiport Adapter Hub', qty: 30, cost: 45, discount: 0 },
+                    { name: 'Apple 20W USB-C Power Adapter', qty: 50, cost: 22, discount: 0 },
+                    { name: 'Apple Magic Keyboard', qty: 10, cost: 115, discount: 0 }
                 ]
             },
             {
-                id: 'inv-37',
-                number: 'INV-2026-0037',
-                customer: 'កែវ វណ្ណៈ',
-                company: 'វណ្ណៈ អេឡិចត្រូនិក',
-                phone: '011 889 900',
-                avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=128&q=80',
-                date: '03/09/2026',
-                dueDate: '03/09/2026',
-                total: 920.00,
-                cost: 630.00,
+                id: 'bill-77',
+                number: 'BILL-2026-0077',
+                supplierRef: 'SUP-INV-4411',
+                supplier: 'ក្រុមហ៊ុន បច្ចេកវិទ្យា ខេមបូឌា ត្រេឌីង ឯ.ក',
+                contactPerson: 'ចាន់ វិចិត្រ',
+                phone: '012 888 999',
+                avatar: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=128&q=80',
+                date: '04/09/2026',
+                dueDate: '04/09/2026',
+                total: 2150.00,
                 paid: 0.00,
+                stockStatus: 'pending',
                 status: 'draft',
                 items: [
-                    { name: 'iPad Air 11-inch M2', qty: 1, price: 699, cost: 520 },
-                    { name: 'សេវាដំឡើងប្រព័ន្ធ Network & Wi-Fi', qty: 1, price: 221, cost: 50 }
+                    { name: 'iPad Air 11-inch M2', qty: 3, cost: 520, discount: 0 },
+                    { name: 'Apple Pencil Pro', qty: 5, cost: 118, discount: 0 }
                 ]
             },
             {
-                id: 'inv-36',
-                number: 'INV-2026-0036',
-                customer: 'ឡុង ដានី',
-                company: 'ដានី ម៉ាត កំពង់ចាម',
-                phone: '097 556 677',
-                avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=128&q=80',
+                id: 'bill-76',
+                number: 'BILL-2026-0076',
+                supplierRef: 'SUP-INV-3390',
+                supplier: 'ហាងលក់ដុំ អេឡិចត្រូនិក រាជធានី',
+                contactPerson: 'សេង ហុង',
+                phone: '098 333 444',
+                avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=128&q=80',
                 date: '28/08/2026',
                 dueDate: '11/09/2026',
-                total: 2500.00,
-                cost: 1680.00,
-                paid: 2500.00,
+                total: 7600.00,
+                paid: 7600.00,
+                stockStatus: 'received',
                 status: 'paid',
                 items: [
-                    { name: 'iPhone 15 Pro Max 256GB', qty: 2, price: 1250, cost: 950 }
+                    { name: 'iPhone 15 Pro Max 256GB', qty: 8, cost: 950, discount: 0 }
                 ]
             }
         ];
 
         let currentFilterStatus = 'all';
 
-        // Render Invoices in Table
-        function renderInvoices(dataToRender) {
-            const tbody = document.getElementById('invoicesTableBody');
+        // Render Bills in Table
+        function renderBills(dataToRender) {
+            const tbody = document.getElementById('billsTableBody');
             if (!tbody) return;
 
             tbody.innerHTML = '';
@@ -836,7 +839,7 @@
                     <tr>
                         <td colspan="8" class="text-center py-12 text-slate-400">
                             <i class="fas fa-folder-open text-4xl mb-3 opacity-40"></i>
-                            <p class="text-base font-medium">មិនមានទិន្នន័យវិក្កយបត្រត្រូវនឹងការស្វែងរកទេ</p>
+                            <p class="text-base font-medium">មិនមានទិន្នន័យវិក្កយបត្របញ្ញាទិញត្រូវនឹងការស្វែងរកទេ</p>
                             <p class="text-xs mt-1 text-slate-400">សូមសាកល្បងផ្លាស់ប្តូរលក្ខខណ្ឌតម្រង ឬស្វែងរកឡើងវិញ</p>
                         </td>
                     </tr>
@@ -845,57 +848,66 @@
                 return;
             }
 
-            dataToRender.forEach(inv => {
-                const balance = inv.total - inv.paid;
-                const profit = inv.total - inv.cost;
-                const margin = ((profit / inv.total) * 100).toFixed(1);
+            dataToRender.forEach(bill => {
+                const balance = bill.total - bill.paid;
 
                 // Status Badge styling
                 let statusBadge = '';
-                if (inv.status === 'paid') {
+                if (bill.status === 'paid') {
                     statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold whitespace-nowrap"><i class="fas fa-circle-check text-[10px] mr-1"></i>បានទូទាត់</span>`;
-                } else if (inv.status === 'pending') {
+                } else if (bill.status === 'pending') {
                     statusBadge = `<span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded-full font-semibold whitespace-nowrap"><i class="fas fa-clock text-[10px] mr-1"></i>រង់ចាំទូទាត់</span>`;
-                } else if (inv.status === 'overdue') {
+                } else if (bill.status === 'overdue') {
                     statusBadge = `<span class="bg-rose-100 text-rose-800 text-xs px-2.5 py-1 rounded-full font-semibold whitespace-nowrap"><i class="fas fa-circle-exclamation text-[10px] mr-1"></i>ហួសកំណត់</span>`;
-                } else if (inv.status === 'draft') {
+                } else if (bill.status === 'draft') {
                     statusBadge = `<span class="bg-slate-200 text-slate-700 text-xs px-2.5 py-1 rounded-full font-semibold whitespace-nowrap"><i class="fas fa-pencil text-[10px] mr-1"></i>ព្រាង</span>`;
+                }
+
+                // Stock Badge
+                let stockBadge = '';
+                if (bill.stockStatus === 'received') {
+                    stockBadge = `<span class="text-emerald-700 bg-emerald-50 border border-emerald-200/60 text-[11px] px-2 py-0.5 rounded-lg font-medium whitespace-nowrap"><i class="fas fa-box-check mr-1 text-[10px]"></i>ចូលស្តុក</span>`;
+                } else {
+                    stockBadge = `<span class="text-amber-700 bg-amber-50 border border-amber-200/60 text-[11px] px-2 py-0.5 rounded-lg font-medium whitespace-nowrap"><i class="fas fa-dolly mr-1 text-[10px]"></i>រង់ចាំទទួល</span>`;
                 }
 
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50/80 transition-colors group';
                 tr.innerHTML = `
-                    <td class="py-3.5 px-4 font-semibold text-primary cursor-pointer hover:underline whitespace-nowrap" onclick="viewInvoiceDetail('${inv.id}')">
-                        ${inv.number}
+                    <td class="py-3.5 px-4 whitespace-nowrap">
+                        <span class="font-semibold text-primary cursor-pointer hover:underline" onclick="viewBillDetail('${bill.id}')">
+                            ${bill.number}
+                        </span>
+                        <p class="text-[11px] text-slate-400">យោង: ${bill.supplierRef}</p>
                     </td>
                     <td class="py-3.5 px-4">
                         <div class="flex items-center gap-2.5">
-                            <img src="${inv.avatar}" alt="${inv.customer}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0" />
+                            <img src="${bill.avatar}" alt="${bill.supplier}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0" />
                             <div>
-                                <p class="font-semibold text-slate-800 text-sm leading-tight">${inv.customer}</p>
-                                <p class="text-xs text-slate-400">${inv.phone}${inv.company ? ' • ' + inv.company : ''}</p>
+                                <p class="font-semibold text-slate-800 text-sm leading-tight">${bill.supplier}</p>
+                                <p class="text-xs text-slate-400">${bill.phone} • ${bill.contactPerson}</p>
                             </div>
                         </div>
                     </td>
                     <td class="py-3.5 px-4 text-xs whitespace-nowrap">
-                        <p class="text-slate-700 font-medium">${inv.date}</p>
-                        <p class="text-slate-400">ផុតកំណត់: <span class="${inv.status === 'overdue' ? 'text-rose-600 font-semibold' : ''}">${inv.dueDate}</span></p>
+                        <p class="text-slate-700 font-medium">${bill.date}</p>
+                        <p class="text-slate-400">ផុតកំណត់: <span class="${bill.status === 'overdue' ? 'text-rose-600 font-semibold' : ''}">${bill.dueDate}</span></p>
                     </td>
                     <td class="py-3.5 px-4 text-right font-semibold text-slate-900 whitespace-nowrap">
-                        $${inv.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                        $${bill.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </td>
                     <td class="py-3.5 px-4 text-right text-xs whitespace-nowrap">
-                        <p class="text-emerald-700 font-medium">$${inv.paid.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                        <p class="text-emerald-700 font-medium">$${bill.paid.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                         <p class="${balance > 0 ? 'text-rose-600 font-semibold' : 'text-slate-400'}">នៅសល់: $${balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                     </td>
-                    <td class="py-3.5 px-4 text-right text-xs whitespace-nowrap">
-                        <p class="text-emerald-700 font-semibold">+$${profit.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
-                        <span class="text-[11px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">${margin}% margin</span>
-                    </td>
-                    <td class="py-3.5 px-4 text-center">
-                        ${statusBadge}
                     <td class="py-3.5 px-4 text-center whitespace-nowrap">
-                        <button onclick="toggleRowActionMenu(event, '${inv.id}')" class="row-action-btn w-8 h-8 inline-flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none" title="សកម្មភាព">
+                        ${stockBadge}
+                    </td>
+                    <td class="py-3.5 px-4 text-center whitespace-nowrap">
+                        ${statusBadge}
+                    </td>
+                    <td class="py-3.5 px-4 text-center whitespace-nowrap">
+                        <button onclick="toggleRowActionMenu(event, '${bill.id}')" class="row-action-btn w-8 h-8 inline-flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none" title="សកម្មភាព">
                             <i class="fas fa-ellipsis-vertical text-base"></i>
                         </button>
                     </td>
@@ -904,18 +916,17 @@
             });
 
             document.getElementById('shownCount').textContent = dataToRender.length;
-            document.getElementById('totalCount').textContent = INVOICES_DATA.length;
+            document.getElementById('totalCount').textContent = BILLS_DATA.length;
             updateCounts();
         }
 
         // True Date Range Selection State
         let calCurrentYear = 2026;
-        let calCurrentMonth = 9; // 9 = September, 8 = August
+        let calCurrentMonth = 9; // 9 = September
         
-        let rangeStartDate = new Date(2026, 8, 1); // 1 Sep 2026
+        let rangeStartDate = new Date(2026, 8, 1);  // 1 Sep 2026
         let rangeEndDate = new Date(2026, 8, 30);   // 30 Sep 2026
-        let selectingRangeStart = false;            // true when 1st date clicked, waiting for 2nd date
-        let tempHoverDate = null;
+        let selectingRangeStart = false;
         let currentPresetName = 'ខែនេះ';
 
         const MONTH_NAMES_KH = {
@@ -924,7 +935,7 @@
             9: 'កញ្ញា', 10: 'តុលា', 11: 'វិច្ឆិកា', 12: 'ធ្នូ'
         };
 
-        function parseInvoiceDate(dStr) {
+        function parseBillDate(dStr) {
             const parts = dStr.split('/');
             return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
         }
@@ -979,18 +990,15 @@
             clickedDate.setHours(0, 0, 0, 0);
 
             if (!selectingRangeStart || (rangeStartDate && rangeEndDate)) {
-                // 1st click: Set start date
                 rangeStartDate = clickedDate;
                 rangeEndDate = null;
                 selectingRangeStart = true;
                 currentPresetName = null;
 
                 const startStr = `${day} ${MONTH_NAMES_KH[month]}`;
-                // Keep top toolbar button stable! Only update popover bottom tag:
                 const tagEl = document.getElementById('rangeTagLabel');
                 if (tagEl) tagEl.textContent = `${startStr} (សូមជ្រើសថ្ងៃបញ្ចប់)`;
             } else {
-                // 2nd click: Set end date
                 if (clickedDate < rangeStartDate) {
                     rangeEndDate = rangeStartDate;
                     rangeStartDate = clickedDate;
@@ -1007,15 +1015,12 @@
                 let rangeText = '';
                 if (rangeStartDate.getTime() === rangeEndDate.getTime()) {
                     rangeText = `${sD} ${sM}`;
-                } else if (rangeStartDate.getMonth() === rangeEndDate.getMonth()) {
-                    rangeText = `${sD} ${sM} - ${eD} ${eM}`;
                 } else {
                     rangeText = `${sD} ${sM} - ${eD} ${eM}`;
                 }
 
-                // Range is complete: update button label & tag, then filter
                 updateRangeLabels(rangeText, rangeText);
-                filterInvoices();
+                filterBills();
             }
 
             highlightPresetButton(null);
@@ -1034,7 +1039,6 @@
             const firstDayIndex = new Date(calCurrentYear, calCurrentMonth - 1, 1).getDay();
             const leadingBlanks = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
 
-            // Empty leading cells
             for (let i = 0; i < leadingBlanks; i++) {
                 const emptyCell = document.createElement('span');
                 grid.appendChild(emptyCell);
@@ -1082,18 +1086,17 @@
         function selectPreset(name) {
             currentPresetName = name;
             selectingRangeStart = false;
-            tempHoverDate = null;
 
             if (name === 'ថ្ងៃនេះ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 8, 4);
+                rangeEndDate = new Date(2026, 8, 4);
+                updateRangeLabels('4 កញ្ញា', '4 កញ្ញា');
+            } else if (name === 'ម្សិលមិញ') {
                 calCurrentMonth = 9;
                 rangeStartDate = new Date(2026, 8, 3);
                 rangeEndDate = new Date(2026, 8, 3);
                 updateRangeLabels('3 កញ្ញា', '3 កញ្ញា');
-            } else if (name === 'ម្សិលមិញ') {
-                calCurrentMonth = 9;
-                rangeStartDate = new Date(2026, 8, 2);
-                rangeEndDate = new Date(2026, 8, 2);
-                updateRangeLabels('2 កញ្ញា', '2 កញ្ញា');
             } else if (name === 'សប្តាហ៍នេះ') {
                 calCurrentMonth = 9;
                 rangeStartDate = new Date(2026, 8, 1);
@@ -1118,124 +1121,198 @@
                 calCurrentMonth = 9;
                 rangeStartDate = new Date(2026, 0, 1);
                 rangeEndDate = new Date(2026, 11, 31);
-                updateRangeLabels('ឆ្នាំ ២០២៦', 'ឆ្នាំ ២០២៦');
+                updateRangeLabels('1 មករា - 31 ធ្នូ 2026', '1 មករា - 31 ធ្នូ 2026');
             } else if (name === '៧ ថ្ងៃចុងក្រោយ') {
                 calCurrentMonth = 9;
-                rangeStartDate = new Date(2026, 7, 28);
-                rangeEndDate = new Date(2026, 8, 3);
-                updateRangeLabels('28 សីហា - 3 កញ្ញា', '28 សីហា - 3 កញ្ញា');
+                rangeStartDate = new Date(2026, 8, 4 - 6);
+                rangeEndDate = new Date(2026, 8, 4);
+                updateRangeLabels('29 សីហា - 4 កញ្ញា', '29 សីហា - 4 កញ្ញា');
             } else if (name === '១៤ ថ្ងៃចុងក្រោយ') {
                 calCurrentMonth = 9;
-                rangeStartDate = new Date(2026, 7, 21);
-                rangeEndDate = new Date(2026, 8, 3);
-                updateRangeLabels('21 សីហា - 3 កញ្ញា', '21 សីហា - 3 កញ្ញា');
+                rangeStartDate = new Date(2026, 8, 4 - 13);
+                rangeEndDate = new Date(2026, 8, 4);
+                updateRangeLabels('22 សីហា - 4 កញ្ញា', '22 សីហា - 4 កញ្ញា');
             } else if (name === '៣០ ថ្ងៃចុងក្រោយ') {
                 calCurrentMonth = 9;
-                rangeStartDate = new Date(2026, 7, 5);
-                rangeEndDate = new Date(2026, 8, 3);
-                updateRangeLabels('5 សីហា - 3 កញ្ញា', '5 សីហា - 3 កញ្ញា');
+                rangeStartDate = new Date(2026, 7, 6);
+                rangeEndDate = new Date(2026, 8, 4);
+                updateRangeLabels('6 សីហា - 4 កញ្ញា', '6 សីហា - 4 កញ្ញា');
             }
 
             highlightPresetButton(name);
             renderCalendarGrid();
-            filterInvoices();
+            filterBills();
         }
 
         function clearRangeTag() {
-            currentPresetName = 'ទាំងអស់';
             rangeStartDate = null;
             rangeEndDate = null;
             selectingRangeStart = false;
-            updateRangeLabels('ទាំងអស់', 'ទាំងអស់');
+            updateRangeLabels('ជ្រើសកាលបរិច្ឆេទ', 'មិនទាន់ជ្រើស');
             highlightPresetButton(null);
             renderCalendarGrid();
-            filterInvoices();
+            filterBills();
         }
 
         function applyDateRange() {
-            if (selectingRangeStart && rangeStartDate && !rangeEndDate) {
-                rangeEndDate = new Date(rangeStartDate);
-                selectingRangeStart = false;
-                const d = rangeStartDate.getDate();
-                const m = MONTH_NAMES_KH[rangeStartDate.getMonth() + 1];
-                const text = `${d} ${m}`;
-                updateRangeLabels(text, text);
-            }
-            toggleDatePicker();
-            filterInvoices();
+            const popover = document.getElementById('datePickerPopover');
+            const chevron = document.getElementById('datePickerChevron');
+            if (popover) popover.classList.add('hidden');
+            if (chevron) chevron.classList.remove('rotate-180');
+            filterBills();
         }
 
-        // Row Action Dropdown Menu Functions
-        let activeActionMenuInvId = null;
+        // Filter and Search Logic
+        function filterBills() {
+            const query = (document.getElementById('billSearchInput').value || '').toLowerCase().trim();
 
-        function toggleRowActionMenu(event, invId) {
-            if (event && event.stopPropagation) event.stopPropagation();
+            const filtered = BILLS_DATA.filter(bill => {
+                // 1. Status Filter
+                if (currentFilterStatus !== 'all' && bill.status !== currentFilterStatus) {
+                    return false;
+                }
+
+                // 2. Date Range Filter
+                if (rangeStartDate && rangeEndDate) {
+                    const bDate = parseBillDate(bill.date);
+                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
+                    const e = new Date(rangeEndDate); e.setHours(23, 59, 59, 999);
+                    if (bDate < s || bDate > e) {
+                        return false;
+                    }
+                } else if (rangeStartDate && !rangeEndDate) {
+                    const bDate = parseBillDate(bill.date);
+                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
+                    const e = new Date(rangeEndDate); e.setHours(23, 59, 59, 999);
+                    if (bDate < s || bDate > e) {
+                        return false;
+                    }
+                }
+
+                // 3. Search Query
+                if (query) {
+                    const matchNum = bill.number.toLowerCase().includes(query);
+                    const matchSupp = bill.supplier.toLowerCase().includes(query);
+                    const matchRef = bill.supplierRef.toLowerCase().includes(query);
+                    const matchPhone = bill.phone.toLowerCase().includes(query);
+                    return matchNum || matchSupp || matchRef || matchPhone;
+                }
+
+                return true;
+            });
+
+            renderBills(filtered);
+        }
+
+        function setStatusFilter(status) {
+            currentFilterStatus = status;
+
+            document.querySelectorAll('.status-tab').forEach(tab => {
+                tab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition';
+            });
+
+            const activeTab = document.getElementById('tab-' + status);
+            if (activeTab) {
+                activeTab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-primary text-white font-medium text-xs shadow-sm transition';
+            }
+
+            filterBills();
+        }
+
+        function resetFilters() {
+            document.getElementById('billSearchInput').value = '';
+            selectPreset('ខែនេះ');
+            setStatusFilter('all');
+        }
+
+        function updateCounts() {
+            const dateFiltered = BILLS_DATA.filter(b => {
+                if (rangeStartDate && rangeEndDate) {
+                    const bDate = parseBillDate(b.date);
+                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
+                    const e = new Date(rangeEndDate); e.setHours(23, 59, 59, 999);
+                    return bDate >= s && bDate <= e;
+                }
+                return true;
+            });
+
+            document.getElementById('count-all').textContent = dateFiltered.length;
+            document.getElementById('count-paid').textContent = dateFiltered.filter(i => i.status === 'paid').length;
+            document.getElementById('count-pending').textContent = dateFiltered.filter(i => i.status === 'pending').length;
+            document.getElementById('count-overdue').textContent = dateFiltered.filter(i => i.status === 'overdue').length;
+            document.getElementById('count-draft').textContent = dateFiltered.filter(i => i.status === 'draft').length;
+        }
+
+        // Floating Row Action Menu Logic
+        let activeActionMenuBillId = null;
+
+        function toggleRowActionMenu(event, billId) {
+            event.stopPropagation();
             const dropdown = document.getElementById('rowActionDropdown');
             if (!dropdown) return;
 
-            // If clicked again for same invoice, close it
-            if (activeActionMenuInvId === invId && !dropdown.classList.contains('hidden')) {
+            if (activeActionMenuBillId === billId && !dropdown.classList.contains('hidden')) {
                 closeRowActionMenu();
                 return;
             }
 
-            const inv = INVOICES_DATA.find(item => item.id === invId);
-            if (!inv) return;
+            activeActionMenuBillId = billId;
+            const bill = BILLS_DATA.find(b => b.id === billId);
+            if (!bill) return;
 
-            activeActionMenuInvId = invId;
-            const balance = inv.total - inv.paid;
+            const balance = bill.total - bill.paid;
 
             let statusBadge = '';
-            if (inv.status === 'paid') {
-                statusBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">បានទូទាត់</span>`;
-            } else if (inv.status === 'pending') {
-                statusBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">រង់ចាំ</span>`;
-            } else if (inv.status === 'overdue') {
-                statusBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/60">ហួសកំណត់</span>`;
+            if (bill.status === 'paid') {
+                statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded-full font-semibold">បានទូទាត់</span>`;
+            } else if (bill.status === 'pending') {
+                statusBadge = `<span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded-full font-semibold">រង់ចាំទូទាត់</span>`;
+            } else if (bill.status === 'overdue') {
+                statusBadge = `<span class="bg-rose-100 text-rose-800 text-[10px] px-2 py-0.5 rounded-full font-semibold">ហួសកំណត់</span>`;
             } else {
-                statusBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 text-slate-600 border border-slate-200/60">ព្រាង</span>`;
+                statusBadge = `<span class="bg-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded-full font-semibold">ព្រាង</span>`;
             }
 
             dropdown.innerHTML = `
                 <div class="px-3 py-2.5 mb-1.5 bg-slate-50/90 rounded-xl border border-slate-100/90 mx-0.5">
                     <div class="flex items-start gap-2.5">
-                        <img src="${inv.avatar}" alt="${inv.customer}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0 mt-0.5" />
+                        <img src="${bill.avatar}" alt="${bill.supplier}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0 mt-0.5" />
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center justify-between gap-1.5 mb-1">
-                                <span class="text-xs font-bold text-slate-800 tracking-tight leading-none">${inv.number}</span>
+                                <span class="text-xs font-bold text-slate-800 tracking-tight leading-none">${bill.number}</span>
                                 <div class="flex-shrink-0">${statusBadge}</div>
                             </div>
                             <div class="text-[11px] font-medium text-slate-600 leading-snug break-words">
-                                ${inv.customer}
+                                ${bill.supplier}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="space-y-0.5">
-                    <button onclick="closeRowActionMenu(); viewInvoiceDetail('${inv.id}')"
+                    <button onclick="closeRowActionMenu(); viewBillDetail('${bill.id}')"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-eye"></i>
                         </span>
                         <span class="flex-1">មើលព័ត៌មានលម្អិត</span>
                     </button>
-                    <a href="edit-invoice.html?id=${inv.id}"
+                    <a href="edit-bills.html?id=${bill.id}"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-file-pen"></i>
                         </span>
-                        <span class="flex-1">កែប្រែវិក្កយបត្រ</span>
+                        <span class="flex-1">កែប្រែវិក្កយបត្របញ្ញាទិញ</span>
                     </a>
-                    ${balance > 0 && inv.status !== 'draft' ? `
-                    <button onclick="closeRowActionMenu(); openPaymentDialog('${inv.id}', '${inv.number}', ${balance})"
+                    ${balance > 0 && bill.status !== 'draft' ? `
+                    <button onclick="closeRowActionMenu(); openPaymentDialog('${bill.id}', '${bill.number}', '${bill.supplier}', ${balance})"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-emerald-700 hover:bg-emerald-50 flex items-center gap-2.5 transition text-xs font-semibold">
                         <span class="w-7 h-7 rounded-lg bg-emerald-100/80 group-hover:bg-emerald-600 group-hover:text-white text-emerald-700 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-hand-holding-dollar"></i>
                         </span>
-                        <span class="flex-1">កត់ត្រាការទូទាត់</span>
+                        <span class="flex-1">កត់ត្រាការទូទាត់ចំណាយ</span>
                     </button>
                     ` : ''}
-                    <button onclick="closeRowActionMenu(); printSingleInvoice('${inv.id}')"
+                    <button onclick="closeRowActionMenu(); printSingleBill('${bill.id}')"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-slate-700 group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-print"></i>
@@ -1243,7 +1320,7 @@
                         <span class="flex-1">បោះពុម្ពវិក្កយបត្រ</span>
                     </button>
                     <div class="my-1 border-t border-slate-100 mx-1"></div>
-                    <button onclick="closeRowActionMenu(); copyInvoiceNumber('${inv.number}')"
+                    <button onclick="closeRowActionMenu(); copyBillNumber('${bill.number}')"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-slate-900 hover:bg-slate-50 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-slate-700 group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-copy"></i>
@@ -1260,6 +1337,7 @@
             const dropdownWidth = dropdown.offsetWidth || 280;
             const dropdownHeight = dropdown.offsetHeight || 190;
 
+            // Anchor right edge of dropdown to right edge of button (widens to the left)
             let left = rect.right - dropdownWidth;
             if (left + dropdownWidth > window.innerWidth - 16) {
                 left = window.innerWidth - dropdownWidth - 16;
@@ -1279,14 +1357,14 @@
         function closeRowActionMenu() {
             const dropdown = document.getElementById('rowActionDropdown');
             if (dropdown) dropdown.classList.add('hidden');
-            activeActionMenuInvId = null;
+            activeActionMenuBillId = null;
         }
 
-        function copyInvoiceNumber(invNum) {
+        function copyBillNumber(billNum) {
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(invNum);
+                navigator.clipboard.writeText(billNum);
             }
-            showToast(`បានចម្លងលេខវិក្កយបត្រ៖ ${invNum}`, 'info');
+            showToast(`បានចម្លងលេខវិក្កយបត្រ៖ ${billNum}`, 'info');
         }
 
         // Close popover & row action menu when clicked outside
@@ -1317,115 +1395,33 @@
             closeRowActionMenu();
         });
 
-        // Filter and Search Logic
-        function filterInvoices() {
-            const query = (document.getElementById('invoiceSearchInput').value || '').toLowerCase().trim();
+        // View Bill Detail Modal
+        function viewBillDetail(billId) {
+            const bill = BILLS_DATA.find(b => b.id === billId);
+            if (!bill) return;
 
-            const filtered = INVOICES_DATA.filter(inv => {
-                // 1. Status Filter
-                if (currentFilterStatus !== 'all' && inv.status !== currentFilterStatus) {
-                    return false;
-                }
-
-                // 2. Date Range Filter (BETWEEN start and end date)
-                if (rangeStartDate && rangeEndDate) {
-                    const invDate = parseInvoiceDate(inv.date);
-                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
-                    const e = new Date(rangeEndDate); e.setHours(23, 59, 59, 999);
-                    if (invDate < s || invDate > e) {
-                        return false;
-                    }
-                } else if (rangeStartDate && !rangeEndDate) {
-                    const invDate = parseInvoiceDate(inv.date);
-                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
-                    const e = new Date(rangeStartDate); e.setHours(23, 59, 59, 999);
-                    if (invDate < s || invDate > e) {
-                        return false;
-                    }
-                }
-
-                // 3. Search Query
-                if (query) {
-                    const matchNum = inv.number.toLowerCase().includes(query);
-                    const matchCust = inv.customer.toLowerCase().includes(query);
-                    const matchPhone = inv.phone.toLowerCase().includes(query);
-                    return matchNum || matchCust || matchPhone;
-                }
-
-                return true;
-            });
-
-            renderInvoices(filtered);
-        }
-
-        function setStatusFilter(status) {
-            currentFilterStatus = status;
-
-            // Reset tab styles
-            document.querySelectorAll('.status-tab').forEach(tab => {
-                tab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition';
-            });
-
-            // Activate chosen tab
-            const activeTab = document.getElementById('tab-' + status);
-            if (activeTab) {
-                activeTab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-primary text-white font-medium text-xs shadow-sm transition';
-            }
-
-            filterInvoices();
-        }
-
-        function resetFilters() {
-            document.getElementById('invoiceSearchInput').value = '';
-            selectPreset('ខែនេះ');
-            setStatusFilter('all');
-        }
-
-        function updateCounts() {
-            const dateFiltered = INVOICES_DATA.filter(inv => {
-                if (rangeStartDate && rangeEndDate) {
-                    const invDate = parseInvoiceDate(inv.date);
-                    const s = new Date(rangeStartDate); s.setHours(0, 0, 0, 0);
-                    const e = new Date(rangeEndDate); e.setHours(23, 59, 59, 999);
-                    return invDate >= s && invDate <= e;
-                }
-                return true;
-            });
-
-            document.getElementById('count-all').textContent = dateFiltered.length;
-            document.getElementById('count-paid').textContent = dateFiltered.filter(i => i.status === 'paid').length;
-            document.getElementById('count-pending').textContent = dateFiltered.filter(i => i.status === 'pending').length;
-            document.getElementById('count-overdue').textContent = dateFiltered.filter(i => i.status === 'overdue').length;
-            document.getElementById('count-draft').textContent = dateFiltered.filter(i => i.status === 'draft').length;
-        }
-
-
-        // View Invoice Detail Modal
-        function viewInvoiceDetail(invId) {
-            const inv = INVOICES_DATA.find(i => i.id === invId);
-            if (!inv) return;
-
-            document.getElementById('previewInvoiceTitle').textContent = `វិក្កយបត្រ #${inv.number}`;
-            document.getElementById('pvNumber').textContent = inv.number;
-            document.getElementById('pvDate').textContent = inv.date;
-            document.getElementById('pvDueDate').textContent = inv.dueDate;
-            document.getElementById('pvCustomer').textContent = inv.customer + (inv.company ? ` (${inv.company})` : '');
-            document.getElementById('pvPhone').textContent = `លេខទូរស័ព្ទ: ${inv.phone}`;
+            document.getElementById('previewBillTitle').textContent = `វិក្កយបត្របញ្ញាទិញ #${bill.number}`;
+            document.getElementById('pvBillNumber').textContent = bill.number;
+            document.getElementById('pvSupplierRef').textContent = bill.supplierRef;
+            document.getElementById('pvBillDate').textContent = bill.date;
+            document.getElementById('pvBillDueDate').textContent = bill.dueDate;
+            document.getElementById('pvSupplier').textContent = bill.supplier;
+            document.getElementById('pvSupplierContact').textContent = `អ្នកទំនាក់ទំនង: ${bill.contactPerson} (${bill.phone})`;
 
             // Status label
             const badge = document.getElementById('previewStatusBadge');
             const statusText = document.getElementById('pvStatusText');
-            if (inv.status === 'paid') {
+            if (bill.status === 'paid') {
                 badge.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800';
                 badge.textContent = 'បានទូទាត់';
                 statusText.className = 'text-emerald-700 font-semibold';
                 statusText.textContent = 'បានទូទាត់រួចរាល់';
-            } else if (inv.status === 'pending') {
+            } else if (bill.status === 'pending') {
                 badge.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800';
                 badge.textContent = 'រង់ចាំទូទាត់';
                 statusText.className = 'text-amber-700 font-semibold';
                 statusText.textContent = 'រង់ចាំការទូទាត់';
-            } else if (inv.status === 'overdue') {
+            } else if (bill.status === 'overdue') {
                 badge.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800';
                 badge.textContent = 'ហួសកំណត់';
                 statusText.className = 'text-rose-700 font-semibold';
@@ -1437,47 +1433,58 @@
                 statusText.textContent = 'វិក្កយបត្រព្រាង';
             }
 
+            // Stock Status Text
+            const stockText = document.getElementById('pvStockText');
+            if (bill.stockStatus === 'received') {
+                stockText.className = 'text-emerald-700 font-semibold';
+                stockText.textContent = 'បានចូលស្តុកពេញលេញ';
+            } else {
+                stockText.className = 'text-amber-700 font-semibold';
+                stockText.textContent = 'រង់ចាំទទួលចូលស្តុក';
+            }
+
             // Lines
             const pvLines = document.getElementById('pvLinesBody');
             pvLines.innerHTML = '';
-            inv.items.forEach((item, idx) => {
-                const lineTotal = item.qty * item.price;
+            bill.items.forEach((item, idx) => {
+                const lineTotal = item.qty * item.cost;
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="py-2.5 px-3 text-slate-400">${idx + 1}</td>
                     <td class="py-2.5 px-3 font-medium text-slate-800">${item.name}</td>
                     <td class="py-2.5 px-3 text-center">${item.qty}</td>
-                    <td class="py-2.5 px-3 text-right">$${item.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                    <td class="py-2.5 px-3 text-right">$${item.cost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                     <td class="py-2.5 px-3 text-right">0%</td>
                     <td class="py-2.5 px-3 text-right font-semibold">$${lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                 `;
                 pvLines.appendChild(tr);
             });
 
-            const balance = inv.total - inv.paid;
-            const subtotal = inv.total / 1.10;
-            const vat = inv.total - subtotal;
+            const balance = bill.total - bill.paid;
+            const subtotal = bill.total / 1.10;
+            const vat = bill.total - subtotal;
 
             document.getElementById('pvSubtotal').textContent = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('pvVat').textContent = '$' + vat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('pvGrandTotal').textContent = '$' + inv.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pvPaid').textContent = '$' + inv.paid.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('pvGrandTotal').textContent = '$' + bill.total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('pvPaid').textContent = '$' + bill.paid.toLocaleString('en-US', { minimumFractionDigits: 2 });
             document.getElementById('pvBalance').textContent = '$' + balance.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
-            openModal('invoiceDetailModal');
+            openModal('billDetailModal');
         }
 
-        function printSingleInvoice(invId) {
-            viewInvoiceDetail(invId);
+        function printSingleBill(billId) {
+            viewBillDetail(billId);
             setTimeout(() => {
                 window.print();
             }, 300);
         }
 
         // Quick Payment Record
-        function openPaymentDialog(invId, invNumber, balanceDue) {
-            document.getElementById('payInvoiceId').value = invId;
-            document.getElementById('payInvoiceNumber').value = invNumber;
+        function openPaymentDialog(billId, billNumber, supplierName, balanceDue) {
+            document.getElementById('payBillId').value = billId;
+            document.getElementById('payBillNumber').value = billNumber;
+            document.getElementById('paySupplierName').value = supplierName;
             document.getElementById('payBalanceDue').value = '$' + balanceDue.toFixed(2);
             document.getElementById('payAmount').value = balanceDue.toFixed(2);
             document.getElementById('payAmount').max = balanceDue;
@@ -1486,39 +1493,39 @@
 
         function handleRecordPaymentSubmit(e) {
             e.preventDefault();
-            const invId = document.getElementById('payInvoiceId').value;
+            const billId = document.getElementById('payBillId').value;
             const amount = parseFloat(document.getElementById('payAmount').value) || 0;
             const method = document.getElementById('payMethodSelect').value;
 
-            const inv = INVOICES_DATA.find(i => i.id === invId);
-            if (inv) {
-                inv.paid += amount;
-                if (inv.paid >= inv.total) {
-                    inv.status = 'paid';
+            const bill = BILLS_DATA.find(b => b.id === billId);
+            if (bill) {
+                bill.paid += amount;
+                if (bill.paid >= bill.total) {
+                    bill.status = 'paid';
                 }
                 closeModal('recordPaymentModal');
-                filterInvoices();
-                showToast(`បានកត់ត្រាការទូទាត់ប្រាក់ចំនួន $${amount.toFixed(2)} តាមរយៈ ${method} ដោយជោគជ័យ!`, 'success');
+                filterBills();
+                showToast(`បានកត់ត្រាការទូទាត់ចំណាយចំនួន $${amount.toFixed(2)} ជូន ${bill.supplier} ដោយជោគជ័យ!`, 'success');
             }
         }
 
-
         // Export data
-        function exportInvoicesData() {
-            let csv = "Invoice Number,Customer,Issue Date,Due Date,Total Amount,Paid Amount,Balance,Status\n";
-            INVOICES_DATA.forEach(i => {
-                const bal = (i.total - i.paid).toFixed(2);
-                csv += `"${i.number}","${i.customer}","${i.date}","${i.dueDate}","${i.total}","${i.paid}","${bal}","${i.status}"\n`;
+        function exportBillsData() {
+            let csv = "Bill Number,Supplier Ref,Supplier,Issue Date,Due Date,Total Amount,Paid Amount,Balance,Stock Status,Status\n";
+            BILLS_DATA.forEach(b => {
+                const bal = (b.total - b.paid).toFixed(2);
+                csv += `"${b.number}","${b.supplierRef}","${b.supplier}","${b.date}","${b.dueDate}","${b.total}","${b.paid}","${bal}","${b.stockStatus}","${b.status}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `BMS_Sales_Invoices_${new Date().toISOString().slice(0,10)}.csv`;
+            a.download = `BMS_Purchase_Bills_${new Date().toISOString().slice(0,10)}.csv`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            showToast('ទាញយករបាយការណ៍វិក្កយបត្របញ្ញាទិញរួចរាល់', 'success');
         }
 
         // Modal Helpers
@@ -1541,7 +1548,7 @@
         // On Page Load
         document.addEventListener('DOMContentLoaded', () => {
             renderCalendarGrid();
-            filterInvoices();
+            filterBills();
         });
     </script>
 

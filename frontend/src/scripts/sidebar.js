@@ -245,6 +245,36 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Purchase Bills
+            if (navId === 'buy-invoices') {
+                try { sessionStorage.setItem('bms_active_nav', 'buy-invoices'); } catch(err){}
+                if (window.location.pathname.endsWith('bills.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('buy-invoices');
+                }
+                return;
+            }
+
+            // If user clicked Suppliers
+            if (navId === 'buy-suppliers') {
+                try { sessionStorage.setItem('bms_active_nav', 'buy-suppliers'); } catch(err){}
+                if (window.location.pathname.endsWith('suppliers.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('buy-suppliers');
+                }
+                return;
+            }
+
+            // If user clicked Disbursements (Expenses)
+            if (navId === 'buy-expenses') {
+                try { sessionStorage.setItem('bms_active_nav', 'buy-expenses'); } catch(err){}
+                if (window.location.pathname.endsWith('disbursement.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('buy-expenses');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -278,8 +308,11 @@ function initSidebarNav() {
     const isQuotes = window.location.pathname.includes('/quote/') || window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html');
     const isCustomers = window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html');
     const isPayments = window.location.pathname.includes('/payment/') || window.location.pathname.endsWith('payment.html');
+    const isBills = window.location.pathname.includes('/bills/') || window.location.pathname.endsWith('bills.html');
+    const isSuppliers = window.location.pathname.includes('/suppliers/') || window.location.pathname.endsWith('suppliers.html');
+    const isDisbursement = window.location.pathname.includes('/disbursement/') || window.location.pathname.endsWith('disbursement.html');
     
-    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (isPayments ? 'sell-receipts' : (savedNav || 'sell-receipts'))))));
+    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (isPayments ? 'sell-receipts' : (isBills ? 'buy-invoices' : (isSuppliers ? 'buy-suppliers' : (isDisbursement ? 'buy-expenses' : (savedNav || 'buy-expenses')))))))));
     
     if (isDashboard && !urlParam) {
         initialNav = 'dashboard';
@@ -291,6 +324,12 @@ function initSidebarNav() {
         initialNav = 'sell-customers';
     } else if (isPayments && !urlParam) {
         initialNav = 'sell-receipts';
+    } else if (isBills && !urlParam) {
+        initialNav = 'buy-invoices';
+    } else if (isSuppliers && !urlParam) {
+        initialNav = 'buy-suppliers';
+    } else if (isDisbursement && !urlParam) {
+        initialNav = 'buy-expenses';
     }
     
     setActiveNavItem(initialNav);
