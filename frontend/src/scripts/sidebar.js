@@ -941,8 +941,11 @@ function initGlobalNotifications() {
     if (!bellIcons || bellIcons.length === 0) return;
 
     bellIcons.forEach(icon => {
+        // Prevent matching bell icons inside the flyout itself
+        if (icon.closest('#bmsNotificationFlyout')) return;
+
         const btn = icon.closest('button');
-        if (!btn) return;
+        if (!btn || btn.id === 'bmsTabNotifsBtn') return;
 
         // Wrap button in relative container if not already wrapped
         let wrapper = btn.parentElement;
@@ -962,7 +965,7 @@ function initGlobalNotifications() {
         if (!flyout) {
             flyout = document.createElement('div');
             flyout.id = 'bmsNotificationFlyout';
-            flyout.className = 'hidden absolute right-0 top-full mt-2.5 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
+            flyout.className = 'hidden absolute right-0 top-full mt-2.5 w-[400px] sm:w-[420px] max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
 
             const invoiceUrl = getPagesRelativePath('3-sales/1-invoice/invoice.html');
             const stockUrl = getPagesRelativePath('5-stock/1-balance/balance.html');
@@ -988,18 +991,18 @@ function initGlobalNotifications() {
                 </div>
 
                 <!-- Segmented Tabs (Action Timeline vs Notifications) -->
-                <div class="flex border-b border-slate-100 bg-slate-50/50">
+                <div class="flex border-b border-slate-100 bg-slate-50/50 overflow-hidden">
                     <button type="button" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
-                        class="flex-1 py-2 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer">
-                        <i class="fas fa-clock-rotate-left text-xs"></i>
-                        <span>ដំណើរការសកម្មភាព</span>
-                        <span id="bmsActionCountBadge" class="px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800">3 សកម្មភាព</span>
+                        class="flex-1 py-2 px-3 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
+                        <i class="fas fa-clock-rotate-left text-xs flex-shrink-0"></i>
+                        <span class="truncate">ដំណើរការសកម្មភាព</span>
+                        <span id="bmsActionCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex-shrink-0">3</span>
                     </button>
                     <button type="button" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
-                        class="flex-1 py-2 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer">
-                        <i class="fas fa-bell text-xs"></i>
-                        <span>ការជូនដំណឹង</span>
-                        <span id="bmsNotifCountBadge" class="px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">4 ថ្មី</span>
+                        class="flex-1 py-2 px-3 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
+                        <i class="fas fa-bell text-xs flex-shrink-0"></i>
+                        <span class="truncate">ការជូនដំណឹង</span>
+                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-100 flex-shrink-0">4 ថ្មី</span>
                     </button>
                 </div>
 
@@ -1079,7 +1082,7 @@ function initGlobalNotifications() {
                 <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
                     <span class="flex items-center gap-1.5 text-slate-500">
                         <i class="fas fa-rotate text-emerald-600 text-[10px]"></i>
-                        <span>ទិន្នន័យនឹងវិលទៅដើមពេល Refresh (F5)</span>
+                        <span>ទិន្នន័យនឹងវិលទៅសភាពដើមពេលផ្ទុកទំព័រឡើងវិញ</span>
                     </span>
                     <button type="button" onclick="window.BMSActionTracker && window.BMSActionTracker.resetToDefault()" class="text-rose-600 hover:underline font-medium cursor-pointer">
                         កំណត់ឡើងវិញ
@@ -1095,13 +1098,20 @@ function initGlobalNotifications() {
             const isHidden = flyout.classList.contains('hidden');
             
             // Close profile dropdown if open
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
+                d.classList.add('hidden');
+                if (d.parentElement) d.parentElement.classList.remove('z-50');
+            });
             // Close other notification flyouts
-            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => {
+                f.classList.add('hidden');
+                if (f.parentElement) f.parentElement.classList.remove('z-50');
+            });
 
             if (isHidden) {
                 flyout.classList.remove('hidden');
                 btn.setAttribute('aria-expanded', 'true');
+                wrapper.classList.add('z-50');
                 if (window.BMSActionTracker) {
                     window.BMSActionTracker.renderTimeline('bmsActionTimelineList');
                     window.BMSActionTracker.updateBadge();
@@ -1109,6 +1119,7 @@ function initGlobalNotifications() {
             } else {
                 flyout.classList.add('hidden');
                 btn.setAttribute('aria-expanded', 'false');
+                wrapper.classList.remove('z-50');
             }
         };
     });
@@ -1116,14 +1127,20 @@ function initGlobalNotifications() {
     // Close on click outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('#bmsNotificationFlyout') && !e.target.closest('.notif-wrapper')) {
-            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => {
+                f.classList.add('hidden');
+                if (f.parentElement) f.parentElement.classList.remove('z-50');
+            });
         }
     });
 
     // Close on ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => {
+                f.classList.add('hidden');
+                if (f.parentElement) f.parentElement.classList.remove('z-50');
+            });
         }
     });
 }

@@ -175,7 +175,7 @@
             const badge = document.getElementById('bmsActionCountBadge');
             if (badge) {
                 const count = this.actions.length;
-                badge.textContent = `${count} សកម្មភាព`;
+                badge.textContent = `${count}`;
             }
         },
 
