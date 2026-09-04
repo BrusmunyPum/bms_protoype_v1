@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMS DigiTech - កែប្រែតារាងតម្លៃស្នើ</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#24692D",
+                        'primary-light': "#2e7d38",
+                        'primary-dark': "#1b5223",
+                        'btn-navy': "#16255c",
+                        'brand-blue': "#1e3a8a",
+                        secondary: "#f1f5f9",
+                        accent: "#10b981",
+                        danger: "#ef4444",
+                    },
+                    fontFamily: {
+                        sans: ["'Kantumruy Pro'", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../../styles/custom.css">
+</head>
+
+<body class="bg-slate-50 font-sans text-gray-800 text-[16px] flex h-screen overflow-hidden select-none">
+
+    <!-- Sidebar Navigation -->
+    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex flex-shrink-0">
+        <!-- Brand Title -->
+        <div class="h-[72px] px-6 flex items-center border-b border-white/10 flex-shrink-0">
+            <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
+        </div>
+
+        <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
+            <!-- ផ្ទាំងគ្រប់គ្រង -->
+            <a href="../../home/dashboard.html" data-nav="dashboard"
+                class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl font-normal whitespace-nowrap transition-colors">
+                <i class="fas fa-border-all w-6 text-center opacity-90"></i>
+                <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
+            </a>
+
+            <!-- ការលក់ -->
+            <div>
+                <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')"
+                    class="nav-parent w-full flex items-center justify-between p-3 bg-white/10 text-white font-medium rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការលក់</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs opacity-60 transition-transform duration-200"
+                        id="icon-menu-sell"></i>
+                </button>
+                <div id="menu-sell"
+                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 block text-[15px]">
+                    <a href="../invoice/invoice.html" data-nav="sell-invoices"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
+                    </a>
+                    <a href="quote.html" data-nav="sell-prices"
+                        class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white font-medium rounded-xl shadow-sm transition-all whitespace-nowrap">
+                        <i class="fas fa-file-alt w-5 text-center mr-2 text-xs"></i> តារាងតម្លៃ
+                    </a>
+                    <a href="../../empty.html?nav=sell-customers" data-nav="sell-customers"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
+                    </a>
+                    <a href="../../empty.html?nav=sell-receipts" data-nav="sell-receipts"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
+                    </a>
+                </div>
+            </div>
+
+            <!-- ការទិញ -->
+            <div>
+                <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')"
+                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការទិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200"
+                        id="icon-menu-buy"></i>
+                </button>
+                <div id="menu-buy"
+                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=buy-invoices" data-nav="buy-invoices"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
+                    </a>
+                    <a href="../../empty.html?nav=buy-suppliers" data-nav="buy-suppliers"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
+                    </a>
+                    <a href="../../empty.html?nav=buy-expenses" data-nav="buy-expenses"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
+                    </a>
+                </div>
+            </div>
+
+            <!-- ស្តុកទំនិញ -->
+            <div>
+                <button id="btn-menu-stock" onclick="toggleMenu('menu-stock')"
+                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    <div class="flex items-center">
+                        <i class="fas fa-boxes-stacked w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ស្តុកទំនិញ</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200"
+                        id="icon-menu-stock"></i>
+                </button>
+                <div id="menu-stock"
+                    class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
+                    </a>
+                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
+                    </a>
+                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements"
+                        class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
+                    </a>
+                </div>
+            </div>
+
+            <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
+            <a href="../../empty.html?nav=reports" data-nav="reports"
+                class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
+            </a>
+
+            <!-- ការកំណត់ប្រព័ន្ធ -->
+            <a href="../../empty.html?nav=settings" data-nav="settings"
+                class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-gear w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-white/10">
+            <a href="../../../../index.html"
+                class="flex items-center text-[16px] text-emerald-100 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-primary">
+                <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Container -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+
+        <!-- Top Header with Back Navigation -->
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
+            <div class="flex items-center gap-3">
+                <a href="quote.html" class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" title="ត្រឡប់ទៅតារាងតម្លៃ">
+                    <i class="fas fa-arrow-left text-sm"></i>
+                </a>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-xl font-semibold text-gray-800 leading-tight">កែប្រែតារាងតម្លៃស្នើ</h2>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200" id="headerStatusBadge">រង់ចាំពិនិត្យ</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">លេខសម្រង់តម្លៃ៖ <span class="font-bold text-slate-700" id="headerQuoteNumber">QT-2026-0088</span></p>
+                </div>
+            </div>
+
+            <!-- Top Action Buttons -->
+            <div class="flex items-center space-x-2.5">
+                <a href="quote.html"
+                    class="h-10 px-4 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center">
+                    បោះបង់
+                </a>
+                <button type="button" onclick="submitQuoteForm('draft')"
+                    class="h-10 px-4 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition flex items-center gap-1.5 border border-slate-200">
+                    <i class="fas fa-file-pen text-xs text-slate-500"></i>
+                    <span>រក្សាទុកជាព្រាង</span>
+                </button>
+                <button type="button" onclick="submitQuoteForm('publish')"
+                    class="h-10 px-5 rounded-xl text-xs bg-primary hover:bg-primary-light text-white font-medium shadow-sm transition flex items-center gap-1.5">
+                    <i class="fas fa-floppy-disk text-xs"></i>
+                    <span>រក្សាទុកការកែប្រែ</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Main Content Form -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
+            <div class="w-full space-y-4">
+
+                <!-- 1. Customer & General Info Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">១</span>
+                            <span>ព័ត៌មានទូទៅនៃសម្រង់តម្លៃ</span>
+                        </h3>
+                        <span class="text-xs text-slate-400">កែប្រែកូដ៖ <strong class="text-slate-800" id="displayQuoteNumber">QT-2026-0088</strong></span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+                        <!-- Customer Custom Dropdown -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">អតិថិជន *</label>
+                            <div class="relative bms-custom-select" id="pageQuoteCustomerDropdown">
+                                <input type="hidden" id="pageQuoteCustomer" value="Chamroeun Tech Co." required />
+                                <button type="button" onclick="toggleCustomDropdown('pageQuoteCustomerDropdown')"
+                                    class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
+                                    <span class="selected-label text-slate-800 font-medium">Chamroeun Tech Co. (015 889 900)</span>
+                                    <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
+                                </button>
+                                <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden max-h-56 overflow-y-auto space-y-0.5">
+                                    <div onclick="selectCustomOption('pageQuoteCustomerDropdown', 'Chamroeun Tech Co.', 'Chamroeun Tech Co. (015 889 900)')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group bg-emerald-50/50">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-7 h-7 rounded-full bg-sky-100 text-sky-800 font-semibold text-xs flex items-center justify-center">CT</div>
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Chamroeun Tech Co.</p>
+                                                <p class="text-[11px] text-slate-400">015 889 900</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomOption('pageQuoteCustomerDropdown', 'Heng Vicheka', 'Heng Vicheka (012 345 678)')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-xs flex items-center justify-center">HV</div>
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Heng Vicheka</p>
+                                                <p class="text-[11px] text-slate-400">012 345 678</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomOption('pageQuoteCustomerDropdown', 'Sok Rathana', 'Sok Rathana (098 765 432)')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-800 font-semibold text-xs flex items-center justify-center">SR</div>
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Sok Rathana</p>
+                                                <p class="text-[11px] text-slate-400">098 765 432</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomOption('pageQuoteCustomerDropdown', 'Bun Leap Enterprise', 'Bun Leap Enterprise (077 112 233)')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="w-7 h-7 rounded-full bg-teal-100 text-teal-800 font-semibold text-xs flex items-center justify-center">BL</div>
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Bun Leap Enterprise</p>
+                                                <p class="text-[11px] text-slate-400">077 112 233</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Date Issued -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">កាលបរិច្ឆេទចេញ *</label>
+                            <input type="date" id="pageQuoteDate" value="2026-09-04" required
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                        </div>
+
+                        <!-- Expiry Date -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">កាលបរិច្ឆេទផុតកំណត់ *</label>
+                            <input type="date" id="pageQuoteExpiry" value="2026-09-18" required
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Line Items Table Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">២</span>
+                            <span>មុខទំនិញ និងសេវាកម្មក្នុងសម្រង់តម្លៃ</span>
+                        </h3>
+                        <span class="text-xs text-slate-400">តម្លៃគិតជាប្រាក់ដុល្លារអាមេរិក ($)</span>
+                    </div>
+
+                    <!-- Spacious Items Table -->
+                    <div class="overflow-visible">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                                    <th class="p-3 w-5/12">មុខទំនិញ / សេវាកម្ម</th>
+                                    <th class="p-3 text-center w-2/12">ចំនួន</th>
+                                    <th class="p-3 text-right w-2/12">តម្លៃឯកតា ($)</th>
+                                    <th class="p-3 text-right w-2/12">សរុប ($)</th>
+                                    <th class="p-3 text-center w-1/12"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="pageQuoteLinesBody" class="divide-y divide-slate-100">
+                                <!-- Pre-populated Item 1: MacBook Air M2 -->
+                                <tr class="quote-line-row">
+                                    <td class="p-3">
+                                        <div class="relative bms-custom-select product-select-container">
+                                            <input type="hidden" class="item-product-val" value="MacBook Air M2 16GB" data-price="1200.00" data-cost="920.00" />
+                                            <button type="button" onclick="toggleProductDropdown(this)"
+                                                class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between transition focus:outline-none">
+                                                <span class="product-selected-label text-slate-800 font-medium truncate">MacBook Air M2 16GB</span>
+                                                <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
+                                            </button>
+                                            <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
+                                                <div onclick="selectProductOption(this, 'Dell Latitude 5420 i7', 850.00, 620.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Dell Latitude 5420 i7</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$850.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'MacBook Air M2 16GB', 1200.00, 920.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition bg-slate-50">
+                                                    <span class="font-medium text-slate-800">MacBook Air M2 16GB</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$1,200.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Monitor LG 27 Inch 4K', 320.00, 220.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Monitor LG 27&quot; 4K</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$320.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Logitech MX Master 3S', 95.00, 65.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Logitech MX Master 3S</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$95.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Printer HP LaserJet Pro', 280.00, 190.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Printer HP LaserJet Pro</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$280.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-3">
+                                        <input type="number" min="1" value="2" oninput="recalcPageQuote()"
+                                            class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    </td>
+                                    <td class="p-3">
+                                        <input type="number" step="0.01" value="1200.00" oninput="recalcPageQuote()"
+                                            class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    </td>
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
+                                        $2,400.00
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <button type="button" onclick="removePageQuoteLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                            <i class="fas fa-trash-can text-xs"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- Pre-populated Item 2: Monitor LG 27 Inch 4K -->
+                                <tr class="quote-line-row">
+                                    <td class="p-3">
+                                        <div class="relative bms-custom-select product-select-container">
+                                            <input type="hidden" class="item-product-val" value="Monitor LG 27 Inch 4K" data-price="320.00" data-cost="220.00" />
+                                            <button type="button" onclick="toggleProductDropdown(this)"
+                                                class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between transition focus:outline-none">
+                                                <span class="product-selected-label text-slate-800 font-medium truncate">Monitor LG 27 Inch 4K</span>
+                                                <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
+                                            </button>
+                                            <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
+                                                <div onclick="selectProductOption(this, 'Dell Latitude 5420 i7', 850.00, 620.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Dell Latitude 5420 i7</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$850.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'MacBook Air M2 16GB', 1200.00, 920.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">MacBook Air M2 16GB</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$1,200.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Monitor LG 27 Inch 4K', 320.00, 220.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition bg-slate-50">
+                                                    <span class="font-medium text-slate-800">Monitor LG 27&quot; 4K</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$320.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Logitech MX Master 3S', 95.00, 65.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Logitech MX Master 3S</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$95.00</span>
+                                                </div>
+                                                <div onclick="selectProductOption(this, 'Printer HP LaserJet Pro', 280.00, 190.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Printer HP LaserJet Pro</span>
+                                                    <span class="text-[11px] text-emerald-700 font-semibold">$280.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-3">
+                                        <input type="number" min="1" value="2" oninput="recalcPageQuote()"
+                                            class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    </td>
+                                    <td class="p-3">
+                                        <input type="number" step="0.01" value="320.00" oninput="recalcPageQuote()"
+                                            class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    </td>
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
+                                        $640.00
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <button type="button" onclick="removePageQuoteLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                            <i class="fas fa-trash-can text-xs"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Add Line Item Button -->
+                    <div class="pt-2">
+                        <button type="button" onclick="addPageQuoteLineRow()"
+                            class="px-4 py-2 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition flex items-center gap-1.5 border border-slate-200">
+                            <i class="fas fa-plus text-xs text-primary"></i>
+                            <span>បន្ថែមមុខទំនិញថ្មី</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Bottom Grid: Terms & Financial Summary -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+                    <!-- Left: Terms & Conditions (7 cols) -->
+                    <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">៣</span>
+                            <span>លក្ខខណ្ឌ និងកំណត់សម្គាល់បន្ថែម</span>
+                        </h3>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">កំណត់សម្គាល់សម្រាប់អតិថិជន</label>
+                            <textarea rows="4" id="pageQuoteNotes"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition"
+                                placeholder="បញ្ចូលលក្ខខណ្ឌនៃការធានា ការដឹកជញ្ជូន និងសុពលភាពតម្លៃ...">តម្លៃខាងលើរាប់បញ្ចូលទាំងការដឹកជញ្ជូន និងការដំឡើងប្រព័ន្ធជូនអតិថិជន។ សុពលភាពសម្រង់តម្លៃ ១៤ ថ្ងៃ។</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right: Financial Summary (5 cols) -->
+                    <div class="lg:col-span-5 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">៤</span>
+                            <span>សង្ខេបហិរញ្ញវត្ថុ</span>
+                        </h3>
+
+                        <div class="space-y-2.5 text-xs text-slate-600">
+                            <div class="flex justify-between items-center py-1">
+                                <span>សរុបរង (Subtotal)៖</span>
+                                <span class="font-semibold text-slate-800 text-sm" id="pageCalcSubtotal">$3,040.00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                                <span>បញ្ចុះតម្លៃ ($)៖</span>
+                                <input type="number" id="pageCalcDiscount" min="0" value="40.00" step="0.01" oninput="recalcPageQuote()"
+                                    class="w-28 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-right text-xs focus:outline-none focus:bg-white focus:border-primary" />
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                                <span>ពន្ធអាករ (VAT 10%)៖</span>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="pageCalcTaxToggle" onchange="recalcPageQuote()" checked class="rounded text-primary focus:ring-0" />
+                                    <span id="pageCalcTaxAmount" class="font-semibold text-slate-800">$300.00</span>
+                                </label>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200 flex justify-between items-center">
+                                <span class="text-sm font-bold text-slate-900">ទឹកប្រាក់សរុបចុងក្រោយ៖</span>
+                                <span class="text-xl font-bold text-primary" id="pageCalcGrandTotal">$3,300.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[11px] text-emerald-700 bg-emerald-50/70 p-2.5 rounded-xl mt-2 border border-emerald-100">
+                                <span class="font-medium">ប្រាក់ចំណេញរំពឹងទុក៖</span>
+                                <span class="font-bold text-xs" id="pageCalcProfit">+$1,020.00 (30.9%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Buttons -->
+                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                    <a href="quote.html"
+                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
+                        បោះបង់
+                    </a>
+                    <button type="button" onclick="submitQuoteForm('draft')"
+                        class="px-5 py-2.5 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition border border-slate-200">
+                        រក្សាទុកជាព្រាង
+                    </button>
+                    <button type="button" onclick="submitQuoteForm('publish')"
+                        class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-light text-white font-medium shadow-sm transition">
+                        រក្សាទុកការកែប្រែ
+                    </button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const quoteId = params.get('id');
+            if (quoteId) {
+                const cleanNumber = quoteId.toUpperCase().replace('QT-', 'QT-2026-00');
+                const displayElem = document.getElementById('displayQuoteNumber');
+                const headerElem = document.getElementById('headerQuoteNumber');
+                if (displayElem) displayElem.textContent = cleanNumber;
+                if (headerElem) headerElem.textContent = cleanNumber;
+            }
+            recalcPageQuote();
+        });
+
+        function recalcPageQuote() {
+            const rows = document.querySelectorAll('#pageQuoteLinesBody tr');
+            let subtotal = 0;
+            let totalCost = 0;
+
+            rows.forEach(tr => {
+                const qtyInput = tr.querySelector('.item-qty');
+                const priceInput = tr.querySelector('.item-price');
+                const productInput = tr.querySelector('.item-product-val');
+                const cost = productInput ? (parseFloat(productInput.dataset.cost) || 0) : 0;
+
+                const qty = parseInt(qtyInput.value, 10) || 0;
+                const price = parseFloat(priceInput.value) || 0;
+                const lineTotal = qty * price;
+
+                const totalElem = tr.querySelector('.item-total');
+                if (totalElem) totalElem.textContent = `$${lineTotal.toFixed(2)}`;
+
+                subtotal += lineTotal;
+                totalCost += (qty * cost);
+            });
+
+            const discount = parseFloat(document.getElementById('pageCalcDiscount').value) || 0;
+            const taxableAmount = Math.max(0, subtotal - discount);
+            const isTaxEnabled = document.getElementById('pageCalcTaxToggle').checked;
+            const tax = isTaxEnabled ? taxableAmount * 0.10 : 0;
+            const grandTotal = taxableAmount + tax;
+            const profit = Math.max(0, grandTotal - totalCost);
+            const margin = grandTotal > 0 ? ((profit / grandTotal) * 100).toFixed(1) : 0;
+
+            document.getElementById('pageCalcSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('pageCalcTaxAmount').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('pageCalcGrandTotal').textContent = `$${grandTotal.toFixed(2)}`;
+            document.getElementById('pageCalcProfit').textContent = `+$${profit.toFixed(2)} (${margin}%)`;
+        }
+
+        function addPageQuoteLineRow() {
+            const tbody = document.getElementById('pageQuoteLinesBody');
+            const tr = document.createElement('tr');
+            tr.className = 'quote-line-row';
+            tr.innerHTML = `
+                <td class="p-3">
+                    <div class="relative bms-custom-select product-select-container">
+                        <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" />
+                        <button type="button" onclick="toggleProductDropdown(this)"
+                            class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between transition focus:outline-none">
+                            <span class="product-selected-label text-slate-400 truncate">-- ជ្រើសរើសទំនិញ --</span>
+                            <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
+                        </button>
+                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
+                            <div onclick="selectProductOption(this, 'Dell Latitude 5420 i7', 850.00, 620.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Dell Latitude 5420 i7</span>
+                                <span class="text-[11px] text-emerald-700 font-semibold">$850.00</span>
+                            </div>
+                            <div onclick="selectProductOption(this, 'MacBook Air M2 16GB', 1200.00, 920.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">MacBook Air M2 16GB</span>
+                                <span class="text-[11px] text-emerald-700 font-semibold">$1,200.00</span>
+                            </div>
+                            <div onclick="selectProductOption(this, 'Monitor LG 27 Inch 4K', 320.00, 220.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Monitor LG 27&quot; 4K</span>
+                                <span class="text-[11px] text-emerald-700 font-semibold">$320.00</span>
+                            </div>
+                            <div onclick="selectProductOption(this, 'Logitech MX Master 3S', 95.00, 65.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Logitech MX Master 3S</span>
+                                <span class="text-[11px] text-emerald-700 font-semibold">$95.00</span>
+                            </div>
+                            <div onclick="selectProductOption(this, 'Printer HP LaserJet Pro', 280.00, 190.00)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Printer HP LaserJet Pro</span>
+                                <span class="text-[11px] text-emerald-700 font-semibold">$280.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="p-3">
+                    <input type="number" min="1" value="1" oninput="recalcPageQuote()"
+                        class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                </td>
+                <td class="p-3">
+                    <input type="number" step="0.01" value="0.00" oninput="recalcPageQuote()"
+                        class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                </td>
+                <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
+                    $0.00
+                </td>
+                <td class="p-3 text-center">
+                    <button type="button" onclick="removePageQuoteLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                        <i class="fas fa-trash-can text-xs"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        function removePageQuoteLineRow(btn) {
+            const rows = document.querySelectorAll('#pageQuoteLinesBody tr');
+            if (rows.length <= 1) {
+                showToast('តារាងតម្លៃត្រូវមានទំនិញយ៉ាងហោចណាស់ ១ ជួរ!', 'warning');
+                return;
+            }
+            btn.closest('tr').remove();
+            recalcPageQuote();
+        }
+
+        // Global hook for product select
+        window.recalcQuote = recalcPageQuote;
+
+        function submitQuoteForm(actionType) {
+            const customer = document.getElementById('pageQuoteCustomer').value;
+            if (!customer) {
+                showToast('សូមជ្រើសរើសអតិថិជនជាមុនសិន!', 'warning');
+                return;
+            }
+
+            const rows = document.querySelectorAll('#pageQuoteLinesBody tr');
+            let hasValidItem = false;
+            rows.forEach(tr => {
+                const productInput = tr.querySelector('.item-product-val');
+                if (productInput && productInput.value) hasValidItem = true;
+            });
+
+            if (!hasValidItem) {
+                showToast('សូមជ្រើសរើសទំនិញយ៉ាងហោចណាស់មួយ!', 'warning');
+                return;
+            }
+
+            const msg = actionType === 'draft' 
+                ? 'បានរក្សាទុកការកែប្រែតារាងតម្លៃជាព្រាងដោយជោគជ័យ!' 
+                : 'បានរក្សាទុកការកែប្រែតារាងតម្លៃដោយជោគជ័យ!';
+
+            showToast(msg, 'success');
+
+            setTimeout(() => {
+                window.location.href = 'quote.html';
+            }, 1000);
+        }
+    </script>
+
+    <!-- Custom UI Components Script -->
+    <script src="../../../scripts/ui-components.js"></script>
+    <!-- Unified Sidebar Script -->
+    <script src="../../../scripts/sidebar.js"></script>
+</body>
+
+</html>

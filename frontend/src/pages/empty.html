@@ -35,103 +35,103 @@
 <body class="bg-slate-50 font-sans text-gray-800 flex h-screen overflow-hidden text-[16px]">
     
     <!-- Sidebar -->
-    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex">
+    <aside class="bg-[#1b5223] text-white w-80 h-full flex flex-col overflow-y-auto hidden md:flex flex-shrink-0">
         <!-- Brand Title -->
-        <div class="p-5 px-6 flex items-center border-b border-white/10">
+        <div class="h-[72px] px-6 flex items-center border-b border-white/10 flex-shrink-0">
             <h1 class="text-xl font-semibold tracking-wider whitespace-nowrap">BMS DigiTech</h1>
         </div>
         
-        <nav class="flex-1 px-4 space-y-1.5">
+        <nav class="flex-1 px-4 py-4 space-y-1.5 text-[16px]">
             <!-- ផ្ទាំងគ្រប់គ្រង -->
-            <a href="home/dashboard.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
-                <i class="fas fa-border-all w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-base">ផ្ទាំងគ្រប់គ្រង</span>
+            <a href="home/dashboard.html" data-nav="dashboard" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl font-normal whitespace-nowrap transition-colors">
+                <i class="fas fa-border-all w-6 text-center opacity-90"></i>
+                <span class="ml-3 text-[16px]">ផ្ទាំងគ្រប់គ្រង</span>
             </a>
             
-            <!-- ការលក់ និង ចំណូល -->
+            <!-- ការលក់ -->
             <div>
-                <button onclick="toggleMenu('menu-sell')" class="w-full flex items-center justify-between p-3 bg-primary-light rounded-xl font-medium whitespace-nowrap">
+                <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
-                        <i class="fas fa-money-bill w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-base">ការលក់ និង ចំណូល</span>
+                        <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការលក់</span>
                     </div>
-                    <i class="fas fa-chevron-down text-xs opacity-50" id="icon-menu-sell"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-sell"></i>
                 </button>
-                <div id="menu-sell" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 block">
-                    <a href="empty.html" class="flex items-center text-white font-medium py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-60 mr-2 text-xs"></i> វិក្កយបត្រលក់
+                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="sales/invoice/invoice.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice-dollar w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្រលក់
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-file-alt w-5 text-center opacity-60 mr-2 text-xs"></i> តារាងតម្លៃ
+                    <a href="sales/quote/quote.html" data-nav="sell-prices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-alt w-5 text-center opacity-70 mr-2 text-xs"></i> តារាងតម្លៃ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-users w-5 text-center opacity-60 mr-2 text-xs"></i> បញ្ជីអតិថិជន
+                    <a href="empty.html?nav=sell-customers" data-nav="sell-customers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-users w-5 text-center opacity-70 mr-2 text-xs"></i> បញ្ជីអតិថិជន
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-credit-card w-5 text-center opacity-60 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
+                    <a href="empty.html?nav=sell-receipts" data-nav="sell-receipts" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-credit-card w-5 text-center opacity-70 mr-2 text-xs"></i> បង្កាន់ដៃទូទាត់
                     </a>
                 </div>
             </div>
 
-            <!-- ការទិញ និង ចំណាយ -->
+            <!-- ការទិញ -->
             <div>
-                <button onclick="toggleMenu('menu-buy')" class="w-full flex items-center justify-between p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
-                        <i class="fas fa-cart-shopping w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-base">ការទិញ និង ចំណាយ</span>
+                        <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ការទិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-50" id="icon-menu-buy"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-buy"></i>
                 </button>
-                <div id="menu-buy" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 hidden">
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-file-invoice w-5 text-center opacity-60 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
+                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="empty.html?nav=buy-invoices" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-truck w-5 text-center opacity-60 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
+                    <a href="empty.html?nav=buy-suppliers" data-nav="buy-suppliers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-truck w-5 text-center opacity-70 mr-2 text-xs"></i> អ្នកផ្គត់ផ្គង់
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-money-check-alt w-5 text-center opacity-60 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
+                    <a href="empty.html?nav=buy-expenses" data-nav="buy-expenses" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-money-check-alt w-5 text-center opacity-70 mr-2 text-xs"></i> ការទូទាត់ចំណាយ
                     </a>
                 </div>
             </div>
 
-            <!-- ឃ្លាំង និង ស្តុកទំនិញ -->
+            <!-- ស្តុកទំនិញ -->
             <div>
-                <button onclick="toggleMenu('menu-stock')" class="w-full flex items-center justify-between p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <button id="btn-menu-stock" onclick="toggleMenu('menu-stock')" class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
-                        <i class="fas fa-boxes-stacked w-6 text-center opacity-70"></i>
-                        <span class="ml-3 text-base">ឃ្លាំង និង ស្តុកទំនិញ</span>
+                        <i class="fas fa-boxes-stacked w-6 text-center opacity-80"></i>
+                        <span class="ml-3 text-[16px]">ស្តុកទំនិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-50" id="icon-menu-stock"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-stock"></i>
                 </button>
-                <div id="menu-stock" class="pl-11 pr-2 py-2 space-y-1 border-l border-primary-light ml-6 mt-1 mb-2 hidden">
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-box w-5 text-center opacity-60 mr-2 text-xs"></i> តុល្យភាពស្តុក
+                <div id="menu-stock" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="empty.html?nav=stock-balance" data-nav="stock-balance" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-list w-5 text-center opacity-60 mr-2 text-xs"></i> កាតាឡុកទំនិញ
+                    <a href="empty.html?nav=stock-catalog" data-nav="stock-catalog" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="empty.html" class="flex items-center text-gray-400 hover:text-white py-2 text-[15px] transition-colors whitespace-nowrap">
-                        <i class="fas fa-clock-rotate-left w-5 text-center opacity-60 mr-2 text-xs"></i> ចលនាស្តុក
+                    <a href="empty.html?nav=stock-movements" data-nav="stock-movements" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                        <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
                 </div>
             </div>
 
             <!-- របាយការណ៍ហិរញ្ញវត្ថុ -->
-            <a href="empty.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
-                <i class="fas fa-chart-line w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-base">របាយការណ៍ហិរញ្ញវត្ថុ</span>
+            <a href="empty.html?nav=reports" data-nav="reports" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-chart-line w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">របាយការណ៍ហិរញ្ញវត្ថុ</span>
             </a>
             
             <!-- ការកំណត់ប្រព័ន្ធ -->
-            <a href="empty.html" class="flex items-center p-3 text-gray-300 hover:bg-primary-light hover:text-white rounded-xl transition-colors whitespace-nowrap">
-                <i class="fas fa-gear w-6 text-center opacity-70"></i>
-                <span class="ml-3 text-base">ការកំណត់ប្រព័ន្ធ</span>
+            <a href="empty.html?nav=settings" data-nav="settings" class="nav-item flex items-center p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                <i class="fas fa-gear w-6 text-center opacity-80"></i>
+                <span class="ml-3 text-[16px]">ការកំណត់ប្រព័ន្ធ</span>
             </a>
         </nav>
         
-        <div class="p-4 border-t border-primary-light">
-            <a href="../../index.html" class="flex items-center text-base hover:text-red-400 transition-colors">
+        <div class="p-4 border-t border-white/10">
+            <a href="../../index.html" class="flex items-center text-[16px] text-emerald-100 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-primary">
                 <i class="fas fa-sign-out-alt w-6 mr-2"></i> ចាកចេញ
             </a>
         </div>
@@ -140,26 +140,29 @@
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header -->
-        <header class="bg-white px-8 py-4 flex justify-between items-center shadow-sm z-10">
-            <h2 class="text-xl font-semibold text-gray-800">ទំព័រទទេ</h2>
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800 leading-tight" id="page-title">វិក្កយបត្រលក់</h2>
+                <p class="text-xs font-normal text-gray-500 mt-0.5" id="page-subtitle">គ្រប់គ្រងវិក្កយបត្រលក់ និងការចេញវិក្កយបត្រ</p>
+            </div>
             
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3 md:space-x-4">
                 <!-- Create Button -->
-                <button class="bg-primary text-white px-4 py-2 rounded-lg flex items-center shadow hover:bg-primary-light transition">
-                    <i class="fas fa-plus mr-2"></i> បង្កើត
+                <button class="h-10 px-4 bg-primary text-white rounded-xl flex items-center shadow-sm hover:bg-primary-light transition text-sm font-normal">
+                    <i class="fas fa-plus mr-2 text-xs"></i> បង្កើត
                 </button>
                 
                 <!-- Notification -->
-                <button class="text-gray-400 hover:text-gray-600 relative">
+                <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute top-0 right-0 -mt-1 -mr-1 flex h-3 w-3">
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                     </span>
                 </button>
                 
                 <!-- User Profile Avatar Only -->
-                <div class="flex items-center border-l pl-4">
+                <div class="flex items-center border-l pl-3 md:pl-4">
                     <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
@@ -168,34 +171,377 @@
             </div>
         </header>
 
-        <!-- Empty Content Area -->
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-8 flex items-center justify-center">
-            <div class="text-center text-gray-400">
-                <i class="fas fa-layer-group text-6xl mb-4 opacity-50"></i>
-                <h3 class="text-xl font-medium">មិនមានទិន្នន័យនៅឡើយទេ</h3>
-                <p class="mt-2 text-sm">សូមជ្រើសរើសម៉ឺនុយផ្សេងទៀត</p>
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
+            <div class="w-full space-y-4">
+                
+                <!-- Search & Filters Toolbar (Standard Template) -->
+                <div class="bg-white rounded-2xl p-3 px-4 shadow-sm border border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <div class="relative flex-1 min-w-[240px] max-w-md">
+                        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="searchInput"
+                            placeholder="ស្វែងរក..."
+                            class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
+                    </div>
+
+                    <!-- Dashboard-style Date Range Picker -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400 hidden sm:inline">កាលបរិច្ឆេទ:</span>
+                        
+                        <div class="relative">
+                            <!-- Date Range Trigger Button -->
+                            <button id="dateRangePickerBtn" onclick="toggleDatePicker(event)"
+                                class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
+                                <i class="fas fa-calendar-days text-primary text-xs"></i>
+                                <span id="selectedDateLabel" class="font-medium text-slate-800">1 កញ្ញា - 30 កញ្ញា</span>
+                                <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5" id="datePickerChevron"></i>
+                            </button>
+
+                            <!-- Date Range Picker Popover Dropdown -->
+                            <div id="datePickerPopover" onclick="event.stopPropagation()"
+                                class="absolute right-0 top-full mt-2 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 hidden overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+                                <div class="grid grid-cols-12 divide-x divide-slate-100">
+                                    <!-- Left Presets Column (col-span-4) -->
+                                    <div class="col-span-4 p-2 py-3 space-y-0.5 text-xs font-normal text-slate-600 bg-slate-50/70">
+                                        <button type="button" onclick="selectPreset('ថ្ងៃនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ថ្ងៃនេះ</button>
+                                        <button type="button" onclick="selectPreset('ម្សិលមិញ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ម្សិលមិញ</button>
+                                        <button type="button" onclick="selectPreset('សប្តាហ៍នេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍នេះ</button>
+                                        <button type="button" onclick="selectPreset('សប្តាហ៍មុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍មុន</button>
+                                        <button type="button" onclick="selectPreset('ខែនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg bg-[#0f2b5c] text-white font-medium shadow-sm transition-colors">ខែនេះ</button>
+                                        <button type="button" onclick="selectPreset('ខែមុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ខែមុន</button>
+                                        <button type="button" onclick="selectPreset('ឆ្នាំនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ឆ្នាំនេះ</button>
+                                        <button type="button" onclick="selectPreset('៧ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៧ ថ្ងៃចុងក្រោយ</button>
+                                        <button type="button" onclick="selectPreset('១៤ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">១៤ ថ្ងៃចុងក្រោយ</button>
+                                        <button type="button" onclick="selectPreset('៣០ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៣០ ថ្ងៃចុងក្រោយ</button>
+                                    </div>
+
+                                    <!-- Right Calendar View (col-span-8) -->
+                                    <div class="col-span-8 p-4 flex flex-col justify-between">
+                                        <div>
+                                            <!-- Calendar Header with Month Navigation -->
+                                            <div class="flex items-center justify-between mb-3 px-1">
+                                                <span id="calMonthYearLabel" class="text-sm font-semibold text-slate-900">កញ្ញា 2026</span>
+                                                <div class="flex items-center gap-1 text-slate-400">
+                                                    <button type="button" onclick="changeCalendarMonth(-1)" title="ខែមុន" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-left text-xs"></i></button>
+                                                    <button type="button" onclick="changeCalendarMonth(1)" title="ខែបន្ទាប់" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-right text-xs"></i></button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Weekdays -->
+                                            <div class="grid grid-cols-7 text-center text-xs font-normal text-slate-400 mb-2">
+                                                <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
+                                            </div>
+
+                                            <!-- Dynamic Days Grid with Range Selection -->
+                                            <div id="calendarDaysGrid" class="grid grid-cols-7 text-center text-xs font-normal gap-y-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer -->
+                                <div class="p-3 px-4 border-t border-slate-100 bg-white flex items-center justify-between">
+                                    <div class="flex items-center gap-1.5 bg-slate-100 px-3 py-1 rounded-full text-xs font-normal text-slate-700">
+                                        <span id="rangeTagLabel">1 កញ្ញា - 30 កញ្ញា</span>
+                                        <button type="button" onclick="clearRangeTag()" class="text-slate-400 hover:text-slate-600 ml-1">
+                                            <i class="fas fa-times-circle text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button" onclick="toggleDatePicker(event)" class="px-3.5 py-1.5 rounded-xl text-xs font-normal text-slate-600 hover:bg-slate-100 transition-colors">
+                                            បោះបង់
+                                        </button>
+                                        <button type="button" onclick="applyDateRange()" class="px-4 py-1.5 rounded-xl text-xs font-normal bg-[#0f2b5c] hover:bg-[#193a73] text-white shadow-sm transition-all">
+                                            ជ្រើសរើស
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="resetFilters()" title="សម្អាតតម្រងទាំងអស់"
+                            class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+                            <i class="fas fa-rotate-left text-xs"></i>
+                            <span>សម្អាត</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty Content Card -->
+                <div class="bg-white rounded-2xl p-12 text-center text-gray-400 border border-slate-100 flex flex-col items-center justify-center min-h-[380px]">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-primary shadow-sm">
+                        <i class="fas fa-file-invoice-dollar text-3xl" id="empty-icon"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-slate-700" id="empty-title">មិនទាន់មានទិន្នន័យនៅឡើយទេ</h3>
+                    <p class="mt-2 text-sm text-slate-400" id="empty-desc">សូមចុចប៊ូតុង "បង្កើត" ខាងលើដើម្បីចាប់ផ្តើមបញ្ចូលទិន្នន័យថ្មី</p>
+                </div>
             </div>
         </main>
     </div>
 
+    <!-- UI Components & Navigation Scripts -->
+    <script src="../scripts/ui-components.js"></script>
+    <script src="../scripts/sidebar.js"></script>
     <script>
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            const icon = document.getElementById('icon-' + menuId);
-            
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('block');
-                icon.classList.remove('fa-chevron-right');
-                icon.classList.add('fa-chevron-down');
+        // Standard Date Range Selection Logic
+        let calCurrentYear = 2026;
+        let calCurrentMonth = 9;
+        let rangeStartDate = new Date(2026, 8, 1);
+        let rangeEndDate = new Date(2026, 8, 30);
+        let selectingRangeStart = false;
+        let currentPresetName = 'ខែនេះ';
+
+        const MONTH_NAMES_KH = {
+            1: 'មករា', 2: 'កុម្ភៈ', 3: 'មីនា', 4: 'មេសា',
+            5: 'ឧសភា', 6: 'មិថុនា', 7: 'កក្កដា', 8: 'សីហា',
+            9: 'កញ្ញា', 10: 'តុលា', 11: 'វិច្ឆិកា', 12: 'ធ្នូ'
+        };
+
+        function toggleDatePicker(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            const popover = document.getElementById('datePickerPopover');
+            const chevron = document.getElementById('datePickerChevron');
+            if (!popover) return;
+            const isHidden = popover.classList.contains('hidden');
+            if (isHidden) {
+                popover.classList.remove('hidden');
+                if (chevron) chevron.classList.add('rotate-180');
+                renderCalendarGrid();
             } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-right');
+                popover.classList.add('hidden');
+                if (chevron) chevron.classList.remove('rotate-180');
             }
         }
+
+        function changeCalendarMonth(delta) {
+            calCurrentMonth += delta;
+            if (calCurrentMonth > 12) {
+                calCurrentMonth = 1;
+                calCurrentYear += 1;
+            } else if (calCurrentMonth < 1) {
+                calCurrentMonth = 12;
+                calCurrentYear -= 1;
+            }
+            renderCalendarGrid();
+        }
+
+        function updateRangeLabels(btnText, tagText) {
+            const btnEl = document.getElementById('selectedDateLabel');
+            const tagEl = document.getElementById('rangeTagLabel');
+            if (btnEl) btnEl.textContent = btnText;
+            if (tagEl) tagEl.textContent = tagText;
+        }
+
+        function highlightPresetButton(name) {
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                if (name && btn.textContent.trim() === name) {
+                    btn.className = 'preset-btn w-full text-left px-3 py-1.5 rounded-lg bg-[#0f2b5c] text-white font-medium shadow-sm transition-colors';
+                } else {
+                    btn.className = 'preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors text-slate-600';
+                }
+            });
+        }
+
+        function handleDateClick(year, month, day) {
+            const clickedDate = new Date(year, month - 1, day);
+            clickedDate.setHours(0, 0, 0, 0);
+
+            if (!selectingRangeStart || (rangeStartDate && rangeEndDate)) {
+                rangeStartDate = clickedDate;
+                rangeEndDate = null;
+                selectingRangeStart = true;
+                currentPresetName = null;
+
+                const startStr = `${day} ${MONTH_NAMES_KH[month]}`;
+                const tagEl = document.getElementById('rangeTagLabel');
+                if (tagEl) tagEl.textContent = `${startStr} (សូមជ្រើសថ្ងៃបញ្ចប់)`;
+            } else {
+                if (clickedDate < rangeStartDate) {
+                    rangeEndDate = rangeStartDate;
+                    rangeStartDate = clickedDate;
+                } else {
+                    rangeEndDate = clickedDate;
+                }
+                selectingRangeStart = false;
+
+                const sD = rangeStartDate.getDate();
+                const sM = MONTH_NAMES_KH[rangeStartDate.getMonth() + 1];
+                const eD = rangeEndDate.getDate();
+                const eM = MONTH_NAMES_KH[rangeEndDate.getMonth() + 1];
+                
+                let rangeText = '';
+                if (rangeStartDate.getTime() === rangeEndDate.getTime()) {
+                    rangeText = `${sD} ${sM}`;
+                } else {
+                    rangeText = `${sD} ${sM} - ${eD} ${eM}`;
+                }
+
+                updateRangeLabels(rangeText, rangeText);
+            }
+
+            highlightPresetButton(null);
+            renderCalendarGrid();
+        }
+
+        function renderCalendarGrid() {
+            const grid = document.getElementById('calendarDaysGrid');
+            const monthLabel = document.getElementById('calMonthYearLabel');
+            if (!grid) return;
+
+            monthLabel.textContent = `${MONTH_NAMES_KH[calCurrentMonth]} ${calCurrentYear}`;
+            grid.innerHTML = '';
+
+            const daysInMonth = new Date(calCurrentYear, calCurrentMonth, 0).getDate();
+            const firstDayIndex = new Date(calCurrentYear, calCurrentMonth - 1, 1).getDay();
+            const leadingBlanks = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+            for (let i = 0; i < leadingBlanks; i++) {
+                const emptyCell = document.createElement('span');
+                grid.appendChild(emptyCell);
+            }
+
+            let effectiveStart = rangeStartDate ? new Date(rangeStartDate) : null;
+            let effectiveEnd = rangeEndDate ? new Date(rangeEndDate) : null;
+            if (effectiveStart) effectiveStart.setHours(0, 0, 0, 0);
+            if (effectiveEnd) effectiveEnd.setHours(0, 0, 0, 0);
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const currentD = new Date(calCurrentYear, calCurrentMonth - 1, d);
+                currentD.setHours(0, 0, 0, 0);
+
+                const isStart = effectiveStart && currentD.getTime() === effectiveStart.getTime();
+                const isEnd = effectiveEnd && currentD.getTime() === effectiveEnd.getTime();
+                const isInRange = effectiveStart && effectiveEnd && currentD > effectiveStart && currentD < effectiveEnd;
+
+                const cellWrapper = document.createElement('div');
+                cellWrapper.className = 'flex items-center justify-center cursor-pointer h-7';
+                cellWrapper.onclick = () => handleDateClick(calCurrentYear, calCurrentMonth, d);
+
+                if (isStart && isEnd) {
+                    cellWrapper.innerHTML = `<span class="w-7 h-7 rounded-full bg-[#0f2b5c] text-white flex items-center justify-center font-bold text-xs shadow">${d}</span>`;
+                } else if (isStart && effectiveEnd) {
+                    cellWrapper.className += ' bg-slate-100 rounded-l-full';
+                    cellWrapper.innerHTML = `<span class="w-7 h-7 rounded-full bg-[#0f2b5c] text-white flex items-center justify-center font-bold text-xs shadow">${d}</span>`;
+                } else if (isStart && !effectiveEnd) {
+                    cellWrapper.innerHTML = `<span class="w-7 h-7 rounded-full bg-[#0f2b5c] text-white flex items-center justify-center font-bold text-xs ring-2 ring-primary/30 shadow">${d}</span>`;
+                } else if (isEnd) {
+                    cellWrapper.className += ' bg-slate-100 rounded-r-full';
+                    cellWrapper.innerHTML = `<span class="w-7 h-7 rounded-full bg-[#0f2b5c] text-white flex items-center justify-center font-bold text-xs shadow">${d}</span>`;
+                } else if (isInRange) {
+                    cellWrapper.className += ' bg-slate-100 text-slate-800 font-medium text-xs';
+                    cellWrapper.innerHTML = `<span>${d}</span>`;
+                } else {
+                    cellWrapper.className += ' rounded-lg hover:bg-slate-100 text-slate-700 transition text-xs';
+                    cellWrapper.innerHTML = `<span>${d}</span>`;
+                }
+
+                grid.appendChild(cellWrapper);
+            }
+        }
+
+        function selectPreset(name) {
+            currentPresetName = name;
+            selectingRangeStart = false;
+
+            if (name === 'ថ្ងៃនេះ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 8, 3);
+                rangeEndDate = new Date(2026, 8, 3);
+                updateRangeLabels('3 កញ្ញា', '3 កញ្ញា');
+            } else if (name === 'ម្សិលមិញ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 8, 2);
+                rangeEndDate = new Date(2026, 8, 2);
+                updateRangeLabels('2 កញ្ញា', '2 កញ្ញា');
+            } else if (name === 'សប្តាហ៍នេះ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 8, 1);
+                rangeEndDate = new Date(2026, 8, 7);
+                updateRangeLabels('1 កញ្ញា - 7 កញ្ញា', '1 កញ្ញា - 7 កញ្ញា');
+            } else if (name === 'សប្តាហ៍មុន') {
+                calCurrentMonth = 8;
+                rangeStartDate = new Date(2026, 7, 24);
+                rangeEndDate = new Date(2026, 7, 30);
+                updateRangeLabels('24 សីហា - 30 សីហា', '24 សីហា - 30 សីហា');
+            } else if (name === 'ខែនេះ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 8, 1);
+                rangeEndDate = new Date(2026, 8, 30);
+                updateRangeLabels('1 កញ្ញា - 30 កញ្ញា', '1 កញ្ញា - 30 កញ្ញា');
+            } else if (name === 'ខែមុន') {
+                calCurrentMonth = 8;
+                rangeStartDate = new Date(2026, 7, 1);
+                rangeEndDate = new Date(2026, 7, 31);
+                updateRangeLabels('1 សីហា - 31 សីហា', '1 សីហា - 31 សីហា');
+            } else if (name === 'ឆ្នាំនេះ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 0, 1);
+                rangeEndDate = new Date(2026, 11, 31);
+                updateRangeLabels('ឆ្នាំ ២០២៦', 'ឆ្នាំ ២០២៦');
+            } else if (name === '៧ ថ្ងៃចុងក្រោយ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 7, 28);
+                rangeEndDate = new Date(2026, 8, 3);
+                updateRangeLabels('28 សីហា - 3 កញ្ញា', '28 សីហា - 3 កញ្ញា');
+            } else if (name === '១៤ ថ្ងៃចុងក្រោយ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 7, 21);
+                rangeEndDate = new Date(2026, 8, 3);
+                updateRangeLabels('21 សីហា - 3 កញ្ញា', '21 សីហា - 3 កញ្ញា');
+            } else if (name === '៣០ ថ្ងៃចុងក្រោយ') {
+                calCurrentMonth = 9;
+                rangeStartDate = new Date(2026, 7, 5);
+                rangeEndDate = new Date(2026, 8, 3);
+                updateRangeLabels('5 សីហា - 3 កញ្ញា', '5 សីហា - 3 កញ្ញា');
+            }
+
+            highlightPresetButton(name);
+            renderCalendarGrid();
+        }
+
+        function clearRangeTag() {
+            currentPresetName = 'ទាំងអស់';
+            rangeStartDate = null;
+            rangeEndDate = null;
+            selectingRangeStart = false;
+            updateRangeLabels('ទាំងអស់', 'ទាំងអស់');
+            highlightPresetButton(null);
+            renderCalendarGrid();
+        }
+
+        function applyDateRange() {
+            if (selectingRangeStart && rangeStartDate && !rangeEndDate) {
+                rangeEndDate = new Date(rangeStartDate);
+                selectingRangeStart = false;
+                const d = rangeStartDate.getDate();
+                const m = MONTH_NAMES_KH[rangeStartDate.getMonth() + 1];
+                const text = `${d} ${m}`;
+                updateRangeLabels(text, text);
+            }
+            toggleDatePicker();
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            selectPreset('ខែនេះ');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCalendarGrid();
+            highlightPresetButton('ខែនេះ');
+        });
+
+        document.addEventListener('click', (e) => {
+            const popover = document.getElementById('datePickerPopover');
+            const btn = document.getElementById('dateRangePickerBtn');
+            if (popover && !popover.classList.contains('hidden')) {
+                if (!popover.contains(e.target) && !btn.contains(e.target)) {
+                    popover.classList.add('hidden');
+                    const chevron = document.getElementById('datePickerChevron');
+                    if (chevron) chevron.classList.remove('rotate-180');
+                }
+            }
+        });
     </script>
-    <script type="module" src="../scripts/main.js"></script>
 </body>
 </html>
