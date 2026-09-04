@@ -244,8 +244,294 @@ function selectProductOption(optElem, name, price, cost) {
     }
 }
 
-// Global click handler to close all custom select dropdown menus when clicked outside
+// 4. Custom Single Date Picker System (100% Khmer UI, Zero Browser Native Defaults)
+const BMS_SINGLE_PICKERS = {};
+const KHMER_MONTHS_LIST = [
+    'មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា',
+    'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'
+];
+
+function formatBmsDisplayDate(d) {
+    if (!d || isNaN(d.getTime())) return '';
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+function formatBmsIsoDate(d) {
+    if (!d || isNaN(d.getTime())) return '';
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${year}-${month}-${day}`;
+}
+
+function parseBmsDate(val) {
+    if (!val) return new Date();
+    if (typeof val === 'string') {
+        if (val.includes('/')) {
+            const parts = val.split('/');
+            if (parts.length === 3) {
+                return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+            }
+        } else if (val.includes('-')) {
+            const parts = val.split('-');
+            if (parts.length === 3) {
+                return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            }
+        }
+    }
+    const d = new Date(val);
+    return isNaN(d.getTime()) ? new Date() : d;
+}
+
+function initSingleDatePicker(id) {
+    const input = document.getElementById(id);
+    if (!input) return;
+
+    const container = input.closest('.bms-date-picker') || input.parentElement;
+    const initialDate = parseBmsDate(input.value);
+
+    BMS_SINGLE_PICKERS[id] = {
+        selectedYear: initialDate.getFullYear(),
+        selectedMonth: initialDate.getMonth() + 1,
+        selectedDay: initialDate.getDate(),
+        viewYear: initialDate.getFullYear(),
+        viewMonth: initialDate.getMonth() + 1
+    };
+
+    // Ensure display label is set
+    const display = document.getElementById(`${id}-display`) || (container ? container.querySelector('.bms-date-label') : null);
+    if (display) {
+        display.textContent = formatBmsDisplayDate(initialDate);
+    }
+
+    // Ensure popover structure exists inside container
+    let popover = document.getElementById(`${id}-popover`);
+    if (!popover && container) {
+        popover = document.createElement('div');
+        popover.id = `${id}-popover`;
+        popover.className = 'bms-date-popover absolute left-0 top-full mt-1.5 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-3.5 hidden select-none';
+        popover.onclick = (e) => e.stopPropagation();
+        popover.innerHTML = `
+            <div class="flex items-center justify-between mb-2.5 px-1">
+                <span id="${id}-month-label" class="text-xs font-bold text-slate-800"></span>
+                <div class="flex items-center gap-1">
+                    <button type="button" onclick="changeSinglePickerMonth('${id}', -1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                        <i class="fas fa-chevron-left text-[10px]"></i>
+                    </button>
+                    <button type="button" onclick="changeSinglePickerMonth('${id}', 1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-400 mb-1.5">
+                <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
+            </div>
+            <div id="${id}-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
+            <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
+                <button type="button" onclick="setSinglePickerToday('${id}')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                    ថ្ងៃនេះ
+                </button>
+                <button type="button" onclick="closeSingleDatePicker('${id}')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
+                    បិទ
+                </button>
+            </div>
+        `;
+        container.appendChild(popover);
+    }
+
+    // Intercept input.value changes via script so display stays in sync
+    if (!input._hasBmsValueSync) {
+        input._hasBmsValueSync = true;
+        const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+        Object.defineProperty(input, 'value', {
+            get: function() {
+                return descriptor.get.call(this);
+            },
+            set: function(newVal) {
+                descriptor.set.call(this, newVal);
+                const d = parseBmsDate(newVal);
+                if (display) display.textContent = formatBmsDisplayDate(d);
+                if (BMS_SINGLE_PICKERS[id]) {
+                    BMS_SINGLE_PICKERS[id].selectedYear = d.getFullYear();
+                    BMS_SINGLE_PICKERS[id].selectedMonth = d.getMonth() + 1;
+                    BMS_SINGLE_PICKERS[id].selectedDay = d.getDate();
+                }
+            }
+        });
+    }
+}
+
+function toggleSingleDatePicker(id) {
+    let popover = document.getElementById(`${id}-popover`);
+    if (!popover) {
+        initSingleDatePicker(id);
+        popover = document.getElementById(`${id}-popover`);
+    }
+    if (!popover) return;
+
+    const isHidden = popover.classList.contains('hidden');
+
+    // Close all other date popovers and select dropdowns
+    document.querySelectorAll('.bms-date-popover').forEach(p => {
+        if (p !== popover) p.classList.add('hidden');
+    });
+    document.querySelectorAll('.bms-date-picker').forEach(c => {
+        if (!c.contains(popover)) c.classList.remove('z-50');
+    });
+
+    if (isHidden) {
+        if (!BMS_SINGLE_PICKERS[id]) {
+            initSingleDatePicker(id);
+        } else {
+            BMS_SINGLE_PICKERS[id].viewYear = BMS_SINGLE_PICKERS[id].selectedYear;
+            BMS_SINGLE_PICKERS[id].viewMonth = BMS_SINGLE_PICKERS[id].selectedMonth;
+        }
+
+        renderSingleDatePickerGrid(id);
+        const container = popover.closest('.bms-date-picker');
+        if (container) container.classList.add('z-50');
+        popover.classList.remove('hidden');
+
+        // Prevent boundary overflow beyond screen right or left
+        const rect = popover.getBoundingClientRect();
+        if (rect.right > window.innerWidth - 12) {
+            popover.classList.remove('left-0');
+            popover.classList.add('right-0');
+        } else if (rect.left < 12) {
+            popover.classList.remove('right-0');
+            popover.classList.add('left-0');
+        }
+    } else {
+        popover.classList.add('hidden');
+        const container = popover.closest('.bms-date-picker');
+        if (container) container.classList.remove('z-50');
+    }
+}
+
+function closeSingleDatePicker(id) {
+    const popover = document.getElementById(`${id}-popover`);
+    if (popover) {
+        popover.classList.add('hidden');
+        const container = popover.closest('.bms-date-picker');
+        if (container) container.classList.remove('z-50');
+    }
+}
+
+function changeSinglePickerMonth(id, delta) {
+    if (!BMS_SINGLE_PICKERS[id]) initSingleDatePicker(id);
+    const state = BMS_SINGLE_PICKERS[id];
+    state.viewMonth += delta;
+    if (state.viewMonth > 12) {
+        state.viewMonth = 1;
+        state.viewYear += 1;
+    } else if (state.viewMonth < 1) {
+        state.viewMonth = 12;
+        state.viewYear -= 1;
+    }
+    renderSingleDatePickerGrid(id);
+}
+
+function setSinglePickerToday(id) {
+    const today = new Date();
+    selectSinglePickerDate(id, today.getFullYear(), today.getMonth() + 1, today.getDate());
+}
+
+function selectSinglePickerDate(id, y, m, d) {
+    const input = document.getElementById(id);
+    const container = input ? (input.closest('.bms-date-picker') || input.parentElement) : null;
+    const display = document.getElementById(`${id}-display`) || (container ? container.querySelector('.bms-date-label') : null);
+    const dateObj = new Date(y, m - 1, d);
+
+    if (!BMS_SINGLE_PICKERS[id]) {
+        BMS_SINGLE_PICKERS[id] = {};
+    }
+    BMS_SINGLE_PICKERS[id].selectedYear = y;
+    BMS_SINGLE_PICKERS[id].selectedMonth = m;
+    BMS_SINGLE_PICKERS[id].selectedDay = d;
+    BMS_SINGLE_PICKERS[id].viewYear = y;
+    BMS_SINGLE_PICKERS[id].viewMonth = m;
+
+    if (input) {
+        input.value = formatBmsIsoDate(dateObj);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    if (display) {
+        display.textContent = formatBmsDisplayDate(dateObj);
+    }
+
+    closeSingleDatePicker(id);
+}
+
+function setSingleDate(id, dateStr) {
+    const d = parseBmsDate(dateStr);
+    selectSinglePickerDate(id, d.getFullYear(), d.getMonth() + 1, d.getDate());
+}
+
+function renderSingleDatePickerGrid(id) {
+    const state = BMS_SINGLE_PICKERS[id];
+    if (!state) return;
+    const grid = document.getElementById(`${id}-days-grid`);
+    const monthLabel = document.getElementById(`${id}-month-label`);
+    if (!grid) return;
+
+    if (monthLabel) {
+        monthLabel.textContent = `${KHMER_MONTHS_LIST[state.viewMonth - 1]} ${state.viewYear}`;
+    }
+
+    grid.innerHTML = '';
+
+    const daysInMonth = new Date(state.viewYear, state.viewMonth, 0).getDate();
+    const firstDayIndex = new Date(state.viewYear, state.viewMonth - 1, 1).getDay();
+    const leadingBlanks = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+    for (let i = 0; i < leadingBlanks; i++) {
+        const emptyCell = document.createElement('span');
+        grid.appendChild(emptyCell);
+    }
+
+    const today = new Date();
+    const isCurrentMonthThisMonth = today.getFullYear() === state.viewYear && (today.getMonth() + 1) === state.viewMonth;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const isSelected = state.selectedYear === state.viewYear &&
+                           state.selectedMonth === state.viewMonth &&
+                           state.selectedDay === d;
+        const isToday = isCurrentMonthThisMonth && today.getDate() === d;
+
+        const cell = document.createElement('div');
+        cell.className = 'flex items-center justify-center cursor-pointer h-7';
+        cell.onclick = () => selectSinglePickerDate(id, state.viewYear, state.viewMonth, d);
+
+        if (isSelected) {
+            cell.innerHTML = `<span class="w-7 h-7 rounded-full bg-[#0f2b5c] text-white flex items-center justify-center font-bold text-xs shadow-xs">${d}</span>`;
+        } else if (isToday) {
+            cell.innerHTML = `<span class="w-7 h-7 rounded-full border border-primary text-primary flex items-center justify-center font-bold text-xs hover:bg-emerald-50">${d}</span>`;
+        } else {
+            cell.innerHTML = `<span class="w-7 h-7 rounded-full hover:bg-slate-100 text-slate-700 flex items-center justify-center transition text-xs">${d}</span>`;
+        }
+        grid.appendChild(cell);
+    }
+}
+
+function initAllSingleDatePickers() {
+    document.querySelectorAll('.bms-date-picker').forEach(container => {
+        const input = container.querySelector('input[type="hidden"]');
+        if (input && input.id) {
+            initSingleDatePicker(input.id);
+        }
+    });
+}
+
+// Global click handler to close all custom select dropdown menus and single date pickers when clicked outside
 document.addEventListener('click', (e) => {
+    if (!e.target.closest('.bms-date-picker')) {
+        document.querySelectorAll('.bms-date-popover').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('.bms-date-picker').forEach(c => c.classList.remove('z-50'));
+    }
     if (!e.target.closest('.bms-custom-select')) {
         document.querySelectorAll('.bms-custom-select-menu').forEach(menu => {
             menu.classList.add('hidden');
@@ -261,3 +547,10 @@ document.addEventListener('click', (e) => {
         });
     }
 });
+
+// Auto initialize single date pickers on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllSingleDatePickers);
+} else {
+    initAllSingleDatePickers();
+}
