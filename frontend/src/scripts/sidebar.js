@@ -66,6 +66,66 @@ const BMS_NAV_ITEMS = {
         icon: 'fa-clock-rotate-left',
         parent: 'menu-stock'
     },
+    'reports-overview': {
+        title: 'របាយការណ៍ទូទៅ',
+        subtitle: 'ទិដ្ឋភាពទូទៅនៃប្រាក់ចំណេញ ចំណូល និងចំណាយ',
+        icon: 'fa-chart-pie',
+        parent: 'menu-reports'
+    },
+    'reports-sales': {
+        title: 'របាយការណ៍លក់',
+        subtitle: 'ទិន្នន័យវិភាគការលក់ និងអតិថិជនសំខាន់ៗ',
+        icon: 'fa-file-invoice-dollar',
+        parent: 'menu-reports'
+    },
+    'reports-purchases': {
+        title: 'របាយការណ៍ទិញ',
+        subtitle: 'ទិន្នន័យវិភាគការទិញ និងការចំណាយលើអ្នកផ្គត់ផ្គង់',
+        icon: 'fa-cart-shopping',
+        parent: 'menu-reports'
+    },
+    'reports-stock': {
+        title: 'របាយការណ៍ស្តុក',
+        subtitle: 'ទិន្នន័យតម្លៃស្តុក និងការវិភាគប្រាក់ចំណេញតាមមុខទំនិញ',
+        icon: 'fa-boxes-stacked',
+        parent: 'menu-reports'
+    },
+    'settings-company': {
+        title: 'ព័ត៌មានក្រុមហ៊ុន',
+        subtitle: 'ការកំណត់ព័ត៌មានទូទៅ អាសយដ្ឋាន រូបសញ្ញា និងត្រាក្រុមហ៊ុន',
+        icon: 'fa-building',
+        parent: 'menu-settings'
+    },
+    'settings-users': {
+        title: 'គ្រប់គ្រងអ្នកប្រើ',
+        subtitle: 'គ្រប់គ្រងគណនី តួនាទី និងសិទ្ធិប្រើប្រាស់ប្រព័ន្ធ',
+        icon: 'fa-users-gear',
+        parent: 'menu-settings'
+    },
+    'settings-tax': {
+        title: 'ពន្ធ និងរូបិយប័ណ្ណ',
+        subtitle: 'ការកំណត់អត្រាពន្ធ រូបិយប័ណ្ណគោល និងអត្រាប្តូរប្រាក់',
+        icon: 'fa-coins',
+        parent: 'menu-settings'
+    },
+    'settings-notifications': {
+        title: 'ការជូនដំណឹង',
+        subtitle: 'ការកំណត់ការផ្ញើសារដាស់តឿន និងដំណឹងប្រព័ន្ធស្វ័យប្រវត្តិ',
+        icon: 'fa-bell',
+        parent: 'menu-settings'
+    },
+    'settings-system': {
+        title: 'ប្រព័ន្ធ និងសុវត្ថិភាព',
+        subtitle: 'ការបម្រុងទុកទិន្នន័យ ប្រវត្តិប្រតិបត្តិការ និងការថែទាំប្រព័ន្ធ',
+        icon: 'fa-sliders',
+        parent: 'menu-settings'
+    },
+    'settings-general': {
+        title: 'ការកំណត់ប្រព័ន្ធ',
+        subtitle: 'ការកំណត់ទូទៅ សិទ្ធិអ្នកប្រើប្រាស់ និងប្រព័ន្ធ',
+        icon: 'fa-gear',
+        parent: 'menu-settings'
+    },
     'reports': {
         title: 'របាយការណ៍ហិរញ្ញវត្ថុ',
         subtitle: 'របាយការណ៍លក់ ចំណូល ចំណាយ និងប្រាក់ចំណេញ',
@@ -305,6 +365,115 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Reports Overview
+            if (navId === 'reports-overview') {
+                try { sessionStorage.setItem('bms_active_nav', 'reports-overview'); } catch(err){}
+                if (window.location.pathname.includes('/reports/overview/') || window.location.pathname.endsWith('overview.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('reports-overview');
+                }
+                return;
+            }
+
+            // If user clicked Reports Sales
+            if (navId === 'reports-sales') {
+                try { sessionStorage.setItem('bms_active_nav', 'reports-sales'); } catch(err){}
+                if (window.location.pathname.includes('/reports/sales/') || window.location.pathname.endsWith('sales.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('reports-sales');
+                }
+                return;
+            }
+
+            // If user clicked Reports Purchases
+            if (navId === 'reports-purchases') {
+                try { sessionStorage.setItem('bms_active_nav', 'reports-purchases'); } catch(err){}
+                if (window.location.pathname.includes('/reports/purchases/') || window.location.pathname.endsWith('purchases.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('reports-purchases');
+                }
+                return;
+            }
+
+            // If user clicked Reports Stock
+            if (navId === 'reports-stock') {
+                try { sessionStorage.setItem('bms_active_nav', 'reports-stock'); } catch(err){}
+                if (window.location.pathname.includes('/reports/stock/') || window.location.pathname.endsWith('stock.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('reports-stock');
+                }
+                return;
+            }
+
+            // If user clicked Company Settings
+            if (navId === 'settings-company') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-company'); } catch(err){}
+                if (window.location.pathname.includes('/settings/company/') || window.location.pathname.endsWith('company.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-company');
+                }
+                return;
+            }
+
+            // If user clicked User Management
+            if (navId === 'settings-users') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-users'); } catch(err){}
+                if (window.location.pathname.includes('/settings/users/')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-users');
+                }
+                return;
+            }
+
+            // If user clicked Tax Settings
+            if (navId === 'settings-tax') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-tax'); } catch(err){}
+                if (window.location.pathname.includes('/settings/tax/') || window.location.pathname.endsWith('tax.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-tax');
+                }
+                return;
+            }
+
+            // If user clicked Notifications Settings
+            if (navId === 'settings-notifications') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-notifications'); } catch(err){}
+                if (window.location.pathname.includes('/settings/notifications/') || window.location.pathname.endsWith('notifications.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-notifications');
+                }
+                return;
+            }
+
+            // If user clicked System Settings
+            if (navId === 'settings-system') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-system'); } catch(err){}
+                if (window.location.pathname.includes('/settings/system/') || window.location.pathname.endsWith('system.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-system');
+                }
+                return;
+            }
+
+            // If user clicked General Settings / Reports (legacy)
+            if (navId === 'settings-general' || navId === 'settings') {
+                try { sessionStorage.setItem('bms_active_nav', 'settings-company'); } catch(err){}
+                if (window.location.pathname.endsWith('settings.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('settings-company');
+                }
+                return;
+            }
+
+            if (navId === 'reports') {
+                try { sessionStorage.setItem('bms_active_nav', 'reports-overview'); } catch(err){}
+                if (window.location.pathname.endsWith('reports.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('reports-overview');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -314,7 +483,6 @@ function initSidebarNav() {
                 url.searchParams.set('nav', navId);
                 window.history.pushState({}, '', url);
             } else {
-                // If navigating from dashboard or invoices to an empty page item
                 try { sessionStorage.setItem('bms_active_nav', navId); } catch(err){}
             }
         });
@@ -345,45 +513,72 @@ function initSidebarNav() {
     const isCatalog = window.location.pathname.includes('/catalog/') || window.location.pathname.endsWith('catalog.html');
     const isMovement = window.location.pathname.includes('/movement/') || window.location.pathname.endsWith('movement.html');
     
-    let initialNav = urlParam || (
-        isDashboard ? 'dashboard' : (
-        isInvoices ? 'sell-invoices' : (
-        isQuotes ? 'sell-prices' : (
-        isCustomers ? 'sell-customers' : (
-        isPayments ? 'sell-receipts' : (
-        isBills ? 'buy-invoices' : (
-        isSuppliers ? 'buy-suppliers' : (
-        isDisbursement ? 'buy-expenses' : (
-        isBalance ? 'stock-balance' : (
-        isCatalog ? 'stock-catalog' : (
-        isMovement ? 'stock-movements' : (
-        savedNav || 'dashboard')))))))))))
-    );
-    
-    if (isDashboard && !urlParam) {
-        initialNav = 'dashboard';
-    } else if (isInvoices && !urlParam) {
-        initialNav = 'sell-invoices';
-    } else if (isQuotes && !urlParam) {
-        initialNav = 'sell-prices';
-    } else if (isCustomers && !urlParam) {
-        initialNav = 'sell-customers';
-    } else if (isPayments && !urlParam) {
-        initialNav = 'sell-receipts';
-    } else if (isBills && !urlParam) {
-        initialNav = 'buy-invoices';
-    } else if (isSuppliers && !urlParam) {
-        initialNav = 'buy-suppliers';
-    } else if (isDisbursement && !urlParam) {
-        initialNav = 'buy-expenses';
-    } else if (isBalance && !urlParam) {
-        initialNav = 'stock-balance';
-    } else if (isCatalog && !urlParam) {
-        initialNav = 'stock-catalog';
-    } else if (isMovement && !urlParam) {
-        initialNav = 'stock-movements';
+    // Reports sub-pages
+    const isReportsOverview = window.location.pathname.includes('/reports/overview/') || window.location.pathname.endsWith('overview.html');
+    const isReportsSales = window.location.pathname.includes('/reports/sales/') || (window.location.pathname.endsWith('sales.html') && window.location.pathname.includes('/reports/'));
+    const isReportsPurchases = window.location.pathname.includes('/reports/purchases/') || (window.location.pathname.endsWith('purchases.html') && window.location.pathname.includes('/reports/'));
+    const isReportsStock = window.location.pathname.includes('/reports/stock/') || (window.location.pathname.endsWith('stock.html') && window.location.pathname.includes('/reports/'));
+    const isLegacyReports = window.location.pathname.endsWith('reports.html') && !window.location.pathname.includes('/overview/');
+
+    // Settings sub-pages
+    const isCompany = window.location.pathname.includes('/settings/company/') || (window.location.pathname.endsWith('company.html') && window.location.pathname.includes('/settings/'));
+    const isUsers = window.location.pathname.includes('/settings/users/') || window.location.pathname.includes('/users/');
+    const isTax = window.location.pathname.includes('/settings/tax/') || (window.location.pathname.endsWith('tax.html') && window.location.pathname.includes('/settings/'));
+    const isNotifications = window.location.pathname.includes('/settings/notifications/') || (window.location.pathname.endsWith('notifications.html') && window.location.pathname.includes('/settings/'));
+    const isSystem = window.location.pathname.includes('/settings/system/') || (window.location.pathname.endsWith('system.html') && window.location.pathname.includes('/settings/'));
+    const isLegacySettings = window.location.pathname.endsWith('settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem;
+
+    let initialNav = urlParam;
+    if (!initialNav) {
+        if (isDashboard) {
+            initialNav = 'dashboard';
+        } else if (isInvoices) {
+            initialNav = 'sell-invoices';
+        } else if (isQuotes) {
+            initialNav = 'sell-prices';
+        } else if (isCustomers) {
+            initialNav = 'sell-customers';
+        } else if (isPayments) {
+            initialNav = 'sell-receipts';
+        } else if (isBills) {
+            initialNav = 'buy-invoices';
+        } else if (isSuppliers) {
+            initialNav = 'buy-suppliers';
+        } else if (isDisbursement) {
+            initialNav = 'buy-expenses';
+        } else if (isBalance) {
+            initialNav = 'stock-balance';
+        } else if (isCatalog) {
+            initialNav = 'stock-catalog';
+        } else if (isMovement) {
+            initialNav = 'stock-movements';
+        } else if (isReportsOverview) {
+            initialNav = 'reports-overview';
+        } else if (isReportsSales) {
+            initialNav = 'reports-sales';
+        } else if (isReportsPurchases) {
+            initialNav = 'reports-purchases';
+        } else if (isReportsStock) {
+            initialNav = 'reports-stock';
+        } else if (isLegacyReports) {
+            initialNav = 'reports-overview';
+        } else if (isCompany) {
+            initialNav = 'settings-company';
+        } else if (isUsers) {
+            initialNav = 'settings-users';
+        } else if (isTax) {
+            initialNav = 'settings-tax';
+        } else if (isNotifications) {
+            initialNav = 'settings-notifications';
+        } else if (isSystem) {
+            initialNav = 'settings-system';
+        } else if (isLegacySettings) {
+            initialNav = 'settings-company';
+        } else {
+            initialNav = savedNav || 'dashboard';
+        }
     }
-    
+
     setActiveNavItem(initialNav);
 }
 

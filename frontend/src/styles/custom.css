@@ -10,6 +10,13 @@ html, body, input, button, select, textarea {
 }
 
 /* =========================================================
+   Global Sidebar Dark Green Background (#1b5223)
+   ========================================================= */
+.bg-sidebar, aside.bg-sidebar, aside {
+    background-color: #1b5223 !important;
+}
+
+/* =========================================================
    Hide all horizontal and vertical scrollbars application-wide
    while keeping smooth scrolling functionality intact
    ========================================================= */
