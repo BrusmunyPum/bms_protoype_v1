@@ -594,4 +594,512 @@ function initSidebarNav() {
     setActiveNavItem(initialNav);
 }
 
-document.addEventListener('DOMContentLoaded', initSidebarNav);
+/**
+ * Global User Profile Dropdown & Modal Manager
+ */
+function getPagesRelativePath(targetPage) {
+    const rawPath = window.location.pathname.replace(/\\/g, '/');
+    const normalized = decodeURIComponent(rawPath).toLowerCase();
+    
+    const pagesIdx = normalized.indexOf('/pages/');
+    if (pagesIdx !== -1) {
+        const afterPages = normalized.substring(pagesIdx + 7);
+        const parts = afterPages.split('/').filter(p => p.length > 0);
+        const depth = Math.max(0, parts.length - 1);
+        const prefix = depth === 0 ? './' : '../'.repeat(depth);
+        return prefix + targetPage;
+    }
+    
+    if (normalized.includes('/frontend/')) {
+        return 'src/pages/' + targetPage;
+    }
+    return targetPage;
+}
+
+function initUserProfileMenu() {
+    const avatarImgs = document.querySelectorAll('header img[alt*="Avatar"], header img[alt*="អ្នកប្រើប្រាស់"], header img[src*="photo-1494790108377"], header button img.rounded-full');
+    if (!avatarImgs || avatarImgs.length === 0) return;
+
+    avatarImgs.forEach(img => {
+        const btn = img.closest('button');
+        if (!btn) return;
+
+        const parentContainer = btn.parentElement;
+        if (!parentContainer) return;
+
+        // Ensure parent container is relative for absolute popover positioning
+        parentContainer.classList.add('relative');
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.style.cursor = 'pointer';
+
+        // Check if dropdown already exists
+        let dropdown = parentContainer.querySelector('#bmsUserProfileDropdown');
+        if (!dropdown) {
+            dropdown = document.createElement('div');
+            dropdown.id = 'bmsUserProfileDropdown';
+            dropdown.className = 'hidden absolute right-0 top-full mt-2.5 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
+            
+            const profileUrl = getPagesRelativePath('settings/users/view-user.html') + '?id=USR-001';
+            const companyUrl = getPagesRelativePath('settings/company/company.html');
+            const systemUrl = getPagesRelativePath('settings/system/system.html');
+            const notifUrl = getPagesRelativePath('settings/notifications/notifications.html');
+
+            dropdown.innerHTML = `
+                <!-- Profile Header -->
+                <div class="p-4 bg-gradient-to-br from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="relative flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm" />
+                            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-sm font-bold text-slate-800 truncate leading-tight">សុខ ចាន់ថន</h4>
+                            <p class="text-xs text-slate-500 truncate mt-0.5">chanthon.sok@bmstech.com</p>
+                            <div class="mt-1.5 flex items-center gap-1.5">
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">
+                                    <i class="fas fa-shield-halved text-[10px]"></i> Admin Superuser
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation List -->
+                <div class="p-2 space-y-1">
+                    <a href="${profileUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 text-primary flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs font-semibold text-slate-700 group-hover:text-primary transition">កម្រងព័ត៌មានផ្ទាល់ខ្លួន</div>
+                            <div class="text-[11px] text-slate-400 truncate">ព័ត៌មានគណនី និងការអនុញ្ញាត</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition"></i>
+                    </a>
+
+                    <a href="${companyUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                        <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs font-semibold text-slate-700 group-hover:text-amber-600 transition">ព័ត៌មានក្រុមហ៊ុន</div>
+                            <div class="text-[11px] text-slate-400 truncate">សាខា អាសយដ្ឋាន និងរូបសញ្ញា</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition"></i>
+                    </a>
+
+                    <a href="${systemUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
+                            <i class="fas fa-sliders"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs font-semibold text-slate-700 group-hover:text-indigo-600 transition">ការកំណត់ប្រព័ន្ធ</div>
+                            <div class="text-[11px] text-slate-400 truncate">ភាសា រូបិយប័ណ្ណ និងទម្រង់</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition"></i>
+                    </a>
+
+                    <button type="button" onclick="openChangePasswordModal()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group text-left">
+                        <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition">ប្ដូរពាក្យសម្ងាត់</div>
+                            <div class="text-[11px] text-slate-400 truncate">សុវត្ថិភាព និងលេខកូដសម្ងាត់</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition"></i>
+                    </button>
+                </div>
+            `;
+            parentContainer.appendChild(dropdown);
+        }
+
+        // Toggle click handler
+        btn.onclick = function(e) {
+            e.stopPropagation();
+            const isHidden = dropdown.classList.contains('hidden');
+            // Close all other dropdowns
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            
+            if (isHidden) {
+                dropdown.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                dropdown.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        };
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#bmsUserProfileDropdown') && !e.target.closest('header button img.rounded-full') && !e.target.closest('header button[aria-haspopup="true"]')) {
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+        }
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+        }
+    });
+}
+
+/**
+ * Change Password Modal Dialog
+ */
+function openChangePasswordModal() {
+    // Close dropdown
+    document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+
+    let modal = document.getElementById('bmsChangePasswordModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'bmsChangePasswordModal';
+        modal.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 select-none';
+        modal.innerHTML = `
+            <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-md w-full overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
+                <!-- Modal Header -->
+                <div class="p-5 px-6 bg-gradient-to-r from-slate-50 to-blue-50/30 border-b border-slate-100 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-800">ប្ដូរពាក្យសម្ងាត់ (Change Password)</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">កំណត់ពាក្យសម្ងាត់ថ្មីដើម្បីសុវត្ថិភាពគណនី</p>
+                        </div>
+                    </div>
+                    <button onclick="closeChangePasswordModal()" class="w-8 h-8 rounded-full bg-white text-slate-400 hover:text-slate-600 hover:bg-slate-100 flex items-center justify-center transition shadow-sm border border-slate-100">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <form id="bmsChangePasswordForm" onsubmit="event.preventDefault(); submitChangePassword();" class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">ពាក្យសម្ងាត់បច្ចុប្បន្ន <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                            <input type="password" id="currentPasswordInput" required placeholder="បញ្ចូលពាក្យសម្ងាត់បច្ចុប្បន្ន..." class="w-full text-xs font-normal text-slate-700 px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-10 transition" />
+                            <button type="button" onclick="togglePasswordVisibility('currentPasswordInput', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                <i class="fas fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">ពាក្យសម្ងាត់ថ្មី <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                            <input type="password" id="newPasswordInput" required minlength="6" placeholder="បញ្ចូលពាក្យសម្ងាត់ថ្មី (យ៉ាងតិច ៦ ខ្ទង់)..." class="w-full text-xs font-normal text-slate-700 px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-10 transition" />
+                            <button type="button" onclick="togglePasswordVisibility('newPasswordInput', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                <i class="fas fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">បញ្ជាក់ពាក្យសម្ងាត់ថ្មី <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                            <input type="password" id="confirmPasswordInput" required minlength="6" placeholder="បញ្ចូលបញ្ជាក់ពាក្យសម្ងាត់ថ្មីម្ដងទៀត..." class="w-full text-xs font-normal text-slate-700 px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-10 transition" />
+                            <button type="button" onclick="togglePasswordVisibility('confirmPasswordInput', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                <i class="fas fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex items-center justify-end gap-2.5 border-t border-slate-100">
+                        <button type="button" onclick="closeChangePasswordModal()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition">
+                            បោះបង់
+                        </button>
+                        <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-primary-light shadow-sm transition flex items-center gap-2">
+                            <i class="fas fa-check"></i> រក្សាទុកពាក្យសម្ងាត់
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    } else {
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeChangePasswordModal() {
+    const modal = document.getElementById('bmsChangePasswordModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        const form = document.getElementById('bmsChangePasswordForm');
+        if (form) form.reset();
+    }
+}
+
+function togglePasswordVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const icon = btn.querySelector('i');
+    if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    } else {
+        input.type = 'password';
+        if (icon) {
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+}
+
+function submitChangePassword() {
+    const current = document.getElementById('currentPasswordInput')?.value;
+    const newPass = document.getElementById('newPasswordInput')?.value;
+    const confirmPass = document.getElementById('confirmPasswordInput')?.value;
+
+    if (!current || !newPass || !confirmPass) {
+        if (typeof showToast === 'function') {
+            showToast('សូមបំពេញព័ត៌មានឱ្យបានគ្រប់ជ្រុងជ្រោយ!', 'warning');
+        } else {
+            alert('សូមបំពេញព័ត៌មានឱ្យបានគ្រប់ជ្រុងជ្រោយ!');
+        }
+        return;
+    }
+
+    if (newPass !== confirmPass) {
+        if (typeof showToast === 'function') {
+            showToast('ពាក្យសម្ងាត់ថ្មី និងការបញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ!', 'error');
+        } else {
+            alert('ពាក្យសម្ងាត់ថ្មី និងការបញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ!');
+        }
+        return;
+    }
+
+    if (newPass.length < 6) {
+        if (typeof showToast === 'function') {
+            showToast('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៦ ខ្ទង់!', 'warning');
+        } else {
+            alert('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៦ ខ្ទង់!');
+        }
+        return;
+    }
+
+    closeChangePasswordModal();
+    if (typeof showToast === 'function') {
+        showToast('ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្ដូរដោយជោគជ័យ!', 'success');
+    } else {
+        alert('ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្ដូរដោយជោគជ័យ!');
+    }
+}
+
+/**
+ * Global Notifications Dropdown Manager
+ */
+function initGlobalNotifications() {
+    const bellIcons = document.querySelectorAll('header i.fa-bell, header .fa-bell');
+    if (!bellIcons || bellIcons.length === 0) return;
+
+    bellIcons.forEach(icon => {
+        const btn = icon.closest('button');
+        if (!btn) return;
+
+        // Wrap button in relative container if not already wrapped
+        let wrapper = btn.parentElement;
+        if (!wrapper.classList.contains('notif-wrapper')) {
+            wrapper = document.createElement('div');
+            wrapper.className = 'relative inline-flex items-center notif-wrapper';
+            btn.parentNode.insertBefore(wrapper, btn);
+            wrapper.appendChild(btn);
+        }
+
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.style.cursor = 'pointer';
+
+        // Check if notification flyout exists
+        let flyout = wrapper.querySelector('#bmsNotificationFlyout');
+        if (!flyout) {
+            flyout = document.createElement('div');
+            flyout.id = 'bmsNotificationFlyout';
+            flyout.className = 'hidden absolute right-0 top-full mt-2.5 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
+
+            const invoiceUrl = getPagesRelativePath('sales/invoice/invoice.html');
+            const stockUrl = getPagesRelativePath('stock/balance/balance.html');
+            const customerUrl = getPagesRelativePath('sales/customer/customer.html');
+            const billsUrl = getPagesRelativePath('buy/bills/bills.html');
+            const allNotifsUrl = getPagesRelativePath('settings/notifications/notifications.html');
+
+            flyout.innerHTML = `
+                <!-- Header -->
+                <div class="p-3.5 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <h4 class="text-sm font-bold text-slate-800">ការជូនដំណឹង (Notifications)</h4>
+                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">៤ ថ្មី</span>
+                    </div>
+                    <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] font-medium text-primary hover:underline transition">
+                        <i class="fas fa-check-double mr-1"></i> អានទាំងអស់
+                    </button>
+                </div>
+
+                <!-- Notification List -->
+                <div class="divide-y divide-slate-50 max-h-96 overflow-y-auto">
+                    <!-- Notification 1 -->
+                    <a href="${invoiceUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                                វិក្កយបត្រ <span class="font-semibold text-slate-800">#INV-2024-008</span> ត្រូវបានទូទាត់ជោគជ័យ <span class="font-semibold text-emerald-700">$12,800.00</span>
+                            </p>
+                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
+                                <i class="fas fa-clock text-[10px]"></i> ១០ នាទីមុន
+                            </span>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0 notif-dot"></span>
+                    </a>
+
+                    <!-- Notification 2 -->
+                    <a href="${stockUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
+                        <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
+                            <i class="fas fa-triangle-exclamation"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                                ស្តុកទំនិញ <span class="font-semibold text-slate-800">iPhone 15 Pro Max</span> ជិតអស់ពីស្តុក (នៅសល់តែ ៣ គ្រឿង)
+                            </p>
+                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
+                                <i class="fas fa-clock text-[10px]"></i> ៤៥ នាទីមុន
+                            </span>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0 notif-dot"></span>
+                    </a>
+
+                    <!-- Notification 3 -->
+                    <a href="${customerUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
+                        <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                                អតិថិជនថ្មី <span class="font-semibold text-slate-800">Emma Thompson (ABC Corp)</span> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ
+                            </p>
+                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
+                                <i class="fas fa-clock text-[10px]"></i> ២ ម៉ោងមុន
+                            </span>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0 notif-dot"></span>
+                    </a>
+
+                    <!-- Notification 4 -->
+                    <a href="${billsUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
+                        <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                                វិក្កយបត្រទិញ <span class="font-semibold text-slate-800">#BILL-2024-042</span> ត្រូវបានអនុម័តដោយប្រធានផ្នែក
+                            </p>
+                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
+                                <i class="fas fa-clock text-[10px]"></i> ៤ ម៉ោងមុន
+                            </span>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0 notif-dot"></span>
+                    </a>
+                </div>
+
+                <!-- Footer -->
+                <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 text-center">
+                    <a href="${allNotifsUrl}" class="text-xs font-semibold text-primary hover:text-primary-light transition flex items-center justify-center gap-1.5">
+                        <span>មើលការជូនដំណឹងទាំងអស់</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            `;
+            wrapper.appendChild(flyout);
+        }
+
+        // Toggle click handler
+        btn.onclick = function(e) {
+            e.stopPropagation();
+            const isHidden = flyout.classList.contains('hidden');
+            
+            // Close profile dropdown if open
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            // Close other notification flyouts
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+
+            if (isHidden) {
+                flyout.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                flyout.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        };
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#bmsNotificationFlyout') && !e.target.closest('.notif-wrapper')) {
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+        }
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('#bmsNotificationFlyout').forEach(f => f.classList.add('hidden'));
+        }
+    });
+}
+
+function markAllNotificationsAsRead() {
+    // Hide dots
+    document.querySelectorAll('.notif-dot').forEach(dot => dot.classList.add('hidden'));
+    
+    // Update count badge
+    const badge = document.getElementById('bmsNotifCountBadge');
+    if (badge) {
+        badge.textContent = '០ ថ្មី';
+        badge.className = 'px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500 border border-slate-200';
+    }
+
+    // Hide ping animation on the bells
+    document.querySelectorAll('header button .animate-ping').forEach(ping => ping.parentElement.remove());
+
+    if (typeof showToast === 'function') {
+        showToast('បានសម្គាល់ការជូនដំណឹងទាំងអស់ថាបានអានរួចរាល់!', 'success');
+    }
+}
+
+// Global toggle shortcut if referenced
+window.toggleNotifications = function() {
+    const flyout = document.querySelector('#bmsNotificationFlyout');
+    if (flyout) {
+        const isHidden = flyout.classList.contains('hidden');
+        document.querySelectorAll('#bmsNotificationFlyout').forEach(f => {
+            if (isHidden) f.classList.remove('hidden');
+            else f.classList.add('hidden');
+        });
+    }
+};
+
+// Attach listeners on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initSidebarNav();
+        initUserProfileMenu();
+        initGlobalNotifications();
+    });
+} else {
+    initSidebarNav();
+    initUserProfileMenu();
+    initGlobalNotifications();
+}
+
+
+
+
