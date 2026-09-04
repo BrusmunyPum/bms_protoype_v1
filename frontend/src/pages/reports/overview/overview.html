@@ -809,11 +809,27 @@
         document.addEventListener("DOMContentLoaded", () => {
             comboChartObj = echarts.init(document.getElementById('comboChart'));
             comboChartObj.setOption({
-                tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
-                legend: { data: ['ចំណូល', 'ចំណាយ'], bottom: 0 },
+                textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
+                tooltip: { 
+                    trigger: 'axis', 
+                    axisPointer: { type: 'cross' },
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 }
+                },
+                legend: { 
+                    data: ['ចំណូល', 'ចំណាយ'], 
+                    bottom: 0,
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14, color: '#475569' }
+                },
                 grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
-                xAxis: [{ type: 'category', data: ['មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា'] }],
-                yAxis: [{ type: 'value' }],
+                xAxis: [{ 
+                    type: 'category', 
+                    data: ['មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា'],
+                    axisLabel: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13.5, color: '#64748b' }
+                }],
+                yAxis: [{ 
+                    type: 'value',
+                    axisLabel: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13, color: '#64748b' }
+                }],
                 series: [
                     { name: 'ចំណូល', type: 'bar', itemStyle: { color: '#10b981', borderRadius: [4, 4, 0, 0] }, data: [41100, 45200, 39500, 42890, 48250, 25000] },
                     { name: 'ចំណាយ', type: 'line', itemStyle: { color: '#f43f5e' }, smooth: true, data: [29200, 30500, 28100, 32850, 31800, 15000] }
@@ -822,7 +838,11 @@
 
             donutChartObj = echarts.init(document.getElementById('donutChart'));
             donutChartObj.setOption({
-                tooltip: { trigger: 'item' },
+                textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
+                tooltip: { 
+                    trigger: 'item',
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 }
+                },
                 legend: { top: '5%', left: 'center', show: false },
                 series: [
                     {
@@ -835,7 +855,12 @@
                             borderColor: '#fff',
                             borderWidth: 2
                         },
-                        label: { show: true, formatter: '{b}\n{d}%' },
+                        label: { 
+                            show: true, 
+                            formatter: '{b}\n{d}%',
+                            fontFamily: 'Kantumruy Pro, sans-serif',
+                            fontSize: 13.5
+                        },
                         data: [
                             { value: 45, name: 'ការទិញទំនិញ', itemStyle: { color: '#3b82f6' } },
                             { value: 20, name: 'បៀវត្ស', itemStyle: { color: '#f59e0b' } },

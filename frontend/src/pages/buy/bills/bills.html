@@ -230,20 +230,6 @@
             </div>
 
             <div class="flex items-center space-x-3 md:space-x-4">
-                <!-- Create Bill Button -->
-                <a href="create-bills.html"
-                    class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
-                    <i class="fas fa-plus mr-2 text-xs"></i>
-                    <span>បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</span>
-                </a>
-
-                <!-- Export Report Button -->
-                <button onclick="exportBillsData()"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
-                    <span>ទាញយករបាយការណ៍</span>
-                </button>
-
                 <!-- Notification Bell -->
                 <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bell text-xl"></i>
@@ -271,22 +257,41 @@
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
 
                     <!-- Card 1: ចំណាយទិញសរុប -->
+                    <!-- Card 1: ចំណាយទិញទំនិញសរុប -->
                     <div onclick="setStatusFilter('all')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-blue-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-emerald-600 flex items-center gap-0.5">
                             <i class="fas fa-arrow-up text-[8px]"></i> 8.4%
                         </span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ចំណាយទិញទំនិញសរុប</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$94,820</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ចំណាយទិញទំនិញសរុប</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-slate-800 leading-none">$94,820</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineBills1" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+                                                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2 L 72,26 L 0,26 Z" fill="url(#sparklineBills1)"/>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-slate-400">វិក្កយបត្រ ៤៦ ច្បាប់</p>
                     </div>
 
                     <!-- Card 2: បានទូទាត់រួចរាល់ -->
                     <div onclick="setStatusFilter('paid')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-slate-400">76.5%</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">បានទូទាត់រួចរាល់</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$72,500</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">បានទូទាត់រួចរាល់</p>
+                            <p class="text-[22px] font-bold text-slate-800 leading-none mb-3">$72,500</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-teal-500 h-[3px] rounded-full" style="width: 76.5%"></div>
@@ -297,10 +302,12 @@
 
                     <!-- Card 3: នៅសល់ត្រូវទូទាត់ -->
                     <div onclick="setStatusFilter('pending')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-amber-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-amber-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-amber-600">៦ ច្បាប់</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">នៅសល់ត្រូវទូទាត់</p>
-                        <p class="text-[22px] font-bold text-amber-600 leading-none mb-3">$22,320</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">នៅសល់ត្រូវទូទាត់</p>
+                            <p class="text-[22px] font-bold text-amber-600 leading-none mb-3">$22,320</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-amber-400 h-[3px] rounded-full" style="width: 23.5%"></div>
@@ -311,16 +318,32 @@
 
                     <!-- Card 4: ហួសកាលកំណត់ -->
                     <div onclick="setStatusFilter('overdue')" role="button" tabindex="0"
-                        class="relative bg-white border border-rose-100 rounded-xl p-4 hover:border-rose-300 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-rose-100 rounded-xl p-4 hover:border-rose-300 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-rose-500">២ ច្បាប់</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ហួសកាលកំណត់</p>
-                        <p class="text-[22px] font-bold text-rose-500 leading-none mb-3">$5,400</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ហួសកាលកំណត់</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-rose-500 leading-none">$5,400</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineBills4" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.25"/>
+                                                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,16 C 14,12 24,19 38,14 C 50,10 60,12 72,4 L 72,26 L 0,26 Z" fill="url(#sparklineBills4)"/>
+                                        <path d="M 0,16 C 14,12 24,19 38,14 C 50,10 60,12 72,4" fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-rose-400">ហួសកាលបរិច្ឆេទ · ត្រូវទូទាត់</p>
                     </div>
 
                 </div>
 
-                <!-- 2. Search & Filter Toolbar -->
+                <!-- 2. Search & Action Toolbar -->
                 <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
                     <div class="flex flex-wrap items-center justify-between gap-3">
 
@@ -332,84 +355,20 @@
                                 class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
 
-                        <!-- Date Range Picker Standard -->
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs text-slate-400 hidden sm:inline">កាលបរិច្ឆេទ:</span>
-                            
-                            <div class="relative">
-                                <!-- Date Range Trigger Button -->
-                                <button id="dateRangePickerBtn" onclick="toggleDatePicker(event)"
-                                    class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
-                                    <i class="fas fa-calendar-days text-primary text-xs"></i>
-                                    <span id="selectedDateLabel" class="font-medium text-slate-800">1 កញ្ញា - 30 កញ្ញា</span>
-                                    <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5" id="datePickerChevron"></i>
-                                </button>
+                        <!-- Action Buttons (Moved to Toolbar) -->
+                        <div class="flex items-center space-x-2.5">
+                            <!-- Create Bill Button -->
+                            <a href="create-bills.html"
+                                class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
+                                <i class="fas fa-plus mr-2 text-xs"></i>
+                                <span>បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</span>
+                            </a>
 
-                                <!-- Date Range Picker Popover Dropdown (480px) -->
-                                <div id="datePickerPopover" onclick="event.stopPropagation()"
-                                    class="absolute right-0 top-full mt-2 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 hidden overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-                                    <div class="grid grid-cols-12 divide-x divide-slate-100">
-                                        <!-- Left Presets Column (col-span-4) -->
-                                        <div class="col-span-4 p-2 py-3 space-y-0.5 text-xs font-normal text-slate-600 bg-slate-50/70">
-                                            <button type="button" onclick="selectPreset('ថ្ងៃនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ថ្ងៃនេះ</button>
-                                            <button type="button" onclick="selectPreset('ម្សិលមិញ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ម្សិលមិញ</button>
-                                            <button type="button" onclick="selectPreset('សប្តាហ៍នេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍នេះ</button>
-                                            <button type="button" onclick="selectPreset('សប្តាហ៍មុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍មុន</button>
-                                            <button type="button" onclick="selectPreset('ខែនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg bg-[#0f2b5c] text-white font-medium shadow-sm transition-colors">ខែនេះ</button>
-                                            <button type="button" onclick="selectPreset('ខែមុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ខែមុន</button>
-                                            <button type="button" onclick="selectPreset('ឆ្នាំនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ឆ្នាំនេះ</button>
-                                            <button type="button" onclick="selectPreset('៧ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៧ ថ្ងៃចុងក្រោយ</button>
-                                            <button type="button" onclick="selectPreset('១៤ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">១៤ ថ្ងៃចុងក្រោយ</button>
-                                            <button type="button" onclick="selectPreset('៣០ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៣០ ថ្ងៃចុងក្រោយ</button>
-                                        </div>
-
-                                        <!-- Right Calendar View (col-span-8) -->
-                                        <div class="col-span-8 p-4 flex flex-col justify-between">
-                                            <div>
-                                                <!-- Calendar Header with Month Navigation -->
-                                                <div class="flex items-center justify-between mb-3 px-1">
-                                                    <span id="calMonthYearLabel" class="text-sm font-semibold text-slate-900">កញ្ញា 2026</span>
-                                                    <div class="flex items-center gap-1 text-slate-400">
-                                                        <button type="button" onclick="changeCalendarMonth(-1)" title="ខែមុន" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-left text-xs"></i></button>
-                                                        <button type="button" onclick="changeCalendarMonth(1)" title="ខែបន្ទាប់" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-right text-xs"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Weekdays -->
-                                                <div class="grid grid-cols-7 text-center text-xs font-normal text-slate-400 mb-2">
-                                                    <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
-                                                </div>
-
-                                                <!-- Dynamic Days Grid with Range Selection -->
-                                                <div id="calendarDaysGrid" class="grid grid-cols-7 text-center text-xs font-normal gap-y-1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Footer -->
-                                    <div class="p-3 px-4 border-t border-slate-100 bg-white flex items-center justify-between">
-                                        <div class="flex items-center gap-1.5 bg-slate-100 px-3 py-1 rounded-full text-xs font-normal text-slate-700">
-                                            <span id="rangeTagLabel">1 កញ្ញា - 30 កញ្ញា</span>
-                                            <button type="button" onclick="clearRangeTag()" class="text-slate-400 hover:text-slate-600 ml-1">
-                                                <i class="fas fa-times-circle text-xs"></i>
-                                            </button>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <button type="button" onclick="toggleDatePicker(event)" class="px-3.5 py-1.5 rounded-xl text-xs font-normal text-slate-600 hover:bg-slate-100 transition-colors">
-                                                បោះបង់
-                                            </button>
-                                            <button type="button" onclick="applyDateRange()" class="px-4 py-1.5 rounded-xl text-xs font-normal bg-[#0f2b5c] hover:bg-[#193a73] text-white shadow-sm transition-all">
-                                                ជ្រើសរើស
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button onclick="resetFilters()"
-                                class="text-slate-500 hover:text-slate-800 text-xs px-2.5 py-2 rounded-xl hover:bg-slate-100 transition flex items-center gap-1">
-                                <i class="fas fa-rotate-left text-xs"></i> កំណត់ឡើងវិញ
+                            <!-- Export Report Button -->
+                            <button onclick="exportBillsData()"
+                                class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
+                                <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
+                                <span>ទាញយករបាយការណ៍</span>
                             </button>
                         </div>
                     </div>
@@ -421,19 +380,19 @@
                             ទាំងអស់ (<span id="count-all">7</span>)
                         </button>
                         <button onclick="setStatusFilter('paid')" id="tab-paid"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             បានទូទាត់ (<span id="count-paid">3</span>)
                         </button>
                         <button onclick="setStatusFilter('pending')" id="tab-pending"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             រង់ចាំទូទាត់ (<span id="count-pending">2</span>)
                         </button>
                         <button onclick="setStatusFilter('overdue')" id="tab-overdue"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             ហួសកំណត់ (<span id="count-overdue">1</span>)
                         </button>
                         <button onclick="setStatusFilter('draft')" id="tab-draft"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             ព្រាង (<span id="count-draft">1</span>)
                         </button>
                     </div>
@@ -445,14 +404,14 @@
                         <table class="w-full text-left border-collapse" id="billsTable">
                             <thead>
                                 <tr class="bg-slate-50/70 border-b border-slate-100 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    <th class="py-3 px-4">លេខវិក្កយបត្រ</th>
-                                    <th class="py-3 px-4">អ្នកផ្គត់ផ្គង់</th>
-                                    <th class="py-3 px-4">កាលបរិច្ឆេទចេញ / ផុតកំណត់</th>
-                                    <th class="py-3 px-4 text-right">ទឹកប្រាក់សរុប</th>
-                                    <th class="py-3 px-4 text-right">បានបង់ / នៅសល់</th>
-                                    <th class="py-3 px-4 text-center">ចូលស្តុក</th>
-                                    <th class="py-3 px-4 text-center">ស្ថានភាព</th>
-                                    <th class="py-3 px-4 text-center w-16">សកម្មភាព</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">លេខវិក្កយបត្រ</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">អ្នកផ្គត់ផ្គង់</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">កាលបរិច្ឆេទចេញ / ផុតកំណត់</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">ទឹកប្រាក់សរុប</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">បានបង់ / នៅសល់</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ចូលស្តុក</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ស្ថានភាព</th>
+                                    <th class="py-3 px-4 text-center w-16 whitespace-nowrap">សកម្មភាព</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 text-[15px] font-normal" id="billsTableBody">
@@ -906,7 +865,7 @@
                 tr.className = 'hover:bg-slate-50/80 transition-colors group';
                 tr.innerHTML = `
                     <td class="py-3.5 px-4 whitespace-nowrap">
-                        <span class="font-semibold text-primary cursor-pointer hover:underline" onclick="viewBillDetail('${bill.id}')">
+                        <span class="font-medium text-primary cursor-pointer hover:underline" onclick="viewBillDetail('${bill.id}')">
                             ${bill.number}
                         </span>
                         <p class="text-[11px] text-slate-400">យោង: ${bill.supplierRef}</p>
@@ -915,7 +874,7 @@
                         <div class="flex items-center gap-2.5">
                             <img src="${bill.avatar}" alt="${bill.supplier}" class="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0" />
                             <div>
-                                <p class="font-semibold text-slate-800 text-sm leading-tight">${bill.supplier}</p>
+                                <p class="font-medium text-slate-700 text-sm leading-tight">${bill.supplier}</p>
                                 <p class="text-xs text-slate-400">${bill.phone} • ${bill.contactPerson}</p>
                             </div>
                         </div>
@@ -924,7 +883,7 @@
                         <p class="text-slate-700 font-medium">${bill.date}</p>
                         <p class="text-slate-400">ផុតកំណត់: <span class="${bill.status === 'overdue' ? 'text-rose-600 font-semibold' : ''}">${bill.dueDate}</span></p>
                     </td>
-                    <td class="py-3.5 px-4 text-right font-semibold text-slate-900 whitespace-nowrap">
+                    <td class="py-3.5 px-4 text-right font-medium text-slate-700 whitespace-nowrap">
                         $${bill.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </td>
                     <td class="py-3.5 px-4 text-right text-xs whitespace-nowrap">
@@ -951,14 +910,9 @@
             updateCounts();
         }
 
-        // True Date Range Selection State
-        let calCurrentYear = 2026;
-        let calCurrentMonth = 9; // 9 = September
-        
-        let rangeStartDate = new Date(2026, 8, 1);  // 1 Sep 2026
-        let rangeEndDate = new Date(2026, 8, 30);   // 30 Sep 2026
-        let selectingRangeStart = false;
-        let currentPresetName = 'ខែនេះ';
+        // Date Range Selection State
+        let rangeStartDate = null;
+        let rangeEndDate = null;
 
         const MONTH_NAMES_KH = {
             1: 'មករា', 2: 'កុម្ភៈ', 3: 'មីនា', 4: 'មេសា',
@@ -1239,7 +1193,7 @@
             currentFilterStatus = status;
 
             document.querySelectorAll('.status-tab').forEach(tab => {
-                tab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition';
+                tab.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition';
             });
 
             const activeTab = document.getElementById('tab-' + status);

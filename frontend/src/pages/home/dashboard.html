@@ -1092,10 +1092,11 @@
             if (cashFlowDom) {
                 const cashFlowChart = echarts.init(cashFlowDom);
                 const cashFlowOption = {
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: { type: 'shadow' },
-                        textStyle: { fontFamily: 'Kantumruy Pro', fontSize: 14 },
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 },
                         formatter: function(params) {
                             let res = `<strong>${params[0].name}</strong><br/>`;
                             params.forEach(item => {
@@ -1106,15 +1107,15 @@
                     },
                     grid: {
                         top: 20,
-                        left: 45,
+                        left: 48,
                         right: 15,
-                        bottom: 25
+                        bottom: 28
                     },
                     xAxis: {
                         type: 'category',
                         data: ['មករា', 'កុម្ភៈ', 'មិនា', 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'],
                         axisLine: { lineStyle: { color: '#e2e8f0' } },
-                        axisLabel: { color: '#64748b', fontSize: 12, fontFamily: 'Kantumruy Pro' },
+                        axisLabel: { color: '#64748b', fontSize: 13.5, fontFamily: 'Kantumruy Pro, sans-serif' },
                         axisTick: { show: false }
                     },
                     yAxis: {
@@ -1122,8 +1123,8 @@
                         axisLabel: {
                             formatter: '${value}',
                             color: '#94a3b8',
-                            fontSize: 11,
-                            fontFamily: 'Kantumruy Pro'
+                            fontSize: 13,
+                            fontFamily: 'Kantumruy Pro, sans-serif'
                         },
                         splitLine: { lineStyle: { color: '#f1f5f9', type: 'dashed' } }
                     },
@@ -1160,15 +1161,16 @@
             if (categoryDom) {
                 const categoryChart = echarts.init(categoryDom);
                 const categoryOption = {
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
                     tooltip: {
                         trigger: 'item',
-                        textStyle: { fontFamily: 'Kantumruy Pro', fontSize: 14 },
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 },
                         formatter: '{b}: <strong>${c}</strong> ({d}%)'
                     },
                     legend: {
                         bottom: 0,
                         left: 'center',
-                        textStyle: { fontFamily: 'Kantumruy Pro', fontSize: 13, color: '#64748b' }
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13.5, color: '#64748b' }
                     },
                     series: [
                         {
@@ -1201,9 +1203,10 @@
             if (ordersDom) {
                 const ordersChart = echarts.init(ordersDom);
                 const ordersOption = {
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
                     tooltip: {
                         trigger: 'item',
-                        textStyle: { fontFamily: 'Kantumruy Pro', fontSize: 14 },
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 },
                         formatter: '{b}: <strong>{c} ការបញ្ជាទិញ</strong>'
                     },
                     grid: {
@@ -1218,7 +1221,7 @@
                         data: ['ចន្ទ', 'អង្គារ', 'ពុធ', 'ព្រហស្បតិ៍', 'សុក្រ', 'សៅរ៍', 'អាទិត្យ'],
                         axisLine: { show: false },
                         axisTick: { show: false },
-                        axisLabel: { color: '#64748b', fontSize: 13, fontFamily: 'Kantumruy Pro' }
+                        axisLabel: { color: '#64748b', fontSize: 13.5, fontFamily: 'Kantumruy Pro, sans-serif' }
                     },
                     yAxis: {
                         type: 'value',
@@ -1243,8 +1246,8 @@
                                         color: '#ffffff',
                                         padding: [4, 7],
                                         borderRadius: 4,
-                                        fontSize: 12,
-                                        fontFamily: 'Kantumruy Pro'
+                                        fontSize: 13,
+                                        fontFamily: 'Kantumruy Pro, sans-serif'
                                     }
                                 },
                                 { value: 820, itemStyle: { color: '#dcfce7', borderRadius: 0 } },

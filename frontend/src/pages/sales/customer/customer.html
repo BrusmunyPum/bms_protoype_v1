@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="km">
 
 <head>
@@ -207,20 +207,6 @@
             </div>
 
             <div class="flex items-center space-x-3 md:space-x-4">
-                <!-- Create Customer Button -->
-                <a href="create-customer.html"
-                    class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
-                    <i class="fas fa-plus mr-2 text-xs"></i>
-                    <span>បន្ថែមអតិថិជនថ្មី</span>
-                </a>
-
-                <!-- Export Report Button -->
-                <button onclick="exportCustomersData()"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
-                    <span>ទាញយកទិន្នន័យ</span>
-                </button>
-
                 <!-- Notification Bell -->
                 <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bell text-xl"></i>
@@ -251,21 +237,39 @@
 
                     <!-- Card 1: អតិថិជនសរុប -->
                     <div onclick="filterByStatus('all')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-blue-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-emerald-600 flex items-center gap-0.5">
                             <i class="fas fa-arrow-up text-[8px]"></i> 8.4%
                         </span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនសរុប</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiTotalCustomers">1,248</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនសរុប</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-slate-800 leading-none" id="kpiTotalCustomers">1,248</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineCust1" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+                                                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2 L 72,26 L 0,26 Z" fill="url(#sparklineCust1)"/>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-slate-400">អតិថិជនសកម្ម 1,180 នាក់</p>
                     </div>
 
                     <!-- Card 2: អតិថិជនដុំ -->
                     <div onclick="filterByType('wholesale')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-indigo-600">68% ចំណូល</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនដុំ</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiWholesaleCustomers">142</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនដុំ</p>
+                            <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiWholesaleCustomers">142</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-indigo-500 h-[3px] rounded-full" style="width: 68%"></div>
@@ -276,10 +280,12 @@
 
                     <!-- Card 3: អតិថិជនរាយ -->
                     <div onclick="filterByType('retail')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-teal-600">32% ចំណូល</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនរាយ</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiRetailCustomers">1,106</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">អតិថិជនរាយ</p>
+                            <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiRetailCustomers">1,106</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-teal-500 h-[3px] rounded-full" style="width: 32%"></div>
@@ -290,16 +296,32 @@
 
                     <!-- Card 4: បំណុលមិនទាន់ទូទាត់ -->
                     <div onclick="filterByStatus('debt')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-rose-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-rose-100 rounded-xl p-4 hover:border-rose-300 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-rose-500">18 នាក់ជំពាក់</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">បំណុលមិនទាន់ទូទាត់</p>
-                        <p class="text-[22px] font-bold text-rose-500 leading-none mb-3" id="kpiTotalDebt">$28,450</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">បំណុលមិនទាន់ទូទាត់</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-rose-500 leading-none" id="kpiTotalDebt">$28,450</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineCust4" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.25"/>
+                                                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,16 C 14,12 24,19 38,14 C 50,10 60,12 72,4 L 72,26 L 0,26 Z" fill="url(#sparklineCust4)"/>
+                                        <path d="M 0,16 C 14,12 24,19 38,14 C 50,10 60,12 72,4" fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-rose-400">ត្រូវតាមដានទូទាត់</p>
                     </div>
 
                 </div>
 
-                <!-- 2. Search & Filter Toolbar -->
+                <!-- 2. Search & Action Toolbar -->
                 <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
                     <div class="flex flex-wrap items-center justify-between gap-3">
 
@@ -311,13 +333,13 @@
                                 class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
 
-                        <!-- Date Range Picker Component & Filters -->
-                        <div class="flex items-center gap-2 flex-wrap">
+                        <!-- Action Toolbar Items -->
+                        <div class="flex items-center gap-2.5 flex-wrap">
 
                             <!-- Customer Type Custom Dropdown -->
                             <div class="relative bms-custom-select" id="customerTypeFilterDropdown">
                                 <button type="button" onclick="toggleCustomDropdown('customerTypeFilterDropdown')"
-                                    class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
+                                    class="h-10 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
                                     <i class="fas fa-layer-group text-slate-400 text-xs"></i>
                                     <span class="selected-label font-medium text-slate-800" id="selectedCustomerTypeLabel">ប្រភេទ៖ ទាំងអស់</span>
                                     <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5 bms-custom-select-arrow"></i>
@@ -342,83 +364,18 @@
                                 </div>
                             </div>
 
-                            <span class="text-xs text-slate-400 hidden sm:inline">កាលបរិច្ឆេទ:</span>
-                            
-                            <!-- Unified Date Range Picker Standard Component -->
-                            <div class="relative">
-                                <!-- Trigger Button -->
-                                <button id="dateRangePickerBtn" onclick="toggleDatePicker(event)"
-                                    class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
-                                    <i class="fas fa-calendar-days text-primary text-xs"></i>
-                                    <span id="selectedDateLabel" class="font-medium text-slate-800">1 កញ្ញា - 30 កញ្ញា</span>
-                                    <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5" id="datePickerChevron"></i>
-                                </button>
+                            <!-- Create Customer Button -->
+                            <a href="create-customer.html"
+                                class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
+                                <i class="fas fa-plus mr-2 text-xs"></i>
+                                <span>បន្ថែមអតិថិជនថ្មី</span>
+                            </a>
 
-                                <!-- Date Range Picker Popover Dropdown -->
-                                <div id="datePickerPopover" onclick="event.stopPropagation()"
-                                    class="absolute right-0 top-full mt-2 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 hidden overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-                                    <div class="grid grid-cols-12 divide-x divide-slate-100">
-                                        <!-- Left Presets Column (col-span-4) -->
-                                        <div class="col-span-4 p-2 py-3 space-y-0.5 text-xs font-normal text-slate-600 bg-slate-50/70">
-                                            <button type="button" onclick="selectPreset('ថ្ងៃនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ថ្ងៃនេះ</button>
-                                            <button type="button" onclick="selectPreset('ម្សិលមិញ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ម្សិលមិញ</button>
-                                            <button type="button" onclick="selectPreset('សប្តាហ៍នេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍នេះ</button>
-                                            <button type="button" onclick="selectPreset('សប្តាហ៍មុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">សប្តាហ៍មុន</button>
-                                            <button type="button" onclick="selectPreset('ខែនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg bg-[#0f2b5c] text-white font-medium shadow-sm transition-colors">ខែនេះ</button>
-                                            <button type="button" onclick="selectPreset('ខែមុន')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ខែមុន</button>
-                                            <button type="button" onclick="selectPreset('ឆ្នាំនេះ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ឆ្នាំនេះ</button>
-                                            <button type="button" onclick="selectPreset('៧ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៧ ថ្ងៃចុងក្រោយ</button>
-                                            <button type="button" onclick="selectPreset('១៤ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">១៤ ថ្ងៃចុងក្រោយ</button>
-                                            <button type="button" onclick="selectPreset('៣០ ថ្ងៃចុងក្រោយ')" class="preset-btn w-full text-left px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">៣០ ថ្ងៃចុងក្រោយ</button>
-                                        </div>
-
-                                        <!-- Right Calendar View (col-span-8) -->
-                                        <div class="col-span-8 p-4 flex flex-col justify-between">
-                                            <div>
-                                                <!-- Calendar Header with Month Navigation -->
-                                                <div class="flex items-center justify-between mb-3 px-1">
-                                                    <span id="calMonthYearLabel" class="text-sm font-semibold text-slate-900">កញ្ញា 2026</span>
-                                                    <div class="flex items-center gap-1 text-slate-400">
-                                                        <button type="button" onclick="changeCalendarMonth(-1)" title="ខែមុន" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-left text-xs"></i></button>
-                                                        <button type="button" onclick="changeCalendarMonth(1)" title="ខែបន្ទាប់" class="hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-chevron-right text-xs"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Weekdays -->
-                                                <div class="grid grid-cols-7 text-center text-xs font-normal text-slate-400 mb-2">
-                                                    <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
-                                                </div>
-
-                                                <!-- Dynamic Days Grid with Range Selection -->
-                                                <div id="calendarDaysGrid" class="grid grid-cols-7 text-center text-xs font-normal gap-y-1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Footer -->
-                                    <div class="p-3 px-4 border-t border-slate-100 bg-white flex items-center justify-between">
-                                        <div class="flex items-center gap-1.5 bg-slate-100 px-3 py-1 rounded-full text-xs font-normal text-slate-700">
-                                            <span id="rangeTagLabel">1 កញ្ញា - 30 កញ្ញា</span>
-                                            <button type="button" onclick="clearRangeTag()" class="text-slate-400 hover:text-slate-600 ml-1">
-                                                <i class="fas fa-times-circle text-xs"></i>
-                                            </button>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <button type="button" onclick="toggleDatePicker(event)" class="px-3.5 py-1.5 rounded-xl text-xs font-normal text-slate-600 hover:bg-slate-100 transition-colors">
-                                                បោះបង់
-                                            </button>
-                                            <button type="button" onclick="applyDateRange()" class="px-4 py-1.5 rounded-xl text-xs font-normal bg-[#0f2b5c] hover:bg-[#193a73] text-white shadow-sm transition-all">
-                                                ជ្រើសរើស
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button onclick="resetCustomerFilters()"
-                                class="text-slate-500 hover:text-slate-800 text-xs px-2.5 py-2 rounded-xl hover:bg-slate-100 transition flex items-center gap-1">
-                                <i class="fas fa-rotate-left text-xs"></i> កំណត់ឡើងវិញ
+                            <!-- Export Report Button -->
+                            <button onclick="exportCustomersData()"
+                                class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
+                                <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
+                                <span>ទាញយកទិន្នន័យ</span>
                             </button>
                         </div>
                     </div>
@@ -430,15 +387,15 @@
                             ទាំងអស់ (<span id="count-all">8</span>)
                         </button>
                         <button onclick="filterByStatus('active')" id="tab-active"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             សកម្ម (<span id="count-active">6</span>)
                         </button>
                         <button onclick="filterByStatus('debt')" id="tab-debt"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             ជំពាក់ប្រាក់ (<span id="count-debt">3</span>)
                         </button>
                         <button onclick="filterByStatus('inactive')" id="tab-inactive"
-                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             អសកម្ម (<span id="count-inactive">2</span>)
                         </button>
                     </div>
@@ -450,15 +407,15 @@
                         <table class="w-full text-left border-collapse" id="customersTable">
                             <thead>
                                 <tr class="bg-slate-50/70 border-b border-slate-100 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    <th class="py-3 px-4">កូដអតិថិជន</th>
-                                    <th class="py-3 px-4">ឈ្មោះអតិថិជន / ក្រុមហ៊ុន</th>
-                                    <th class="py-3 px-4">ទំនាក់ទំនង & អាសយដ្ឋាន</th>
-                                    <th class="py-3 px-4 text-center">ប្រភេទ</th>
-                                    <th class="py-3 px-4 text-center">ការបញ្ជាទិញ</th>
-                                    <th class="py-3 px-4 text-right">ទិញសរុប</th>
-                                    <th class="py-3 px-4 text-right">បំណុលនៅសល់</th>
-                                    <th class="py-3 px-4 text-center">ស្ថានភាព</th>
-                                    <th class="py-3 px-4 text-center w-16">សកម្មភាព</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">កូដអតិថិជន</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">ឈ្មោះអតិថិជន / ក្រុមហ៊ុន</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">ទំនាក់ទំនង & អាសយដ្ឋាន</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ប្រភេទ</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ការបញ្ជាទិញ</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">ទិញសរុប</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">បំណុលនៅសល់</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ស្ថានភាព</th>
+                                    <th class="py-3 px-4 text-center w-16 whitespace-nowrap">សកម្មភាព</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 text-[15px] font-normal" id="customersTableBody">
@@ -490,7 +447,7 @@
     </div>
 
     <!-- Customer Statement / Detail Modal -->
-    <div id="customerDetailModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="customerDetailModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden">
         <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-100">
             <!-- Modal Header -->
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
@@ -821,7 +778,7 @@
                 return `
                     <tr class="hover:bg-slate-50/70 transition-colors group">
                         <!-- Code -->
-                        <td class="py-3.5 px-4 font-semibold text-slate-800 text-xs">
+                        <td class="py-3.5 px-4 font-medium text-slate-700 text-xs">
                             <span class="px-2 py-1 bg-slate-100 rounded-lg text-slate-700">${c.id}</span>
                         </td>
 
@@ -830,7 +787,7 @@
                             <div class="flex items-center gap-3">
                                 <img src="${c.avatar}" alt="${c.name}" class="w-9 h-9 rounded-full object-cover border border-slate-200 shadow-xs flex-shrink-0" />
                                 <div class="min-w-0">
-                                    <p class="font-semibold text-slate-800 text-sm hover:text-primary transition cursor-pointer" onclick="viewCustomerDetail('${c.id}')">${c.name}</p>
+                                    <p class="font-medium text-slate-700 text-sm hover:text-primary transition cursor-pointer" onclick="viewCustomerDetail('${c.id}')">${c.name}</p>
                                     <p class="text-xs text-slate-400 truncate">${c.company}</p>
                                 </div>
                             </div>
@@ -861,7 +818,7 @@
                         </td>
 
                         <!-- Total Purchased -->
-                        <td class="py-3.5 px-4 text-right font-bold text-slate-800 text-sm">
+                        <td class="py-3.5 px-4 text-right font-medium text-slate-700 text-sm">
                             $${c.totalPurchased.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                         </td>
 
@@ -922,7 +879,7 @@
             currentStatusFilter = status;
 
             document.querySelectorAll('.status-tab').forEach(btn => {
-                btn.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition';
+                btn.className = 'status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition';
             });
 
             const activeBtn = document.getElementById('tab-' + status);

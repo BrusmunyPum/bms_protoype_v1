@@ -1,12 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+/* =========================================================
+   Global Typography Standard (Kantumruy Pro 15px - 16px)
+   - Titles / Names: font-weight 600 (Semi-bold)
+   - Listings / Table Rows: font-weight 500 (Medium)
+   - Readability: Increased base scale for Khmer typography
+   ========================================================= */
 * {
     font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-html, body, input, button, select, textarea {
+html {
+    font-size: 16px;
+}
+
+body {
     font-family: 'Kantumruy Pro', sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   Universal Typography Scaling for Khmer Readability
+   ========================================================= */
+/* Small utility overrides */
+.text-xs,
+[class*="text-xs"],
+.text-\[10px\],
+.text-\[11px\],
+.text-\[12px\] {
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+}
+
+.text-sm,
+[class*="text-sm"],
+.text-\[13px\],
+.text-\[14px\] {
+    font-size: 15.5px !important;
+    line-height: 1.55 !important;
+}
+
+.text-base,
+[class*="text-base"],
+.text-\[15px\],
+.text-\[16px\] {
+    font-size: 16.5px !important;
+    line-height: 1.6 !important;
+}
+
+.text-lg,
+[class*="text-lg"] {
+    font-size: 18.5px !important;
+    line-height: 1.5 !important;
+}
+
+.text-xl,
+[class*="text-xl"] {
+    font-size: 21px !important;
+    line-height: 1.4 !important;
+}
+
+.text-2xl,
+[class*="text-2xl"] {
+    font-size: 25px !important;
+    line-height: 1.35 !important;
+}
+
+/* Table Headers & Table Data */
+table th,
+.table-header th {
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #64748b !important; /* slate-500 */
+    white-space: nowrap !important;
+    letter-spacing: normal !important;
+}
+
+table td,
+table tbody tr,
+.table-row-item {
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-size: 15.5px !important;
+    font-weight: 500 !important;
+    color: #334155 !important; /* slate-700 - softer text */
+    white-space: nowrap;
+}
+
+/* Ensure table cells, names, and all listing elements use medium font */
+table td p,
+table td div,
+table td span,
+.listing-item,
+.list-item,
+.nav-item,
+.bms-list-item,
+.item-name {
+    font-weight: 500 !important;
+}
+
+/* Status Filter Tabs & Pill Buttons: Medium (500) */
+.status-tab,
+.mv-status-tab,
+[id^="tab-"],
+button[onclick*="setStatusFilter"],
+button[onclick*="filterBy"],
+button[onclick*="selectFilter"] {
+    font-family: 'Kantumruy Pro', sans-serif !important;
+    font-weight: 500 !important;
+}
+
+/* Soften harsh dark text slates globally */
+.text-slate-900,
+.text-slate-800,
+.text-gray-900,
+.text-gray-800 {
+    color: #334155 !important; /* Soft Slate-700 */
+}
+
+/* Inputs, Selects, Buttons, and Form Controls */
+input,
+select,
+textarea,
+button,
+label {
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-size: 15.5px !important;
+}
+
+/* Titles: Semi-bold (600) */
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.card-title,
+.font-title,
+header h2,
+.modal-title {
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-weight: 600 !important;
+}
+
+/* Listings, Table rows, and Row Names: Medium (500) with soft slate color */
+aside nav a,
+aside a {
+    font-weight: 500 !important;
+}
+
+/* Badges & Pills */
+.badge,
+[class*="rounded-full"][class*="text-"] {
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+}
+
+/* Date picker, Dropdowns & Popovers */
+.preset-btn,
+.bms-custom-select-menu,
+.bms-date-popover,
+.bms-date-popover button,
+#rowActionDropdown a,
+#rowActionDropdown button {
+    font-size: 15px !important;
 }
 
 /* =========================================================
