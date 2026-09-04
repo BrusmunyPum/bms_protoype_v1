@@ -215,20 +215,10 @@ function initSidebarNav() {
                 return;
             }
 
-            // If user clicked Quotes / Price List
-            if (navId === 'sell-prices') {
-                try { sessionStorage.setItem('bms_active_nav', 'sell-prices'); } catch(err){}
-                if (window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html')) {
-                    e.preventDefault();
-                    setActiveNavItem('sell-prices');
-                }
-                return;
-            }
-
             // If user clicked Customers List
             if (navId === 'sell-customers') {
                 try { sessionStorage.setItem('bms_active_nav', 'sell-customers'); } catch(err){}
-                if (window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html')) {
+                if (window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html') || window.location.pathname.endsWith('customers.html')) {
                     e.preventDefault();
                     setActiveNavItem('sell-customers');
                 }

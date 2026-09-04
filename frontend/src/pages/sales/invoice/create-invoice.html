@@ -224,57 +224,98 @@
                                     <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
                                 </button>
                                 <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden max-h-56 overflow-y-auto space-y-0.5">
-                                    <div onclick="selectCustomOption('pageInvCustomerDropdown', 'Heng Vicheka', 'Heng Vicheka (012 345 678)')"
-                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-001', 'ហេង វិច្ឆិកា', '012 345 678', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80', 'ក្រុមហ៊ុន វិច្ឆិកា ត្រេឌីង ឯ.ក')"
+                                        data-customer-id="CUST-001"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-xs flex items-center justify-center">HV</div>
+                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80" alt="ហេង វិច្ឆិកា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Heng Vicheka</p>
-                                                <p class="text-[11px] text-slate-400">012 345 678</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ហេង វិច្ឆិកា</p>
+                                                <p class="text-[11px] text-slate-400">012 345 678 • ក្រុមហ៊ុន វិច្ឆិកា ត្រេឌីង ឯ.ក</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvCustomerDropdown', 'Sok Rathana', 'Sok Rathana (098 765 432)')"
-                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-002', 'ចាន់ សុភា', '098 765 432', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=128&q=80', 'ហាងលក់ទំនិញ សុភា សែនសុខ')"
+                                        data-customer-id="CUST-002"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-full bg-indigo-100 text-indigo-800 font-semibold text-xs flex items-center justify-center">SR</div>
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=128&q=80" alt="ចាន់ សុភា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Sok Rathana</p>
-                                                <p class="text-[11px] text-slate-400">098 765 432</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ចាន់ សុភា</p>
+                                                <p class="text-[11px] text-slate-400">098 765 432 • ហាងលក់ទំនិញ សុភា សែនសុខ</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvCustomerDropdown', 'Bun Leap Enterprise', 'Bun Leap Enterprise (077 112 233)')"
-                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-003', 'លី ម៉េងហុង', '077 112 233', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=128&q=80', 'អតិថិជនបុគ្គល')"
+                                        data-customer-id="CUST-003"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-full bg-teal-100 text-teal-800 font-semibold text-xs flex items-center justify-center">BL</div>
+                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=128&q=80" alt="លី ម៉េងហុង" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Bun Leap Enterprise</p>
-                                                <p class="text-[11px] text-slate-400">077 112 233</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">លី ម៉េងហុង</p>
+                                                <p class="text-[11px] text-slate-400">077 112 233 • អតិថិជនបុគ្គល</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvCustomerDropdown', 'Chamroeun Tech', 'Chamroeun Tech (015 889 900)')"
-                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-004', 'គឹម សុផល', '015 998 877', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=80', 'ក្រុមហ៊ុន សុផល អាហរ័ណ នីហរ័ណ')"
+                                        data-customer-id="CUST-004"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-full bg-sky-100 text-sky-800 font-semibold text-xs flex items-center justify-center">CT</div>
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=80" alt="គឹម សុផល" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Chamroeun Tech</p>
-                                                <p class="text-[11px] text-slate-400">015 889 900</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">គឹម សុផល</p>
+                                                <p class="text-[11px] text-slate-400">015 998 877 • ក្រុមហ៊ុន សុផល អាហរ័ណ នីហរ័ណ</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvCustomerDropdown', 'Keo Molika', 'Keo Molika (089 554 433)')"
-                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-005', 'សួស ធីតា', '085 445 566', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80', 'ហាងកាហ្វេ និងនំបុ័ង ធីតា')"
+                                        data-customer-id="CUST-005"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="w-7 h-7 rounded-full bg-rose-100 text-rose-800 font-semibold text-xs flex items-center justify-center">KM</div>
+                                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80" alt="សួស ធីតា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">Keo Molika</p>
-                                                <p class="text-[11px] text-slate-400">089 554 433</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">សួស ធីតា</p>
+                                                <p class="text-[11px] text-slate-400">085 445 566 • ហាងកាហ្វេ និងនំបុ័ង ធីតា</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-006', 'កែវ វណ្ណៈ', '011 889 900', 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=128&q=80', 'វណ្ណៈ អេឡិចត្រូនិក')"
+                                        data-customer-id="CUST-006"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=128&q=80" alt="កែវ វណ្ណៈ" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">កែវ វណ្ណៈ</p>
+                                                <p class="text-[11px] text-slate-400">011 889 900 • វណ្ណៈ អេឡិចត្រូនិក</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-007', 'អ៊ុក សម្បត្តិ', '092 334 455', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=128&q=80', 'សម្បត្តិ សំណង់ និងជួសជុល')"
+                                        data-customer-id="CUST-007"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=128&q=80" alt="អ៊ុក សម្បត្តិ" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">អ៊ុក សម្បត្តិ</p>
+                                                <p class="text-[11px] text-slate-400">092 334 455 • សម្បត្តិ សំណង់ និងជួសជុល</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-008', 'ឡុង ដានី', '097 556 677', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=128&q=80', 'ដានី ម៉ាត កំពង់ចាម')"
+                                        data-customer-id="CUST-008"
+                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                        <div class="flex items-center gap-2.5">
+                                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=128&q=80" alt="ឡុង ដានី" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <div>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ឡុង ដានី</p>
+                                                <p class="text-[11px] text-slate-400">097 556 677 • ដានី ម៉ាត កំពង់ចាម</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
@@ -678,6 +719,18 @@
                 window.location.href = 'invoice.html';
             }, 1000);
         }
+
+        // Auto-select customer if customerId passed in URL
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const custId = params.get('customerId');
+            if (custId) {
+                const opt = document.querySelector(`.customer-opt[data-customer-id="${custId}"]`);
+                if (opt) {
+                    opt.click();
+                }
+            }
+        });
     </script>
 
     <!-- Custom UI Components Script -->

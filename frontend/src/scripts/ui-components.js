@@ -158,7 +158,11 @@ function selectCustomOption(dropdownId, value, displayText) {
         hiddenInput.dispatchEvent(new Event('change'));
     }
     if (labelElem) {
-        labelElem.textContent = displayText || value;
+        if (displayText && (displayText.includes('<') || displayText.includes('<img'))) {
+            labelElem.innerHTML = displayText;
+        } else {
+            labelElem.textContent = displayText || value;
+        }
         labelElem.classList.remove('text-slate-400');
         labelElem.classList.add('text-slate-800', 'font-medium');
     }
@@ -172,6 +176,11 @@ function selectCustomOption(dropdownId, value, displayText) {
     container.classList.remove('z-50');
     if (menu) menu.classList.add('hidden');
     if (arrow) arrow.classList.remove('rotate-180');
+}
+
+function selectCustomCustomer(dropdownId, customerId, name, phone, avatar, company) {
+    const displayText = `<div class="flex items-center gap-2 text-left"><img src="${avatar}" alt="${name}" class="w-6 h-6 rounded-full object-cover border border-slate-200 flex-shrink-0" /><span class="font-medium text-slate-800 text-xs truncate">${name} (${phone})</span></div>`;
+    selectCustomOption(dropdownId, name, displayText);
 }
 
 function toggleProductDropdown(btn) {

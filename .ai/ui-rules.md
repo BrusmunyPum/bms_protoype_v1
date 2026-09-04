@@ -15,9 +15,20 @@
 
 ---
 
-## ២. គោលការណ៍ទម្រង់បង្កើតថ្មី (Dedicated Page for Create/Add Forms)
-- **ហាមដាច់ខាតការប្រើប្រាស់ Modal Dialog Pop-up** សម្រាប់ទម្រង់បង្កើតថ្មី (Add/Create Forms)
-- រាល់មុខងារបង្កើតថ្មីទាំងអស់ (ដូចជា បង្កើតសម្រង់តម្លៃ, បង្កើតវិក្កយបត្រ, បង្កើតអតិថិជន, បង្កើតទំនិញ) ត្រូវតែរៀបចំជា**ទំព័រពេញលេញដាច់ដោយឡែក (Dedicated Full Page)** ដែលមានប៊ូតុងត្រឡប់ក្រោយ (`← ត្រឡប់ក្រោយ`) និងប្លង់ទម្រង់ទូលាយកម្រិតសហគ្រាស (Enterprise Layout)។
+## ២. គោលការណ៍ទម្រង់បង្កើត និងកែប្រែ (Dedicated Pages & Unified Back Button Standard)
+- **ហាមដាច់ខាតការប្រើប្រាស់ Modal Dialog Pop-up** សម្រាប់ទម្រង់បង្កើតថ្មី (Add/Create) ឬទម្រង់កែប្រែ (Edit)។
+- រាល់មុខងារបង្កើតថ្មី និងកែប្រែទាំងអស់ (ដូចជា បង្កើតសម្រង់តម្លៃ, បង្កើតវិក្កយបត្រ, បង្កើតអតិថិជន) ត្រូវតែរៀបចំជា**ទំព័រពេញលេញដាច់ដោយឡែក (Dedicated Full Page)** ដែលមានប៊ូតុងត្រឡប់ក្រោយស្តង់ដាររួម និងប្លង់ទម្រង់ទូលាយកម្រិតសហគ្រាស (Enterprise Layout)។
+- **ស្តង់ដារប៊ូតុងត្រឡប់ក្រោយ (Unified Back Button Standard)**៖
+  គ្រប់ទំព័ររង (ដូចជា `create-[feature].html`, `edit-[feature].html`) ត្រូវតែប្រើប្រាស់ប៊ូតុងត្រឡប់ក្រោយជាប្រអប់មូលកោងមានរូបសញ្ញាព្រួញតែមួយគត់ (Icon-only rounded-square button) ដូចគ្នាបេះបិទ ១០០%៖
+  ```html
+  <a href="[feature].html" 
+     class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" 
+     title="ត្រឡប់ទៅ...">
+      <i class="fas fa-arrow-left text-sm"></i>
+  </a>
+  ```
+  ហាមដាច់ខាតការសរសេរអក្សរវែងក្នុងប៊ូតុង ឬការប្រើប្រាស់របារខណ្ឌ (`divider`) ដើម្បីធានាបាននូវភាពស្អាតស្អំ ស្រាលភ្នែក និងស៊ីសង្វាក់គ្នាជាសកល។
+
 
 ---
 
