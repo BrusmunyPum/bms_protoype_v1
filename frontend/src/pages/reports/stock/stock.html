@@ -782,10 +782,22 @@
         document.addEventListener("DOMContentLoaded", () => {
             barChartObj = echarts.init(document.getElementById('barChart'));
             barChartObj.setOption({
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
+                tooltip: { 
+                    trigger: 'axis', 
+                    axisPointer: { type: 'shadow' },
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14.5 }
+                },
                 grid: { left: '3%', right: '4%', bottom: '10%', top: '5%', containLabel: true },
-                xAxis: { type: 'value' },
-                yAxis: { type: 'category', data: ['កុំព្យូទ័រយួរដៃ', 'ទូរស័ព្ទស្មាតហ្វូន', 'គ្រឿងបន្លាស់', 'ឧបករណ៍សំឡេង', 'អេក្រង់កុំព្យូទ័រ'] },
+                xAxis: { 
+                    type: 'value',
+                    axisLabel: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13, color: '#64748b' }
+                },
+                yAxis: { 
+                    type: 'category', 
+                    data: ['កុំព្យូទ័រយួរដៃ', 'ទូរស័ព្ទស្មាតហ្វូន', 'គ្រឿងបន្លាស់', 'ឧបករណ៍សំឡេង', 'អេក្រង់កុំព្យូទ័រ'],
+                    axisLabel: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13.5, color: '#475569', fontWeight: 500 }
+                },
                 series: [
                     {
                         name: 'ចំណូល',

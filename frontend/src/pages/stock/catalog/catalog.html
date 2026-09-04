@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="km">
 
 <head>
@@ -67,7 +67,7 @@
     <div id="toastContainer" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 pointer-events-none"></div>
 
     <!-- Custom Confirmation Modal -->
-    <div id="customConfirmModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-[9998] flex items-center justify-center p-4">
+    <div id="customConfirmModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-[9998] items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 text-center transform transition-all">
             <div id="confirmIconContainer" class="w-12 h-12 rounded-full bg-rose-50 text-rose-500 mx-auto flex items-center justify-center mb-4 text-xl">
                 <i class="fas fa-triangle-exclamation"></i>
@@ -253,20 +253,6 @@
             </div>
 
             <div class="flex items-center space-x-3 md:space-x-4">
-                <!-- Add Product Button -->
-                <a href="create-catalog.html"
-                    class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
-                    <i class="fas fa-plus mr-2 text-xs"></i>
-                    <span>បន្ថែមទំនិញថ្មី</span>
-                </a>
-
-                <!-- Export Report Button -->
-                <button type="button" onclick="exportCatalogData()"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
-                    <span>ទាញយកទិន្នន័យ</span>
-                </button>
-
                 <!-- Notification Bell -->
                 <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
                     <i class="fas fa-bell text-xl"></i>
@@ -297,21 +283,39 @@
 
                     <!-- Card 1: ផលិតផលសរុប -->
                     <div onclick="filterByCatalogStatus('all')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-blue-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-emerald-600 flex items-center gap-0.5">
                             <i class="fas fa-arrow-up text-[8px]"></i> 12.5%
                         </span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលិតផលសរុប</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiTotalProducts">124 មុខ</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលិតផលសរុប</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-slate-800 leading-none" id="kpiTotalProducts">124 មុខ</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineCat1" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+                                                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2 L 72,26 L 0,26 Z" fill="url(#sparklineCat1)"/>
+                                        <path d="M 0,20 C 12,18 22,21 34,14 C 46,9 58,7 72,2" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-slate-400">ផលិតផលសកម្ម ១១៨ មុខ</p>
                     </div>
 
                     <!-- Card 2: ប្រភេទមុខទំនិញ -->
                     <div onclick="filterByCatalogCategory('all')" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-indigo-600">6 ប្រភេទ</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ប្រភេទមុខទំនិញ</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiTotalCategories">6</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ប្រភេទមុខទំនិញ</p>
+                            <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiTotalCategories">6</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-indigo-500 h-[3px] rounded-full" style="width: 80%"></div>
@@ -322,10 +326,12 @@
 
                     <!-- Card 3: ផលិតផលពេញនិយម -->
                     <div onclick="filterByPopular()" role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-teal-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-teal-600">លក់ដាច់រហ័ស</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលិតផលពេញនិយម</p>
-                        <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiPopularProducts">18 មុខ</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលិតផលពេញនិយម</p>
+                            <p class="text-[22px] font-bold text-slate-800 leading-none mb-3" id="kpiPopularProducts">18 មុខ</p>
+                        </div>
                         <div class="space-y-1">
                             <div class="w-full bg-slate-100 rounded-full h-[3px] overflow-hidden">
                                 <div class="bg-teal-500 h-[3px] rounded-full" style="width: 70%"></div>
@@ -336,10 +342,26 @@
 
                     <!-- Card 4: ផលចំណេញជាមធ្យម -->
                     <div role="button" tabindex="0"
-                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group">
+                        class="relative bg-white border border-slate-200 rounded-xl p-4 hover:border-emerald-200 hover:shadow-sm transition-all duration-200 cursor-pointer group flex flex-col justify-between">
                         <span class="absolute top-3.5 right-3.5 text-[11px] font-semibold text-emerald-600">កម្រៃដុល</span>
-                        <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលចំណេញជាមធ្យម</p>
-                        <p class="text-[22px] font-bold text-emerald-600 leading-none mb-3" id="kpiAvgProfitMargin">28.5%</p>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium mb-1.5">ផលចំណេញជាមធ្យម</p>
+                            <div class="flex items-end justify-between gap-2 mb-2">
+                                <p class="text-[22px] font-bold text-emerald-600 leading-none" id="kpiAvgProfitMargin">28.5%</p>
+                                <div class="w-18 h-7 flex-shrink-0">
+                                    <svg viewBox="0 0 72 26" class="w-[72px] h-[26px] overflow-visible">
+                                        <defs>
+                                            <linearGradient id="sparklineCat4" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+                                                <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0,22 C 14,20 24,16 38,12 C 50,8 60,6 72,2 L 72,26 L 0,26 Z" fill="url(#sparklineCat4)"/>
+                                        <path d="M 0,22 C 14,20 24,16 38,12 C 50,8 60,6 72,2" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                         <p class="text-xs text-slate-400">គិតតាមថ្លៃដើម និងតម្លៃលក់</p>
                     </div>
 
@@ -357,13 +379,13 @@
                                 class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
 
-                        <!-- Filters Group -->
+                        <!-- Action Buttons & Filters -->
                         <div class="flex items-center gap-2 flex-wrap">
 
                             <!-- Category Custom Dropdown -->
                             <div class="relative bms-custom-select" id="catalogCategoryFilterDropdown">
                                 <button type="button" onclick="toggleCustomDropdown('catalogCategoryFilterDropdown')"
-                                    class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
+                                    class="h-10 px-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
                                     <i class="fas fa-layer-group text-slate-400 text-xs"></i>
                                     <span class="selected-label font-medium text-slate-800" id="selectedCatalogCatLabel">ប្រភេទ៖ ទាំងអស់</span>
                                     <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5 bms-custom-select-arrow"></i>
@@ -398,115 +420,19 @@
                                 </div>
                             </div>
 
-                            <!-- Unified Date Range Picker Standard (w-[480px]) -->
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-400 hidden sm:inline">កាលបរិច្ឆេទ:</span>
-                                <div class="relative">
-                                    <button id="dateRangePickerBtn" onclick="toggleDatePicker(event)"
-                                        class="h-9 px-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all focus:outline-none cursor-pointer">
-                                        <i class="fas fa-calendar-days text-primary text-xs"></i>
-                                        <span id="selectedDateLabel" class="font-medium text-slate-800">1 កញ្ញា - 30 កញ្ញា</span>
-                                        <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ml-0.5" id="datePickerChevron"></i>
-                                    </button>
-
-                                    <!-- Popover Dropdown (Unified Standard w-[480px]) -->
-                                    <div id="datePickerPopover"
-                                        class="absolute right-0 top-full mt-2 w-[480px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 z-50 p-4 hidden animate-in fade-in zoom-in-95 duration-100 select-none">
-                                        <div class="grid grid-cols-12 gap-4">
-                                            <!-- Left: 10 Quick Presets -->
-                                            <div class="col-span-5 border-r border-slate-100 pr-3 space-y-1">
-                                                <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">ជម្រើសរហ័ស</p>
-                                                <button type="button" onclick="selectPreset('today')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>ថ្ងៃនេះ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('yesterday')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>ម្សិលមិញ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('thisWeek')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>សប្តាហ៍នេះ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('lastWeek')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>សប្តាហ៍មុន</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('thisMonth')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs bg-[#0f2b5c] text-white font-medium shadow-xs transition flex items-center justify-between">
-                                                    <span>ខែនេះ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('lastMonth')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>ខែមុន</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('thisYear')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>ឆ្នាំនេះ</span>
-                                                </button>
-                                                <div class="my-1 border-t border-slate-100"></div>
-                                                <button type="button" onclick="selectPreset('last7days')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>៧ ថ្ងៃចុងក្រោយ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('last14days')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>១៤ ថ្ងៃចុងក្រោយ</span>
-                                                </button>
-                                                <button type="button" onclick="selectPreset('last30days')" class="preset-btn w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-600 hover:bg-slate-100 font-medium transition flex items-center justify-between">
-                                                    <span>៣០ ថ្ងៃចុងក្រោយ</span>
-                                                </button>
-                                            </div>
-
-                                            <!-- Right: Khmer Calendar Grid -->
-                                            <div class="col-span-7 flex flex-col justify-between">
-                                                <div>
-                                                    <div class="flex items-center justify-between mb-3 px-1">
-                                                        <span id="calendarMonthYear" class="text-xs font-bold text-slate-800">កញ្ញា ២០២៦</span>
-                                                        <div class="flex items-center gap-1">
-                                                            <button type="button" onclick="changeCalendarMonth(-1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 text-xs transition">
-                                                                <i class="fas fa-chevron-left"></i>
-                                                            </button>
-                                                            <button type="button" onclick="changeCalendarMonth(1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 text-xs transition">
-                                                                <i class="fas fa-chevron-right"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="grid grid-cols-7 gap-1 text-center mb-1 text-[11px] font-semibold text-slate-400">
-                                                        <span>ច</span>
-                                                        <span>អ</span>
-                                                        <span>ព</span>
-                                                        <span>ព្រ</span>
-                                                        <span>សុ</span>
-                                                        <span>ស</span>
-                                                        <span>អា</span>
-                                                    </div>
-
-                                                    <div id="calendarDaysGrid" class="grid grid-cols-7 gap-1 text-center text-xs">
-                                                        <!-- Injected by renderCalendarGrid -->
-                                                    </div>
-                                                </div>
-
-                                                <!-- Footer Actions -->
-                                                <div class="border-t border-slate-100 pt-3 mt-3 flex items-center justify-between">
-                                                    <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-full text-[11px] font-medium text-slate-700" id="currentRangeTag">
-                                                        <span id="rangeTagText">1 កញ្ញា - 30 កញ្ញា</span>
-                                                        <button type="button" onclick="clearRangeTag()" class="text-slate-400 hover:text-slate-600">
-                                                            <i class="fas fa-xmark text-[10px]"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <button type="button" onclick="toggleDatePicker(event)" class="px-3 py-1.5 text-xs text-slate-500 hover:text-slate-700 font-medium rounded-lg">
-                                                            បោះបង់
-                                                        </button>
-                                                        <button type="button" onclick="applyDateRange()" class="px-3 py-1.5 text-xs bg-[#0f2b5c] hover:bg-[#163a75] text-white font-medium rounded-lg shadow-sm">
-                                                            ជ្រើសរើស
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Reset Button -->
-                            <button onclick="resetCatalogFilters()"
-                                class="text-slate-500 hover:text-slate-800 text-xs px-2.5 py-2 rounded-xl hover:bg-slate-100 transition flex items-center gap-1">
-                                <i class="fas fa-rotate-left text-xs"></i> កំណត់ឡើងវិញ
+                            <!-- Export Report Button -->
+                            <button type="button" onclick="exportCatalogData()"
+                                class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
+                                <i class="fas fa-file-export mr-2 text-xs text-slate-500"></i>
+                                <span>ទាញយកទិន្នន័យ</span>
                             </button>
+
+                            <!-- Add Product Button -->
+                            <a href="create-catalog.html"
+                                class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
+                                <i class="fas fa-plus mr-2 text-xs"></i>
+                                <span>បន្ថែមទំនិញថ្មី</span>
+                            </a>
                         </div>
                     </div>
 
@@ -517,11 +443,11 @@
                             ទាំងអស់ (<span id="count-all">8</span>)
                         </button>
                         <button onclick="filterByCatalogStatus('active')" id="tab-active"
-                            class="cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             សកម្ម (<span id="count-active">7</span>)
                         </button>
                         <button onclick="filterByCatalogStatus('inactive')" id="tab-inactive"
-                            class="cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition">
+                            class="cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition">
                             ផ្អាកបណ្តោះអាសន្ន (<span id="count-inactive">1</span>)
                         </button>
                     </div>
@@ -533,15 +459,15 @@
                         <table class="w-full text-left border-collapse" id="catalogTable">
                             <thead>
                                 <tr class="bg-slate-50/70 border-b border-slate-100 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                    <th class="py-3 px-4">កូដសម្គាល់ទំនិញ</th>
-                                    <th class="py-3 px-4">រូបភាព & ឈ្មោះទំនិញ</th>
-                                    <th class="py-3 px-4">ប្រភេទ & ម៉ាក</th>
-                                    <th class="py-3 px-4 text-center">ឯកតា</th>
-                                    <th class="py-3 px-4 text-right">ថ្លៃដើម</th>
-                                    <th class="py-3 px-4 text-right">តម្លៃលក់</th>
-                                    <th class="py-3 px-4 text-center">ផលចំណេញ</th>
-                                    <th class="py-3 px-4 text-center">ស្ថានភាព</th>
-                                    <th class="py-3 px-4 text-center w-16">សកម្មភាព</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">កូដសម្គាល់ទំនិញ</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">រូបភាព & ឈ្មោះទំនិញ</th>
+                                    <th class="py-3 px-4 whitespace-nowrap">ប្រភេទ & ម៉ាក</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ឯកតា</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">ថ្លៃដើម</th>
+                                    <th class="py-3 px-4 text-right whitespace-nowrap">តម្លៃលក់</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ផលចំណេញ</th>
+                                    <th class="py-3 px-4 text-center whitespace-nowrap">ស្ថានភាព</th>
+                                    <th class="py-3 px-4 text-center w-16 whitespace-nowrap">សកម្មភាព</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 text-[15px] font-normal" id="catalogTableBody">
@@ -792,7 +718,7 @@
                 return `
                     <tr class="hover:bg-slate-50/80 transition-colors">
                         <!-- SKU -->
-                        <td class="py-3.5 px-4 font-semibold text-slate-900 text-xs">
+                        <td class="py-3.5 px-4 font-medium text-slate-700 text-xs">
                             <span class="px-2 py-1 bg-slate-100 rounded-lg text-slate-700">${item.id}</span>
                         </td>
 
@@ -801,7 +727,7 @@
                             <div class="flex items-center gap-3">
                                 <img src="${item.image}" alt="${item.name}" class="w-10 h-10 rounded-xl object-cover border border-slate-200 shadow-xs flex-shrink-0" />
                                 <div class="min-w-0">
-                                    <p class="font-semibold text-slate-800 text-sm hover:text-primary transition cursor-pointer" onclick="viewCatalogDetail('${item.id}')">${item.name}</p>
+                                    <p class="font-medium text-slate-700 text-sm hover:text-primary transition cursor-pointer" onclick="viewCatalogDetail('${item.id}')">${item.name}</p>
                                     <p class="text-[11px] text-slate-400">បាកូដ: ${item.barcode}</p>
                                 </div>
                             </div>
@@ -822,13 +748,13 @@
 
                         <!-- Cost -->
                         <td class="py-3.5 px-4 text-right text-xs">
-                            <div class="font-semibold text-slate-800 text-sm">$${item.cost.toFixed(2)}</div>
+                            <div class="font-medium text-slate-700 text-sm">$${item.cost.toFixed(2)}</div>
                             <div class="text-[10px] text-slate-400 font-normal truncate max-w-[120px] ml-auto" title="${item.primarySupplier}">${item.primarySupplier}</div>
                         </td>
 
                         <!-- Selling Price -->
                         <td class="py-3.5 px-4 text-right text-xs">
-                            <div class="font-bold text-primary text-sm">$${item.retailPrice.toFixed(2)}</div>
+                            <div class="font-medium text-primary text-sm">$${item.retailPrice.toFixed(2)}</div>
                             <div class="text-[10px] text-emerald-600 font-medium">ដុំ: $${item.wholesalePrice.toFixed(2)}</div>
                         </td>
 
@@ -886,7 +812,7 @@
             currentCatStatusFilter = status;
 
             document.querySelectorAll('.cat-status-tab').forEach(btn => {
-                btn.className = 'cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-normal text-xs transition';
+                btn.className = 'cat-status-tab px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs transition';
             });
 
             const activeBtn = document.getElementById('tab-' + status);

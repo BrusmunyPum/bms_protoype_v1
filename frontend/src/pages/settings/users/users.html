@@ -287,11 +287,25 @@
                 <p class="text-xs font-normal text-gray-500 mt-0.5">គ្រប់គ្រងគណនី តួនាទី និងសិទ្ធិប្រើប្រាស់ប្រព័ន្ធ</p>
             </div>
 
-            <div class="flex items-center gap-3">
-                <a href="create-user.html" class="h-9 px-4 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm transition">
-                    <i class="fas fa-user-plus"></i>
-                    <span>បង្កើតអ្នកប្រើថ្មី</span>
-                </a>
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <!-- Notification Bell -->
+                <button class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </button>
+
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-3 md:pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80"
+                            alt="រូបតំណាងអ្នកប្រើប្រាស់"
+                            class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -345,8 +359,8 @@
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mb-6">
                 <!-- Filter Bar -->
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex flex-wrap gap-4 items-center justify-between">
-                    <div class="flex gap-3 items-center w-full md:w-auto">
-                        <div class="relative w-full md:w-72">
+                    <div class="flex flex-wrap gap-3 items-center flex-1">
+                        <div class="relative min-w-[240px] max-w-xs flex-1">
                             <input type="text" id="userSearchInput" oninput="filterUserTable()" placeholder="ស្វែងរកតាមឈ្មោះ ឬឈ្មោះគណនី..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:border-primary text-xs bg-white">
                             <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
                         </div>
@@ -354,7 +368,7 @@
                         <!-- Role Filter Custom Dropdown -->
                         <div class="relative w-44">
                             <button type="button" id="roleFilterBtn" onclick="toggleRoleDropdown(event)" class="w-full h-9 px-3 bg-white border border-slate-200 rounded-xl text-xs text-slate-700 flex items-center justify-between hover:bg-slate-50 transition">
-                                <span id="currentRoleFilterLabel" class="truncate">តួនាទីទាំងអស់</span>
+                                <span id="currentRoleFilterLabel" class="truncate font-medium text-slate-800">តួនាទីទាំងអស់</span>
                                 <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-2"></i>
                             </button>
                             <div id="roleDropdown" class="custom-select-dropdown hidden">
@@ -368,7 +382,7 @@
                         <!-- Status Filter Custom Dropdown -->
                         <div class="relative w-36">
                             <button type="button" id="statusFilterBtn" onclick="toggleStatusDropdown(event)" class="w-full h-9 px-3 bg-white border border-slate-200 rounded-xl text-xs text-slate-700 flex items-center justify-between hover:bg-slate-50 transition">
-                                <span id="currentStatusFilterLabel" class="truncate">ស្ថានភាពទាំងអស់</span>
+                                <span id="currentStatusFilterLabel" class="truncate font-medium text-slate-800">ស្ថានភាពទាំងអស់</span>
                                 <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-2"></i>
                             </button>
                             <div id="statusDropdown" class="custom-select-dropdown hidden">
@@ -379,23 +393,26 @@
                         </div>
                     </div>
 
-                    <div class="text-xs text-slate-400">
-                        បង្ហាញ <span id="shownUserCount" class="font-medium text-slate-700">៤</span> នៃ <span class="font-medium text-slate-700">៤</span> គណនី
+                    <div class="flex items-center gap-3">
+                        <a href="create-user.html" class="h-10 px-4 bg-primary hover:bg-primary-light text-white rounded-xl text-sm font-normal flex items-center gap-2 shadow-sm transition">
+                            <i class="fas fa-plus text-xs"></i>
+                            <span>បង្កើតអ្នកប្រើថ្មី</span>
+                        </a>
                     </div>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-50 text-slate-500 text-xs border-b border-slate-100">
-                                <th class="py-3.5 px-4 font-medium">#</th>
-                                <th class="py-3.5 px-4 font-medium">អ្នកប្រើប្រាស់</th>
-                                <th class="py-3.5 px-4 font-medium">ឈ្មោះគណនី</th>
-                                <th class="py-3.5 px-4 font-medium">ទំនាក់ទំនង</th>
-                                <th class="py-3.5 px-4 font-medium text-center">តួនាទី</th>
-                                <th class="py-3.5 px-4 font-medium text-center">ស្ថានភាព</th>
-                                <th class="py-3.5 px-4 font-medium text-center">ចូលចុងក្រោយ</th>
-                                <th class="py-3.5 px-4 font-medium text-center"></th>
+                            <tr class="bg-slate-50 text-slate-500 text-xs border-b border-slate-100 font-semibold">
+                                <th class="py-3.5 px-4 whitespace-nowrap">#</th>
+                                <th class="py-3.5 px-4 whitespace-nowrap">អ្នកប្រើប្រាស់</th>
+                                <th class="py-3.5 px-4 whitespace-nowrap">ឈ្មោះគណនី</th>
+                                <th class="py-3.5 px-4 whitespace-nowrap">ទំនាក់ទំនង</th>
+                                <th class="py-3.5 px-4 text-center whitespace-nowrap">តួនាទី</th>
+                                <th class="py-3.5 px-4 text-center whitespace-nowrap">ស្ថានភាព</th>
+                                <th class="py-3.5 px-4 text-center whitespace-nowrap">ចូលចុងក្រោយ</th>
+                                <th class="py-3.5 px-4 text-center whitespace-nowrap"></th>
                             </tr>
                         </thead>
                         <tbody id="userTableBody" class="text-xs divide-y divide-slate-100">
@@ -477,7 +494,7 @@
                                 ${user.name.charAt(user.name.lastIndexOf(' ') + 1)}
                             </div>
                             <div>
-                                <p class="font-medium text-slate-800 text-xs">${user.name}</p>
+                                <p class="font-medium text-slate-700 text-xs">${user.name}</p>
                                 <p class="text-[11px] text-slate-400 font-mono">${user.id}</p>
                             </div>
                         </div>
