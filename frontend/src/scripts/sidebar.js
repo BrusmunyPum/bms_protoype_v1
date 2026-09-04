@@ -235,6 +235,16 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Receipts / Payments
+            if (navId === 'sell-receipts') {
+                try { sessionStorage.setItem('bms_active_nav', 'sell-receipts'); } catch(err){}
+                if (window.location.pathname.endsWith('payment.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('sell-receipts');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -267,8 +277,9 @@ function initSidebarNav() {
     const isInvoices = window.location.pathname.includes('/invoice/') || window.location.pathname.endsWith('invoice.html') || window.location.pathname.endsWith('invoices.html');
     const isQuotes = window.location.pathname.includes('/quote/') || window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html');
     const isCustomers = window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html');
+    const isPayments = window.location.pathname.includes('/payment/') || window.location.pathname.endsWith('payment.html');
     
-    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (savedNav || 'sell-customers')))));
+    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (isPayments ? 'sell-receipts' : (savedNav || 'sell-receipts'))))));
     
     if (isDashboard && !urlParam) {
         initialNav = 'dashboard';
@@ -278,6 +289,8 @@ function initSidebarNav() {
         initialNav = 'sell-prices';
     } else if (isCustomers && !urlParam) {
         initialNav = 'sell-customers';
+    } else if (isPayments && !urlParam) {
+        initialNav = 'sell-receipts';
     }
     
     setActiveNavItem(initialNav);
