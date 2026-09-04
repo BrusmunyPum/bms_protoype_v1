@@ -198,10 +198,12 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header with Back Navigation -->
-        <header class="bg-white px-6 h-[72px] flex items-center shadow-sm z-10 flex-shrink-0">
-            <div class="flex items-center gap-3">
-                <a href="quote.html" class="text-slate-500 hover:text-slate-800 transition p-1.5 -ml-1.5 flex items-center justify-center" title="ត្រឡប់ទៅតារាងតម្លៃ">
-                    <i class="fas fa-arrow-left text-lg"></i>
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+<div class="flex items-center gap-4">
+                <a href="quote.html"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    title="ត្រឡប់ទៅសម្រង់តម្លៃ">
+                    <i class="fas fa-arrow-left text-sm"></i>
                 </a>
                 <div>
                     <div class="flex items-center gap-2">
@@ -209,6 +211,25 @@
                         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200" id="headerStatusBadge">រង់ចាំពិនិត្យ</span>
                     </div>
                     <p class="text-xs text-slate-400 mt-0.5">លេខសម្រង់តម្លៃ៖ <span class="font-bold text-slate-700" id="headerQuoteNumber">QT-2026-0088</span></p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <!-- Notification Bell -->
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </button>
+                
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-3 md:pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
                 </div>
             </div>
         </header>
@@ -372,7 +393,7 @@
                                     </div>
                                     <div id="pageQuoteDate-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
                                     <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                                        <button type="button" onclick="setSinglePickerToday('pageQuoteDate')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                                        <button type="button" onclick="setSinglePickerToday('pageQuoteDate')" class="text-xs font-semibold text-primary hover:text-primary-dark px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
                                             ថ្ងៃនេះ
                                         </button>
                                         <button type="button" onclick="closeSingleDatePicker('pageQuoteDate')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
@@ -411,7 +432,7 @@
                                     </div>
                                     <div id="pageQuoteExpiry-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
                                     <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                                        <button type="button" onclick="setSinglePickerToday('pageQuoteExpiry')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                                        <button type="button" onclick="setSinglePickerToday('pageQuoteExpiry')" class="text-xs font-semibold text-primary hover:text-primary-dark px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
                                             ថ្ងៃនេះ
                                         </button>
                                         <button type="button" onclick="closeSingleDatePicker('pageQuoteExpiry')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
@@ -627,7 +648,7 @@
                         រក្សាទុកជាព្រាង
                     </button>
                     <button type="button" onclick="submitQuoteForm('publish')"
-                        class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-light text-white font-medium shadow-sm transition">
+                        class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-dark text-white font-medium shadow-sm transition">
                         រក្សាទុកការកែប្រែ
                     </button>
                 </div>

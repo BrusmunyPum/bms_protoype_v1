@@ -367,4 +367,16 @@ textarea::-webkit-scrollbar {
     }
 }
 
+/* =========================================================
+   Primary Action Button Hover Contrast Standard
+   Ensure primary buttons always deepen to dark green with crisp white text
+   ========================================================= */
+button.bg-primary:hover,
+a.bg-primary:hover,
+.btn-primary:hover {
+    background-color: #1b5223 !important;
+    color: #ffffff !important;
+}
+
+
 

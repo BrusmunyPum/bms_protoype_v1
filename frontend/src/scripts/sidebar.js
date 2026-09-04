@@ -120,6 +120,12 @@ const BMS_NAV_ITEMS = {
         icon: 'fa-sliders',
         parent: 'menu-settings'
     },
+    'settings-profile': {
+        title: 'កម្រងព័ត៌មានផ្ទាល់ខ្លួន',
+        subtitle: 'ការគ្រប់គ្រងព័ត៌មានគណនី សុវត្ថិភាព និងការអនុញ្ញាតផ្ទាល់ខ្លួន',
+        icon: 'fa-user-gear',
+        parent: null
+    },
     'settings-general': {
         title: 'ការកំណត់ប្រព័ន្ធ',
         subtitle: 'ការកំណត់ទូទៅ សិទ្ធិអ្នកប្រើប្រាស់ និងប្រព័ន្ធ',
@@ -538,7 +544,8 @@ function initSidebarNav() {
     const isTax = normalizedPath.includes('tax') || normalizedPath.includes('3-tax');
     const isNotifications = normalizedPath.includes('notifications') || normalizedPath.includes('4-notifications');
     const isSystem = normalizedPath.includes('system') || normalizedPath.includes('5-system');
-    const isLegacySettings = normalizedPath.endsWith('/settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem;
+    const isProfile = normalizedPath.includes('profile') || normalizedPath.includes('6-profile');
+    const isLegacySettings = normalizedPath.endsWith('/settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem && !isProfile;
 
     let initialNav = urlParam;
     if (!initialNav) {
@@ -584,6 +591,8 @@ function initSidebarNav() {
             initialNav = 'settings-notifications';
         } else if (isSystem) {
             initialNav = 'settings-system';
+        } else if (isProfile) {
+            initialNav = 'settings-profile';
         } else if (isLegacySettings) {
             initialNav = 'settings-company';
         } else {
@@ -601,19 +610,34 @@ function getPagesRelativePath(targetPage) {
     const rawPath = window.location.pathname.replace(/\\/g, '/');
     const normalized = decodeURIComponent(rawPath).toLowerCase();
     
+    // Auto-map unnumbered / shorthand paths to canonical numbered paths
+    const PATH_MAP = {
+        'settings/users/view-user.html': '7-settings/2-users/view-user.html',
+        'settings/profile/profile.html': '7-settings/6-profile/profile.html',
+        'settings/company/company.html': '7-settings/1-company/company.html',
+        'settings/system/system.html': '7-settings/5-system/system.html',
+        'settings/notifications/notifications.html': '7-settings/4-notifications/notifications.html',
+        'sales/invoice/invoice.html': '3-sales/1-invoice/invoice.html',
+        'stock/balance/balance.html': '5-stock/1-balance/balance.html',
+        'sales/customer/customer.html': '3-sales/3-customer/customer.html',
+        'buy/bills/bills.html': '4-buy/1-bills/bills.html',
+        'login.html': '1-login/login.html'
+    };
+    const resolvedTarget = PATH_MAP[targetPage] || targetPage;
+
     const pagesIdx = normalized.indexOf('/pages/');
     if (pagesIdx !== -1) {
         const afterPages = normalized.substring(pagesIdx + 7);
         const parts = afterPages.split('/').filter(p => p.length > 0);
         const depth = Math.max(0, parts.length - 1);
         const prefix = depth === 0 ? './' : '../'.repeat(depth);
-        return prefix + targetPage;
+        return prefix + resolvedTarget;
     }
     
     if (normalized.includes('/frontend/')) {
-        return 'src/pages/' + targetPage;
+        return 'src/pages/' + resolvedTarget;
     }
-    return targetPage;
+    return resolvedTarget;
 }
 
 function initUserProfileMenu() {
@@ -623,7 +647,6 @@ function initUserProfileMenu() {
     avatarImgs.forEach(img => {
         const btn = img.closest('button');
         if (!btn) return;
-
         const parentContainer = btn.parentElement;
         if (!parentContainer) return;
 
@@ -640,10 +663,10 @@ function initUserProfileMenu() {
             dropdown.id = 'bmsUserProfileDropdown';
             dropdown.className = 'hidden absolute right-0 top-full mt-2.5 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
             
-            const profileUrl = getPagesRelativePath('settings/users/view-user.html') + '?id=USR-001';
-            const companyUrl = getPagesRelativePath('settings/company/company.html');
-            const systemUrl = getPagesRelativePath('settings/system/system.html');
-            const notifUrl = getPagesRelativePath('settings/notifications/notifications.html');
+            const profileUrl = getPagesRelativePath('7-settings/6-profile/profile.html');
+            const companyUrl = getPagesRelativePath('7-settings/1-company/company.html');
+            const systemUrl = getPagesRelativePath('7-settings/5-system/system.html');
+            const loginUrl = getPagesRelativePath('1-login/login.html');
 
             dropdown.innerHTML = `
                 <!-- Profile Header -->
@@ -655,10 +678,10 @@ function initUserProfileMenu() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <h4 class="text-sm font-bold text-slate-800 truncate leading-tight">សុខ ចាន់ថន</h4>
-                            <p class="text-xs text-slate-500 truncate mt-0.5">chanthon.sok@bmstech.com</p>
+                            <p class="text-xs text-slate-500 truncate mt-0.5">chanthon.sok@digitechkh.com</p>
                             <div class="mt-1.5 flex items-center gap-1.5">
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">
-                                    <i class="fas fa-shield-halved text-[10px]"></i> Admin Superuser
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100/80 text-emerald-800">
+                                    <i class="fas fa-shield-halved text-[10px]"></i> អ្នកគ្រប់គ្រងកំពូល
                                 </span>
                             </div>
                         </div>
@@ -667,7 +690,7 @@ function initUserProfileMenu() {
 
                 <!-- Navigation List -->
                 <div class="p-2 space-y-1">
-                    <a href="${profileUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                    <a href="${profileUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
                         <div class="w-8 h-8 rounded-xl bg-emerald-50 text-primary flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
                             <i class="fas fa-user"></i>
                         </div>
@@ -678,7 +701,7 @@ function initUserProfileMenu() {
                         <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition"></i>
                     </a>
 
-                    <a href="${companyUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                    <a href="${companyUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
                         <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
                             <i class="fas fa-building"></i>
                         </div>
@@ -689,7 +712,7 @@ function initUserProfileMenu() {
                         <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition"></i>
                     </a>
 
-                    <a href="${systemUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group">
+                    <a href="${systemUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
                         <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
                             <i class="fas fa-sliders"></i>
                         </div>
@@ -700,16 +723,29 @@ function initUserProfileMenu() {
                         <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition"></i>
                     </a>
 
-                    <button type="button" onclick="openChangePasswordModal()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group text-left">
+                    <button type="button" onclick="openChangePasswordModal()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group text-left cursor-pointer">
                         <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
                             <i class="fas fa-key"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition">ប្ដូរពាក្យសម្ងាត់</div>
+                            <div class="text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition">ប្តូរពាក្យសម្ងាត់</div>
                             <div class="text-[11px] text-slate-400 truncate">សុវត្ថិភាព និងលេខកូដសម្ងាត់</div>
                         </div>
                         <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition"></i>
                     </button>
+
+                    <div class="my-1 border-t border-slate-100 mx-1"></div>
+
+                    <a href="${loginUrl}" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-50 text-rose-600 transition group text-left cursor-pointer">
+                        <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 group-hover:bg-rose-100 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
+                            <i class="fas fa-arrow-right-from-bracket"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs font-semibold text-rose-700">ចាកចេញពីប្រព័ន្ធ</div>
+                            <div class="text-[11px] text-rose-400 truncate">បញ្ចប់សម័យការងារបច្ចុប្បន្ន</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-[10px] text-rose-300 group-hover:text-rose-600 group-hover:translate-x-0.5 transition"></i>
+                    </a>
                 </div>
             `;
             parentContainer.appendChild(dropdown);
@@ -768,7 +804,7 @@ function openChangePasswordModal() {
                             <i class="fas fa-key"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold text-slate-800">ប្ដូរពាក្យសម្ងាត់ (Change Password)</h3>
+                            <h3 class="text-base font-bold text-slate-800">ប្តូរពាក្យសម្ងាត់</h3>
                             <p class="text-xs text-slate-400 mt-0.5">កំណត់ពាក្យសម្ងាត់ថ្មីដើម្បីសុវត្ថិភាពគណនី</p>
                         </div>
                     </div>
@@ -813,7 +849,7 @@ function openChangePasswordModal() {
                         <button type="button" onclick="closeChangePasswordModal()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition">
                             បោះបង់
                         </button>
-                        <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-primary-light shadow-sm transition flex items-center gap-2">
+                        <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-primary-dark shadow-sm transition flex items-center gap-2">
                             <i class="fas fa-check"></i> រក្សាទុកពាក្យសម្ងាត់
                         </button>
                     </div>
@@ -862,8 +898,6 @@ function submitChangePassword() {
     if (!current || !newPass || !confirmPass) {
         if (typeof showToast === 'function') {
             showToast('សូមបំពេញព័ត៌មានឱ្យបានគ្រប់ជ្រុងជ្រោយ!', 'warning');
-        } else {
-            alert('សូមបំពេញព័ត៌មានឱ្យបានគ្រប់ជ្រុងជ្រោយ!');
         }
         return;
     }
@@ -871,8 +905,6 @@ function submitChangePassword() {
     if (newPass !== confirmPass) {
         if (typeof showToast === 'function') {
             showToast('ពាក្យសម្ងាត់ថ្មី និងការបញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ!', 'error');
-        } else {
-            alert('ពាក្យសម្ងាត់ថ្មី និងការបញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ!');
         }
         return;
     }
@@ -880,8 +912,6 @@ function submitChangePassword() {
     if (newPass.length < 6) {
         if (typeof showToast === 'function') {
             showToast('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច 6 ខ្ទង់!', 'warning');
-        } else {
-            alert('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច 6 ខ្ទង់!');
         }
         return;
     }
@@ -889,8 +919,6 @@ function submitChangePassword() {
     closeChangePasswordModal();
     if (typeof showToast === 'function') {
         showToast('ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្ដូរដោយជោគជ័យ!', 'success');
-    } else {
-        alert('ពាក្យសម្ងាត់ត្រូវបានផ្លាស់ប្ដូរដោយជោគជ័យ!');
     }
 }
 
@@ -925,17 +953,17 @@ function initGlobalNotifications() {
             flyout.id = 'bmsNotificationFlyout';
             flyout.className = 'hidden absolute right-0 top-full mt-2.5 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
 
-            const invoiceUrl = getPagesRelativePath('sales/invoice/invoice.html');
-            const stockUrl = getPagesRelativePath('stock/balance/balance.html');
-            const customerUrl = getPagesRelativePath('sales/customer/customer.html');
-            const billsUrl = getPagesRelativePath('buy/bills/bills.html');
-            const allNotifsUrl = getPagesRelativePath('settings/notifications/notifications.html');
+            const invoiceUrl = getPagesRelativePath('3-sales/1-invoice/invoice.html');
+            const stockUrl = getPagesRelativePath('5-stock/1-balance/balance.html');
+            const customerUrl = getPagesRelativePath('3-sales/3-customer/customer.html');
+            const billsUrl = getPagesRelativePath('4-buy/1-bills/bills.html');
+            const allNotifsUrl = getPagesRelativePath('7-settings/4-notifications/notifications.html');
 
             flyout.innerHTML = `
                 <!-- Header -->
                 <div class="p-3.5 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-bold text-slate-800">ការជូនដំណឹង (Notifications)</h4>
+                        <h4 class="text-sm font-bold text-slate-800">ការជូនដំណឹង</h4>
                         <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">4 ថ្មី</span>
                     </div>
                     <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] font-medium text-primary hover:underline transition">
@@ -1012,7 +1040,7 @@ function initGlobalNotifications() {
 
                 <!-- Footer -->
                 <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 text-center">
-                    <a href="${allNotifsUrl}" class="text-xs font-semibold text-primary hover:text-primary-light transition flex items-center justify-center gap-1.5">
+                    <a href="${allNotifsUrl}" class="text-xs font-semibold text-primary hover:text-primary-dark transition flex items-center justify-center gap-1.5">
                         <span>មើលការជូនដំណឹងទាំងអស់</span>
                         <i class="fas fa-arrow-right text-[10px]"></i>
                     </a>

@@ -195,15 +195,15 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         
         <!-- Top Header -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0">
-            <div>
+        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+<div>
                 <h2 class="text-xl font-semibold text-gray-800 leading-tight">ផ្ទាំងគ្រប់គ្រង</h2>
                 <p class="text-xs font-normal text-gray-500 mt-0.5">ស្វាគមន៍មកកាន់ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម DIGITECHKH</p>
             </div>
             
-            <div class="flex items-center space-x-3 md:space-x-4">
+                        <div class="flex items-center space-x-3 md:space-x-4">
                 <!-- Notification Bell -->
-                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors">
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
                     <i class="fas fa-bell text-xl"></i>
                     <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -213,8 +213,8 @@
                 
                 <!-- User Profile Avatar Only -->
                 <div class="flex items-center border-l pl-3 md:pl-4">
-                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20" title="ពុំ ប្រុសមុន្នី (អ្នកគ្រប់គ្រងប្រព័ន្ធ)">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="ពុំ ប្រុសមុន្នី" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
                     </button>
                 </div>
@@ -544,7 +544,7 @@
                                         </td>
                                         <td class="py-3 text-center text-slate-500 text-xs">10 គ្រឿង</td>
                                         <td class="py-3 text-right">
-                                            <a href="../4-buy/1-bills/create-bills.html?item=IPH15PM-256" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-light text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
+                                            <a href="../4-buy/1-bills/create-bills.html?item=IPH15PM-256" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
                                                 <i class="fas fa-cart-plus text-[11px]"></i>
                                                 <span>+ បញ្ជាទិញ</span>
                                             </a>
@@ -569,7 +569,7 @@
                                         </td>
                                         <td class="py-3 text-center text-slate-500 text-xs">15 គ្រឿង</td>
                                         <td class="py-3 text-right">
-                                            <a href="../4-buy/1-bills/create-bills.html?item=MBA-M3-15" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-light text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
+                                            <a href="../4-buy/1-bills/create-bills.html?item=MBA-M3-15" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
                                                 <i class="fas fa-cart-plus text-[11px]"></i>
                                                 <span>+ បញ្ជាទិញ</span>
                                             </a>
@@ -594,7 +594,7 @@
                                         </td>
                                         <td class="py-3 text-center text-slate-500 text-xs">8 គ្រឿង</td>
                                         <td class="py-3 text-right">
-                                            <a href="../4-buy/1-bills/create-bills.html?item=SONY-WHXM5" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-light text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
+                                            <a href="../4-buy/1-bills/create-bills.html?item=SONY-WHXM5" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-xs px-3.5 py-1.5 rounded-lg transition-colors shadow-xs">
                                                 <i class="fas fa-cart-plus text-[11px]"></i>
                                                 <span>+ បញ្ជាទិញ</span>
                                             </a>
@@ -660,7 +660,7 @@
                                     <button type="button" onclick="filterDashboardInvoices('pending')" id="dashTabPending" class="dash-inv-filter-btn px-3 py-1 rounded-lg text-slate-500 hover:text-slate-800 transition cursor-pointer">រង់ចាំទូទាត់</button>
                                     <button type="button" onclick="filterDashboardInvoices('overdue')" id="dashTabOverdue" class="dash-inv-filter-btn px-3 py-1 rounded-lg text-slate-500 hover:text-slate-800 transition cursor-pointer">ហួសកំណត់</button>
                                 </div>
-                                <a href="../3-sales/1-invoice/invoice.html" class="text-xs text-primary hover:text-primary-light font-medium px-2 py-1 rounded-lg hover:bg-slate-50 transition flex items-center gap-1" title="មើលវិក្កយបត្រទាំងអស់">
+                                <a href="../3-sales/1-invoice/invoice.html" class="text-xs text-primary hover:text-primary-dark font-medium px-2 py-1 rounded-lg hover:bg-slate-50 transition flex items-center gap-1" title="មើលវិក្កយបត្រទាំងអស់">
                                     <span>មើលទាំងអស់</span>
                                     <i class="fas fa-chevron-right text-[10px]"></i>
                                 </a>

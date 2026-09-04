@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -221,7 +222,7 @@
 
         <!-- Top Header (Standard h-[72px]) -->
         <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-            <div>
+<div>
                 <h2 class="text-xl font-semibold text-gray-800 leading-tight">របាយការណ៍លក់</h2>
                 <p class="text-xs font-normal text-gray-500 mt-0.5">ទិន្នន័យវិភាគការលក់ និងអតិថិជនសំខាន់ៗ</p>
             </div>
@@ -294,15 +295,29 @@
                         </div>
                     </div>
                 </div>
-
-                <button onclick="window.print()" class="h-9 px-3.5 bg-white border border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 flex items-center gap-2 shadow-sm text-xs font-medium transition">
-                    <i class="fas fa-print text-slate-500"></i>
-                    <span>បោះពុម្ព</span>
-                </button>
                 <button onclick="showToast('បានទាញយកទិន្នន័យរបាយការណ៍លក់', 'success')" class="h-9 px-3.5 bg-primary text-white rounded-xl hover:bg-primary-dark flex items-center gap-2 shadow-sm text-xs font-medium transition">
                     <i class="fas fa-file-export"></i>
                     <span>ទាញយកទិន្នន័យ</span>
                 </button>
+            
+                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+
+                <!-- Notification Bell -->
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </button>
+                
+                <!-- User Profile Avatar Only -->
+                <div class="flex items-center border-l pl-3 md:pl-4">
+                    <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -310,34 +325,113 @@
         <main class="flex-1 overflow-y-auto p-6 w-full">
 
 
-            <!-- KPIs -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
-                        <i class="fas fa-file-invoice"></i>
+            <!-- Sales KPIs Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <!-- KPI 1: Total Sales Revenue -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-slate-500 mb-1">ទឹកប្រាក់លក់សរុប</p>
+                            <h3 class="text-2xl font-bold text-slate-800 tracking-tight">$38,750.00</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <i class="fas fa-dollar-sign text-lg"></i>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-xs text-slate-500 font-medium">វិក្កយបត្រសរុប</p>
-                        <h3 class="text-xl font-bold text-slate-800">125 ច្បាប់</h3>
+                    <div class="mt-4 flex items-center text-xs">
+                        <span class="text-emerald-600 font-medium flex items-center bg-emerald-50 px-2 py-0.5 rounded-full">
+                            <i class="fas fa-arrow-up mr-1 text-[10px]"></i>15.2%
+                        </span>
+                        <span class="text-slate-400 ml-2">ធៀបខែមុន</span>
                     </div>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
-                        <i class="fas fa-dollar-sign"></i>
+
+                <!-- KPI 2: Total Invoices -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-slate-500 mb-1">វិក្កយបត្រសរុប</p>
+                            <h3 class="text-2xl font-bold text-slate-800 tracking-tight">125 <span class="text-sm font-normal text-slate-500">ច្បាប់</span></h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                            <i class="fas fa-file-invoice text-lg"></i>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-xs text-slate-500 font-medium">ទឹកប្រាក់លក់</p>
-                        <h3 class="text-xl font-bold text-slate-800 tracking-tight">$38,750.00</h3>
+                    <div class="mt-4 flex items-center text-xs">
+                        <span class="text-blue-600 font-medium flex items-center bg-blue-50 px-2 py-0.5 rounded-full">
+                            <i class="fas fa-arrow-up mr-1 text-[10px]"></i>8.5%
+                        </span>
+                        <span class="text-slate-400 ml-2">ធៀបខែមុន</span>
                     </div>
                 </div>
-                <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
-                        <i class="fas fa-check-double"></i>
+
+                <!-- KPI 3: Fully Paid Invoices -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-slate-500 mb-1">ការទូទាត់ពេញលេញ</p>
+                            <h3 class="text-2xl font-bold text-slate-800 tracking-tight">98 <span class="text-sm font-normal text-slate-500">ច្បាប់</span></h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <i class="fas fa-check-double text-lg"></i>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-xs text-slate-500 font-medium">ការទូទាត់ពេញលេញ</p>
-                        <h3 class="text-xl font-bold text-slate-800">98 ច្បាប់</h3>
+                    <div class="mt-4 flex items-center text-xs">
+                        <span class="text-indigo-600 font-medium bg-indigo-50 px-2 py-0.5 rounded-full">
+                            78.4%
+                        </span>
+                        <span class="text-slate-400 ml-2">នៃវិក្កយបត្រសរុប</span>
                     </div>
+                </div>
+
+                <!-- KPI 4: Credit / Outstanding -->
+                <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-medium text-slate-500 mb-1">ក្រេឌីតនៅសល់ (ជំពាក់)</p>
+                            <h3 class="text-2xl font-bold text-slate-800 tracking-tight">$4,320.00</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+                            <i class="fas fa-hand-holding-dollar text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs">
+                        <span class="text-amber-700 font-medium bg-amber-100 px-2 py-0.5 rounded-full text-[11px]">
+                            27 ច្បាប់
+                        </span>
+                        <span class="text-slate-400 ml-2">ត្រូវប្រមូលពីអតិថិជន</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Charts Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                <!-- Chart 1: Monthly Sales Trend -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-base">និន្នាការចំណូលលក់ប្រចាំខែ</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">ការប្រៀបធៀបចំណូលលក់ និងចំនួនវិក្កយបត្រ</p>
+                        </div>
+                        <span class="text-xs text-slate-400">ទិន្នន័យ 6 ខែចុងក្រោយ</span>
+                    </div>
+                    <div id="salesTrendChart" class="w-full h-[320px]"></div>
+                </div>
+
+                <!-- Chart 2: Sales Distribution by Product Category -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-base">ការបែងចែកការលក់តាមប្រភេទមុខទំនិញ</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">សមាមាត្រចំណូលតាមប្រភេទផលិតផល</p>
+                        </div>
+                        <span class="text-xs text-slate-400">គិតជាភាគរយ (%)</span>
+                    </div>
+                    <div id="salesCategoryChart" class="w-full h-[320px]"></div>
                 </div>
             </div>
 
@@ -530,7 +624,10 @@
             { id: 'INV-2026-002', date: '02 កញ្ញា 2026', customer: 'លោក សុខ សាន្ត', items: 'ទូរស័ព្ទដៃស្មាតហ្វូន ប្រូម៉ាក់', qty: 1, amount: 1099.00, status: 'credit', statusKh: 'ជំពាក់' },
             { id: 'INV-2026-003', date: '03 កញ្ញា 2026', customer: 'ហាង កុំព្យូទ័រ សុវណ្ណ', items: 'កុំព្យូទ័រយួរដៃ, អេក្រង់កុំព្យូទ័រ', qty: 5, amount: 5400.00, status: 'overdue', statusKh: 'ហួសកំណត់' },
             { id: 'INV-2026-004', date: '03 កញ្ញា 2026', customer: 'អ្នកស្រី ចាន់ ធី', items: 'ថេប្លេត ប្រូ 11 អ៊ីញ', qty: 2, amount: 1700.00, status: 'paid', statusKh: 'បានទូទាត់' },
-            { id: 'INV-2026-005', date: '04 កញ្ញា 2026', customer: 'សាលារៀន អន្តរជាតិ', items: 'គ្រឿងបន្លាស់ និងកាស', qty: 10, amount: 3200.00, status: 'paid', statusKh: 'បានទូទាត់' }
+            { id: 'INV-2026-005', date: '04 កញ្ញា 2026', customer: 'សាលារៀន អន្តរជាតិ', items: 'គ្រឿងបន្លាស់ និងកាស', qty: 10, amount: 3200.00, status: 'paid', statusKh: 'បានទូទាត់' },
+            { id: 'INV-2026-006', date: '04 កញ្ញា 2026', customer: 'ក្រុមហ៊ុន ស៊ីធី មេឌា', items: 'ម៉ូនីទ័រ 27 អ៊ីញ 4K, ក្តារចុចមេកានិក', qty: 4, amount: 2850.00, status: 'paid', statusKh: 'បានទូទាត់' },
+            { id: 'INV-2026-007', date: '04 កញ្ញា 2026', customer: 'លោកស្រី គីម ហេង', items: 'នាឡិកាឆ្លាតវៃ ស៊េរី 8, កាសឥតខ្សែ', qty: 3, amount: 1320.00, status: 'credit', statusKh: 'ជំពាក់' },
+            { id: 'INV-2026-008', date: '04 កញ្ញា 2026', customer: 'មជ្ឈមណ្ឌល ភាសា អេស៊ីធី', items: 'កុំព្យូទ័រយួរដៃ ប្រូ 14 អ៊ីញ', qty: 6, amount: 11994.00, status: 'paid', statusKh: 'បានទូទាត់' }
         ];
 
         let currentActiveStatus = 'all';
@@ -637,11 +734,7 @@
             });
         }
 
-        // Toast & Confirm Modal
-        , 3000);
-        }
-
-        // Date Range Picker Standard Logic
+        // Unified Date Range Picker Standard
         let calCurrentYear = 2026;
         let calCurrentMonth = 9;
         let rangeStartDate = new Date(2026, 8, 1);
@@ -877,8 +970,132 @@
             closeRowAction();
         });
 
+        // ECharts Sales Visual Analytics
+        let salesTrendChartObj, salesCategoryChartObj;
+
+        function initSalesCharts() {
+            // Chart 1: Monthly Sales Trend (Combo Bar & Line)
+            const trendEl = document.getElementById('salesTrendChart');
+            if (trendEl) {
+                salesTrendChartObj = echarts.init(trendEl);
+                salesTrendChartObj.setOption({
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'cross' },
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13.5 }
+                    },
+                    legend: {
+                        data: ['ចំណូលលក់ ($)', 'ចំនួនវិក្កយបត្រ'],
+                        bottom: 0,
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13, color: '#475569' }
+                    },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+                    xAxis: [{
+                        type: 'category',
+                        data: ['មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា'],
+                        axisLabel: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13, color: '#64748b' }
+                    }],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: 'ចំណូល ($)',
+                            nameTextStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 12, color: '#64748b' },
+                            axisLabel: {
+                                fontFamily: 'Kantumruy Pro, sans-serif',
+                                fontSize: 12,
+                                color: '#64748b',
+                                formatter: '${value}'
+                            }
+                        },
+                        {
+                            type: 'value',
+                            name: 'វិក្កយបត្រ',
+                            nameTextStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 12, color: '#64748b' },
+                            min: 0,
+                            max: 150,
+                            axisLabel: {
+                                fontFamily: 'Kantumruy Pro, sans-serif',
+                                fontSize: 12,
+                                color: '#64748b',
+                                formatter: '{value}'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: 'ចំណូលលក់ ($)',
+                            type: 'bar',
+                            yAxisIndex: 0,
+                            itemStyle: { color: '#10b981', borderRadius: [6, 6, 0, 0] },
+                            data: [31500, 36200, 32800, 35400, 41200, 38750]
+                        },
+                        {
+                            name: 'ចំនួនវិក្កយបត្រ',
+                            type: 'line',
+                            yAxisIndex: 1,
+                            itemStyle: { color: '#0f2b5c' },
+                            lineStyle: { width: 3 },
+                            smooth: true,
+                            data: [95, 110, 102, 114, 130, 125]
+                        }
+                    ]
+                });
+            }
+
+            // Chart 2: Sales by Category (Donut)
+            const catEl = document.getElementById('salesCategoryChart');
+            if (catEl) {
+                salesCategoryChartObj = echarts.init(catEl);
+                salesCategoryChartObj.setOption({
+                    textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 14 },
+                    tooltip: {
+                        trigger: 'item',
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 13.5 }
+                    },
+                    legend: {
+                        orient: 'horizontal',
+                        bottom: 0,
+                        textStyle: { fontFamily: 'Kantumruy Pro, sans-serif', fontSize: 12.5, color: '#475569' }
+                    },
+                    series: [
+                        {
+                            name: 'ចំណូលតាមប្រភេទ',
+                            type: 'pie',
+                            radius: ['40%', '68%'],
+                            center: ['50%', '46%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: {
+                                borderRadius: 8,
+                                borderColor: '#fff',
+                                borderWidth: 2
+                            },
+                            label: {
+                                show: true,
+                                formatter: '{b}\n{d}%',
+                                fontFamily: 'Kantumruy Pro, sans-serif',
+                                fontSize: 12.5
+                            },
+                            data: [
+                                { value: 16275, name: 'កុំព្យូទ័រ & គ្រឿងបន្លាស់', itemStyle: { color: '#0f2b5c' } },
+                                { value: 13562, name: 'ស្មាតហ្វូន & ថេប្លេត', itemStyle: { color: '#10b981' } },
+                                { value: 5813, name: 'គ្រឿងបន្ថែម & អូឌីយ៉ូ', itemStyle: { color: '#3b82f6' } },
+                                { value: 3100, name: 'ឧបករណ៍ឆ្លាតវៃ', itemStyle: { color: '#f59e0b' } }
+                            ]
+                        }
+                    ]
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                if (salesTrendChartObj) salesTrendChartObj.resize();
+                if (salesCategoryChartObj) salesCategoryChartObj.resize();
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderSalesTable(SALES_DATA);
+            initSalesCharts();
         });
     </script>
     <script src="../../../scripts/ui-components.js"></script>

@@ -78,7 +78,7 @@ function showCustomConfirm(options) {
 
     const confirmBtnClass = isDanger
         ? 'bg-rose-600 hover:bg-rose-700 text-white'
-        : 'bg-primary hover:bg-primary-light text-white';
+        : 'bg-primary hover:bg-primary-dark text-white';
 
     modal.innerHTML = `
         <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-sm w-full p-6 text-center transform transition-all">
@@ -116,12 +116,13 @@ function showCustomConfirm(options) {
 function toggleCustomDropdown(dropdownId) {
     const container = document.getElementById(dropdownId);
     if (!container) return;
-    const menu = container.querySelector('.bms-custom-select-menu');
-    const arrow = container.querySelector('.bms-custom-select-arrow');
+    const menu = container.querySelector('.bms-custom-select-menu') || container.querySelector('.bms-custom-menu');
+    const arrow = container.querySelector('.bms-custom-select-arrow') || container.querySelector('.bms-custom-arrow');
+    if (!menu) return;
     const isHidden = menu.classList.contains('hidden');
     
     // Close other open dropdowns first
-    document.querySelectorAll('.bms-custom-select-menu').forEach(m => {
+    document.querySelectorAll('.bms-custom-select-menu, .bms-custom-menu').forEach(m => {
         if (m !== menu) {
             m.classList.add('hidden');
             const p = m.closest('.bms-custom-select');
@@ -130,7 +131,7 @@ function toggleCustomDropdown(dropdownId) {
             if (parentRow) parentRow.classList.remove('z-40', 'relative');
         }
     });
-    document.querySelectorAll('.bms-custom-select-arrow').forEach(a => {
+    document.querySelectorAll('.bms-custom-select-arrow, .bms-custom-arrow').forEach(a => {
         if (a !== arrow) a.classList.remove('rotate-180');
     });
 
@@ -149,9 +150,9 @@ function selectCustomOption(dropdownId, value, displayText) {
     const container = document.getElementById(dropdownId);
     if (!container) return;
     const hiddenInput = container.querySelector('input[type="hidden"]');
-    const labelElem = container.querySelector('.selected-label');
-    const menu = container.querySelector('.bms-custom-select-menu');
-    const arrow = container.querySelector('.bms-custom-select-arrow');
+    const labelElem = container.querySelector('.selected-label') || container.querySelector('.dropdown-label');
+    const menu = container.querySelector('.bms-custom-select-menu') || container.querySelector('.bms-custom-menu');
+    const arrow = container.querySelector('.bms-custom-select-arrow') || container.querySelector('.bms-custom-arrow');
 
     if (hiddenInput) {
         hiddenInput.value = value;
@@ -168,9 +169,13 @@ function selectCustomOption(dropdownId, value, displayText) {
     }
 
     container.querySelectorAll('.checkmark').forEach(cm => cm.classList.add('opacity-0'));
-    if (window.event && window.event.currentTarget) {
-        const activeCheck = window.event.currentTarget.querySelector('.checkmark');
-        if (activeCheck) activeCheck.classList.remove('opacity-0');
+    const evt = (typeof event !== 'undefined' && event) ? event : (window.event || null);
+    if (evt) {
+        const itemEl = evt.currentTarget || (evt.target ? evt.target.closest('button, [onclick*="selectCustomOption"]') : null);
+        if (itemEl) {
+            const activeCheck = itemEl.querySelector('.checkmark');
+            if (activeCheck) activeCheck.classList.remove('opacity-0');
+        }
     }
 
     container.classList.remove('z-50');
@@ -331,7 +336,7 @@ function initSingleDatePicker(id) {
             </div>
             <div id="${id}-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
             <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                <button type="button" onclick="setSinglePickerToday('${id}')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                <button type="button" onclick="setSinglePickerToday('${id}')" class="text-xs font-semibold text-primary hover:text-primary-dark px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
                     ថ្ងៃនេះ
                 </button>
                 <button type="button" onclick="closeSingleDatePicker('${id}')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
@@ -534,10 +539,10 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.bms-date-picker').forEach(c => c.classList.remove('z-50'));
     }
     if (!e.target.closest('.bms-custom-select')) {
-        document.querySelectorAll('.bms-custom-select-menu').forEach(menu => {
+        document.querySelectorAll('.bms-custom-select-menu, .bms-custom-menu').forEach(menu => {
             menu.classList.add('hidden');
         });
-        document.querySelectorAll('.bms-custom-select-arrow').forEach(arrow => {
+        document.querySelectorAll('.bms-custom-select-arrow, .bms-custom-arrow').forEach(arrow => {
             arrow.classList.remove('rotate-180');
         });
         document.querySelectorAll('.bms-custom-select').forEach(c => {
