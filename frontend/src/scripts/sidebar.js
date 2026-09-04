@@ -661,7 +661,7 @@ function initUserProfileMenu() {
         if (!dropdown) {
             dropdown = document.createElement('div');
             dropdown.id = 'bmsUserProfileDropdown';
-            dropdown.className = 'hidden absolute right-0 top-full mt-2.5 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
+            dropdown.className = 'hidden absolute right-0 top-full mt-2.5 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
             
             const profileUrl = getPagesRelativePath('7-settings/6-profile/profile.html');
             const companyUrl = getPagesRelativePath('7-settings/1-company/company.html');
@@ -678,7 +678,7 @@ function initUserProfileMenu() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <h4 class="text-sm font-bold text-slate-800 truncate leading-tight">សុខ ចាន់ថន</h4>
-                            <p class="text-xs text-slate-500 truncate mt-0.5">chanthon.sok@digitechkh.com</p>
+                            <p class="text-xs text-slate-500 mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">chanthon.sok@digitechkh.com</p>
                             <div class="mt-1.5 flex items-center gap-1.5">
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100/80 text-emerald-800">
                                     <i class="fas fa-shield-halved text-[10px]"></i> អ្នកគ្រប់គ្រងកំពូល
@@ -756,14 +756,19 @@ function initUserProfileMenu() {
             e.stopPropagation();
             const isHidden = dropdown.classList.contains('hidden');
             // Close all other dropdowns
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
+                d.classList.add('hidden');
+                if (d.parentElement) d.parentElement.classList.remove('z-50');
+            });
             
             if (isHidden) {
                 dropdown.classList.remove('hidden');
                 btn.setAttribute('aria-expanded', 'true');
+                parentContainer.classList.add('z-50');
             } else {
                 dropdown.classList.add('hidden');
                 btn.setAttribute('aria-expanded', 'false');
+                parentContainer.classList.remove('z-50');
             }
         };
     });
@@ -771,14 +776,20 @@ function initUserProfileMenu() {
     // Close on click outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('#bmsUserProfileDropdown') && !e.target.closest('header button img.rounded-full') && !e.target.closest('header button[aria-haspopup="true"]')) {
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
+                d.classList.add('hidden');
+                if (d.parentElement) d.parentElement.classList.remove('z-50');
+            });
         }
     });
 
     // Close on ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
+                d.classList.add('hidden');
+                if (d.parentElement) d.parentElement.classList.remove('z-50');
+            });
         }
     });
 }
