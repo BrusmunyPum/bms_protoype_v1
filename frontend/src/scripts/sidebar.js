@@ -275,6 +275,36 @@ function initSidebarNav() {
                 return;
             }
 
+            // If user clicked Stock Balance
+            if (navId === 'stock-balance') {
+                try { sessionStorage.setItem('bms_active_nav', 'stock-balance'); } catch(err){}
+                if (window.location.pathname.endsWith('balance.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('stock-balance');
+                }
+                return;
+            }
+
+            // If user clicked Stock Catalog
+            if (navId === 'stock-catalog') {
+                try { sessionStorage.setItem('bms_active_nav', 'stock-catalog'); } catch(err){}
+                if (window.location.pathname.endsWith('catalog.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('stock-catalog');
+                }
+                return;
+            }
+
+            // If user clicked Stock Movements
+            if (navId === 'stock-movements') {
+                try { sessionStorage.setItem('bms_active_nav', 'stock-movements'); } catch(err){}
+                if (window.location.pathname.endsWith('movement.html')) {
+                    e.preventDefault();
+                    setActiveNavItem('stock-movements');
+                }
+                return;
+            }
+
             // If currently on empty.html and clicking any empty.html item
             const isAtEmptyPage = window.location.pathname.endsWith('empty.html') || window.location.pathname.endsWith('empty.html/');
             if (isAtEmptyPage) {
@@ -311,8 +341,24 @@ function initSidebarNav() {
     const isBills = window.location.pathname.includes('/bills/') || window.location.pathname.endsWith('bills.html');
     const isSuppliers = window.location.pathname.includes('/suppliers/') || window.location.pathname.endsWith('suppliers.html');
     const isDisbursement = window.location.pathname.includes('/disbursement/') || window.location.pathname.endsWith('disbursement.html');
+    const isBalance = window.location.pathname.includes('/balance/') || window.location.pathname.endsWith('balance.html');
+    const isCatalog = window.location.pathname.includes('/catalog/') || window.location.pathname.endsWith('catalog.html');
+    const isMovement = window.location.pathname.includes('/movement/') || window.location.pathname.endsWith('movement.html');
     
-    let initialNav = urlParam || (isDashboard ? 'dashboard' : (isInvoices ? 'sell-invoices' : (isQuotes ? 'sell-prices' : (isCustomers ? 'sell-customers' : (isPayments ? 'sell-receipts' : (isBills ? 'buy-invoices' : (isSuppliers ? 'buy-suppliers' : (isDisbursement ? 'buy-expenses' : (savedNav || 'buy-expenses')))))))));
+    let initialNav = urlParam || (
+        isDashboard ? 'dashboard' : (
+        isInvoices ? 'sell-invoices' : (
+        isQuotes ? 'sell-prices' : (
+        isCustomers ? 'sell-customers' : (
+        isPayments ? 'sell-receipts' : (
+        isBills ? 'buy-invoices' : (
+        isSuppliers ? 'buy-suppliers' : (
+        isDisbursement ? 'buy-expenses' : (
+        isBalance ? 'stock-balance' : (
+        isCatalog ? 'stock-catalog' : (
+        isMovement ? 'stock-movements' : (
+        savedNav || 'dashboard')))))))))))
+    );
     
     if (isDashboard && !urlParam) {
         initialNav = 'dashboard';
@@ -330,6 +376,12 @@ function initSidebarNav() {
         initialNav = 'buy-suppliers';
     } else if (isDisbursement && !urlParam) {
         initialNav = 'buy-expenses';
+    } else if (isBalance && !urlParam) {
+        initialNav = 'stock-balance';
+    } else if (isCatalog && !urlParam) {
+        initialNav = 'stock-catalog';
+    } else if (isMovement && !urlParam) {
+        initialNav = 'stock-movements';
     }
     
     setActiveNavItem(initialNav);

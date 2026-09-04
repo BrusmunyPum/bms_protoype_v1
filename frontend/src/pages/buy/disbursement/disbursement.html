@@ -173,15 +173,15 @@
                 </button>
                 <div id="menu-stock"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance"
+                    <a href="../../stock/balance/balance.html" data-nav="stock-balance"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog"
+                    <a href="../../stock/catalog/catalog.html" data-nav="stock-catalog"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements"
+                    <a href="../../stock/movement/movement.html" data-nav="stock-movements"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
@@ -1050,13 +1050,13 @@
 
                 <!-- Action Items -->
                 <div class="space-y-0.5">
-                    <button type="button" onclick="closeRowActionMenu(); viewVoucherDetail('${item.id}')"
+                    <a href="view-disbursement.html?id=${item.id}"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium cursor-pointer">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-eye"></i>
                         </span>
-                        <span class="flex-1">មើលប័ណ្ណចំណាយលម្អិត</span>
-                    </button>
+                        <span class="flex-1">មើលព័ត៌មានលម្អិត</span>
+                    </a>
                     <a href="edit-disbursement.html?id=${item.id}"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium cursor-pointer">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
@@ -1201,36 +1201,9 @@
             showToast('កំពុងទាញយកទិន្នន័យប័ណ្ណចំណាយជាឯកសារ Excel...', 'success');
         }
 
-        // Voucher Detail Modal & Printing
+        // Voucher Detail Page Navigation
         function viewVoucherDetail(id) {
-            const item = DISBURSEMENTS_DATA.find(d => d.id === id);
-            if (!item) return;
-
-            document.getElementById('modalVoucherTitle').textContent = `ប័ណ្ណទូទាត់ចំណាយ #${item.voucherNumber}`;
-            document.getElementById('pvVoucherNum').textContent = item.voucherNumber;
-            document.getElementById('pvBillRef').textContent = item.billRef;
-            document.getElementById('pvDate').textContent = item.date;
-            document.getElementById('pvCreatedBy').textContent = item.createdBy;
-
-            document.getElementById('pvSupplierCompany').textContent = item.supplierCompany;
-            document.getElementById('pvSupplierContact').textContent = `តំណាង៖ ${item.supplierName}`;
-            document.getElementById('pvSupplierPhone').textContent = `ទូរស័ព្ទ៖ ${item.supplierPhone}`;
-            
-            document.getElementById('pvMethod').textContent = item.methodName;
-            document.getElementById('pvAccount').textContent = item.accountName;
-            document.getElementById('pvRefNum').textContent = item.refNumber;
-            document.getElementById('pvPurpose').textContent = item.purpose;
-            document.getElementById('pvAmount').textContent = `$${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            document.getElementById('pvNotes').textContent = item.notes;
-
-            const badge = document.getElementById('pvStatusBadge');
-            badge.className = `inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${item.statusBadgeClass}`;
-            badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-current"></span> ${item.statusName}`;
-
-            document.getElementById('pvSignPrepared').textContent = item.createdBy;
-            document.getElementById('pvSignReceiver').textContent = item.supplierName;
-
-            document.getElementById('voucherDetailModal').classList.remove('hidden');
+            window.location.href = `view-disbursement.html?id=${id}`;
         }
 
         function closeVoucherDetailModal() {

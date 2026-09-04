@@ -173,15 +173,15 @@
                 </button>
                 <div id="menu-stock"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance"
+                    <a href="../../stock/balance/balance.html" data-nav="stock-balance"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog"
+                    <a href="../../stock/catalog/catalog.html" data-nav="stock-catalog"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements"
+                    <a href="../../stock/movement/movement.html" data-nav="stock-movements"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
@@ -1108,14 +1108,13 @@
                     </div>
                     <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${s.typeClass} flex-shrink-0">${s.typeName}</span>
                 </div>
-                <div class="space-y-0.5 px-1">
-                    <button onclick="closeRowActionMenu(); viewSupplierDetail('${s.id}')"
+                    <a href="view-suppliers.html?id=${s.id}"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
                             <i class="fas fa-eye"></i>
                         </span>
                         <span class="flex-1">មើលព័ត៌មានលម្អិត</span>
-                    </button>
+                    </a>
                     <a href="edit-suppliers.html?id=${s.id}"
                         class="w-full group px-2.5 py-2 rounded-xl text-left text-slate-700 hover:text-primary hover:bg-emerald-50/60 flex items-center gap-2.5 transition text-xs font-medium">
                         <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-primary group-hover:text-white text-slate-500 flex items-center justify-center text-[11px] transition shadow-xs">
@@ -1181,51 +1180,9 @@
             }
         });
 
-        // Supplier Detail Modal View (Matching viewCustomerDetail in customer.html)
+        // View Supplier Detail
         function viewSupplierDetail(supplierId) {
-            const s = SUPPLIERS_DATA.find(item => item.id === supplierId);
-            if (!s) return;
-
-            document.getElementById('modalAvatar').src = s.avatar;
-            document.getElementById('modalSupplierName').textContent = s.name;
-            document.getElementById('modalSupplierCode').textContent = `កូដ: ${s.id} · ${s.typeName}`;
-            document.getElementById('modalTotalOrders').textContent = `${s.ordersCount} លើក`;
-            document.getElementById('modalTotalPurchased').textContent = `$${s.totalPurchases.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            document.getElementById('modalTotalDebt').textContent = `$${s.debt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            document.getElementById('modalPhone').textContent = s.phone;
-            document.getElementById('modalTelegram').textContent = s.telegram;
-            document.getElementById('modalEmail').textContent = s.email;
-            document.getElementById('modalTerms').textContent = s.terms;
-            document.getElementById('modalTaxId').textContent = s.taxId;
-            document.getElementById('modalBank').textContent = s.bankName;
-            document.getElementById('modalAddress').textContent = s.fullAddress;
-            document.getElementById('modalCreateBillBtn').href = `../bills/create-bills.html?supplierId=${s.id}`;
-
-            const billsList = document.getElementById('modalBillsList');
-            if (billsList) {
-                if (s.bills && s.bills.length > 0) {
-                    billsList.innerHTML = s.bills.map(b => `
-                        <tr>
-                            <td class="py-2.5 px-3 font-medium text-slate-800">${b.number}</td>
-                            <td class="py-2.5 px-3 text-slate-500">${b.date}</td>
-                            <td class="py-2.5 px-3 text-right font-semibold text-slate-800">$${b.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                            <td class="py-2.5 px-3 text-center">
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${b.status === 'paid' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}">
-                                    ${b.statusName}
-                                </span>
-                            </td>
-                        </tr>
-                    `).join('');
-                } else {
-                    billsList.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="py-4 text-center text-slate-400">មិនមានប្រវត្តិវិក្កយបត្របញ្ញាទិញឡើយ</td>
-                        </tr>
-                    `;
-                }
-            }
-
-            document.getElementById('supplierDetailModal').classList.remove('hidden');
+            window.location.href = `view-suppliers.html?id=${supplierId}`;
         }
 
         function closeSupplierDetailModal() {

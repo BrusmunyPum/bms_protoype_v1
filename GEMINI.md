@@ -55,19 +55,20 @@
 
 ## ៤. រចនាសម្ព័ន្ធម៉ូឌុល និងថតរង (Modular Feature Subfolder Standard)
 * រាល់មុខងារកូននីមួយៗក្នុងម៉ូឌុល (ដូចជា ការលក់ `sales/`, ការទិញ `buy/`, ស្តុក `stock/`, ហិរញ្ញវត្ថុ `finance/`) ត្រូវមានថតរងដាច់ដោយឡែក (Subfolder per child feature)។
-* ថតរងនីមួយៗត្រូវរៀបចំឯកសារជា ៣ ទំព័រគោល៖
+* ថតរងនីមួយៗត្រូវរៀបចំឯកសារជា ៤ ទំព័រគោល៖
   1. `[feature].html` (ឧ. `invoice.html`, `quote.html`)៖ ទំព័រតារាងបញ្ជីទិន្នន័យមេ (List View)
   2. `create-[feature].html` (ឧ. `create-invoice.html`, `create-quote.html`)៖ ទំព័រទម្រង់បង្កើតទិន្នន័យថ្មី (Create Form Page)
   3. `edit-[feature].html` (ឧ. `edit-invoice.html`, `edit-quote.html`)៖ ទំព័រទម្រង់កែប្រែទិន្នន័យ (Edit Form Page)
+  4. `view-[feature].html` (ឧ. `view-invoice.html`, `view-quote.html`)៖ ទំព័របង្ហាញព័ត៌មានលម្អិតពេញលេញ (Full View Detail Page)
 * ហាមដាច់ខាតការដាក់ឯកសារលាយឡំគ្នាក្នុង Root Folder ដោយគ្មានការបែងចែកថតរង ដើម្បីភាពស្អាត និងងាយស្រួលគ្រប់គ្រង (Clean & Modular Architecture)។
 
 ---
 
-## ៥. គោលការណ៍ទម្រង់បង្កើត និងកែប្រែ (Dedicated Pages for Create & Edit Forms)
-* **ហាមដាច់ខាតការប្រើប្រាស់ Modal Dialog Pop-up** សម្រាប់ទម្រង់បង្កើតថ្មី (Add/Create) ឬទម្រង់កែប្រែ (Edit)។
-* រាល់ទម្រង់ Add/Create និង Edit ត្រូវតែជា**ទំព័រពេញលេញដាច់ដោយឡែក (Dedicated Full Page)** ដែលមានប៊ូតុងត្រឡប់ក្រោយស្តង់ដាររួម និងប្លង់ទម្រង់ទូលាយកម្រិតសហគ្រាស (Enterprise Layout)។
+## ៥. គោលការណ៍ទម្រង់បង្កើត កែប្រែ និងបង្ហាញព័ត៌មានលម្អិត (Dedicated Pages for Create, Edit & View Detail)
+* **ហាមដាច់ខាតការប្រើប្រាស់ Modal Dialog Pop-up** សម្រាប់ទម្រង់បង្កើតថ្មី (Add/Create), ទម្រង់កែប្រែ (Edit), ឬការបង្ហាញព័ត៌មានលម្អិត (View Detail)។
+* រាល់ទម្រង់ Add/Create, Edit និង View Detail ត្រូវតែជា**ទំព័រពេញលេញដាច់ដោយឡែក (Dedicated Full Page)** ដែលមានប៊ូតុងត្រឡប់ក្រោយស្តង់ដាររួម ប្លង់ទម្រង់ទូលាយកម្រិតសហគ្រាស (Enterprise Layout), ប៊ូតុងសកម្មភាពរហ័ស (ដូចជា កែប្រែ, បោះពុម្ព, បម្លែង)។
 * **ស្តង់ដារប៊ូតុងត្រឡប់ក្រោយ (Unified Back Button Standard)**៖
-  គ្រប់ទំព័ររង (ដូចជា `create-[feature].html`, `edit-[feature].html`) ត្រូវតែប្រើប្រាស់ប៊ូតុងត្រឡប់ក្រោយជាប្រអប់មូលកោងមានរូបសញ្ញាព្រួញតែមួយគត់ (Icon-only rounded-square button) ដូចគ្នាបេះបិទ ១០០%៖
+  គ្រប់ទំព័ររង (ដូចជា `create-[feature].html`, `edit-[feature].html`, `view-[feature].html`) ត្រូវតែប្រើប្រាស់ប៊ូតុងត្រឡប់ក្រោយជាប្រអប់មូលកោងមានរូបសញ្ញាព្រួញតែមួយគត់ (Icon-only rounded-square button) ដូចគ្នាបេះបិទ ១០០%៖
   ```html
   <a href="[feature].html" 
      class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" 
@@ -98,3 +99,11 @@
 
 ## ៩. ជួរឈរសកម្មភាពក្នុងតារាង (Table Row Actions)
 * ជួរឈរសកម្មភាពក្នុងតារាងទាំងអស់ ត្រូវប្រើប្រាស់ប៊ូតុង **`⋮`** តែមួយគត់ជាមួយ Floating Action Dropdown Menu (`#rowActionDropdown`) ដែលមានរចនាបថ Capsule Header, រូបតំណាងក្នុងប្រអប់មូលតូច, Hover Effect ស្រស់ស្អាត, និងតំណភ្ជាប់ទៅកាន់ទំព័រ `edit-[feature].html?id=...`។
+
+---
+
+## ១០. គោលការណ៍តម្លៃឌីណាមិកតាមអតិថិជន និងអ្នកផ្គត់ផ្គង់ (Dynamic Customer & Supplier Pricing)
+* មុខទំនិញ ឬផលិតផលនីមួយៗមិនមានតម្លៃថេរបរិបូរណ៍តែមួយមុខនោះឡើយ។ តម្លៃលក់ និងថ្លៃដើមទិញ ត្រូវប្រែប្រួល និងអាស្រ័យលើ៖
+  1. **ផ្នែកលក់ (អតិថិជន)**៖ តម្លៃលក់អាស្រ័យលើកម្រិតអតិថិជន (អតិថិជនទូទៅ/រាយ, អតិថិជនដុំ, តំណាងចែកចាយ), តម្លៃតាមកិច្ចសន្យា ឬប្រវត្តិតម្លៃដែលធ្លាប់លក់ជូនអតិថិជននោះពីមុន ព្រមទាំងអនុញ្ញាតឱ្យកែសម្រួលតម្លៃឯកតាជាក់ស្តែងលើបន្ទាត់វិក្កយបត្រ ឬសម្រង់តម្លៃ។
+  2. **ផ្នែកទិញ (អ្នកផ្គត់ផ្គង់)**៖ ថ្លៃដើមទិញអាស្រ័យលើអ្នកផ្គត់ផ្គង់នីមួយៗ (អ្នកផ្គត់ផ្គង់ផ្សេងគ្នាផ្តល់ថ្លៃទិញខុសគ្នា) និងប្រវត្តិនៃការបញ្ជាទិញចូលជាក់ស្តែង ដែលជាមូលដ្ឋានក្នុងការគណនាថ្លៃដើមមធ្យមនៃស្តុក។
+

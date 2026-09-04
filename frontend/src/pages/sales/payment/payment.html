@@ -151,15 +151,15 @@
                 </button>
                 <div id="menu-stock"
                     class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../empty.html?nav=stock-balance" data-nav="stock-balance"
+                    <a href="../../stock/balance/balance.html" data-nav="stock-balance"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-box w-5 text-center opacity-70 mr-2 text-xs"></i> តុល្យភាពស្តុក
                     </a>
-                    <a href="../../empty.html?nav=stock-catalog" data-nav="stock-catalog"
+                    <a href="../../stock/catalog/catalog.html" data-nav="stock-catalog"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-list w-5 text-center opacity-70 mr-2 text-xs"></i> កាតាឡុកទំនិញ
                     </a>
-                    <a href="../../empty.html?nav=stock-movements" data-nav="stock-movements"
+                    <a href="../../stock/movement/movement.html" data-nav="stock-movements"
                         class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-clock-rotate-left w-5 text-center opacity-70 mr-2 text-xs"></i> ចលនាស្តុក
                     </a>
@@ -1244,13 +1244,13 @@
 
                 <!-- Action Items -->
                 <div class="py-1 space-y-0.5 text-xs">
-                    <button onclick="viewReceiptDetail('${p.id}')"
+                    <a href="view-payment.html?id=${p.id}"
                         class="w-full text-left px-3.5 py-2 text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition">
                         <span class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs">
                             <i class="fas fa-eye"></i>
                         </span>
                         <span>មើលព័ត៌មានលម្អិត</span>
-                    </button>
+                    </a>
                     <a href="edit-payment.html?id=${p.id}"
                         class="w-full text-left px-3.5 py-2 text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition">
                         <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs">
@@ -1300,43 +1300,9 @@
         }
 
         // ====================================================
-        // View Receipt Detail Modal
-        // ====================================================
+        // View Receipt Detail
         function viewReceiptDetail(pid) {
-            closeRowActionMenu();
-            const p = PAYMENTS_DATA.find(item => item.id === pid);
-            if (!p) return;
-
-            document.getElementById('pvReceiptTitle').textContent = `បង្កាន់ដៃទូទាត់ #${p.receiptNumber}`;
-            document.getElementById('pvCustomerName').textContent = p.customer;
-            document.getElementById('pvCustomerCompany').textContent = p.company;
-            document.getElementById('pvCustomerPhone').textContent = p.phone;
-
-            document.getElementById('pvReceiptNum').textContent = p.receiptNumber;
-            document.getElementById('pvInvoiceNum').textContent = p.invoiceNumber;
-            document.getElementById('pvDate').textContent = p.date;
-            document.getElementById('pvTime').textContent = p.time;
-
-            document.getElementById('pvMethod').textContent = p.method;
-            document.getElementById('pvAccount').textContent = p.account;
-            document.getElementById('pvRefNum').textContent = p.referenceNumber;
-            document.getElementById('pvReceivedBy').textContent = p.receivedBy;
-            document.getElementById('pvAmount').textContent = '$' + p.amount.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pvNotes').textContent = p.notes || '-';
-
-            const badge = document.getElementById('pvStatusBadge');
-            if (p.status === 'completed') {
-                badge.className = 'mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200';
-                badge.innerHTML = '<i class="fas fa-check-circle"></i> បានទូទាត់ជោគជ័យ';
-            } else if (p.status === 'pending') {
-                badge.className = 'mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200';
-                badge.innerHTML = '<i class="fas fa-clock"></i> កំពុងរង់ចាំផ្ទៀងផ្ទាត់';
-            } else {
-                badge.className = 'mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200';
-                badge.innerHTML = '<i class="fas fa-times-circle"></i> បានបដិសេធ / បរាជ័យ';
-            }
-
-            document.getElementById('receiptDetailModal').classList.remove('hidden');
+            window.location.href = `view-payment.html?id=${pid}`;
         }
 
         function closeReceiptDetailModal() {
