@@ -974,32 +974,16 @@ function initGlobalNotifications() {
             const allNotifsUrl = getPagesRelativePath('7-settings/4-notifications/notifications.html');
 
             flyout.innerHTML = `
-                <!-- Header -->
-                <div class="p-3 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-lg bg-emerald-100/70 text-primary flex items-center justify-center text-xs">
-                            <i class="fas fa-bolt-lightning"></i>
-                        </div>
-                        <h4 class="text-xs font-bold text-slate-800">មជ្ឈមណ្ឌលសកម្មភាព</h4>
-                    </div>
-                    <button type="button" onclick="window.BMSActionTracker && window.BMSActionTracker.resetToDefault()" 
-                        class="text-[11px] font-medium text-slate-500 hover:text-rose-600 transition flex items-center gap-1.5 px-2 py-1 rounded-lg hover:bg-rose-50 cursor-pointer" 
-                        title="កំណត់ទិន្នន័យ និងសកម្មភាពត្រឡប់ទៅសភាពដើមដំបូង">
-                        <i class="fas fa-rotate-left text-[10px]"></i>
-                        <span>កំណត់ឡើងវិញ</span>
-                    </button>
-                </div>
-
                 <!-- Segmented Tabs (Action Timeline vs Notifications) -->
                 <div class="flex border-b border-slate-100 bg-slate-50/50 overflow-hidden">
                     <button type="button" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
-                        class="flex-1 py-2 px-3 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
+                        class="flex-1 py-2.5 px-3 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
                         <i class="fas fa-clock-rotate-left text-xs flex-shrink-0"></i>
                         <span class="truncate">ដំណើរការសកម្មភាព</span>
                         <span id="bmsActionCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex-shrink-0">3</span>
                     </button>
                     <button type="button" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
-                        class="flex-1 py-2 px-3 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
+                        class="flex-1 py-2.5 px-3 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
                         <i class="fas fa-bell text-xs flex-shrink-0"></i>
                         <span class="truncate">ការជូនដំណឹង</span>
                         <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-100 flex-shrink-0">4 ថ្មី</span>
@@ -1076,17 +1060,6 @@ function initGlobalNotifications() {
                         </div>
                         <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0 notif-dot"></span>
                     </a>
-                </div>
-
-                <!-- Footer -->
-                <div class="p-2.5 px-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                    <span class="flex items-center gap-1.5 text-slate-500">
-                        <i class="fas fa-rotate text-emerald-600 text-[10px]"></i>
-                        <span>ទិន្នន័យនឹងវិលទៅសភាពដើមពេលផ្ទុកទំព័រឡើងវិញ</span>
-                    </span>
-                    <button type="button" onclick="window.BMSActionTracker && window.BMSActionTracker.resetToDefault()" class="text-rose-600 hover:underline font-medium cursor-pointer">
-                        កំណត់ឡើងវិញ
-                    </button>
                 </div>
             `;
             wrapper.appendChild(flyout);
