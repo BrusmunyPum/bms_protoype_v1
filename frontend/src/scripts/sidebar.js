@@ -150,26 +150,22 @@ function toggleMenu(menuId) {
 
     if (isHidden) {
         menu.classList.remove('hidden');
-        menu.classList.add('block');
         if (icon) {
-            icon.classList.remove('fa-chevron-right');
-            icon.classList.add('fa-chevron-down');
+            icon.classList.add('rotate-90');
         }
         if (btn) {
-            btn.classList.add('bg-white/10', 'text-white');
+            btn.classList.add('bg-white/10', 'text-white', 'font-medium');
             btn.classList.remove('text-emerald-100');
         }
     } else {
         menu.classList.add('hidden');
-        menu.classList.remove('block');
         if (icon) {
-            icon.classList.remove('fa-chevron-down');
-            icon.classList.add('fa-chevron-right');
+            icon.classList.remove('rotate-90');
         }
         // Only remove active style from parent button if none of its child items are currently active
         const hasActiveChild = menu.querySelector('.nav-sub-item.bg-primary');
         if (!hasActiveChild && btn) {
-            btn.classList.remove('bg-white/10', 'text-white');
+            btn.classList.remove('bg-white/10', 'text-white', 'font-medium');
             btn.classList.add('text-emerald-100');
         }
     }
@@ -179,6 +175,9 @@ function setActiveNavItem(itemId) {
     if (!itemId || !BMS_NAV_ITEMS[itemId]) {
         itemId = 'dashboard';
     }
+
+    const meta = BMS_NAV_ITEMS[itemId];
+    const activeParentId = meta ? meta.parent : null;
 
     // 1. Reset all top-level items
     document.querySelectorAll('.nav-item').forEach(el => {
@@ -192,10 +191,24 @@ function setActiveNavItem(itemId) {
         el.classList.add('text-emerald-100/75', 'hover:bg-white/10', 'hover:text-white', 'font-normal');
     });
 
-    // 3. Reset all parent menu buttons
-    document.querySelectorAll('.nav-parent').forEach(el => {
-        el.classList.remove('bg-white/10', 'text-white', 'font-medium');
-        el.classList.add('text-emerald-100', 'hover:bg-white/10', 'hover:text-white', 'font-normal');
+    // 3. Reset inactive parent menu buttons & icons
+    const allParentIds = ['menu-sell', 'menu-buy', 'menu-stock', 'menu-reports', 'menu-settings'];
+    allParentIds.forEach(pId => {
+        if (pId !== activeParentId) {
+            const btn = document.getElementById('btn-' + pId);
+            const icon = document.getElementById('icon-' + pId);
+            const menu = document.getElementById(pId);
+            if (btn) {
+                btn.classList.remove('bg-white/10', 'text-white', 'font-medium');
+                btn.classList.add('text-emerald-100', 'hover:bg-white/10', 'hover:text-white', 'font-normal');
+            }
+            if (icon) {
+                icon.classList.remove('rotate-90');
+            }
+            if (menu) {
+                menu.classList.add('hidden');
+            }
+        }
     });
 
     // 4. Activate target item
@@ -206,7 +219,6 @@ function setActiveNavItem(itemId) {
     }
 
     // 5. If item belongs to a parent menu, expand and highlight parent
-    const meta = BMS_NAV_ITEMS[itemId];
     if (meta && meta.parent) {
         const parentMenu = document.getElementById(meta.parent);
         const parentIcon = document.getElementById('icon-' + meta.parent);
@@ -214,14 +226,12 @@ function setActiveNavItem(itemId) {
 
         if (parentMenu) {
             parentMenu.classList.remove('hidden');
-            parentMenu.classList.add('block');
         }
         if (parentIcon) {
-            parentIcon.classList.remove('fa-chevron-right');
-            parentIcon.classList.add('fa-chevron-down');
+            parentIcon.classList.add('rotate-90');
         }
         if (parentBtn) {
-            parentBtn.classList.remove('text-emerald-100');
+            parentBtn.classList.remove('text-emerald-100', 'font-normal');
             parentBtn.classList.add('bg-white/10', 'text-white', 'font-medium');
         }
     }
@@ -501,32 +511,34 @@ function initSidebarNav() {
     let savedNav = null;
     try { savedNav = sessionStorage.getItem('bms_active_nav'); } catch(e) {}
 
-    const isDashboard = window.location.pathname.endsWith('dashboard.html');
-    const isInvoices = window.location.pathname.includes('/invoice/') || window.location.pathname.endsWith('invoice.html') || window.location.pathname.endsWith('invoices.html');
-    const isQuotes = window.location.pathname.includes('/quote/') || window.location.pathname.endsWith('quote.html') || window.location.pathname.endsWith('quotes.html');
-    const isCustomers = window.location.pathname.includes('/customer/') || window.location.pathname.endsWith('customer.html');
-    const isPayments = window.location.pathname.includes('/payment/') || window.location.pathname.endsWith('payment.html');
-    const isBills = window.location.pathname.includes('/bills/') || window.location.pathname.endsWith('bills.html');
-    const isSuppliers = window.location.pathname.includes('/suppliers/') || window.location.pathname.endsWith('suppliers.html');
-    const isDisbursement = window.location.pathname.includes('/disbursement/') || window.location.pathname.endsWith('disbursement.html');
-    const isBalance = window.location.pathname.includes('/balance/') || window.location.pathname.endsWith('balance.html');
-    const isCatalog = window.location.pathname.includes('/catalog/') || window.location.pathname.endsWith('catalog.html');
-    const isMovement = window.location.pathname.includes('/movement/') || window.location.pathname.endsWith('movement.html');
+    const normalizedPath = decodeURIComponent(window.location.pathname).replace(/\\/g, '/').toLowerCase();
+
+    const isDashboard = normalizedPath.endsWith('/dashboard.html') || normalizedPath.endsWith('dashboard.html');
+    const isInvoices = normalizedPath.includes('/sales/invoice/') || normalizedPath.endsWith('/invoice.html') || normalizedPath.endsWith('invoice.html');
+    const isQuotes = normalizedPath.includes('/sales/quote/') || normalizedPath.endsWith('/quote.html') || normalizedPath.endsWith('quote.html');
+    const isCustomers = normalizedPath.includes('/sales/customer/') || normalizedPath.endsWith('/customer.html') || normalizedPath.endsWith('customer.html');
+    const isPayments = normalizedPath.includes('/sales/payment/') || normalizedPath.endsWith('/payment.html') || normalizedPath.endsWith('payment.html');
+    const isBills = normalizedPath.includes('/buy/bills/') || normalizedPath.endsWith('/bills.html') || normalizedPath.endsWith('bills.html');
+    const isSuppliers = normalizedPath.includes('/buy/suppliers/') || normalizedPath.endsWith('/suppliers.html') || normalizedPath.endsWith('suppliers.html');
+    const isDisbursement = normalizedPath.includes('/buy/disbursement/') || normalizedPath.endsWith('/disbursement.html') || normalizedPath.endsWith('disbursement.html');
+    const isBalance = normalizedPath.includes('/stock/balance/') || normalizedPath.endsWith('/balance.html') || normalizedPath.endsWith('balance.html');
+    const isCatalog = normalizedPath.includes('/stock/catalog/') || normalizedPath.endsWith('/catalog.html') || normalizedPath.endsWith('catalog.html');
+    const isMovement = normalizedPath.includes('/stock/movement/') || normalizedPath.endsWith('/movement.html') || normalizedPath.endsWith('movement.html');
     
     // Reports sub-pages
-    const isReportsOverview = window.location.pathname.includes('/reports/overview/') || window.location.pathname.endsWith('overview.html');
-    const isReportsSales = window.location.pathname.includes('/reports/sales/') || (window.location.pathname.endsWith('sales.html') && window.location.pathname.includes('/reports/'));
-    const isReportsPurchases = window.location.pathname.includes('/reports/purchases/') || (window.location.pathname.endsWith('purchases.html') && window.location.pathname.includes('/reports/'));
-    const isReportsStock = window.location.pathname.includes('/reports/stock/') || (window.location.pathname.endsWith('stock.html') && window.location.pathname.includes('/reports/'));
-    const isLegacyReports = window.location.pathname.endsWith('reports.html') && !window.location.pathname.includes('/overview/');
+    const isReportsOverview = normalizedPath.includes('/reports/overview/') || (normalizedPath.endsWith('/overview.html') && normalizedPath.includes('/reports/'));
+    const isReportsSales = normalizedPath.includes('/reports/sales/') || (normalizedPath.endsWith('/sales.html') && normalizedPath.includes('/reports/'));
+    const isReportsPurchases = normalizedPath.includes('/reports/purchases/') || (normalizedPath.endsWith('/purchases.html') && normalizedPath.includes('/reports/'));
+    const isReportsStock = normalizedPath.includes('/reports/stock/') || (normalizedPath.endsWith('/stock.html') && normalizedPath.includes('/reports/'));
+    const isLegacyReports = normalizedPath.endsWith('/reports.html') && !normalizedPath.includes('/overview/');
 
     // Settings sub-pages
-    const isCompany = window.location.pathname.includes('/settings/company/') || (window.location.pathname.endsWith('company.html') && window.location.pathname.includes('/settings/'));
-    const isUsers = window.location.pathname.includes('/settings/users/') || window.location.pathname.includes('/users/');
-    const isTax = window.location.pathname.includes('/settings/tax/') || (window.location.pathname.endsWith('tax.html') && window.location.pathname.includes('/settings/'));
-    const isNotifications = window.location.pathname.includes('/settings/notifications/') || (window.location.pathname.endsWith('notifications.html') && window.location.pathname.includes('/settings/'));
-    const isSystem = window.location.pathname.includes('/settings/system/') || (window.location.pathname.endsWith('system.html') && window.location.pathname.includes('/settings/'));
-    const isLegacySettings = window.location.pathname.endsWith('settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem;
+    const isCompany = normalizedPath.includes('/settings/company/') || (normalizedPath.endsWith('/company.html') && normalizedPath.includes('/settings/'));
+    const isUsers = normalizedPath.includes('/settings/users/') || normalizedPath.includes('/users/');
+    const isTax = normalizedPath.includes('/settings/tax/') || (normalizedPath.endsWith('/tax.html') && normalizedPath.includes('/settings/'));
+    const isNotifications = normalizedPath.includes('/settings/notifications/') || (normalizedPath.endsWith('/notifications.html') && normalizedPath.includes('/settings/'));
+    const isSystem = normalizedPath.includes('/settings/system/') || (normalizedPath.endsWith('/system.html') && normalizedPath.includes('/settings/'));
+    const isLegacySettings = normalizedPath.endsWith('/settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem;
 
     let initialNav = urlParam;
     if (!initialNav) {

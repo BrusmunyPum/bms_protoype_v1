@@ -63,3 +63,20 @@ textarea::-webkit-scrollbar {
         transform: translateY(0) scale(1);
     }
 }
+
+/* =========================================================
+   Sidebar Smooth Accordion & Chevron Animation
+   ========================================================= */
+.nav-parent i.fa-chevron-right {
+    display: inline-block;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-parent i.fa-chevron-right.rotate-90 {
+    transform: rotate(90deg);
+}
+
+.nav-item, .nav-sub-item, .nav-parent {
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
