@@ -2,7 +2,7 @@
 const BMS_NAV_ITEMS = {
     'dashboard': {
         title: 'ផ្ទាំងគ្រប់គ្រង',
-        subtitle: 'ស្វាគមន៍មកកាន់ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម BMS DigiTech',
+        subtitle: 'ស្វាគមន៍មកកាន់ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម DIGITECHKH',
         icon: 'fa-border-all',
         parent: null
     },
@@ -254,7 +254,7 @@ function setActiveNavItem(itemId) {
     if (emptyTitle && meta) emptyTitle.textContent = `មិនទាន់មានទិន្នន័យ ${meta.title} នៅឡើយទេ`;
     if (emptyDesc && meta) emptyDesc.textContent = `សូមចុចប៊ូតុង "បង្កើត" ខាងលើដើម្បីបញ្ចូលទិន្នន័យ ${meta.title} ថ្មី`;
     if (meta && document.getElementById('page-title')) {
-        document.title = `BMS DigiTech - ${meta.title}`;
+        document.title = `DIGITECHKH - ${meta.title}`;
     }
 }
 
@@ -513,31 +513,31 @@ function initSidebarNav() {
 
     const normalizedPath = decodeURIComponent(window.location.pathname).replace(/\\/g, '/').toLowerCase();
 
-    const isDashboard = normalizedPath.endsWith('/dashboard.html') || normalizedPath.endsWith('dashboard.html');
-    const isInvoices = normalizedPath.includes('/sales/invoice/') || normalizedPath.endsWith('/invoice.html') || normalizedPath.endsWith('invoice.html');
-    const isQuotes = normalizedPath.includes('/sales/quote/') || normalizedPath.endsWith('/quote.html') || normalizedPath.endsWith('quote.html');
-    const isCustomers = normalizedPath.includes('/sales/customer/') || normalizedPath.endsWith('/customer.html') || normalizedPath.endsWith('customer.html');
-    const isPayments = normalizedPath.includes('/sales/payment/') || normalizedPath.endsWith('/payment.html') || normalizedPath.endsWith('payment.html');
-    const isBills = normalizedPath.includes('/buy/bills/') || normalizedPath.endsWith('/bills.html') || normalizedPath.endsWith('bills.html');
-    const isSuppliers = normalizedPath.includes('/buy/suppliers/') || normalizedPath.endsWith('/suppliers.html') || normalizedPath.endsWith('suppliers.html');
-    const isDisbursement = normalizedPath.includes('/buy/disbursement/') || normalizedPath.endsWith('/disbursement.html') || normalizedPath.endsWith('disbursement.html');
-    const isBalance = normalizedPath.includes('/stock/balance/') || normalizedPath.endsWith('/balance.html') || normalizedPath.endsWith('balance.html');
-    const isCatalog = normalizedPath.includes('/stock/catalog/') || normalizedPath.endsWith('/catalog.html') || normalizedPath.endsWith('catalog.html');
-    const isMovement = normalizedPath.includes('/stock/movement/') || normalizedPath.endsWith('/movement.html') || normalizedPath.endsWith('movement.html');
+    const isDashboard = normalizedPath.includes('dashboard.html');
+    const isInvoices = (normalizedPath.includes('invoice') || normalizedPath.includes('1-invoice')) && !normalizedPath.includes('bills');
+    const isQuotes = normalizedPath.includes('quote') || normalizedPath.includes('2-quote');
+    const isCustomers = normalizedPath.includes('customer') || normalizedPath.includes('3-customer');
+    const isPayments = normalizedPath.includes('payment') || normalizedPath.includes('4-payment');
+    const isBills = normalizedPath.includes('bills') || normalizedPath.includes('1-bills');
+    const isSuppliers = normalizedPath.includes('suppliers') || normalizedPath.includes('2-suppliers');
+    const isDisbursement = normalizedPath.includes('disbursement') || normalizedPath.includes('3-disbursement');
+    const isBalance = normalizedPath.includes('balance') || normalizedPath.includes('1-balance');
+    const isCatalog = normalizedPath.includes('catalog') || normalizedPath.includes('2-catalog');
+    const isMovement = normalizedPath.includes('movement') || normalizedPath.includes('3-movement');
     
     // Reports sub-pages
-    const isReportsOverview = normalizedPath.includes('/reports/overview/') || (normalizedPath.endsWith('/overview.html') && normalizedPath.includes('/reports/'));
-    const isReportsSales = normalizedPath.includes('/reports/sales/') || (normalizedPath.endsWith('/sales.html') && normalizedPath.includes('/reports/'));
-    const isReportsPurchases = normalizedPath.includes('/reports/purchases/') || (normalizedPath.endsWith('/purchases.html') && normalizedPath.includes('/reports/'));
-    const isReportsStock = normalizedPath.includes('/reports/stock/') || (normalizedPath.endsWith('/stock.html') && normalizedPath.includes('/reports/'));
-    const isLegacyReports = normalizedPath.endsWith('/reports.html') && !normalizedPath.includes('/overview/');
+    const isReportsOverview = normalizedPath.includes('overview') && (normalizedPath.includes('reports') || normalizedPath.includes('6-reports'));
+    const isReportsSales = normalizedPath.includes('sales.html') && (normalizedPath.includes('reports') || normalizedPath.includes('6-reports'));
+    const isReportsPurchases = normalizedPath.includes('purchases.html') && (normalizedPath.includes('reports') || normalizedPath.includes('6-reports'));
+    const isReportsStock = normalizedPath.includes('stock.html') && (normalizedPath.includes('reports') || normalizedPath.includes('6-reports'));
+    const isLegacyReports = normalizedPath.endsWith('/reports.html') && !normalizedPath.includes('overview');
 
     // Settings sub-pages
-    const isCompany = normalizedPath.includes('/settings/company/') || (normalizedPath.endsWith('/company.html') && normalizedPath.includes('/settings/'));
-    const isUsers = normalizedPath.includes('/settings/users/') || normalizedPath.includes('/users/');
-    const isTax = normalizedPath.includes('/settings/tax/') || (normalizedPath.endsWith('/tax.html') && normalizedPath.includes('/settings/'));
-    const isNotifications = normalizedPath.includes('/settings/notifications/') || (normalizedPath.endsWith('/notifications.html') && normalizedPath.includes('/settings/'));
-    const isSystem = normalizedPath.includes('/settings/system/') || (normalizedPath.endsWith('/system.html') && normalizedPath.includes('/settings/'));
+    const isCompany = normalizedPath.includes('company') || normalizedPath.includes('1-company');
+    const isUsers = normalizedPath.includes('users') || normalizedPath.includes('2-users');
+    const isTax = normalizedPath.includes('tax') || normalizedPath.includes('3-tax');
+    const isNotifications = normalizedPath.includes('notifications') || normalizedPath.includes('4-notifications');
+    const isSystem = normalizedPath.includes('system') || normalizedPath.includes('5-system');
     const isLegacySettings = normalizedPath.endsWith('/settings.html') && !isCompany && !isUsers && !isTax && !isNotifications && !isSystem;
 
     let initialNav = urlParam;
@@ -792,7 +792,7 @@ function openChangePasswordModal() {
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1.5">ពាក្យសម្ងាត់ថ្មី <span class="text-rose-500">*</span></label>
                         <div class="relative">
-                            <input type="password" id="newPasswordInput" required minlength="6" placeholder="បញ្ចូលពាក្យសម្ងាត់ថ្មី (យ៉ាងតិច ៦ ខ្ទង់)..." class="w-full text-xs font-normal text-slate-700 px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-10 transition" />
+                            <input type="password" id="newPasswordInput" required minlength="6" placeholder="បញ្ចូលពាក្យសម្ងាត់ថ្មី (យ៉ាងតិច 6 ខ្ទង់)..." class="w-full text-xs font-normal text-slate-700 px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary pr-10 transition" />
                             <button type="button" onclick="togglePasswordVisibility('newPasswordInput', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                                 <i class="fas fa-eye text-xs"></i>
                             </button>
@@ -879,9 +879,9 @@ function submitChangePassword() {
 
     if (newPass.length < 6) {
         if (typeof showToast === 'function') {
-            showToast('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៦ ខ្ទង់!', 'warning');
+            showToast('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច 6 ខ្ទង់!', 'warning');
         } else {
-            alert('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៦ ខ្ទង់!');
+            alert('ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច 6 ខ្ទង់!');
         }
         return;
     }
@@ -936,7 +936,7 @@ function initGlobalNotifications() {
                 <div class="p-3.5 px-4 bg-gradient-to-r from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <h4 class="text-sm font-bold text-slate-800">ការជូនដំណឹង (Notifications)</h4>
-                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">៤ ថ្មី</span>
+                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-100">4 ថ្មី</span>
                     </div>
                     <button type="button" onclick="markAllNotificationsAsRead()" class="text-[11px] font-medium text-primary hover:underline transition">
                         <i class="fas fa-check-double mr-1"></i> អានទាំងអស់
@@ -952,10 +952,10 @@ function initGlobalNotifications() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រ <span class="font-semibold text-slate-800">#INV-2024-008</span> ត្រូវបានទូទាត់ជោគជ័យ <span class="font-semibold text-emerald-700">$12,800.00</span>
+                                វិក្កយបត្រ <span class="font-semibold text-slate-800">#INV-2026-0042</span> ត្រូវបានទូទាត់ជោគជ័យ <span class="font-semibold text-emerald-700">$12,800.00</span>
                             </p>
                             <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> ១០ នាទីមុន
+                                <i class="fas fa-clock text-[10px]"></i> 10 នាទីមុន
                             </span>
                         </div>
                         <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0 notif-dot"></span>
@@ -968,10 +968,10 @@ function initGlobalNotifications() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                ស្តុកទំនិញ <span class="font-semibold text-slate-800">iPhone 15 Pro Max</span> ជិតអស់ពីស្តុក (នៅសល់តែ ៣ គ្រឿង)
+                                ស្តុកទំនិញ <span class="font-semibold text-slate-800">iPhone 15 Pro Max</span> ជិតអស់ពីស្តុក (នៅសល់តែ 3 គ្រឿង)
                             </p>
                             <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> ៤៥ នាទីមុន
+                                <i class="fas fa-clock text-[10px]"></i> 45 នាទីមុន
                             </span>
                         </div>
                         <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0 notif-dot"></span>
@@ -984,10 +984,10 @@ function initGlobalNotifications() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                អតិថិជនថ្មី <span class="font-semibold text-slate-800">Emma Thompson (ABC Corp)</span> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ
+                                អតិថិជនថ្មី <span class="font-semibold text-slate-800">សុខ វណ្ណា (ក្រុមហ៊ុន សុខ វណ្ណា ត្រេឌីង)</span> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ
                             </p>
                             <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> ២ ម៉ោងមុន
+                                <i class="fas fa-clock text-[10px]"></i> 2 ម៉ោងមុន
                             </span>
                         </div>
                         <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0 notif-dot"></span>
@@ -1000,10 +1000,10 @@ function initGlobalNotifications() {
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រទិញ <span class="font-semibold text-slate-800">#BILL-2024-042</span> ត្រូវបានអនុម័តដោយប្រធានផ្នែក
+                                វិក្កយបត្រទិញ <span class="font-semibold text-slate-800">#BILL-2026-004</span> ត្រូវបានអនុម័តដោយប្រធានផ្នែក
                             </p>
                             <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> ៤ ម៉ោងមុន
+                                <i class="fas fa-clock text-[10px]"></i> 4 ម៉ោងមុន
                             </span>
                         </div>
                         <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0 notif-dot"></span>
@@ -1063,7 +1063,7 @@ function markAllNotificationsAsRead() {
     // Update count badge
     const badge = document.getElementById('bmsNotifCountBadge');
     if (badge) {
-        badge.textContent = '០ ថ្មី';
+        badge.textContent = '0 ថ្មី';
         badge.className = 'px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500 border border-slate-200';
     }
 

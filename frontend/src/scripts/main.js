@@ -1,4 +1,4 @@
-console.log("BMS DigiTech Prototype Initialized");
+console.log("DIGITECHKH Prototype Initialized");
 
 // --- Mock Data for future use ---
 // You can use this data later when connecting to the Spring Boot backend via fetch()

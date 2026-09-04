@@ -239,3 +239,132 @@ textarea::-webkit-scrollbar {
     transition: background-color 0.15s ease, color 0.15s ease;
 }
 
+/* =========================================================
+   Print Stylesheet Standard (A4 Enterprise Document Print)
+   ========================================================= */
+.print-only {
+    display: none !important;
+}
+
+@media print {
+    /* 1. Page Standard */
+    @page {
+        size: A4 portrait;
+        margin: 12mm 14mm 14mm 14mm;
+    }
+
+    /* 2. Global Reset for Pure Document Print */
+    html, body {
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 13.5px !important;
+        line-height: 1.45 !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* 3. Hide all non-printable UI chrome */
+    aside,
+    header,
+    nav,
+    footer:not(.print-footer),
+    .no-print,
+    button,
+    #rowActionDropdown,
+    .bms-date-popover,
+    .bms-custom-select-menu,
+    #bmsToastContainer,
+    #bmsCustomConfirmModal {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* 4. Layout Container Unwrapping */
+    div.flex-1.flex.flex-col,
+    main {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: transparent !important;
+    }
+
+    /* 5. Document Card Expansion to Pure A4 Sheet */
+    .printable-document,
+    main > div.w-full,
+    main > div[class*="max-w-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+    }
+
+    /* 6. Table Layout & Anti-Clipping */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    table th, table td {
+        font-size: 13px !important;
+        padding: 8px 10px !important;
+        border-color: #cbd5e1 !important;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    /* 7. Avoid Awkward Page Breaks */
+    tr,
+    .signature-section,
+    .summary-section,
+    .no-break-inside {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 8. Print Badges & Colors */
+    .badge,
+    [class*="rounded-full"] {
+        border-width: 1px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* 9. Print-only Elements Visibility */
+    .print-only {
+        display: block !important;
+    }
+
+    .print-footer {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-top: 36px !important;
+        padding-top: 10px !important;
+        border-top: 1px dashed #cbd5e1 !important;
+        font-size: 11px !important;
+        color: #64748b !important;
+    }
+
+    /* 10. Clean Links without URL display */
+    a[href]::after {
+        content: "" !important;
+    }
+}
+
+

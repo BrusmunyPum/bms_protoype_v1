@@ -1,5 +1,5 @@
 /**
- * BMS DigiTech - Custom UI Components
+ * DIGITECHKH - Custom UI Components
  * Replaces native browser elements (alert, confirm, select) with elegant enterprise-grade UI
  */
 
@@ -22,7 +22,7 @@ function showToast(message, type = 'success', duration = 3200) {
     if (type === 'success') {
         iconHtml = '<div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 text-base"><i class="fas fa-circle-check"></i></div>';
         borderClass = 'border-emerald-100';
-    } else if (type === 'error') {
+    } else if (type === 'error' || type === 'danger') {
         iconHtml = '<div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0 text-base"><i class="fas fa-circle-xmark"></i></div>';
         borderClass = 'border-rose-100';
     } else if (type === 'warning') {
@@ -37,7 +37,7 @@ function showToast(message, type = 'success', duration = 3200) {
     toast.innerHTML = `
         ${iconHtml}
         <div class="flex-1 font-medium text-slate-800 text-xs leading-relaxed">${message}</div>
-        <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-600 p-1 rounded-lg transition">
+        <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-600 p-1 rounded-lg transition ml-auto flex-shrink-0 cursor-pointer">
             <i class="fas fa-xmark text-xs"></i>
         </button>
     `;
