@@ -43,7 +43,7 @@ textarea::-webkit-scrollbar {
 .bms-date-popover,
 #rowActionDropdown {
     animation: bmsDropdownPop 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: top;
+    transform-origin: top right;
 }
 
 @keyframes bmsDropdownPop {

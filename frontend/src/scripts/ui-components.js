@@ -312,7 +312,7 @@ function initSingleDatePicker(id) {
     if (!popover && container) {
         popover = document.createElement('div');
         popover.id = `${id}-popover`;
-        popover.className = 'bms-date-popover absolute left-0 top-full mt-1.5 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-3.5 hidden select-none';
+        popover.className = 'bms-date-popover absolute right-0 top-full mt-1.5 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-3.5 hidden select-none';
         popover.onclick = (e) => e.stopPropagation();
         popover.innerHTML = `
             <div class="flex items-center justify-between mb-2.5 px-1">
@@ -395,12 +395,13 @@ function toggleSingleDatePicker(id) {
         if (container) container.classList.add('z-50');
         popover.classList.remove('hidden');
 
-        // Prevent boundary overflow beyond screen right or left
+        // Default align right directly underneath the calendar icon
+        popover.classList.remove('left-0');
+        popover.classList.add('right-0');
+
+        // Prevent boundary overflow if window is very narrow and left is clipped
         const rect = popover.getBoundingClientRect();
-        if (rect.right > window.innerWidth - 12) {
-            popover.classList.remove('left-0');
-            popover.classList.add('right-0');
-        } else if (rect.left < 12) {
+        if (rect.left < 12) {
             popover.classList.remove('right-0');
             popover.classList.add('left-0');
         }
