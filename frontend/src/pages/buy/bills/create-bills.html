@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMS DigiTech - បង្កើតវិក្កយបត្រលក់ថ្មី</title>
+    <title>BMS DigiTech - បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</title>
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,15 +63,15 @@
             <!-- ការលក់ -->
             <div>
                 <button id="btn-menu-sell" onclick="toggleMenu('menu-sell')"
-                    class="nav-parent w-full flex items-center justify-between p-3 bg-white/10 text-white font-medium rounded-xl transition-colors whitespace-nowrap">
+                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-money-bill w-6 text-center opacity-80"></i>
                         <span class="ml-3 text-[16px]">ការលក់</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200 rotate-90" id="icon-menu-sell"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-sell"></i>
                 </button>
-                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 text-[15px]">
-                    <a href="../../sales/invoice/invoice.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white shadow-sm font-medium rounded-xl transition-all whitespace-nowrap">
+                <div id="menu-sell" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
+                    <a href="../../sales/invoice/invoice.html" data-nav="sell-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice-dollar w-5 text-center mr-2 text-xs opacity-70"></i> វិក្កយបត្រលក់
                     </a>
                     <a href="../../sales/quote/quote.html" data-nav="sell-prices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
@@ -89,15 +89,15 @@
             <!-- ការទិញ -->
             <div>
                 <button id="btn-menu-buy" onclick="toggleMenu('menu-buy')"
-                    class="nav-parent w-full flex items-center justify-between p-3 text-emerald-100 hover:bg-white/10 hover:text-white rounded-xl transition-colors whitespace-nowrap">
+                    class="nav-parent w-full flex items-center justify-between p-3 bg-white/10 text-white font-medium rounded-xl transition-colors whitespace-nowrap">
                     <div class="flex items-center">
                         <i class="fas fa-cart-shopping w-6 text-center opacity-80"></i>
                         <span class="ml-3 text-[16px]">ការទិញ</span>
                     </div>
-                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200" id="icon-menu-buy"></i>
+                    <i class="fas fa-chevron-right text-xs opacity-60 transition-transform duration-200 rotate-90" id="icon-menu-buy"></i>
                 </button>
-                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 hidden text-[15px]">
-                    <a href="../../buy/bills/bills.html" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
+                <div id="menu-buy" class="ml-6 pl-3 py-1.5 space-y-1 border-l border-white/20 mt-1 mb-2 text-[15px]">
+                    <a href="../../buy/bills/bills.html" data-nav="buy-invoices" class="nav-sub-item flex items-center px-3 py-2 bg-primary text-white shadow-sm font-medium rounded-xl transition-all whitespace-nowrap">
                         <i class="fas fa-file-invoice w-5 text-center opacity-70 mr-2 text-xs"></i> វិក្កយបត្របញ្ញាទិញ
                     </a>
                     <a href="../../buy/suppliers/suppliers.html" data-nav="buy-suppliers" class="nav-sub-item flex items-center px-3 py-2 text-emerald-100/75 hover:bg-white/10 hover:text-white rounded-xl transition-all whitespace-nowrap">
@@ -199,136 +199,96 @@
     <!-- Main Container -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
-        <!-- Top Header with Back Navigation -->
+        <!-- Top Header with Back Navigation (72px height standard) -->
         <header class="bg-white px-6 h-[72px] flex items-center shadow-sm z-10 flex-shrink-0">
             <div class="flex items-center gap-3">
-                <a href="invoice.html" class="text-slate-500 hover:text-slate-800 transition p-1.5 -ml-1.5 flex items-center justify-center" title="ត្រឡប់ទៅវិក្កយបត្រ">
+                <a href="bills.html" class="text-slate-500 hover:text-slate-800 transition p-1.5 -ml-1.5 flex items-center justify-center" title="ត្រឡប់ទៅវិក្កយបត្របញ្ញាទិញ">
                     <i class="fas fa-arrow-left text-lg"></i>
                 </a>
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">បង្កើតវិក្កយបត្រលក់ថ្មី</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5">បញ្ចូលព័ត៌មានទិញទំនិញចូលស្តុកពីអ្នកផ្គត់ផ្គង់</p>
                 </div>
             </div>
         </header>
 
-        <!-- Scrollable Main Content Form -->
+        <!-- Scrollable Main Content Form (Full Width) -->
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-4">
             <div class="w-full space-y-4">
 
-                <!-- 1. Customer & Invoice Info Card -->
+                <!-- 1. Supplier & Bill Info Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">១</span>
-                            <span>ព័ត៌មានទូទៅនៃវិក្កយបត្រ</span>
+                            <span>ព័ត៌មានទូទៅនៃវិក្កយបត្របញ្ញាទិញ</span>
                         </h3>
-                        <span class="text-xs text-slate-400">លេខកូដវិក្កយបត្រ៖ <strong class="text-slate-800" id="displayInvNumber">INV-2026-0043</strong></span>
+                        <span class="text-xs text-slate-400">លេខកូដវិក្កយបត្រ៖ <strong class="text-slate-800" id="displayBillNumber">BILL-2026-0083</strong></span>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-                        <!-- Customer Custom Dropdown -->
+                        <!-- Supplier Custom Dropdown -->
                         <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1.5">អតិថិជន *</label>
-                            <div class="relative bms-custom-select" id="pageInvCustomerDropdown">
-                                <input type="hidden" id="pageInvCustomer" value="" required />
-                                <button type="button" onclick="toggleCustomDropdown('pageInvCustomerDropdown')"
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">អ្នកផ្គត់ផ្គង់ <span class="text-rose-500">*</span></label>
+                            <div class="relative bms-custom-select" id="pageBillSupplierDropdown">
+                                <input type="hidden" id="pageBillSupplier" value="" required />
+                                <button type="button" onclick="toggleCustomDropdown('pageBillSupplierDropdown')"
                                     class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
-                                    <span class="selected-label text-slate-400">-- ជ្រើសរើសអតិថិជន --</span>
+                                    <span class="selected-label text-slate-400">-- ជ្រើសរើសអ្នកផ្គត់ផ្គង់ --</span>
                                     <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
                                 </button>
                                 <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden max-h-56 overflow-y-auto space-y-0.5">
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-001', 'ហេង វិច្ឆិកា', '012 345 678', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80', 'ក្រុមហ៊ុន វិច្ឆិកា ត្រេឌីង ឯ.ក')"
-                                        data-customer-id="CUST-001"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectSupplierOption('pageBillSupplierDropdown', 'SUP-001', 'ក្រុមហ៊ុន បច្ចេកវិទ្យា ខេមបូឌា ត្រេឌីង ឯ.ក', '012 888 999', 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=128&q=80', 'ចាន់ វិចិត្រ')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80" alt="ហេង វិច្ឆិកា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=128&q=80" alt="Supplier" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ហេង វិច្ឆិកា</p>
-                                                <p class="text-[11px] text-slate-400">012 345 678 • ក្រុមហ៊ុន វិច្ឆិកា ត្រេឌីង ឯ.ក</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ក្រុមហ៊ុន បច្ចេកវិទ្យា ខេមបូឌា ត្រេឌីង ឯ.ក</p>
+                                                <p class="text-[11px] text-slate-400">012 888 999 • អ្នកទំនាក់ទំនង: ចាន់ វិចិត្រ</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-002', 'ចាន់ សុភា', '098 765 432', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=128&q=80', 'ហាងលក់ទំនិញ សុភា សែនសុខ')"
-                                        data-customer-id="CUST-002"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectSupplierOption('pageBillSupplierDropdown', 'SUP-002', 'ហាងលក់ដុំ អេឡិចត្រូនិក រាជធានី', '098 333 444', 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=128&q=80', 'សេង ហុង')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=128&q=80" alt="ចាន់ សុភា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=128&q=80" alt="Supplier" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ចាន់ សុភា</p>
-                                                <p class="text-[11px] text-slate-400">098 765 432 • ហាងលក់ទំនិញ សុភា សែនសុខ</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ហាងលក់ដុំ អេឡិចត្រូនិក រាជធានី</p>
+                                                <p class="text-[11px] text-slate-400">098 333 444 • អ្នកទំនាក់ទំនង: សេង ហុង</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-003', 'លី ម៉េងហុង', '077 112 233', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=128&q=80', 'អតិថិជនបុគ្គល')"
-                                        data-customer-id="CUST-003"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectSupplierOption('pageBillSupplierDropdown', 'SUP-003', 'ក្រុមហ៊ុន ឌីជីថល សឹបផ្លាយ ឯ.ក', '077 555 666', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=128&q=80', 'កែវ ពិសិដ្ឋ')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=128&q=80" alt="លី ម៉េងហុង" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=128&q=80" alt="Supplier" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">លី ម៉េងហុង</p>
-                                                <p class="text-[11px] text-slate-400">077 112 233 • អតិថិជនបុគ្គល</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ក្រុមហ៊ុន ឌីជីថល សឹបផ្លាយ ឯ.ក</p>
+                                                <p class="text-[11px] text-slate-400">077 555 666 • អ្នកទំនាក់ទំនង: កែវ ពិសិដ្ឋ</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-004', 'គឹម សុផល', '015 998 877', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=80', 'ក្រុមហ៊ុន សុផល អាហរ័ណ នីហរ័ណ')"
-                                        data-customer-id="CUST-004"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectSupplierOption('pageBillSupplierDropdown', 'SUP-004', 'ក្រុមហ៊ុន អាហរ័ណ នីហរ័ណ សុវណ្ណភូមិ', '015 222 111', 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=128&q=80', 'ម៉ៅ វណ្ណឌី')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=80" alt="គឹម សុផល" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=128&q=80" alt="Supplier" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">គឹម សុផល</p>
-                                                <p class="text-[11px] text-slate-400">015 998 877 • ក្រុមហ៊ុន សុផល អាហរ័ណ នីហរ័ណ</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ក្រុមហ៊ុន អាហរ័ណ នីហរ័ណ សុវណ្ណភូមិ</p>
+                                                <p class="text-[11px] text-slate-400">015 222 111 • អ្នកទំនាក់ទំនង: ម៉ៅ វណ្ណឌី</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-005', 'សួស ធីតា', '085 445 566', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80', 'ហាងកាហ្វេ និងនំបុ័ង ធីតា')"
-                                        data-customer-id="CUST-005"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
+                                    <div onclick="selectSupplierOption('pageBillSupplierDropdown', 'SUP-005', 'ហាងផ្គត់ផ្គង់គ្រឿងបន្លាស់ ទំនើប', '085 777 888', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=128&q=80', 'នួន ថាវី')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
                                         <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=128&q=80" alt="សួស ធីតា" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
+                                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=128&q=80" alt="Supplier" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
                                             <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">សួស ធីតា</p>
-                                                <p class="text-[11px] text-slate-400">085 445 566 • ហាងកាហ្វេ និងនំបុ័ង ធីតា</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
-                                    </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-006', 'កែវ វណ្ណៈ', '011 889 900', 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=128&q=80', 'វណ្ណៈ អេឡិចត្រូនិក')"
-                                        data-customer-id="CUST-006"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
-                                        <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=128&q=80" alt="កែវ វណ្ណៈ" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
-                                            <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">កែវ វណ្ណៈ</p>
-                                                <p class="text-[11px] text-slate-400">011 889 900 • វណ្ណៈ អេឡិចត្រូនិក</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
-                                    </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-007', 'អ៊ុក សម្បត្តិ', '092 334 455', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=128&q=80', 'សម្បត្តិ សំណង់ និងជួសជុល')"
-                                        data-customer-id="CUST-007"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
-                                        <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=128&q=80" alt="អ៊ុក សម្បត្តិ" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
-                                            <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">អ៊ុក សម្បត្តិ</p>
-                                                <p class="text-[11px] text-slate-400">092 334 455 • សម្បត្តិ សំណង់ និងជួសជុល</p>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
-                                    </div>
-                                    <div onclick="selectCustomCustomer('pageInvCustomerDropdown', 'CUST-008', 'ឡុង ដានី', '097 556 677', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=128&q=80', 'ដានី ម៉ាត កំពង់ចាម')"
-                                        data-customer-id="CUST-008"
-                                        class="customer-opt p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between transition group">
-                                        <div class="flex items-center gap-2.5">
-                                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=128&q=80" alt="ឡុង ដានី" class="w-8 h-8 rounded-full object-cover border border-slate-200 flex-shrink-0 shadow-xs" />
-                                            <div>
-                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ឡុង ដានី</p>
-                                                <p class="text-[11px] text-slate-400">097 556 677 • ដានី ម៉ាត កំពង់ចាម</p>
+                                                <p class="font-medium text-xs text-slate-800 group-hover:text-primary">ហាងផ្គត់ផ្គង់គ្រឿងបន្លាស់ ទំនើប</p>
+                                                <p class="text-[11px] text-slate-400">085 777 888 • អ្នកទំនាក់ទំនង: នួន ថាវី</p>
                                             </div>
                                         </div>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
@@ -337,25 +297,25 @@
                             </div>
                         </div>
 
-                        <!-- Date Issued -->
+                        <!-- Date Issued (Single Date Picker) -->
                         <div>
                             <label class="block text-xs font-medium text-slate-700 mb-1.5">កាលបរិច្ឆេទចេញវិក្កយបត្រ <span class="text-rose-500">*</span></label>
                             <div class="relative bms-date-picker">
-                                <input type="hidden" id="pageInvDate" value="2026-09-04" />
-                                <button type="button" onclick="toggleSingleDatePicker('pageInvDate')"
+                                <input type="hidden" id="pageBillDate" value="2026-09-04" />
+                                <button type="button" onclick="toggleSingleDatePicker('pageBillDate')"
                                     class="w-full h-10 px-3.5 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 rounded-xl text-xs text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition group cursor-pointer">
-                                    <span id="pageInvDate-display" class="bms-date-label font-medium text-slate-800">04/09/2026</span>
+                                    <span id="pageBillDate-display" class="bms-date-label font-medium text-slate-800">04/09/2026</span>
                                     <i class="fas fa-calendar-days text-primary text-xs opacity-75 group-hover:opacity-100 transition"></i>
                                 </button>
-                                <div id="pageInvDate-popover" onclick="event.stopPropagation()"
+                                <div id="pageBillDate-popover" onclick="event.stopPropagation()"
                                     class="bms-date-popover absolute right-0 top-full mt-1.5 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-3.5 hidden select-none">
                                     <div class="flex items-center justify-between mb-2.5 px-1">
-                                        <span id="pageInvDate-month-label" class="text-xs font-bold text-slate-800"></span>
+                                        <span id="pageBillDate-month-label" class="text-xs font-bold text-slate-800"></span>
                                         <div class="flex items-center gap-1">
-                                            <button type="button" onclick="changeSinglePickerMonth('pageInvDate', -1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                                            <button type="button" onclick="changeSinglePickerMonth('pageBillDate', -1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                                                 <i class="fas fa-chevron-left text-[10px]"></i>
                                             </button>
-                                            <button type="button" onclick="changeSinglePickerMonth('pageInvDate', 1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                                            <button type="button" onclick="changeSinglePickerMonth('pageBillDate', 1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                                                 <i class="fas fa-chevron-right text-[10px]"></i>
                                             </button>
                                         </div>
@@ -363,12 +323,12 @@
                                     <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-400 mb-1.5">
                                         <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
                                     </div>
-                                    <div id="pageInvDate-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
+                                    <div id="pageBillDate-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
                                     <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                                        <button type="button" onclick="setSinglePickerToday('pageInvDate')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                                        <button type="button" onclick="setSinglePickerToday('pageBillDate')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
                                             ថ្ងៃនេះ
                                         </button>
-                                        <button type="button" onclick="closeSingleDatePicker('pageInvDate')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
+                                        <button type="button" onclick="closeSingleDatePicker('pageBillDate')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
                                             បិទ
                                         </button>
                                     </div>
@@ -376,25 +336,25 @@
                             </div>
                         </div>
 
-                        <!-- Due Date -->
+                        <!-- Due Date (Single Date Picker) -->
                         <div>
                             <label class="block text-xs font-medium text-slate-700 mb-1.5">កាលបរិច្ឆេទផុតកំណត់ <span class="text-rose-500">*</span></label>
                             <div class="relative bms-date-picker">
-                                <input type="hidden" id="pageInvDueDate" value="2026-09-18" />
-                                <button type="button" onclick="toggleSingleDatePicker('pageInvDueDate')"
+                                <input type="hidden" id="pageBillDueDate" value="2026-09-18" />
+                                <button type="button" onclick="toggleSingleDatePicker('pageBillDueDate')"
                                     class="w-full h-10 px-3.5 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 rounded-xl text-xs text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition group cursor-pointer">
-                                    <span id="pageInvDueDate-display" class="bms-date-label font-medium text-slate-800">18/09/2026</span>
+                                    <span id="pageBillDueDate-display" class="bms-date-label font-medium text-slate-800">18/09/2026</span>
                                     <i class="fas fa-calendar-days text-primary text-xs opacity-75 group-hover:opacity-100 transition"></i>
                                 </button>
-                                <div id="pageInvDueDate-popover" onclick="event.stopPropagation()"
+                                <div id="pageBillDueDate-popover" onclick="event.stopPropagation()"
                                     class="bms-date-popover absolute right-0 top-full mt-1.5 w-[280px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-3.5 hidden select-none">
                                     <div class="flex items-center justify-between mb-2.5 px-1">
-                                        <span id="pageInvDueDate-month-label" class="text-xs font-bold text-slate-800"></span>
+                                        <span id="pageBillDueDate-month-label" class="text-xs font-bold text-slate-800"></span>
                                         <div class="flex items-center gap-1">
-                                            <button type="button" onclick="changeSinglePickerMonth('pageInvDueDate', -1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                                            <button type="button" onclick="changeSinglePickerMonth('pageBillDueDate', -1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                                                 <i class="fas fa-chevron-left text-[10px]"></i>
                                             </button>
-                                            <button type="button" onclick="changeSinglePickerMonth('pageInvDueDate', 1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+                                            <button type="button" onclick="changeSinglePickerMonth('pageBillDueDate', 1)" class="w-7 h-7 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
                                                 <i class="fas fa-chevron-right text-[10px]"></i>
                                             </button>
                                         </div>
@@ -402,12 +362,12 @@
                                     <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-400 mb-1.5">
                                         <span>ច</span><span>អ</span><span>ព</span><span>ព្រ</span><span>សុ</span><span>ស</span><span>អា</span>
                                     </div>
-                                    <div id="pageInvDueDate-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
+                                    <div id="pageBillDueDate-days-grid" class="grid grid-cols-7 text-center text-xs gap-y-1"></div>
                                     <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                                        <button type="button" onclick="setSinglePickerToday('pageInvDueDate')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
+                                        <button type="button" onclick="setSinglePickerToday('pageBillDueDate')" class="text-xs font-semibold text-primary hover:text-primary-light px-2 py-1 rounded-lg hover:bg-emerald-50 transition">
                                             ថ្ងៃនេះ
                                         </button>
-                                        <button type="button" onclick="closeSingleDatePicker('pageInvDueDate')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
+                                        <button type="button" onclick="closeSingleDatePicker('pageBillDueDate')" class="text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1 rounded-lg hover:bg-slate-100 transition">
                                             បិទ
                                         </button>
                                     </div>
@@ -418,35 +378,40 @@
 
                     <!-- Row 2 Info -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-slate-100">
-                        <!-- PO Number -->
+                        <!-- Supplier Invoice Ref -->
                         <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1.5">លេខបញ្ជាទិញអតិថិជន (PO)</label>
-                            <input type="text" id="pageInvPO" placeholder="ឧ. PO-2026-088"
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">លេខវិក្កយបត្រយោងអ្នកផ្គត់ផ្គង់ <span class="text-rose-500">*</span></label>
+                            <input type="text" id="pageBillSupplierRef" placeholder="ឧ. SUP-INV-9950" required
                                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
 
                         <!-- Payment Terms Custom Dropdown -->
                         <div>
                             <label class="block text-xs font-medium text-slate-700 mb-1.5">លក្ខខណ្ឌទូទាត់</label>
-                            <div class="relative bms-custom-select" id="pageInvTermsDropdown">
-                                <input type="hidden" id="pageInvTerms" value="net15" />
-                                <button type="button" onclick="toggleCustomDropdown('pageInvTermsDropdown')"
+                            <div class="relative bms-custom-select" id="pageBillTermsDropdown">
+                                <input type="hidden" id="pageBillTerms" value="net15" />
+                                <button type="button" onclick="toggleCustomDropdown('pageBillTermsDropdown')"
                                     class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
                                     <span class="selected-label text-slate-800 font-medium">ទូទាត់ក្នុងរយៈពេល ១៥ ថ្ងៃ</span>
                                     <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
                                 </button>
                                 <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden text-xs space-y-0.5">
-                                    <div onclick="selectCustomOption('pageInvTermsDropdown', 'net15', 'ទូទាត់ក្នុងរយៈពេល ១៥ ថ្ងៃ')"
+                                    <div onclick="selectCustomOption('pageBillTermsDropdown', 'net15', 'ទូទាត់ក្នុងរយៈពេល ១៥ ថ្ងៃ')"
                                         class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
                                         <span>ទូទាត់ក្នុងរយៈពេល ១៥ ថ្ងៃ</span>
                                         <i class="fas fa-check text-xs text-emerald-600 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvTermsDropdown', 'net30', 'ទូទាត់ក្នុងរយៈពេល ៣០ ថ្ងៃ')"
+                                    <div onclick="selectCustomOption('pageBillTermsDropdown', 'net30', 'ទូទាត់ក្នុងរយៈពេល ៣០ ថ្ងៃ')"
                                         class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
                                         <span>ទូទាត់ក្នុងរយៈពេល ៣០ ថ្ងៃ</span>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
                                     </div>
-                                    <div onclick="selectCustomOption('pageInvTermsDropdown', 'immediate', 'ទូទាត់ភ្លាមៗពេលទទួល')"
+                                    <div onclick="selectCustomOption('pageBillTermsDropdown', 'net7', 'ទូទាត់ក្នុងរយៈពេល ៧ ថ្ងៃ')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
+                                        <span>ទូទាត់ក្នុងរយៈពេល ៧ ថ្ងៃ</span>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomOption('pageBillTermsDropdown', 'immediate', 'ទូទាត់ភ្លាមៗពេលទទួល')"
                                         class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
                                         <span>ទូទាត់ភ្លាមៗពេលទទួល</span>
                                         <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
@@ -455,23 +420,41 @@
                             </div>
                         </div>
 
-                        <!-- Currency -->
+                        <!-- Stock Status Custom Dropdown -->
                         <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1.5">រូបិយប័ណ្ណ</label>
-                            <input type="text" value="ប្រាក់ដុល្លារ ($)" disabled
-                                class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-500 font-medium" />
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">ស្ថានភាពទំនិញចូលស្តុក</label>
+                            <div class="relative bms-custom-select" id="pageBillStockStatusDropdown">
+                                <input type="hidden" id="pageBillStockStatus" value="received" />
+                                <button type="button" onclick="toggleCustomDropdown('pageBillStockStatusDropdown')"
+                                    class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-800 flex items-center justify-between focus:outline-none focus:bg-white focus:border-primary transition">
+                                    <span class="selected-label text-emerald-700 font-medium"><i class="fas fa-box-check mr-1.5 text-xs"></i>បានចូលស្តុកពេញលេញ</span>
+                                    <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200 bms-custom-select-arrow"></i>
+                                </button>
+                                <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1.5 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 hidden text-xs space-y-0.5">
+                                    <div onclick="selectCustomOption('pageBillStockStatusDropdown', 'received', '<i class=\'fas fa-box-check mr-1.5 text-xs text-emerald-600\'></i>បានចូលស្តុកពេញលេញ')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
+                                        <span>បានចូលស្តុកពេញលេញ</span>
+                                        <i class="fas fa-check text-xs text-emerald-600 checkmark"></i>
+                                    </div>
+                                    <div onclick="selectCustomOption('pageBillStockStatusDropdown', 'pending', '<i class=\'fas fa-dolly mr-1.5 text-xs text-amber-600\'></i>រង់ចាំទទួលចូលស្តុក')"
+                                        class="p-2 rounded-xl hover:bg-emerald-50/70 cursor-pointer flex items-center justify-between text-slate-800">
+                                        <span>រង់ចាំទទួលចូលស្តុក</span>
+                                        <i class="fas fa-check text-xs text-emerald-600 opacity-0 checkmark"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Line Items Card -->
+                <!-- 2. Purchased Items Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">២</span>
-                            <span>មុខទំនិញ និងសេវាកម្មលក់</span>
+                            <span>បញ្ជីមុខទំនិញទិញចូលឃ្លាំង</span>
                         </h3>
-                        <button type="button" onclick="addPageInvLineRow()"
+                        <button type="button" onclick="addBillLineRow()"
                             class="px-3 py-1.5 bg-emerald-50 text-primary hover:bg-emerald-100 rounded-xl text-xs font-medium transition flex items-center gap-1.5 border border-emerald-200/60">
                             <i class="fas fa-plus text-[10px]"></i>
                             <span>បន្ថែមទំនិញថ្មី</span>
@@ -479,71 +462,77 @@
                     </div>
 
                     <div class="border border-slate-200 rounded-2xl overflow-visible bg-white">
-                        <table class="w-full text-left text-sm" id="pageInvLinesTable">
+                        <table class="w-full text-left text-sm" id="pageBillLinesTable">
                             <thead class="bg-slate-50/70 text-xs text-slate-500 border-b border-slate-200">
                                 <tr>
-                                    <th class="py-3 px-4 rounded-tl-2xl">ទំនិញ / បរិយាយ</th>
-                                    <th class="py-3 px-3 w-28 text-center">ស្តុកនៅសល់</th>
-                                    <th class="py-3 px-3 w-24 text-center">ចំនួន</th>
-                                    <th class="py-3 px-3 w-32 text-right">តម្លៃឯកតា ($)</th>
+                                    <th class="py-3 px-4 rounded-tl-2xl">ទំនិញ / ផលិតផល</th>
+                                    <th class="py-3 px-3 w-28 text-center">ចំនួន</th>
+                                    <th class="py-3 px-3 w-36 text-right">ថ្លៃដើមឯកតា ($)</th>
                                     <th class="py-3 px-3 w-28 text-right">បញ្ចុះតម្លៃ (%)</th>
                                     <th class="py-3 px-4 w-36 text-right">សរុបទឹកប្រាក់ ($)</th>
                                     <th class="py-3 px-3 w-12 text-center rounded-tr-2xl"></th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-100" id="pageInvLinesBody">
+                            <tbody class="divide-y divide-slate-100" id="pageBillLinesBody">
                                 <!-- Line Row 1 Default -->
                                 <tr>
                                     <td class="p-3">
                                         <div class="relative bms-custom-select product-select-container">
-                                            <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" data-stock="0" />
+                                            <input type="hidden" class="item-product-val" value="" data-cost="0" />
                                             <button type="button" onclick="toggleProductDropdown(this)"
                                                 class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between transition focus:outline-none">
                                                 <span class="product-selected-label text-slate-400 truncate">-- ជ្រើសរើសទំនិញ --</span>
                                                 <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
                                             </button>
-                                            <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
-                                                <div onclick="selectInvProductOption(this, 'iPhone 15 Pro Max 256GB', 1250, 950, 8)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                                    <span class="font-medium text-slate-800">iPhone 15 Pro Max 256GB</span>
-                                                    <span class="text-[11px] text-emerald-700 font-semibold">$1,250.00</span>
-                                                </div>
-                                                <div onclick="selectInvProductOption(this, 'MacBook Air M3 15-inch', 1450, 1100, 12)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                            <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[300px] max-h-56 overflow-y-auto space-y-0.5">
+                                                <div onclick="selectBillProduct(this, 'MacBook Air M3 15-inch', 1100)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
                                                     <span class="font-medium text-slate-800">MacBook Air M3 15-inch</span>
-                                                    <span class="text-[11px] text-emerald-700 font-semibold">$1,450.00</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$1,100.00</span>
                                                 </div>
-                                                <div onclick="selectInvProductOption(this, 'Sony WH-1000XM5 Headphone', 380, 280, 15)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                                    <span class="font-medium text-slate-800">Sony WH-1000XM5</span>
-                                                    <span class="text-[11px] text-emerald-700 font-semibold">$380.00</span>
+                                                <div onclick="selectBillProduct(this, 'iPhone 15 Pro Max 256GB', 950)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">iPhone 15 Pro Max 256GB</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$950.00</span>
                                                 </div>
-                                                <div onclick="selectInvProductOption(this, 'iPad Air 11-inch M2', 699, 520, 9)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                <div onclick="selectBillProduct(this, 'iPad Air 11-inch M2', 520)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
                                                     <span class="font-medium text-slate-800">iPad Air 11-inch M2</span>
-                                                    <span class="text-[11px] text-emerald-700 font-semibold">$699.00</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$520.00</span>
                                                 </div>
-                                                <div onclick="selectInvProductOption(this, 'សេវាដំឡើងប្រព័ន្ធ Network & Wi-Fi', 250, 50, 999)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                                    <span class="font-medium text-slate-800">សេវាដំឡើង Network</span>
-                                                    <span class="text-[11px] text-emerald-700 font-semibold">$250.00</span>
+                                                <div onclick="selectBillProduct(this, 'Sony WH-1000XM5 Headphone', 280)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Sony WH-1000XM5</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$280.00</span>
+                                                </div>
+                                                <div onclick="selectBillProduct(this, 'Network Switch 24 Ports Gigabit', 350)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Network Switch 24 Ports</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$350.00</span>
+                                                </div>
+                                                <div onclick="selectBillProduct(this, 'Wi-Fi 6 Access Point Router', 180)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">Wi-Fi 6 Access Point</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$180.00</span>
+                                                </div>
+                                                <div onclick="selectBillProduct(this, 'ខ្សែបណ្តាញ Network Cat6 305m', 100)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                                    <span class="font-medium text-slate-800">ខ្សែបណ្តាញ Cat6 305m</span>
+                                                    <span class="text-[11px] text-primary font-semibold">$100.00</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3 text-center text-xs text-slate-500 item-stock-badge">-</td>
                                     <td class="p-3">
-                                        <input type="number" min="1" value="1" oninput="recalcPageInvoice()"
+                                        <input type="number" min="1" value="1" oninput="recalcBill()"
                                             class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
                                     <td class="p-3">
-                                        <input type="number" step="0.01" value="0.00" oninput="recalcPageInvoice()"
-                                            class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                        <input type="number" step="0.01" value="0.00" oninput="recalcBill()"
+                                            class="item-cost w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
                                     <td class="p-3">
-                                        <input type="number" min="0" max="100" value="0" oninput="recalcPageInvoice()"
+                                        <input type="number" min="0" max="100" value="0" oninput="recalcBill()"
                                             class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
                                     <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
                                         $0.00
                                     </td>
                                     <td class="p-3 text-center">
-                                        <button type="button" onclick="removePageInvLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                        <button type="button" onclick="removeBillLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
                                             <i class="fas fa-trash-can text-xs"></i>
                                         </button>
                                     </td>
@@ -555,16 +544,16 @@
 
                 <!-- 3. Notes & Financial Summary Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <!-- Terms & Notes Card -->
+                    <!-- Notes Card -->
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">៣</span>
-                            <span>កំណត់សម្គាល់ និងលក្ខខណ្ឌការទូទាត់</span>
+                            <span>កំណត់សម្គាល់បន្ថែម</span>
                         </h3>
                         <div>
-                            <textarea id="pageInvNotes" rows="6"
-                                placeholder="បញ្ចូលកំណត់សម្គាល់បន្ថែម ឬលក្ខខណ្ឌការទូទាត់សម្រាប់វិក្កយបត្រនេះ..."
-                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition">សូមធ្វើការទូទាត់តាមកាលបរិច្ឆេទកំណត់តាមរយៈគណនីធនាគារ ABA: 000 123 456 (BMS DigiTech Co., Ltd.)។ សូមអរគុណ!</textarea>
+                            <textarea id="pageBillNotes" rows="5"
+                                placeholder="បញ្ចូលកំណត់សម្គាល់បន្ថែមអំពីការទិញទំនិញ ឬលក្ខខណ្ឌដឹកជញ្ជូន..."
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition">ទំនិញត្រូវបានត្រួតពិនិត្យគុណភាព និងផ្ទៀងផ្ទាត់បរិមាណរួចរាល់ មុនពេលទទួលចូលឃ្លាំង។</textarea>
                         </div>
                     </div>
 
@@ -572,29 +561,25 @@
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-3.5">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">៤</span>
-                            <span>សង្ខេបហិរញ្ញវត្ថុ និងប្រាក់ចំណេញ</span>
+                            <span>សង្ខេបទឹកប្រាក់វិក្កយបត្រ</span>
                         </h3>
 
                         <div class="space-y-2.5 text-xs text-slate-600">
                             <div class="flex justify-between items-center py-1">
-                                <span>សរុបរង (Subtotal)៖</span>
-                                <span class="font-semibold text-slate-800 text-sm" id="pageInvCalcSubtotal">$0.00</span>
+                                <span>សរុបរង៖</span>
+                                <span class="font-semibold text-slate-800 text-sm" id="pageBillCalcSubtotal">$0.00</span>
                             </div>
                             <div class="flex justify-between items-center py-1">
                                 <span>ការបញ្ចុះតម្លៃសរុប៖</span>
-                                <span class="font-semibold text-rose-600" id="pageInvCalcDiscount">-$0.00</span>
+                                <span class="font-semibold text-rose-600" id="pageBillCalcDiscount">-$0.00</span>
                             </div>
                             <div class="flex justify-between items-center py-1">
-                                <span>ពន្ធអាករ (VAT 10%)៖</span>
-                                <span class="font-semibold text-slate-800" id="pageInvCalcVAT">$0.00</span>
+                                <span>អាករលើតម្លៃបន្ថែម ១០%៖</span>
+                                <span class="font-semibold text-slate-800" id="pageBillCalcVAT">$0.00</span>
                             </div>
                             <div class="pt-3 border-t border-slate-200 flex justify-between items-center">
                                 <span class="text-sm font-bold text-slate-900">ទឹកប្រាក់សរុបចុងក្រោយ៖</span>
-                                <span class="text-xl font-bold text-primary" id="pageInvCalcGrandTotal">$0.00</span>
-                            </div>
-                            <div class="flex justify-between items-center text-[11px] text-emerald-700 bg-emerald-50/70 p-2.5 rounded-xl mt-2 border border-emerald-100">
-                                <span class="font-medium">ប្រាក់ចំណេញរំពឹងទុក៖</span>
-                                <span class="font-bold text-xs" id="pageInvCalcProfit">+$0.00 (0.0% កម្រៃ)</span>
+                                <span class="text-xl font-bold text-primary" id="pageBillCalcGrandTotal">$0.00</span>
                             </div>
                         </div>
                     </div>
@@ -602,17 +587,17 @@
 
                 <!-- Bottom Action Buttons -->
                 <div class="flex items-center justify-end gap-3 pt-2 pb-6">
-                    <a href="invoice.html"
+                    <a href="bills.html"
                         class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
                         បោះបង់
                     </a>
-                    <button type="button" onclick="submitInvoiceForm('draft')"
+                    <button type="button" onclick="submitBillForm('draft')"
                         class="px-5 py-2.5 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition border border-slate-200">
                         រក្សាទុកជាព្រាង
                     </button>
-                    <button type="button" onclick="submitInvoiceForm('confirm')"
+                    <button type="button" onclick="submitBillForm('confirm')"
                         class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-light text-white font-medium shadow-sm transition">
-                        ចេញវិក្កយបត្រផ្លូវការ
+                        បញ្ជាក់វិក្កយបត្រទិញចូល
                     </button>
                 </div>
 
@@ -622,7 +607,12 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        function selectInvProductOption(optElem, name, price, cost, stock) {
+        function selectSupplierOption(dropdownId, id, name, phone, avatar, contact) {
+            const displayText = `<div class="flex items-center gap-2 text-left"><img src="${avatar}" alt="${name}" class="w-6 h-6 rounded-full object-cover border border-slate-200 flex-shrink-0" /><span class="font-medium text-slate-800 text-xs truncate">${name} (${phone})</span></div>`;
+            selectCustomOption(dropdownId, name, displayText);
+        }
+
+        function selectBillProduct(optElem, name, cost) {
             const container = optElem.closest('.bms-custom-select');
             if (!container) return;
             const tr = container.closest('tr');
@@ -632,9 +622,7 @@
 
             if (hiddenInput) {
                 hiddenInput.value = name;
-                hiddenInput.dataset.price = price;
                 hiddenInput.dataset.cost = cost;
-                hiddenInput.dataset.stock = stock;
             }
             if (labelElem) {
                 labelElem.textContent = name;
@@ -646,110 +634,73 @@
             if (menu) menu.classList.add('hidden');
 
             if (tr) {
-                const priceInput = tr.querySelector('.item-price');
-                if (priceInput) priceInput.value = price.toFixed(2);
-                const stockBadge = tr.querySelector('.item-stock-badge');
-                if (stockBadge) {
-                    stockBadge.innerHTML = stock > 5 
-                        ? `<span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-semibold text-[11px]">${stock}</span>`
-                        : `<span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 font-semibold text-[11px]">${stock} (ជិតអស់)</span>`;
-                }
-                recalcPageInvoice();
+                const costInput = tr.querySelector('.item-cost');
+                if (costInput) costInput.value = cost.toFixed(2);
+                recalcBill();
             }
         }
 
-        function recalcPageInvoice() {
-            const rows = document.querySelectorAll('#pageInvLinesBody tr');
-            let subtotal = 0;
-            let discountAmount = 0;
-            let totalCost = 0;
-
-            rows.forEach(tr => {
-                const qty = parseFloat(tr.querySelector('.item-qty').value) || 0;
-                const price = parseFloat(tr.querySelector('.item-price').value) || 0;
-                const discPct = parseFloat(tr.querySelector('.item-disc').value) || 0;
-                const productInput = tr.querySelector('.item-product-val');
-                const cost = productInput ? (parseFloat(productInput.dataset.cost) || 0) : 0;
-
-                const lineGross = qty * price;
-                const lineDisc = lineGross * (discPct / 100);
-                const lineNet = lineGross - lineDisc;
-
-                const totalElem = tr.querySelector('.item-total');
-                if (totalElem) totalElem.textContent = '$' + lineNet.toLocaleString('en-US', { minimumFractionDigits: 2 });
-
-                subtotal += lineGross;
-                discountAmount += lineDisc;
-                totalCost += (qty * cost);
-            });
-
-            const taxable = Math.max(0, subtotal - discountAmount);
-            const vat = taxable * 0.10;
-            const grandTotal = taxable + vat;
-            const profit = Math.max(0, taxable - totalCost);
-            const marginPct = taxable > 0 ? ((profit / taxable) * 100).toFixed(1) : 0;
-
-            document.getElementById('pageInvCalcSubtotal').textContent = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pageInvCalcDiscount').textContent = '-$' + discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pageInvCalcVAT').textContent = '$' + vat.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pageInvCalcGrandTotal').textContent = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pageInvCalcProfit').textContent = `+$${profit.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${marginPct}% កម្រៃ)`;
-        }
-
-        function addPageInvLineRow() {
-            const tbody = document.getElementById('pageInvLinesBody');
+        function addBillLineRow() {
+            const tbody = document.getElementById('pageBillLinesBody');
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="p-3">
                     <div class="relative bms-custom-select product-select-container">
-                        <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" data-stock="0" />
+                        <input type="hidden" class="item-product-val" value="" data-cost="0" />
                         <button type="button" onclick="toggleProductDropdown(this)"
                             class="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 flex items-center justify-between transition focus:outline-none">
                             <span class="product-selected-label text-slate-400 truncate">-- ជ្រើសរើសទំនិញ --</span>
                             <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
                         </button>
-                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
-                            <div onclick="selectInvProductOption(this, 'iPhone 15 Pro Max 256GB', 1250, 950, 8)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                <span class="font-medium text-slate-800">iPhone 15 Pro Max 256GB</span>
-                                <span class="text-[11px] text-emerald-700 font-semibold">$1,250.00</span>
-                            </div>
-                            <div onclick="selectInvProductOption(this, 'MacBook Air M3 15-inch', 1450, 1100, 12)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[300px] max-h-56 overflow-y-auto space-y-0.5">
+                            <div onclick="selectBillProduct(this, 'MacBook Air M3 15-inch', 1100)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
                                 <span class="font-medium text-slate-800">MacBook Air M3 15-inch</span>
-                                <span class="text-[11px] text-emerald-700 font-semibold">$1,450.00</span>
+                                <span class="text-[11px] text-primary font-semibold">$1,100.00</span>
                             </div>
-                            <div onclick="selectInvProductOption(this, 'Sony WH-1000XM5 Headphone', 380, 280, 15)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                <span class="font-medium text-slate-800">Sony WH-1000XM5</span>
-                                <span class="text-[11px] text-emerald-700 font-semibold">$380.00</span>
+                            <div onclick="selectBillProduct(this, 'iPhone 15 Pro Max 256GB', 950)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">iPhone 15 Pro Max 256GB</span>
+                                <span class="text-[11px] text-primary font-semibold">$950.00</span>
                             </div>
-                            <div onclick="selectInvProductOption(this, 'iPad Air 11-inch M2', 699, 520, 9)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                            <div onclick="selectBillProduct(this, 'iPad Air 11-inch M2', 520)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
                                 <span class="font-medium text-slate-800">iPad Air 11-inch M2</span>
-                                <span class="text-[11px] text-emerald-700 font-semibold">$699.00</span>
+                                <span class="text-[11px] text-primary font-semibold">$520.00</span>
                             </div>
-                            <div onclick="selectInvProductOption(this, 'សេវាដំឡើងប្រព័ន្ធ Network & Wi-Fi', 250, 50, 999)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                <span class="font-medium text-slate-800">សេវាដំឡើង Network</span>
-                                <span class="text-[11px] text-emerald-700 font-semibold">$250.00</span>
+                            <div onclick="selectBillProduct(this, 'Sony WH-1000XM5 Headphone', 280)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Sony WH-1000XM5</span>
+                                <span class="text-[11px] text-primary font-semibold">$280.00</span>
+                            </div>
+                            <div onclick="selectBillProduct(this, 'Network Switch 24 Ports Gigabit', 350)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Network Switch 24 Ports</span>
+                                <span class="text-[11px] text-primary font-semibold">$350.00</span>
+                            </div>
+                            <div onclick="selectBillProduct(this, 'Wi-Fi 6 Access Point Router', 180)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">Wi-Fi 6 Access Point</span>
+                                <span class="text-[11px] text-primary font-semibold">$180.00</span>
+                            </div>
+                            <div onclick="selectBillProduct(this, 'ខ្សែបណ្តាញ Network Cat6 305m', 100)" class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
+                                <span class="font-medium text-slate-800">ខ្សែបណ្តាញ Cat6 305m</span>
+                                <span class="text-[11px] text-primary font-semibold">$100.00</span>
                             </div>
                         </div>
                     </div>
                 </td>
-                <td class="p-3 text-center text-xs text-slate-500 item-stock-badge">-</td>
                 <td class="p-3">
-                    <input type="number" min="1" value="1" oninput="recalcPageInvoice()"
+                    <input type="number" min="1" value="1" oninput="recalcBill()"
                         class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
                 <td class="p-3">
-                    <input type="number" step="0.01" value="0.00" oninput="recalcPageInvoice()"
-                        class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                    <input type="number" step="0.01" value="0.00" oninput="recalcBill()"
+                        class="item-cost w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
                 <td class="p-3">
-                    <input type="number" min="0" max="100" value="0" oninput="recalcPageInvoice()"
+                    <input type="number" min="0" max="100" value="0" oninput="recalcBill()"
                         class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
                 <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
                     $0.00
                 </td>
                 <td class="p-3 text-center">
-                    <button type="button" onclick="removePageInvLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                    <button type="button" onclick="removeBillLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
                         <i class="fas fa-trash-can text-xs"></i>
                     </button>
                 </td>
@@ -757,55 +708,97 @@
             tbody.appendChild(tr);
         }
 
-        function removePageInvLineRow(btn) {
-            const rows = document.querySelectorAll('#pageInvLinesBody tr');
-            if (rows.length <= 1) {
-                showToast('វិក្កយបត្រត្រូវមានទំនិញយ៉ាងហោចណាស់ ១ ជួរ!', 'warning');
-                return;
+        function removeBillLineRow(btn) {
+            const row = btn.closest('tr');
+            const tbody = document.getElementById('pageBillLinesBody');
+            if (tbody.querySelectorAll('tr').length > 1) {
+                row.remove();
+                recalcBill();
+            } else {
+                showToast('វិក្កយបត្រត្រូវមានមុខទំនិញយ៉ាងហោចណាស់មួយ!', 'warning');
             }
-            btn.closest('tr').remove();
-            recalcPageInvoice();
         }
 
-        function submitInvoiceForm(actionType) {
-            const customer = document.getElementById('pageInvCustomer').value;
-            if (!customer) {
-                showToast('សូមជ្រើសរើសអតិថិជនជាមុនសិន!', 'warning');
+        function recalcBill() {
+            let subtotal = 0;
+            let totalDiscount = 0;
+
+            const rows = document.querySelectorAll('#pageBillLinesBody tr');
+            rows.forEach(row => {
+                const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+                const cost = parseFloat(row.querySelector('.item-cost').value) || 0;
+                const discPct = parseFloat(row.querySelector('.item-disc').value) || 0;
+
+                const lineGross = qty * cost;
+                const lineDisc = lineGross * (discPct / 100);
+                const lineNet = lineGross - lineDisc;
+
+                row.querySelector('.item-total').textContent = '$' + lineNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                subtotal += lineGross;
+                totalDiscount += lineDisc;
+            });
+
+            const netSubtotal = subtotal - totalDiscount;
+            const vat = netSubtotal * 0.10;
+            const grandTotal = netSubtotal + vat;
+
+            document.getElementById('pageBillCalcSubtotal').textContent = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('pageBillCalcDiscount').textContent = '-$' + totalDiscount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('pageBillCalcVAT').textContent = '$' + vat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('pageBillCalcGrandTotal').textContent = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function submitBillForm(mode) {
+            const supplier = document.getElementById('pageBillSupplier').value;
+            const supplierRef = document.getElementById('pageBillSupplierRef').value.trim();
+
+            if (!supplier) {
+                showToast('សូមជ្រើសរើសអ្នកផ្គត់ផ្គង់!', 'warning');
                 return;
             }
 
-            const rows = document.querySelectorAll('#pageInvLinesBody tr');
+            if (!supplierRef) {
+                showToast('សូមបញ្ចូលលេខវិក្កយបត្រយោងអ្នកផ្គត់ផ្គង់!', 'warning');
+                return;
+            }
+
+            const rows = document.querySelectorAll('#pageBillLinesBody tr');
             let hasValidItem = false;
-            rows.forEach(tr => {
-                const productInput = tr.querySelector('.item-product-val');
-                if (productInput && productInput.value) hasValidItem = true;
+            rows.forEach(r => {
+                const val = r.querySelector('.item-product-val').value;
+                const qty = parseFloat(r.querySelector('.item-qty').value) || 0;
+                if (val && qty > 0) hasValidItem = true;
             });
 
             if (!hasValidItem) {
-                showToast('សូមជ្រើសរើសទំនិញយ៉ាងហោចណាស់មួយ!', 'warning');
+                showToast('សូមជ្រើសរើសមុខទំនិញទិញចូលយ៉ាងហោចណាស់មួយ!', 'warning');
                 return;
             }
 
-            const msg = actionType === 'draft' 
-                ? 'បានរក្សាទុកវិក្កយបត្រព្រាងដោយជោគជ័យ!' 
-                : 'បានចេញវិក្កយបត្រផ្លូវការដោយជោគជ័យ! ស្តុកទំនិញត្រូវបានកាត់បន្ថយ។';
+            const billNum = document.getElementById('displayBillNumber').textContent;
+            const statusText = mode === 'draft' ? 'ជាព្រាង' : 'និងកត់ត្រាចូលស្តុក';
 
-            showToast(msg, 'success');
-
-            setTimeout(() => {
-                window.location.href = 'invoice.html';
-            }, 1000);
+            showCustomConfirm({
+                title: mode === 'draft' ? 'រក្សាទុកជាព្រាង' : 'បញ្ជាក់វិក្កយបត្របញ្ញាទិញ',
+                message: `តើលោកអ្នកពិតជាចង់រក្សាទុកវិក្កយបត្រ ${billNum} ${statusText} មែនទេ?`,
+                confirmText: 'យល់ព្រម',
+                cancelText: 'បោះបង់',
+                onConfirm: () => {
+                    showToast(`វិក្កយបត្រ ${billNum} ត្រូវបានរក្សាទុកដោយជោគជ័យ!`, 'success');
+                    setTimeout(() => {
+                        window.location.href = 'bills.html';
+                    }, 1000);
+                }
+            });
         }
 
-        // Auto-select customer if customerId passed in URL
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const custId = params.get('customerId');
-            if (custId) {
-                const opt = document.querySelector(`.customer-opt[data-customer-id="${custId}"]`);
-                if (opt) {
-                    opt.click();
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pre-select sample product for row 1
+            const firstRow = document.querySelector('#pageBillLinesBody tr');
+            if (firstRow) {
+                const opt = firstRow.querySelector('.bms-custom-select-menu div');
+                if (opt) selectBillProduct(opt, 'MacBook Air M3 15-inch', 1100);
             }
         });
     </script>
