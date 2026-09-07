@@ -1058,6 +1058,50 @@ function submitChangePassword() {
 }
 
 /**
+ * Notification feed (mock). `text` may carry <b> for the emphasised fragment and
+ * <v> for a value that should take the item's own colour.
+ */
+const BMS_NOTIFICATIONS = [
+    {
+        target: 'invoice', tone: 'emerald', icon: 'fa-file-invoice-dollar', unread: true,
+        text: 'វិក្កយបត្រ <b>#INV-2026-0042</b> ត្រូវបានទូទាត់ជោគជ័យ <v>$12,800.00</v>',
+        time: '10 នាទីមុន'
+    },
+    {
+        target: 'stock', tone: 'amber', icon: 'fa-triangle-exclamation', unread: true,
+        text: 'ស្តុកទំនិញ <b>iPhone 15 Pro Max</b> ជិតអស់ពីស្តុក នៅសល់តែ <v>3 គ្រឿង</v>',
+        time: '45 នាទីមុន'
+    },
+    {
+        target: 'customer', tone: 'blue', icon: 'fa-user-plus', unread: true,
+        text: 'អតិថិជនថ្មី <b>សុខ វណ្ណា</b> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ',
+        time: '2 ម៉ោងមុន'
+    },
+    {
+        target: 'bills', tone: 'violet', icon: 'fa-file-invoice', unread: true,
+        text: 'វិក្កយបត្រទិញ <b>#BILL-2026-004</b> ត្រូវបានអនុម័តដោយប្រធានផ្នែក',
+        time: '4 ម៉ោងមុន'
+    }
+];
+
+function buildNotifRow(n, urls) {
+    const body = n.text
+        .replace(/<b>/g, '<span class="nf-strong text-slate-800">').replace(/<\/b>/g, '</span>')
+        .replace(/<v>/g, `<span class="nf-strong text-${n.tone}-700">`).replace(/<\/v>/g, '</span>');
+
+    return `
+        <a href="${urls[n.target]}" class="nf-row ${n.unread ? 'is-unread' : ''} relative flex items-start gap-3.5 px-4 py-3 hover:bg-slate-50 transition-colors group">
+            <i class="fas ${n.icon} nf-icon text-${n.tone}-500 w-5 text-center flex-shrink-0 mt-0.5"></i>
+            <div class="flex-1 min-w-0">
+                <p class="nf-text text-slate-600">${body}</p>
+                <span class="nf-time text-slate-400 block mt-1">${n.time}</span>
+            </div>
+            <span class="notif-dot w-2 h-2 rounded-full bg-${n.tone}-500 mt-1.5 flex-shrink-0"></span>
+        </a>
+    `;
+}
+
+/**
  * Global Notifications Dropdown Manager
  */
 function initGlobalNotifications() {
@@ -1097,96 +1141,59 @@ function initGlobalNotifications() {
             const billsUrl = getPagesRelativePath('4-buy/1-bills/bills.html');
             const allNotifsUrl = getPagesRelativePath('7-settings/4-notifications/notifications.html');
 
+            // Mirror BMSActionTracker's tab classes so switching tabs doesn't resize
+            // them. Fall back to the same strings if the tracker hasn't loaded —
+            // an empty fallback would render the tabs completely unstyled.
+            const TAB_BASE = 'bms-nf-tab flex-1 py-2.5 px-3 flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden border-b-2 transition-colors';
+            const TAB_ACTIVE = (window.BMSActionTracker && window.BMSActionTracker.TAB_ACTIVE)
+                || TAB_BASE + ' is-active border-primary text-primary bg-primary/5';
+            const TAB_INACTIVE = (window.BMSActionTracker && window.BMSActionTracker.TAB_INACTIVE)
+                || TAB_BASE + ' border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100/70';
+
             flyout.innerHTML = `
                 <!-- Segmented Tabs (Action Timeline vs Notifications) -->
-                <div class="flex border-b border-slate-100 bg-slate-50/50 overflow-hidden">
-                    <button type="button" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
-                        class="flex-1 py-2.5 px-3 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
-                        <i class="fas fa-clock-rotate-left text-xs flex-shrink-0"></i>
+                <div class="flex items-stretch border-b border-slate-100 bg-slate-50/60" role="tablist">
+                    <button type="button" role="tab" aria-selected="true" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
+                        class="${TAB_ACTIVE}">
+                        <i class="fas fa-clock-rotate-left nf-tab-icon flex-shrink-0"></i>
                         <span class="truncate">ដំណើរការសកម្មភាព</span>
-                        <span id="bmsActionCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex-shrink-0">3</span>
+                        <span id="bmsActionCountBadge" class="nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-slate-200/70 text-slate-600 flex-shrink-0">3</span>
                     </button>
-                    <button type="button" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
-                        class="flex-1 py-2.5 px-3 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
-                        <i class="fas fa-bell text-xs flex-shrink-0"></i>
+                    <button type="button" role="tab" aria-selected="false" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
+                        class="${TAB_INACTIVE}">
+                        <i class="fas fa-bell nf-tab-icon flex-shrink-0"></i>
                         <span class="truncate">ការជូនដំណឹង</span>
-                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-100 flex-shrink-0">4 ថ្មី</span>
+                        <span id="bmsNotifCountBadge" class="nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-rose-500 text-white flex-shrink-0">4</span>
+                    </button>
+                    <button type="button" id="bmsMarkAllReadBtn" onclick="markAllNotificationsAsRead()"
+                        class="px-3.5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-100/70 border-b-2 border-transparent transition-colors cursor-pointer flex-shrink-0"
+                        title="សម្គាល់ថាបានអានទាំងអស់" aria-label="សម្គាល់ថាបានអានទាំងអស់">
+                        <i class="fas fa-check-double nf-tab-icon"></i>
                     </button>
                 </div>
 
                 <!-- Tab 1: Action Timeline List -->
-                <div id="bmsActionTimelineList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto">
+                <div id="bmsActionTimelineList" class="nf-list divide-y divide-slate-50 max-h-96 overflow-y-auto scrollbar-hide">
                     <!-- Injected dynamically by BMSActionTracker -->
                 </div>
 
                 <!-- Tab 2: Notification List -->
-                <div id="bmsNotificationItemsList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto hidden">
-                    <!-- Notification 1 -->
-                    <a href="${invoiceUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រ <span class="font-semibold text-slate-800">#INV-2026-0042</span> ត្រូវបានទូទាត់ជោគជ័យ <span class="font-semibold text-emerald-700">$12,800.00</span>
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 10 នាទីមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 2 -->
-                    <a href="${stockUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-triangle-exclamation"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                ស្តុកទំនិញ <span class="font-semibold text-slate-800">iPhone 15 Pro Max</span> ជិតអស់ពីស្តុក (នៅសល់តែ 3 គ្រឿង)
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 45 នាទីមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 3 -->
-                    <a href="${customerUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                អតិថិជនថ្មី <span class="font-semibold text-slate-800">សុខ វណ្ណា (ក្រុមហ៊ុន សុខ វណ្ណា ត្រេឌីង)</span> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 2 ម៉ោងមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 4 -->
-                    <a href="${billsUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-file-invoice"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រទិញ <span class="font-semibold text-slate-800">#BILL-2026-004</span> ត្រូវបានអនុម័តដោយប្រធានផ្នែក
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 4 ម៉ោងមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
+                <div id="bmsNotificationItemsList" class="nf-list divide-y divide-slate-50 max-h-96 overflow-y-auto scrollbar-hide hidden">
+                    ${BMS_NOTIFICATIONS.map(n => buildNotifRow(n, {
+                        invoice: invoiceUrl, stock: stockUrl, customer: customerUrl, bills: billsUrl
+                    })).join('')}
                 </div>
+
+                <!-- Fades the last row into the panel edge while more remain below -->
+                <div id="bmsNotifScrollFade" class="pointer-events-none absolute left-0 right-0 bottom-0 h-9 transition-opacity duration-200"></div>
             `;
             wrapper.appendChild(flyout);
+
+            // Scrollbars are hidden application-wide, so the bottom fade is the
+            // only cue that more rows exist below the fold.
+            flyout.querySelectorAll('.nf-list').forEach(listEl => {
+                listEl.addEventListener('scroll', () => window.syncNotifScrollFade());
+            });
         }
 
         // Toggle click handler
@@ -1212,6 +1219,7 @@ function initGlobalNotifications() {
                     window.BMSActionTracker.renderTimeline('bmsActionTimelineList');
                     window.BMSActionTracker.updateBadge();
                 }
+                window.syncNotifScrollFade();
             } else {
                 flyout.classList.add('hidden');
                 btn.setAttribute('aria-expanded', 'false');
@@ -1241,19 +1249,45 @@ function initGlobalNotifications() {
     });
 }
 
+/**
+ * Shows the bottom fade on whichever list is visible, but only while it can
+ * still be scrolled further. Exposed globally so BMSActionTracker can call it
+ * after re-rendering the timeline or switching tabs.
+ */
+window.syncNotifScrollFade = function() {
+    document.querySelectorAll('#bmsNotificationFlyout').forEach(flyout => {
+        const fade = flyout.querySelector('#bmsNotifScrollFade');
+        if (!fade) return;
+
+        const list = [...flyout.querySelectorAll('.nf-list')]
+            .find(el => !el.classList.contains('hidden'));
+
+        if (!list) {
+            fade.classList.add('is-hidden');
+            return;
+        }
+
+        const atEnd = list.scrollTop + list.clientHeight >= list.scrollHeight - 4;
+        fade.classList.toggle('is-hidden', atEnd);
+    });
+};
+
 function markAllNotificationsAsRead() {
-    // Hide dots
+    // Clear the unread tint and the per-row dots
+    document.querySelectorAll('#bmsNotificationFlyout .nf-row').forEach(row => row.classList.remove('is-unread'));
     document.querySelectorAll('.notif-dot').forEach(dot => dot.classList.add('hidden'));
-    
-    // Update count badge
+
+    // Fade the tab counter down to a neutral zero
     const badge = document.getElementById('bmsNotifCountBadge');
     if (badge) {
-        badge.textContent = '0 ថ្មី';
-        badge.className = 'px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500 border border-slate-200';
+        badge.textContent = '0';
+        badge.className = 'nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-slate-200/70 text-slate-500 flex-shrink-0';
     }
 
-    // Hide ping animation on the bells
-    document.querySelectorAll('header button .animate-ping').forEach(ping => ping.parentElement.remove());
+    // Drop the pulsing indicator on the header bells
+    document.querySelectorAll('header button .animate-ping').forEach(ping => {
+        if (ping.parentElement) ping.parentElement.remove();
+    });
 
     if (typeof showToast === 'function') {
         showToast('បានសម្គាល់ការជូនដំណឹងទាំងអស់ថាបានអានរួចរាល់!', 'success');

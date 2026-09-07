@@ -2605,3 +2605,103 @@ main .toolbar-actions a {
     font-size: 16px !important;
     line-height: 1 !important;
 }
+
+/* =========================================================
+   Notification Flyout (#bmsNotificationFlyout)
+   Built and injected by scripts/sidebar.js + BMSActionTracker
+   ========================================================= */
+
+/* Scoped type scale. The global Khmer readability block above flattens
+   .text-xs / .text-[11px] / .text-[10px] to one size with !important, which
+   made the message, the timestamp and the badge all render identically.
+   These ID-scoped rules restore the hierarchy without touching that scale. */
+#bmsNotificationFlyout .nf-tab-icon {
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+#bmsNotificationFlyout .bms-nf-tab {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+}
+
+#bmsNotificationFlyout .bms-nf-tab.is-active {
+    font-weight: 600 !important;
+}
+
+#bmsNotificationFlyout .nf-chip {
+    font-size: 10.5px !important;
+    line-height: 1.45 !important;
+}
+
+#bmsNotificationFlyout .nf-icon {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+}
+
+/* Notification message */
+#bmsNotificationFlyout .nf-text {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    font-weight: 400 !important;
+}
+
+#bmsNotificationFlyout .nf-strong {
+    font-weight: 600 !important;
+}
+
+/* Timeline row: title / detail / time */
+#bmsNotificationFlyout .nf-title {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+}
+
+#bmsNotificationFlyout .nf-sub {
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+}
+
+#bmsNotificationFlyout .nf-time {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+}
+
+/* Unread rows carry a faint brand wash plus a left marker; read rows sit plain */
+#bmsNotificationFlyout .nf-row.is-unread {
+    background-color: rgba(36, 105, 45, 0.055);
+    box-shadow: inset 2px 0 0 0 rgba(36, 105, 45, 0.35);
+}
+
+#bmsNotificationFlyout .nf-row.is-unread:hover {
+    background-color: rgba(36, 105, 45, 0.09);
+}
+
+/* Separate the mark-all-read action from the two tabs */
+#bmsNotificationFlyout #bmsMarkAllReadBtn {
+    border-left: 1px solid #f1f5f9;
+}
+
+/* Bottom scroll fade — visible only while more rows remain below */
+#bmsNotificationFlyout #bmsNotifScrollFade {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+    opacity: 1;
+}
+
+#bmsNotificationFlyout #bmsNotifScrollFade.is-hidden {
+    opacity: 0;
+}
+
+/* Keyboard focus, matching the profile drawer */
+#bmsNotificationFlyout a:focus-visible,
+#bmsNotificationFlyout button:focus-visible {
+    outline: 2px solid #24692d;
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #bmsNotificationFlyout #bmsNotifScrollFade {
+        transition: none !important;
+    }
+}

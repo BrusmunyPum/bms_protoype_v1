@@ -74,15 +74,17 @@ These are classic scripts declaring globals — no modules, no imports. Everythi
 
 - **`ui-components.js`** — `showToast()`, `showCustomConfirm()` (Promise-based), the floating dropdown engine (`openFloatingDropdown` / `closeFloatingDropdown` / `closeAllFloatingDropdowns`), custom select/customer/product pickers, and the single-date picker (`initSingleDatePicker`, `renderSingleDatePickerGrid`, …). It installs global `click`, `scroll`, `resize` and `keydown` listeners to close popovers.
 - **`sidebar.js`** — `BMS_NAV_ITEMS` (nav id → Khmer title, subtitle, icon, parent menu), `toggleMenu()`, `setActiveNavItem()`, the user-profile dropdown, the global notification flyout, the change-password modal, and the mobile drawer. It self-initialises on load.
-- **`action-tracker.js`** — `window.BMSActionTracker`, an in-memory demo activity feed that resets on refresh. `showToast()` auto-records into it when the message matches Khmer action keywords (`បាន|រក្សាទុក|អនុម័ត|…`).
+- **`action-tracker.js`** — **dead file. No page loads it; do not edit it.** The live `window.BMSActionTracker` is a second, near-identical copy inlined at the bottom of `ui-components.js` (guarded by `if (window.BMSActionTracker) return;`). Edit that copy. It is an in-memory demo activity feed that resets on refresh; `showToast()` auto-records into it when the message matches Khmer action keywords (`បាន|រក្សាទុក|អនុម័ត|…`).
 - **`main.js`** — nearly empty leftover; not a real entry point.
+
+Only `ui-components.js` and `sidebar.js` are ever loaded by a page, in that order. Anything else in `scripts/` is unreferenced.
 
 ### Things `sidebar.js` injects at runtime — do not hand-write them into pages
 
 `initUserProfileMenu()`, `initGlobalNotifications()` and `initMobileSidebarDrawer()` find existing elements by heuristic and build the rest of the DOM themselves:
 
 - The **user profile drawer** (`#bmsUserProfileDrawer`) — a full-height slide-over on the right edge, plus its backdrop `#bmsProfileBackdrop`. Both are appended to `<body>`, not to the header, so no header stacking context can clip them. Any `header button img.rounded-full` (or an avatar whose `alt` mentions Avatar / អ្នកប្រើប្រាស់) becomes its trigger. It is a `<div>` on purpose: `custom.css` applies `aside { background: #1b5223 !important }` and an off-canvas `aside` transform below 1024px, which would wreck it. Controlled by `openUserProfileDrawer()` / `closeUserProfileDrawer()` / `toggleUserProfileDrawer()`; goes full-screen under 640px.
-- The **notification flyout** is created next to any `header i.fa-bell`.
+- The **notification flyout** (`#bmsNotificationFlyout`) is created next to any `header i.fa-bell`. Two tabs — the BMSActionTracker timeline and a mock notification feed (`BMS_NOTIFICATIONS` + `buildNotifRow()` in `sidebar.js`) — plus a mark-all-read action. Its tab classes live on `BMSActionTracker.TAB_ACTIVE` / `.TAB_INACTIVE` so the initial markup and `switchTab()` cannot drift apart.
 - The **mobile hamburger, drawer backdrop and sidebar close button** are injected automatically. The hamburger is deliberately *skipped* on pages whose header already contains the standard back button (`a i.fa-arrow-left`).
 
 Consequence: changing the header's avatar or bell markup can silently break these features. Keep the recognisable hooks.

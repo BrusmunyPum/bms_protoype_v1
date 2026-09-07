@@ -729,9 +729,17 @@ if (document.readyState === 'loading') {
         }
     ];
 
+    // Single source of truth for the flyout's tab classes. sidebar.js builds the
+    // initial markup from these too, so switching tabs no longer changes the
+    // tab's padding/size the way two divergent class strings used to.
+    const TAB_BASE = 'bms-nf-tab flex-1 py-2.5 px-3 flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden border-b-2 transition-colors';
+
     window.BMSActionTracker = {
         actions: JSON.parse(JSON.stringify(BMS_DEFAULT_ACTIONS)),
         activeTab: 'actions',
+
+        TAB_ACTIVE: TAB_BASE + ' is-active border-primary text-primary bg-primary/5',
+        TAB_INACTIVE: TAB_BASE + ' border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100/70',
 
         record: function(opts) {
             if (!opts) return;
@@ -822,26 +830,16 @@ if (document.readyState === 'loading') {
             const actionContainer = document.getElementById('bmsActionTimelineList');
             const notifContainer = document.getElementById('bmsNotificationItemsList');
 
-            if (tabName === 'actions') {
-                if (tabActionsBtn) {
-                    tabActionsBtn.className = 'flex-1 py-2 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer';
-                }
-                if (tabNotifsBtn) {
-                    tabNotifsBtn.className = 'flex-1 py-2 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer';
-                }
-                if (actionContainer) actionContainer.classList.remove('hidden');
-                if (notifContainer) notifContainer.classList.add('hidden');
-                this.renderTimeline();
-            } else {
-                if (tabActionsBtn) {
-                    tabActionsBtn.className = 'flex-1 py-2 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer';
-                }
-                if (tabNotifsBtn) {
-                    tabNotifsBtn.className = 'flex-1 py-2 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer';
-                }
-                if (actionContainer) actionContainer.classList.add('hidden');
-                if (notifContainer) notifContainer.classList.remove('hidden');
-            }
+            const showActions = tabName === 'actions';
+            if (tabActionsBtn) tabActionsBtn.className = showActions ? this.TAB_ACTIVE : this.TAB_INACTIVE;
+            if (tabNotifsBtn) tabNotifsBtn.className = showActions ? this.TAB_INACTIVE : this.TAB_ACTIVE;
+            if (tabActionsBtn) tabActionsBtn.setAttribute('aria-selected', String(showActions));
+            if (tabNotifsBtn) tabNotifsBtn.setAttribute('aria-selected', String(!showActions));
+            if (actionContainer) actionContainer.classList.toggle('hidden', !showActions);
+            if (notifContainer) notifContainer.classList.toggle('hidden', showActions);
+
+            if (showActions) this.renderTimeline();
+            if (typeof window.syncNotifScrollFade === 'function') window.syncNotifScrollFade();
         },
 
         updateBadge: function() {
@@ -865,37 +863,45 @@ if (document.readyState === 'loading') {
 
             if (this.actions.length === 0) {
                 container.innerHTML = `
-                    <div class="py-12 text-center text-slate-400">
-                        <i class="fas fa-clipboard-list text-3xl mb-2 opacity-30"></i>
-                        <p class="text-xs font-medium">មិនទាន់មានសកម្មភាពត្រូវបានកត់ត្រានៅឡើយទេ</p>
+                    <div class="py-14 px-6 text-center">
+                        <i class="fas fa-clipboard-list text-3xl text-slate-200 mb-3"></i>
+                        <p class="nf-title text-slate-500">មិនទាន់មានសកម្មភាពត្រូវបានកត់ត្រានៅឡើយទេ</p>
+                        <p class="nf-sub text-slate-400 mt-1">សកម្មភាពរបស់លោកអ្នកនឹងបង្ហាញនៅទីនេះ</p>
                     </div>
                 `;
+                this.updateBadge();
                 return;
             }
 
             let html = '';
             this.actions.forEach((act, idx) => {
                 const isLast = idx === this.actions.length - 1;
-                const newPulse = act.isNew 
-                    ? '<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-semibold bg-emerald-100 text-emerald-800 ml-1.5 animate-pulse">ទើបធ្វើ</span>' 
+                // Icons are drawn bare (no tinted chip), so keep only the text-* half
+                // of the stored iconBg pair and brighten it a step.
+                const iconColor = (act.iconBg || '')
+                    .split(' ')
+                    .filter(c => c.startsWith('text-'))
+                    .join(' ')
+                    .replace('-600', '-500') || 'text-slate-500';
+
+                const newPulse = act.isNew
+                    ? '<span class="nf-chip inline-flex items-center px-1.5 py-0.5 rounded-full font-medium bg-emerald-100 text-emerald-800">ទើបធ្វើ</span>'
                     : '';
 
                 html += `
-                    <div class="relative flex items-start gap-3 p-3 px-4 hover:bg-slate-50/90 transition group">
-                        ${!isLast ? '<div class="absolute left-[30px] top-10 bottom-0 w-px bg-slate-100 group-hover:bg-slate-200 transition"></div>' : ''}
-                        
-                        <div class="w-8 h-8 rounded-xl ${act.iconBg} flex items-center justify-center text-xs flex-shrink-0 z-10 shadow-xs ring-2 ring-white">
-                            <i class="fas ${act.icon}"></i>
-                        </div>
+                    <div class="relative flex items-start gap-3.5 px-4 py-3 hover:bg-slate-50 transition-colors group">
+                        ${!isLast ? '<div class="absolute left-[26px] top-[34px] bottom-0 w-px bg-slate-100"></div>' : ''}
+
+                        <i class="fas ${act.icon} nf-icon ${iconColor} w-5 text-center flex-shrink-0 mt-0.5 relative z-10"></i>
 
                         <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between gap-1 mb-0.5">
-                                <h5 class="text-xs font-semibold text-slate-800 truncate">${act.title}</h5>
-                                <span class="text-[10px] text-slate-400 flex-shrink-0 font-medium">${act.time}</span>
+                            <div class="flex items-baseline justify-between gap-2">
+                                <h5 class="nf-title text-slate-700 truncate">${act.title}</h5>
+                                <span class="nf-time text-slate-400 flex-shrink-0">${act.time}</span>
                             </div>
-                            <p class="text-[11px] text-slate-500 truncate leading-tight">${act.detail}</p>
+                            <p class="nf-sub text-slate-400 truncate mt-0.5">${act.detail}</p>
                             <div class="mt-1.5 flex items-center gap-1.5">
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-medium ${act.badgeClass}">${act.badge}</span>
+                                <span class="nf-chip px-2 py-0.5 rounded-full font-medium ${act.badgeClass}">${act.badge}</span>
                                 ${newPulse}
                             </div>
                         </div>
@@ -905,6 +911,7 @@ if (document.readyState === 'loading') {
 
             container.innerHTML = html;
             this.updateBadge();
+            if (typeof window.syncNotifScrollFade === 'function') window.syncNotifScrollFade();
         }
     };
 })();
