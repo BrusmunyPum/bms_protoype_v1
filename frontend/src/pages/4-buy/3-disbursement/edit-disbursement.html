@@ -44,24 +44,6 @@
     <!-- Toast Notification Container -->
     
 
-    <!-- Custom Confirmation Modal -->
-    <div id="customConfirmModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-[9998] items-center justify-center p-4">
-        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 text-center transform transition-all">
-            <div id="confirmIconContainer" class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 mx-auto flex items-center justify-center mb-4 text-xl">
-                <i class="fas fa-circle-check"></i>
-            </div>
-            <h3 id="confirmTitle" class="text-base font-bold text-slate-800 mb-1.5">បញ្ជាក់ការកែប្រែ</h3>
-            <p id="confirmMessage" class="text-xs text-slate-500 mb-6 leading-relaxed">តើលោកអ្នកពិតជាចង់រក្សាទុកការកែប្រែប័ណ្ណចំណាយនេះមែនទេ?</p>
-            <div class="flex items-center justify-center gap-3">
-                <button type="button" onclick="resolveCustomConfirm(false)" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition">
-                    បោះបង់
-                </button>
-                <button type="button" id="confirmAcceptBtn" onclick="resolveCustomConfirm(true)" class="flex-1 py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-dark text-xs font-semibold text-white shadow transition">
-                    យល់ព្រម
-                </button>
-            </div>
-        </div>
-    </div>
     <!-- Standard DIGITECHKH Sidebar -->
     <aside class="w-64 bg-[#1b5223] text-white flex flex-col flex-shrink-0 select-none z-20">
         <!-- Sidebar Brand Container (Exact h-[72px] px-6) -->
@@ -587,35 +569,9 @@
     </div>
 
     <!-- Application Scripts -->
+    <script src="../../../scripts/ui-components.js"></script>
     <script src="../../../scripts/sidebar.js"></script>
     <script>
-        // Custom Confirm Dialog Implementation
-        let customConfirmCallback = null;
-        function showCustomConfirm(options) {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('customConfirmModal');
-                const title = document.getElementById('confirmTitle');
-                const msg = document.getElementById('confirmMessage');
-                const btn = document.getElementById('confirmAcceptBtn');
-                
-                if (title && options.title) title.textContent = options.title;
-                if (msg && options.message) msg.textContent = options.message;
-                if (btn && options.confirmText) btn.textContent = options.confirmText;
-                
-                customConfirmCallback = resolve;
-                modal.classList.remove('hidden');
-            });
-        }
-
-        function resolveCustomConfirm(result) {
-            const modal = document.getElementById('customConfirmModal');
-            modal.classList.add('hidden');
-            if (customConfirmCallback) {
-                customConfirmCallback(result);
-                customConfirmCallback = null;
-            }
-        }
-
         // Custom Dropdown Handling
         function toggleCustomDropdown(id) {
             const dd = document.getElementById(id);

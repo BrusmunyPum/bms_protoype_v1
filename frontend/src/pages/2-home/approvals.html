@@ -646,62 +646,8 @@
         <!-- Injected dynamically via openApprovalActionMenu -->
     </div>
 
-    <!-- Floating Confirmation Modal Container -->
-    <div id="customConfirmModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 border border-slate-100">
-            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4" id="confirmIcon">
-                <i class="fas fa-triangle-exclamation"></i>
-            </div>
-            <h3 class="text-base font-bold text-slate-800 mb-1" id="confirmTitle">បញ្ជាក់ការសម្រេចចិត្ត</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mb-6" id="confirmMessage">តើអ្នកពិតជាចង់បដិសេធសំណើនេះមែនទេ?</p>
-            <div class="flex items-center justify-end gap-3">
-                <button type="button" id="confirmCancelBtn" class="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100 transition">បោះបង់</button>
-                <button type="button" id="confirmOkBtn" class="px-4 py-2 rounded-xl text-xs font-medium bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition">យល់ព្រម</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Container -->
-    
-
+    <!-- Custom Select Dropdown Toggle & Page Script -->
     <script>
-        // Custom Confirm Modal
-        function showCustomConfirm(options) {
-            const modal = document.getElementById('customConfirmModal');
-            const title = document.getElementById('confirmTitle');
-            const message = document.getElementById('confirmMessage');
-            const okBtn = document.getElementById('confirmOkBtn');
-            const cancelBtn = document.getElementById('confirmCancelBtn');
-
-            title.textContent = options.title || 'បញ្ជាក់ការសម្រេចចិត្ត';
-            message.textContent = options.message || 'តើអ្នកប្រាកដដែរឬទេ?';
-            okBtn.textContent = options.okText || 'យល់ព្រម';
-            okBtn.className = `px-4 py-2 rounded-xl text-xs font-medium text-white shadow-sm transition ${
-                options.danger ? 'bg-rose-600 hover:bg-rose-700' : 'bg-primary hover:bg-primary-dark'
-            }`;
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-
-            const cleanup = () => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                okBtn.onclick = null;
-                cancelBtn.onclick = null;
-            };
-
-            okBtn.onclick = () => {
-                cleanup();
-                if (options.onConfirm) options.onConfirm();
-            };
-
-            cancelBtn.onclick = () => {
-                cleanup();
-                if (options.onCancel) options.onCancel();
-            };
-        }
-
-        // Custom Select Dropdown Toggle
         function toggleCustomSelect(id) {
             const el = document.getElementById(id);
             const menu = el.querySelector('.bms-custom-select-menu');

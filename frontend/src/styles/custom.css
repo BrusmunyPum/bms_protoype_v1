@@ -393,5 +393,1615 @@ main {
     z-index: 10;
 }
 
+/* =========================================================
+   Universal Modal Dialog Standard (Center Viewport Alignment)
+   Guarantees confirmation dialogs are always centered on screen
+   ========================================================= */
+#bmsCustomConfirmModal,
+#customConfirmModal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+    padding: 1rem !important;
+}
+
+#bmsCustomConfirmModal.hidden,
+#customConfirmModal.hidden,
+#bmsCustomConfirmModal[style*="display: none"],
+#customConfirmModal[style*="display: none"] {
+    display: none !important;
+}
+
+@keyframes bmsModalIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   Global Responsive Layout Standard (Mobile, Tablet, Desktop)
+   ========================================================= */
+
+/* 1. Mobile Off-Canvas Sidebar Drawer & Backdrop (< 1024px) */
+@media (max-width: 1023px) {
+    aside {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 17.5rem !important; /* 280px */
+        max-width: 85vw !important;
+        height: 100vh !important;
+        z-index: 50 !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+        box-shadow: none !important;
+    }
+
+    aside.mobile-open {
+        transform: translateX(0) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Mobile Backdrop Overlay */
+    #bmsMobileBackdrop {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-color: rgba(15, 23, 42, 0.6) !important;
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        z-index: 45 !important;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease !important;
+    }
+
+    #bmsMobileBackdrop.active {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Full-width Workspace Container on Mobile/Tablet */
+    body > div.flex-1 {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+    }
+
+    /* Header Compact Paddings on Mobile/Tablet */
+    header {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* 2. Responsive Table Scroll Safety */
+.table-responsive-wrapper,
+.overflow-x-auto {
+    width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow-x-auto > table:not(.no-min-width),
+.table-responsive-wrapper > table:not(.no-min-width) {
+    min-width: 680px;
+}
+
+/* 3. Popover & Flyout Viewport Protection */
+#datePickerPopover,
+.bms-date-popover,
+#bmsUserProfileDropdown,
+#bmsNotificationFlyout {
+    max-width: calc(100vw - 1.5rem);
+}
+
+@media (max-width: 639px) {
+    #bmsNotificationFlyout,
+    #bmsUserProfileDropdown {
+        position: fixed !important;
+        top: 72px !important;
+        left: 0.75rem !important;
+        right: 0.75rem !important;
+        width: auto !important;
+        max-width: none !important;
+        transform: none !important;
+        z-index: 9999 !important;
+    }
+}
+
+/* 4. Unified Date Range Picker Popover Mobile Adaptation (< 640px) */
+#bmsDateModalBackdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(15, 23, 42, 0.5) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    z-index: 9998 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+@media (max-width: 639px) {
+    #datePickerPopover,
+    .bms-date-popover {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: calc(100vw - 1.5rem) !important;
+        max-width: 380px !important;
+        max-height: calc(100vh - 2rem) !important;
+        overflow-y: auto !important;
+        z-index: 9999 !important;
+        border-radius: 1.25rem !important;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+        margin: 0 !important;
+    }
+
+    #datePickerPopover .grid-cols-12,
+    .bms-date-popover .grid-cols-12,
+    #datePickerPopover .flex.gap-4,
+    .bms-date-popover .flex.gap-4 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    #datePickerPopover .col-span-4,
+    .bms-date-popover .col-span-4,
+    #datePickerPopover .w-36,
+    .bms-date-popover .w-36 {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 0.375rem !important;
+        max-height: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        padding: 0.625rem 0.75rem !important;
+        background-color: #f8fafc !important;
+    }
+
+    #datePickerPopover .preset-btn,
+    .bms-date-popover .preset-btn {
+        flex-shrink: 0 !important;
+        width: auto !important;
+        white-space: nowrap !important;
+        padding: 0.35rem 0.75rem !important;
+        font-size: 13px !important;
+        border-radius: 9999px !important;
+        border: 1px solid #e2e8f0 !important;
+        background-color: #ffffff !important;
+        color: #475569 !important;
+        text-align: center !important;
+        line-height: 1.4 !important;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03) !important;
+    }
+
+    #datePickerPopover .preset-btn.bg-\[\#0f2b5c\],
+    .bms-date-popover .preset-btn.bg-\[\#0f2b5c\],
+    #datePickerPopover .preset-btn.active,
+    .bms-date-popover .preset-btn.active {
+        background-color: #0f2b5c !important;
+        color: #ffffff !important;
+        border-color: #0f2b5c !important;
+    }
+
+    #datePickerPopover .col-span-8,
+    .bms-date-popover .col-span-8,
+    #datePickerPopover .flex-1,
+    .bms-date-popover .flex-1 {
+        width: 100% !important;
+        padding: 0.75rem 0.875rem !important;
+    }
+
+    #datePickerPopover > div:last-child,
+    .bms-date-popover > div:last-child {
+        padding: 0.625rem 0.75rem !important;
+        gap: 0.375rem !important;
+    }
+
+    #rangeTagLabel {
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 11.5px !important;
+    }
+
+    #dateRangePickerBtn,
+    .date-range-picker-btn {
+        white-space: nowrap !important;
+    }
+
+    #dateRangePickerBtn span#selectedDateLabel,
+    .date-range-picker-btn span.selected-date-label {
+        white-space: nowrap !important;
+    }
+}
+
+/* 5. Mobile Search & Filter Action Bar Stacking (< 640px) */
+@media (max-width: 639px) {
+    /* Search Bar container on Mobile: full width */
+    main div:has(> input[type="text"][placeholder*="ស្វែងរក"]) {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        flex: 1 1 100% !important;
+    }
+
+    /* Toolbar flex parent (Search + Actions) stack vertically */
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.625rem !important;
+    }
+
+    /* Action Buttons Row (Dropdown, Add Button, Export Button) */
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        align-items: stretch !important;
+    }
+
+    /* Primary Action Button (+ បន្ថែម... / + បង្កើត...) takes FULL width row */
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > a.bg-primary,
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > button.bg-primary {
+        width: 100% !important;
+        order: -1 !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        height: 2.5rem !important;
+    }
+
+    /* Custom Select Dropdown & Export Button: 50% / 50% split on row below */
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > .bms-custom-select {
+        flex: 1 1 calc(50% - 0.25rem) !important;
+        min-width: 0 !important;
+        max-width: calc(50% - 0.25rem) !important;
+    }
+
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > .bms-custom-select > button {
+        width: 100% !important;
+        height: 2.5rem !important;
+        justify-content: space-between !important;
+        padding-left: 0.625rem !important;
+        padding-right: 0.625rem !important;
+    }
+
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > .bms-custom-select > button span,
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > .bms-custom-select > button .selected-label {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        font-size: 13px !important;
+    }
+
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > button:not(.bg-primary),
+    main div.bg-white > div.flex-wrap:has(input[type="text"][placeholder*="ស្វែងរក"]) > div:not(:has(input[type="text"])) > a:not(.bg-primary) {
+        flex: 1 1 calc(50% - 0.25rem) !important;
+        min-width: 0 !important;
+        max-width: calc(50% - 0.25rem) !important;
+        height: 2.5rem !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        font-size: 13px !important;
+    }
+}
+
+/* 6. Header Typography & Mobile Viewport Protection (< 640px) */
+@media (max-width: 639px) {
+    header {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    header h2 {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 165px !important;
+    }
+
+    header h2 + p {
+        display: none !important; /* Hide page title subtitle on mobile to preserve exact 72px seamless line */
+    }
+
+    #bmsNotificationFlyout p,
+    #bmsUserProfileDropdown p {
+        display: block !important;
+    }
+
+    .header-left-wrapper {
+        gap: 0.5rem !important;
+    }
+}
+
+/* 7. Swipeable Status Filter Tabs on Mobile & Tablet (< 768px) */
+@media (max-width: 767px) {
+    div:has(> .status-tab),
+    .status-tabs-wrapper {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 0.375rem !important;
+        padding-bottom: 0.25rem !important;
+        padding-right: 1.5rem !important;
+        width: 100% !important;
+    }
+
+    .status-tab {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        padding: 0.35rem 0.75rem !important;
+        font-size: 13px !important;
+    }
+}
+
+/* 8. Mobile Swipeable Quick Action Bar (< 640px) */
+@media (max-width: 639px) {
+    div:has(> a[href*="create-"]) {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 0.5rem !important;
+        padding-bottom: 0.25rem !important;
+        width: 100% !important;
+    }
+
+    div:has(> a[href*="create-"]) > a {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        font-size: 14px !important;
+        padding: 0.45rem 0.85rem !important;
+    }
+}
+
+/* 9. KPI Cards Mobile Optimization (< 640px) */
+@media (max-width: 639px) {
+    .kpi-card,
+    [role="button"][class*="rounded-xl"][class*="border"] {
+        padding: 0.75rem !important;
+    }
+
+    [role="button"] p[class*="text-\[22px\]"] {
+        font-size: 19px !important;
+    }
+}
+
+/* 10. Floating Row Actions & Modals Viewport Protection */
+#rowActionDropdown {
+    max-width: calc(100vw - 1.5rem) !important;
+}
+
+@media (max-width: 639px) {
+    #invoiceDetailModal > div,
+    #bmsChangePasswordModal > div,
+    .bms-modal-dialog {
+        margin: 0.75rem !important;
+        max-height: calc(100vh - 1.5rem) !important;
+        border-radius: 1.25rem !important;
+        padding: 1rem !important;
+    }
+}
+
+/* 11. Universal KPI Grid Scaling across all pages */
+@media (max-width: 639px) {
+    main .grid.grid-cols-2.lg\:grid-cols-4,
+    main .grid.grid-cols-2.md\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    main .grid.grid-cols-2.lg\:grid-cols-4,
+    main .grid.grid-cols-2.md\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* 12. Search & Toolbar Responsiveness on Mobile */
+@media (max-width: 639px) {
+    main div:has(> input[type="text"][placeholder*="ស្វែងរក"]) {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    /* Table cells touch readability */
+    table th, table td {
+        padding-top: 0.65rem !important;
+        padding-bottom: 0.65rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+}
+
+/* 13. View Detail Header Action Buttons Adaptation (< 640px) */
+@media (max-width: 639px) {
+    header .space-x-3,
+    header .space-x-2 {
+        gap: 0.375rem !important;
+    }
+
+    header .space-x-3 > :not([hidden]) ~ :not([hidden]),
+    header .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+        --tw-space-x-reverse: 0;
+        margin-right: 0 !important;
+        margin-left: 0.375rem !important;
+    }
+
+    header .space-x-3 > a.h-10,
+    header .space-x-2 > a.h-10,
+    header .space-x-3 > button.h-10,
+    header .space-x-2 > button.h-10,
+    header .flex.items-center.gap-2 > a.h-10,
+    header .flex.items-center.gap-2 > button.h-10 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 2.25rem !important; /* 36px */
+        height: 2.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    header .space-x-3 > a.h-10 > span,
+    header .space-x-2 > a.h-10 > span,
+    header .space-x-3 > button.h-10 > span,
+    header .space-x-2 > button.h-10 > span,
+    header .flex.items-center.gap-2 > a.h-10 > span,
+    header .flex.items-center.gap-2 > button.h-10 > span {
+        display: none !important;
+    }
+
+    header .space-x-3 > a.h-10 > i,
+    header .space-x-2 > a.h-10 > i,
+    header .space-x-3 > button.h-10 > i,
+    header .space-x-2 > button.h-10 > i,
+    header .flex.items-center.gap-2 > a.h-10 > i,
+    header .flex.items-center.gap-2 > button.h-10 > i {
+        margin-right: 0 !important;
+        font-size: 0.8125rem !important;
+    }
+}
+
+/* 14. Reports Header Date Picker & Export Buttons (< 640px) */
+@media (max-width: 639px) {
+    header .flex.items-center.gap-3 {
+        gap: 0.375rem !important;
+    }
+
+    header .h-6.w-px.bg-slate-200 {
+        display: none !important;
+    }
+
+    header button:has(i.fa-file-export) span,
+    header a:has(i.fa-file-export) span {
+        display: none !important;
+    }
+
+    header button:has(i.fa-file-export),
+    header a:has(i.fa-file-export) {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    header #dateRangePickerBtn {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        gap: 0.25rem !important;
+        height: 2.25rem !important;
+    }
+
+    header #dateRangePickerBtn span#selectedDateLabel {
+        max-width: 75px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        font-size: 11px !important;
+    }
+
+    header .border-l {
+        border-left-width: 0 !important;
+        padding-left: 0.25rem !important;
+    }
+}
+
+@media (max-width: 479px) {
+    header #dateRangePickerBtn span#selectedDateLabel,
+    header #dateRangePickerBtn i.fa-chevron-down {
+        display: none !important;
+    }
+
+    header #dateRangePickerBtn {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    header #dateRangePickerBtn i.fa-calendar-days {
+        margin: 0 !important;
+    }
+}
+
+/* 15. Universal Form Line Items Table Responsive Container */
+div:has(> table.w-full),
+div:has(> table#pageBillLinesTable),
+div:has(> table#pageInvLinesTable),
+div:has(> table#pageQuoteLinesTable),
+div:has(> table#movementLinesTable),
+div:has(> table#adjustmentLinesTable) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+}
+
+/* 16. Toolbar Action Buttons Text Wrapping Protection */
+main a[href*="create-"],
+main button[onclick*="showToast"],
+main .toolbar-actions button,
+main .toolbar-actions a {
+    white-space: nowrap !important;
+}
+
+/* 17. Form Sticky Action Buttons on Mobile (< 640px) */
+@media (max-width: 639px) {
+    main .bg-white:has(button[type="submit"]) {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+
+    main .bg-white:has(button[type="submit"]) > div {
+        width: 100% !important;
+        justify-content: stretch !important;
+    }
+
+    main .bg-white:has(button[type="submit"]) button,
+    main .bg-white:has(button[type="submit"]) a {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+
+/* ==========================================================================
+   18. Enterprise Mobile Card Table Transformation (< 640px)
+   Automatically converts standard tabular data rows into native app-style
+   structured cards with zero DOM duplication, preserving 100% JS compatibility.
+   ========================================================================== */
+@media (max-width: 639px) {
+    /* 1. Reset Table and Container to Stack Block */
+    .bms-responsive-table thead,
+    #invoicesTable thead,
+    #quotesTable thead,
+    #billsTable thead,
+    #customersTable thead,
+    #suppliersTable thead,
+    #paymentsTable thead,
+    #disbursementsTable thead,
+    #stockTable thead,
+    #catalogTable thead,
+    #movementsTable thead {
+        display: none !important;
+    }
+
+    .bms-responsive-table,
+    #invoicesTable,
+    #quotesTable,
+    #billsTable,
+    #customersTable,
+    #suppliersTable,
+    #paymentsTable,
+    #disbursementsTable,
+    #stockTable,
+    #catalogTable,
+    #movementsTable,
+    .bms-responsive-table tbody,
+    #invoicesTable tbody,
+    #quotesTable tbody,
+    #billsTable tbody,
+    #customersTable tbody,
+    #suppliersTable tbody,
+    #paymentsTable tbody,
+    #disbursementsTable tbody,
+    #stockTable tbody,
+    #catalogTable tbody,
+    #movementsTable tbody {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* Seamless Outer Container */
+    div:has(> .overflow-x-auto > #invoicesTable),
+    div:has(> .overflow-x-auto > #quotesTable),
+    div:has(> .overflow-x-auto > #billsTable),
+    div:has(> .overflow-x-auto > #customersTable),
+    div:has(> .overflow-x-auto > #suppliersTable),
+    div:has(> .overflow-x-auto > #paymentsTable),
+    div:has(> .overflow-x-auto > #disbursementsTable),
+    div:has(> .overflow-x-auto > #stockTable),
+    div:has(> .overflow-x-auto > #catalogTable),
+    div:has(> .overflow-x-auto > #movementsTable) {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    /* 2. Structured Card: tr */
+    .bms-responsive-table tr,
+    #invoicesTable tr,
+    #quotesTable tr,
+    #billsTable tr,
+    #customersTable tr,
+    #suppliersTable tr,
+    #paymentsTable tr,
+    #disbursementsTable tr,
+    #stockTable tr,
+    #catalogTable tr,
+    #movementsTable tr {
+        display: flex !important;
+        flex-direction: column !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 1.25rem !important;
+        padding: 1.125rem !important;
+        margin-bottom: 0.875rem !important;
+        position: relative !important;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+        gap: 0.625rem !important;
+        transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+    }
+
+    /* Empty state exception */
+    .bms-responsive-table tr:has(td[colspan]),
+    #invoicesTable tr:has(td[colspan]),
+    #quotesTable tr:has(td[colspan]),
+    #billsTable tr:has(td[colspan]),
+    #customersTable tr:has(td[colspan]),
+    #suppliersTable tr:has(td[colspan]),
+    #paymentsTable tr:has(td[colspan]),
+    #disbursementsTable tr:has(td[colspan]),
+    #stockTable tr:has(td[colspan]),
+    #catalogTable tr:has(td[colspan]),
+    #movementsTable tr:has(td[colspan]) {
+        display: block !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Common Card Headers & Cells */
+    #invoicesTable tr td,
+    #quotesTable tr td,
+    #billsTable tr td,
+    #customersTable tr td,
+    #suppliersTable tr td,
+    #paymentsTable tr td,
+    #disbursementsTable tr td,
+    #stockTable tr td,
+    #catalogTable tr td,
+    #movementsTable tr td {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    /* --- Group 1: Invoices, Quotes, Bills --- */
+    #invoicesTable tr td:nth-child(1),
+    #quotesTable tr td:nth-child(1) {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #billsTable tr td:nth-child(1) {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.125rem !important;
+        padding-right: 7.5rem !important;
+    }
+    #billsTable tr td:nth-child(1) span {
+        display: inline-block !important;
+    }
+    #billsTable tr td:nth-child(1) p {
+        font-size: 0.72rem !important;
+        font-weight: 400 !important;
+        color: #94a3b8 !important;
+        margin: 0 !important;
+    }
+
+    #invoicesTable tr td:nth-child(2),
+    #quotesTable tr td:nth-child(2),
+    #billsTable tr td:nth-child(2) {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #invoicesTable tr td:nth-child(3),
+    #quotesTable tr td:nth-child(3),
+    #billsTable tr td:nth-child(3) {
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+    }
+
+    #invoicesTable tr td:nth-child(4),
+    #quotesTable tr td:nth-child(4),
+    #billsTable tr td:nth-child(4) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+    }
+    #invoicesTable tr td:nth-child(4)::before,
+    #quotesTable tr td:nth-child(4)::before,
+    #billsTable tr td:nth-child(4)::before {
+        content: 'ទឹកប្រាក់សរុប:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #invoicesTable tr td:nth-child(5),
+    #quotesTable tr td:nth-child(5),
+    #billsTable tr td:nth-child(5) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.8rem !important;
+    }
+    #invoicesTable tr td:nth-child(5)::before,
+    #quotesTable tr td:nth-child(5)::before,
+    #billsTable tr td:nth-child(5)::before {
+        content: 'ការទូទាត់:';
+        color: #64748b !important;
+    }
+
+    #invoicesTable tr td:nth-child(6),
+    #quotesTable tr td:nth-child(6),
+    #billsTable tr td:nth-child(6) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.8rem !important;
+    }
+    #invoicesTable tr td:nth-child(6)::before,
+    #quotesTable tr td:nth-child(6)::before {
+        content: 'កម្រៃរំពឹងទុក:';
+        color: #64748b !important;
+    }
+    #billsTable tr td:nth-child(6)::before {
+        content: 'ចូលស្តុក:';
+        color: #64748b !important;
+    }
+
+    #invoicesTable tr td:nth-child(7),
+    #quotesTable tr td:nth-child(7),
+    #billsTable tr td:nth-child(7) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #invoicesTable tr td:nth-child(8),
+    #quotesTable tr td:nth-child(8),
+    #billsTable tr td:nth-child(8) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    /* --- Group 2: Customers & Suppliers --- */
+    #customersTable tr td:nth-child(1),
+    #suppliersTable tr td:nth-child(1) {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #customersTable tr td:nth-child(2),
+    #suppliersTable tr td:nth-child(2) {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #customersTable tr td:nth-child(3),
+    #suppliersTable tr td:nth-child(3) {
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    #customersTable tr td:nth-child(4),
+    #suppliersTable tr td:nth-child(4) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+    #customersTable tr td:nth-child(4)::before,
+    #suppliersTable tr td:nth-child(4)::before {
+        content: 'ប្រភេទដៃគូ:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #customersTable tr td:nth-child(5),
+    #suppliersTable tr td:nth-child(5) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+    #customersTable tr td:nth-child(5)::before,
+    #suppliersTable tr td:nth-child(5)::before {
+        content: 'ការបញ្ជាទិញ:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #customersTable tr td:nth-child(6),
+    #suppliersTable tr td:nth-child(6) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-weight: 600 !important;
+    }
+    #customersTable tr td:nth-child(6)::before,
+    #suppliersTable tr td:nth-child(6)::before {
+        content: 'ទិញសរុប:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #customersTable tr td:nth-child(7),
+    #suppliersTable tr td:nth-child(7) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+    #customersTable tr td:nth-child(7)::before,
+    #suppliersTable tr td:nth-child(7)::before {
+        content: 'បំណុលនៅសល់:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #customersTable tr td:nth-child(8),
+    #suppliersTable tr td:nth-child(8) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #customersTable tr td:nth-child(9),
+    #suppliersTable tr td:nth-child(9) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    /* --- Group 3: Payments & Disbursements --- */
+    #paymentsTable tr td:nth-child(1),
+    #disbursementsTable tr td:nth-child(1) {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #paymentsTable tr td:nth-child(2),
+    #disbursementsTable tr td:nth-child(2) {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #paymentsTable tr td:nth-child(3),
+    #disbursementsTable tr td:nth-child(3) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.8rem !important;
+    }
+    #paymentsTable tr td:nth-child(3)::before,
+    #disbursementsTable tr td:nth-child(3)::before {
+        content: 'ឯកសារយោង:';
+        color: #64748b !important;
+    }
+
+    #paymentsTable tr td:nth-child(4),
+    #disbursementsTable tr td:nth-child(4) {
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+    }
+    #paymentsTable tr td:nth-child(4)::before,
+    #disbursementsTable tr td:nth-child(4)::before {
+        content: 'វិធីសាស្ត្រ:';
+        color: #64748b !important;
+    }
+
+    #paymentsTable tr td:nth-child(5),
+    #disbursementsTable tr td:nth-child(5) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: #15803d !important;
+    }
+    #paymentsTable tr td:nth-child(5)::before,
+    #disbursementsTable tr td:nth-child(5)::before {
+        content: 'ទឹកប្រាក់:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #paymentsTable tr td:nth-child(6),
+    #disbursementsTable tr td:nth-child(6) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+    }
+    #paymentsTable tr td:nth-child(6)::before,
+    #disbursementsTable tr td:nth-child(6)::before {
+        content: 'លេខប្រតិបត្តិការ:';
+        color: #64748b !important;
+    }
+
+    #paymentsTable tr td:nth-child(7),
+    #disbursementsTable tr td:nth-child(7) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+    }
+    #paymentsTable tr td:nth-child(7)::before,
+    #disbursementsTable tr td:nth-child(7)::before {
+        content: 'កាលបរិច្ឆេទ:';
+        color: #64748b !important;
+    }
+
+    #paymentsTable tr td:nth-child(8),
+    #disbursementsTable tr td:nth-child(8) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #paymentsTable tr td:nth-child(9),
+    #disbursementsTable tr td:nth-child(9) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    /* --- Group 4A: Stock Balance --- */
+    #stockTable tr td:nth-child(1) {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #stockTable tr td:nth-child(2) {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #stockTable tr td:nth-child(3) {
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+    }
+    #stockTable tr td:nth-child(3)::before {
+        content: 'ទីតាំងឃ្លាំង:';
+        color: #64748b !important;
+    }
+
+    #stockTable tr td:nth-child(4) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+    }
+    #stockTable tr td:nth-child(4)::before {
+        content: 'ថ្លៃដើមមធ្យម:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #stockTable tr td:nth-child(5) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+    }
+    #stockTable tr td:nth-child(5)::before {
+        content: 'តម្លៃលក់:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #stockTable tr td:nth-child(6) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+    }
+    #stockTable tr td:nth-child(6)::before {
+        content: 'ចំនួនក្នុងស្តុក:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #stockTable tr td:nth-child(7) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+    }
+    #stockTable tr td:nth-child(7)::before {
+        content: 'តម្លៃស្តុកសរុប:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #stockTable tr td:nth-child(8) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #stockTable tr td:nth-child(9) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    /* --- Group 4B: Stock Catalog --- */
+    #catalogTable tr td:nth-child(1) {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #catalogTable tr td:nth-child(2) {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #catalogTable tr td:nth-child(3) {
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+    }
+    #catalogTable tr td:nth-child(3)::before {
+        content: 'ប្រភេទ & ម៉ាក:';
+        color: #64748b !important;
+    }
+
+    #catalogTable tr td:nth-child(4) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+    }
+    #catalogTable tr td:nth-child(4)::before {
+        content: 'ឯកតា:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #catalogTable tr td:nth-child(5) {
+        display: grid !important;
+        grid-template-columns: auto 1fr !important;
+        column-gap: 0.75rem !important;
+        row-gap: 0.125rem !important;
+        align-items: baseline !important;
+        font-size: 0.85rem !important;
+    }
+    #catalogTable tr td:nth-child(5)::before {
+        content: 'ថ្លៃដើមទិញ:';
+        grid-row: 1 / span 2 !important;
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+    #catalogTable tr td:nth-child(5) > div:first-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+    }
+    #catalogTable tr td:nth-child(5) > div:last-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+    }
+
+    #catalogTable tr td:nth-child(6) {
+        display: grid !important;
+        grid-template-columns: auto 1fr !important;
+        column-gap: 0.75rem !important;
+        row-gap: 0.125rem !important;
+        align-items: baseline !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+    }
+    #catalogTable tr td:nth-child(6)::before {
+        content: 'តម្លៃលក់:';
+        grid-row: 1 / span 2 !important;
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+    #catalogTable tr td:nth-child(6) > div:first-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+    }
+    #catalogTable tr td:nth-child(6) > div:last-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+    }
+
+    #catalogTable tr td:nth-child(7) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: #16a34a !important;
+    }
+    #catalogTable tr td:nth-child(7)::before {
+        content: 'កម្រៃចំណេញ:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #catalogTable tr td:nth-child(8) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #catalogTable tr td:nth-child(9) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    /* --- Group 4C: Stock Movement --- */
+    #movementsTable tr td:nth-child(1) {
+        order: 1 !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-right: 7.5rem !important;
+    }
+
+    #movementsTable tr td:nth-child(3) {
+        position: absolute !important;
+        top: 1rem !important;
+        right: 2.75rem !important;
+    }
+
+    #movementsTable tr td:nth-child(9) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.625rem !important;
+    }
+
+    #movementsTable tr td:nth-child(5) {
+        order: 2 !important;
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 0.625rem !important;
+    }
+
+    #movementsTable tr td:nth-child(2) {
+        order: 3 !important;
+        background: #f8fafc !important;
+        border-radius: 0.75rem !important;
+        padding: 0.5rem 0.75rem !important;
+        display: grid !important;
+        grid-template-columns: auto 1fr !important;
+        column-gap: 0.75rem !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+    }
+    #movementsTable tr td:nth-child(2)::before {
+        content: 'កាលបរិច្ឆេទ:';
+        grid-row: 1 / span 2 !important;
+        color: #64748b !important;
+        white-space: nowrap !important;
+    }
+    #movementsTable tr td:nth-child(2) > div:first-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+        font-weight: 500 !important;
+        color: #1e293b !important;
+    }
+    #movementsTable tr td:nth-child(2) > div:last-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+        font-size: 0.7rem !important;
+        color: #94a3b8 !important;
+    }
+
+    #movementsTable tr td:nth-child(4) {
+        order: 4 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.8rem !important;
+    }
+    #movementsTable tr td:nth-child(4)::before {
+        content: 'ឯកសារយោង:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+    }
+
+    #movementsTable tr td:nth-child(6) {
+        order: 5 !important;
+        display: grid !important;
+        grid-template-columns: auto 1fr !important;
+        column-gap: 0.75rem !important;
+        row-gap: 0.125rem !important;
+        align-items: baseline !important;
+        font-size: 0.8rem !important;
+    }
+    #movementsTable tr td:nth-child(6)::before {
+        content: 'ឃ្លាំងចរាចរ:';
+        grid-row: 1 / span 2 !important;
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        white-space: nowrap !important;
+    }
+    #movementsTable tr td:nth-child(6) > div:first-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+        font-weight: 500 !important;
+    }
+    #movementsTable tr td:nth-child(6) > div:last-of-type {
+        grid-column: 2 !important;
+        text-align: right !important;
+        font-size: 0.72rem !important;
+        max-width: none !important;
+    }
+
+    #movementsTable tr td:nth-child(7) {
+        order: 6 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+    }
+    #movementsTable tr td:nth-child(7)::before {
+        content: 'បរិមាណប្រែប្រួល:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #movementsTable tr td:nth-child(8) {
+        order: 7 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+    }
+    #movementsTable tr td:nth-child(8)::before {
+        content: 'ស្តុកនៅសល់:';
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    /* 3. Table Pagination Footer Mobile Card */
+    div:has(> .overflow-x-auto > #invoicesTable) > div:last-child,
+    div:has(> .overflow-x-auto > #quotesTable) > div:last-child,
+    div:has(> .overflow-x-auto > #billsTable) > div:last-child,
+    div:has(> .overflow-x-auto > #customersTable) > div:last-child,
+    div:has(> .overflow-x-auto > #suppliersTable) > div:last-child,
+    div:has(> .overflow-x-auto > #paymentsTable) > div:last-child,
+    div:has(> .overflow-x-auto > #disbursementsTable) > div:last-child,
+    div:has(> .overflow-x-auto > #stockTable) > div:last-child,
+    div:has(> .overflow-x-auto > #catalogTable) > div:last-child,
+    div:has(> .overflow-x-auto > #movementsTable) > div:last-child {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 1.25rem !important;
+        padding: 0.875rem 1rem !important;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+    }
+
+    /* --- Group 5: Dashboard Tables (Low Stock & Recent Invoices) --- */
+    #dashLowStockTable,
+    #dashRecentInvoicesTable {
+        min-width: 0 !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    #dashLowStockTable thead,
+    #dashRecentInvoicesTable thead {
+        display: none !important;
+    }
+
+    #dashLowStockTable tbody,
+    #dashRecentInvoicesTable tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #dashLowStockTable tr {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-rows: auto auto !important;
+        align-items: center !important;
+        row-gap: 0.625rem !important;
+        column-gap: 0.75rem !important;
+        background: #ffffff !important;
+        border: 1px solid #f1f5f9 !important;
+        border-radius: 1rem !important;
+        padding: 0.875rem !important;
+        margin-bottom: 0.625rem !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    #dashLowStockTable tr td:nth-child(1) {
+        grid-column: 1 / 2 !important;
+        grid-row: 1 !important;
+        display: block !important;
+        border: none !important;
+        padding: 0 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+    #dashLowStockTable tr td:nth-child(1) a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.625rem !important;
+        min-width: 0 !important;
+    }
+    #dashLowStockTable tr td:nth-child(1) a > div {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+    }
+    #dashLowStockTable tr td:nth-child(1) a p:first-child {
+        font-size: 0.85rem !important;
+        line-height: 1.25 !important;
+        font-weight: 500 !important;
+        color: #1e293b !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+
+    #dashLowStockTable tr td:nth-child(2) {
+        grid-column: 2 / 3 !important;
+        grid-row: 1 !important;
+        display: flex !important;
+        justify-self: end !important;
+        align-items: center !important;
+        border: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+    #dashLowStockTable tr td:nth-child(2)::before {
+        display: none !important;
+    }
+
+    #dashLowStockTable tr td:nth-child(3) {
+        grid-column: 1 / 2 !important;
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+        border: none !important;
+        padding: 0 !important;
+        border-top: 1px solid #f8fafc !important;
+        padding-top: 0.5rem !important;
+    }
+    #dashLowStockTable tr td:nth-child(3)::before {
+        content: 'កម្រិតប្រកាស:';
+        color: #94a3b8 !important;
+    }
+
+    #dashLowStockTable tr td:nth-child(4) {
+        grid-column: 2 / 3 !important;
+        grid-row: 2 !important;
+        display: flex !important;
+        justify-self: end !important;
+        border: none !important;
+        padding: 0 !important;
+        border-top: 1px solid #f8fafc !important;
+        padding-top: 0.5rem !important;
+    }
+    #dashLowStockTable tr td:nth-child(4) a {
+        justify-content: center !important;
+        padding: 0.35rem 0.75rem !important;
+        border-radius: 0.625rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    #dashRecentInvoicesTable tr {
+        display: flex !important;
+        flex-direction: column !important;
+        background: #ffffff !important;
+        border: 1px solid #f1f5f9 !important;
+        border-radius: 1rem !important;
+        padding: 0.875rem !important;
+        margin-bottom: 0.625rem !important;
+        gap: 0.375rem !important;
+        position: relative !important;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+    }
+
+    #dashRecentInvoicesTable tr td:nth-child(2) {
+        order: 1 !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        border: none !important;
+        padding: 0 !important;
+        padding-right: 5.5rem !important;
+    }
+
+    #dashRecentInvoicesTable tr td:nth-child(1) {
+        position: absolute !important;
+        top: 0.875rem !important;
+        right: 0.875rem !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    #dashRecentInvoicesTable tr td:nth-child(3) {
+        order: 2 !important;
+        border: none !important;
+        padding: 0 !important;
+        padding-top: 0.25rem !important;
+        border-top: 1px solid #f8fafc !important;
+    }
+    #dashRecentInvoicesTable tr td:nth-child(3) p:first-child {
+        font-size: 0.85rem !important;
+        font-weight: 500 !important;
+        color: #334155 !important;
+    }
+
+    #dashRecentInvoicesTable tr td:nth-child(4) {
+        order: 3 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-top: 0.125rem !important;
+    }
+    #dashRecentInvoicesTable tr td:nth-child(4)::before {
+        content: 'ទឹកប្រាក់:';
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+        font-weight: 400 !important;
+    }
+
+    #dashRecentInvoicesTable tr td:nth-child(5) {
+        order: 4 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+    #dashRecentInvoicesTable tr td:nth-child(5)::before {
+        content: 'កាលបរិច្ឆេទ:';
+        color: #94a3b8 !important;
+    }
+}
+
 
 

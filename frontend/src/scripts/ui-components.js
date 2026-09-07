@@ -65,62 +65,86 @@ function showToast(message, type = 'success', duration = 3200) {
 }
 
 // 2. Custom Confirm Dialog (Replaces window.confirm)
-function showCustomConfirm(options) {
-    const {
-        title = 'បញ្ជាក់ការប្រតិបត្តិ',
-        message = 'តើលោកអ្នកពិតជាចង់បន្តសកម្មភាពនេះមែនទេ?',
-        confirmText = 'យល់ព្រម',
-        cancelText = 'បោះបង់',
-        type = 'primary', // primary, danger
-        onConfirm = () => {}
-    } = options;
+function showCustomConfirm(options = {}) {
+    return new Promise((resolve) => {
+        const title = options.title || 'បញ្ជាក់ការប្រតិបត្តិ';
+        const message = options.message || 'តើលោកអ្នកពិតជាចង់បន្តសកម្មភាពនេះមែនទេ?';
+        const confirmText = options.confirmText || options.okText || 'យល់ព្រម';
+        const cancelText = options.cancelText || 'បោះបង់';
+        const isDanger = options.danger === true || options.type === 'danger' || options.type === 'error';
+        const onConfirm = options.onConfirm || null;
+        const onCancel = options.onCancel || null;
 
-    let modal = document.getElementById('bmsCustomConfirmModal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'bmsCustomConfirmModal';
-        modal.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9998] flex items-center justify-center p-4 select-none';
-        document.body.appendChild(modal);
-    }
-
-    const isDanger = type === 'danger';
-    const iconHtml = isDanger 
-        ? '<div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl mx-auto mb-3"><i class="fas fa-triangle-exclamation"></i></div>'
-        : '<div class="w-12 h-12 rounded-2xl bg-emerald-50 text-primary flex items-center justify-center text-xl mx-auto mb-3"><i class="fas fa-circle-question"></i></div>';
-
-    const confirmBtnClass = isDanger
-        ? 'bg-rose-600 hover:bg-rose-700 text-white'
-        : 'bg-primary hover:bg-primary-dark text-white';
-
-    modal.innerHTML = `
-        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-sm w-full p-6 text-center transform transition-all">
-            ${iconHtml}
-            <h4 class="text-base font-bold text-slate-900 mb-1.5">${title}</h4>
-            <p class="text-xs text-slate-500 leading-relaxed mb-6">${message}</p>
-            <div class="flex items-center justify-center gap-2.5">
-                <button id="bmsConfirmCancelBtn" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition">
-                    ${cancelText}
-                </button>
-                <button id="bmsConfirmOkBtn" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-medium ${confirmBtnClass} shadow-sm transition">
-                    ${confirmText}
-                </button>
-            </div>
-        </div>
-    `;
-
-    modal.classList.remove('hidden');
-
-    const closeConfirm = () => {
-        modal.classList.add('hidden');
-    };
-
-    document.getElementById('bmsConfirmCancelBtn').onclick = closeConfirm;
-    document.getElementById('bmsConfirmOkBtn').onclick = () => {
-        closeConfirm();
-        if (typeof onConfirm === 'function') {
-            onConfirm();
+        let modal = document.getElementById('bmsCustomConfirmModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'bmsCustomConfirmModal';
+            document.body.appendChild(modal);
         }
-    };
+
+        modal.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 select-none';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.right = '0';
+        modal.style.bottom = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+
+        const iconHtml = isDanger
+            ? '<div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl mx-auto mb-3"><i class="fas fa-triangle-exclamation"></i></div>'
+            : '<div class="w-12 h-12 rounded-2xl bg-emerald-50 text-primary flex items-center justify-center text-xl mx-auto mb-3"><i class="fas fa-circle-question"></i></div>';
+
+        const confirmBtnClass = isDanger
+            ? 'bg-rose-600 hover:bg-rose-700 text-white'
+            : 'bg-primary hover:bg-primary-dark text-white';
+
+        modal.innerHTML = `
+            <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-sm w-full p-6 text-center transform transition-all animate-[bmsModalIn_0.18s_ease-out]">
+                ${iconHtml}
+                <h4 class="text-base font-bold text-slate-900 mb-1.5">${title}</h4>
+                <p class="text-xs text-slate-500 leading-relaxed mb-6">${message}</p>
+                <div class="flex items-center justify-center gap-2.5">
+                    <button id="bmsConfirmCancelBtn" type="button" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition cursor-pointer">
+                        ${cancelText}
+                    </button>
+                    <button id="bmsConfirmOkBtn" type="button" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-medium ${confirmBtnClass} shadow-sm transition cursor-pointer">
+                        ${confirmText}
+                    </button>
+                </div>
+            </div>
+        `;
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+        const closeConfirm = (confirmed) => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modal.style.display = 'none';
+            if (confirmed) {
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
+                }
+                resolve(true);
+            } else {
+                if (typeof onCancel === 'function') {
+                    onCancel();
+                }
+                resolve(false);
+            }
+        };
+
+        const cancelBtn = document.getElementById('bmsConfirmCancelBtn');
+        const okBtn = document.getElementById('bmsConfirmOkBtn');
+
+        if (cancelBtn) cancelBtn.onclick = () => closeConfirm(false);
+        if (okBtn) okBtn.onclick = () => closeConfirm(true);
+    });
 }
 
 // 3. Custom Dropdown Helpers
@@ -795,3 +819,107 @@ if (document.readyState === 'loading') {
     };
 })();
 
+/**
+ * Mobile Date Range Picker Backdrop & Modal Portal Manager
+ * Fixes stacking context on mobile (< 640px) by portaling popovers to document.body above the backdrop
+ */
+function initDateRangeBackdropObserver() {
+    let backdrop = document.getElementById('bmsDateModalBackdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'bmsDateModalBackdrop';
+        backdrop.className = 'hidden opacity-0 pointer-events-none';
+        document.body.appendChild(backdrop);
+
+        backdrop.addEventListener('click', () => {
+            document.querySelectorAll('#datePickerPopover, .bms-date-popover').forEach(p => {
+                p.classList.add('hidden');
+            });
+            document.querySelectorAll('#datePickerChevron').forEach(c => {
+                c.classList.remove('rotate-180');
+            });
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+            backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+            setTimeout(() => backdrop.classList.add('hidden'), 200);
+            checkPopovers();
+        });
+    }
+
+    const checkPopovers = () => {
+        const popovers = Array.from(document.querySelectorAll('#datePickerPopover, .bms-date-popover'));
+        const isMobile = window.innerWidth < 640;
+
+        popovers.forEach(p => {
+            const isOpen = !p.classList.contains('hidden') && window.getComputedStyle(p).display !== 'none';
+
+            if (isMobile && isOpen) {
+                // Teleport to document.body above backdrop if not already there
+                if (p.parentElement !== document.body) {
+                    if (!p.__portalPlaceholder) {
+                        p.__portalPlaceholder = document.createComment('bms-date-popover-placeholder');
+                    }
+                    p.parentElement.insertBefore(p.__portalPlaceholder, p);
+                    document.body.appendChild(p);
+                }
+            } else {
+                // Restore to original container when closed or on desktop
+                if (p.__portalPlaceholder && p.__portalPlaceholder.parentElement) {
+                    p.__portalPlaceholder.parentElement.insertBefore(p, p.__portalPlaceholder);
+                    p.__portalPlaceholder.remove();
+                    delete p.__portalPlaceholder;
+                }
+            }
+        });
+
+        if (!isMobile) {
+            if (backdrop) {
+                backdrop.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+            }
+            return;
+        }
+
+        const anyOpen = popovers.some(p => !p.classList.contains('hidden') && window.getComputedStyle(p).display !== 'none');
+
+        if (backdrop) {
+            if (anyOpen) {
+                backdrop.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                    backdrop.classList.add('opacity-100', 'pointer-events-auto');
+                });
+            } else {
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+                setTimeout(() => {
+                    const stillOpen = Array.from(document.querySelectorAll('#datePickerPopover, .bms-date-popover'))
+                        .some(p => !p.classList.contains('hidden'));
+                    if (!stillOpen) backdrop.classList.add('hidden');
+                }, 200);
+            }
+        }
+    };
+
+    const attachObservers = () => {
+        const popovers = document.querySelectorAll('#datePickerPopover, .bms-date-popover');
+        if (popovers.length > 0) {
+            const observer = new MutationObserver(checkPopovers);
+            popovers.forEach(p => {
+                if (!p.__hasBmsObserver) {
+                    p.__hasBmsObserver = true;
+                    observer.observe(p, { attributes: true, attributeFilter: ['class', 'style'] });
+                }
+            });
+        }
+    };
+
+    attachObservers();
+    document.addEventListener('click', () => setTimeout(checkPopovers, 50));
+    window.addEventListener('resize', checkPopovers);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDateRangeBackdropObserver);
+} else {
+    initDateRangeBackdropObserver();
+}

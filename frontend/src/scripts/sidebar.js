@@ -1149,19 +1149,169 @@ window.toggleNotifications = function() {
     }
 };
 
+/**
+ * Global Mobile Sidebar Drawer & Backdrop Manager
+ * Enables smooth off-canvas drawer on mobile (< 1024px) with auto-injected hamburger button
+ */
+function initMobileSidebarDrawer() {
+    const sidebar = document.querySelector('aside');
+    if (!sidebar) return;
+
+    // 1. Ensure Backdrop exists
+    let backdrop = document.getElementById('bmsMobileBackdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'bmsMobileBackdrop';
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(backdrop);
+    }
+
+    // ECharts auto-resize handler
+    const triggerChartResize = () => {
+        if (window.echarts) {
+            document.querySelectorAll('div[_echarts_instance_]').forEach(div => {
+                const chart = window.echarts.getInstanceByDom(div);
+                if (chart) chart.resize();
+            });
+        }
+    };
+
+    // Drawer state helpers
+    const openDrawer = () => {
+        sidebar.classList.add('mobile-open');
+        backdrop.classList.add('active');
+        document.body.classList.add('overflow-hidden');
+        setTimeout(triggerChartResize, 300);
+    };
+
+    const closeDrawer = () => {
+        sidebar.classList.remove('mobile-open');
+        backdrop.classList.remove('active');
+        document.body.classList.remove('overflow-hidden');
+        setTimeout(triggerChartResize, 300);
+    };
+
+    // Close on backdrop click
+    backdrop.onclick = closeDrawer;
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('mobile-open')) {
+            closeDrawer();
+        }
+    });
+
+    // Close on resize to desktop (>= 1024px)
+    window.addEventListener('resize', () => {
+        triggerChartResize();
+        if (window.innerWidth >= 1024 && sidebar.classList.contains('mobile-open')) {
+            closeDrawer();
+        }
+    });
+
+    // Close on navigation click inside sidebar
+    sidebar.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 1024) {
+                closeDrawer();
+            }
+        });
+    });
+
+    // 2. Add Mobile Close Button inside Sidebar Brand Container (if not present)
+    let closeBtn = sidebar.querySelector('#bmsSidebarCloseBtn');
+    if (!closeBtn) {
+        const brandContainer = sidebar.querySelector('.h-\\[72px\\]') || sidebar.firstElementChild;
+        if (brandContainer) {
+            closeBtn = document.createElement('button');
+            closeBtn.id = 'bmsSidebarCloseBtn';
+            closeBtn.type = 'button';
+            closeBtn.className = 'ml-auto w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex lg:hidden items-center justify-center transition cursor-pointer flex-shrink-0 shadow-sm';
+            closeBtn.setAttribute('aria-label', 'បិទម៉ឺនុយ');
+            closeBtn.title = 'បិទម៉ឺនុយ';
+            closeBtn.innerHTML = '<i class="fas fa-xmark text-base"></i>';
+            closeBtn.onclick = closeDrawer;
+            brandContainer.appendChild(closeBtn);
+        }
+    }
+
+    // 3. Inject Hamburger button into Header (if not present)
+    const header = document.querySelector('header');
+    if (header) {
+        // If this page already has a standard back button (Create/Edit/View sub-pages),
+        // do not clutter the mobile header with a hamburger button.
+        const existingBackBtn = header.querySelector('a i.fa-arrow-left, a[title*="ត្រឡប់"]');
+        let menuBtn = document.getElementById('bmsMobileMenuToggle');
+        if (existingBackBtn) {
+            if (menuBtn) menuBtn.remove();
+        } else {
+            if (!menuBtn) {
+                menuBtn = document.createElement('button');
+                menuBtn.id = 'bmsMobileMenuToggle';
+                menuBtn.type = 'button';
+                menuBtn.className = 'w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 flex lg:hidden items-center justify-center border border-slate-200/80 transition-colors cursor-pointer flex-shrink-0 shadow-sm mr-2.5';
+                menuBtn.setAttribute('aria-label', 'បើកម៉ឺនុយ');
+                menuBtn.title = 'បើកម៉ឺនុយ';
+                menuBtn.innerHTML = '<i class="fas fa-bars text-base"></i>';
+
+                menuBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (sidebar.classList.contains('mobile-open')) {
+                        closeDrawer();
+                    } else {
+                        openDrawer();
+                    }
+                };
+
+                // Find where to insert in header
+                const firstChild = header.firstElementChild;
+                if (firstChild) {
+                    if (firstChild.classList.contains('flex')) {
+                        firstChild.insertBefore(menuBtn, firstChild.firstChild);
+                    } else {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'flex items-center gap-2.5 min-w-0 flex-1 sm:flex-initial header-left-wrapper';
+                        header.insertBefore(wrapper, firstChild);
+                        wrapper.appendChild(menuBtn);
+                        wrapper.appendChild(firstChild);
+                    }
+                } else {
+                    header.appendChild(menuBtn);
+                }
+            } else {
+                menuBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (sidebar.classList.contains('mobile-open')) {
+                        closeDrawer();
+                    } else {
+                        openDrawer();
+                    }
+                };
+            }
+        }
+    }
+
+    // Expose toggle globally
+    window.toggleMobileSidebar = () => {
+        if (sidebar.classList.contains('mobile-open')) {
+            closeDrawer();
+        } else {
+            openDrawer();
+        }
+    };
+}
+
 // Attach listeners on load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initSidebarNav();
         initUserProfileMenu();
         initGlobalNotifications();
+        initMobileSidebarDrawer();
     });
 } else {
     initSidebarNav();
     initUserProfileMenu();
     initGlobalNotifications();
+    initMobileSidebarDrawer();
 }
-
-
-
-

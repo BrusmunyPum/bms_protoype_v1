@@ -390,21 +390,6 @@
     <!-- Toast Notification Container -->
     
 
-    <!-- Custom Confirm Modal -->
-    <div id="customConfirmModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 transform scale-95 opacity-0 transition-all duration-200" id="customConfirmContent">
-            <div class="flex items-center justify-center w-12 h-12 rounded-full mb-4 mx-auto bg-rose-100 text-rose-600 text-xl">
-                <i class="fas fa-triangle-exclamation"></i>
-            </div>
-            <h3 class="text-base font-bold text-center text-slate-800 mb-2" id="confirmTitle">ព្រមានអំពីការលុបទិន្នន័យ</h3>
-            <p class="text-xs text-center text-slate-500 mb-6" id="confirmMessage">តើអ្នកពិតជាចង់កំណត់ប្រព័ន្ធឡើងវិញមែនទេ? ទិន្នន័យទាំងអស់នឹងត្រូវបាត់បង់ទាំងស្រុង។</p>
-            <div class="flex gap-3">
-                <button type="button" onclick="closeConfirmModal(false)" class="w-1/2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-medium transition">បោះបង់</button>
-                <button type="button" onclick="closeConfirmModal(true)" class="w-1/2 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold transition shadow-sm">យល់ព្រមលុប</button>
-            </div>
-        </div>
-    </div>
-
     <script src="../../../scripts/ui-components.js"></script>
     <script src="../../../scripts/sidebar.js"></script>
     <script>
@@ -449,36 +434,6 @@
                     showToast('មិនអាចអនុវត្តការកំណត់ឡើងវិញបានទេនៅក្នុងកំណែសាកល្បង', 'danger');
                 }
             });
-        }
-
-        function showCustomConfirm(options) {
-            const modal = document.getElementById('customConfirmModal');
-            const content = document.getElementById('customConfirmContent');
-            const titleEl = document.getElementById('confirmTitle');
-            const msgEl = document.getElementById('confirmMessage');
-
-            titleEl.textContent = options.title || 'បញ្ជាក់ការសម្រេចចិត្ត';
-            msgEl.textContent = options.message || 'តើអ្នកប្រាកដដែរឬទេ?';
-            confirmCallback = options.onConfirm;
-
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                content.classList.remove('scale-95', 'opacity-0');
-            }, 10);
-        }
-
-        function closeConfirmModal(isConfirmed) {
-            const modal = document.getElementById('customConfirmModal');
-            const content = document.getElementById('customConfirmContent');
-
-            content.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                if (isConfirmed && confirmCallback) {
-                    confirmCallback();
-                }
-                confirmCallback = null;
-            }, 150);
         }
     </script>
 </body>
