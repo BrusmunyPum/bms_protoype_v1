@@ -203,17 +203,17 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50">
 
         <!-- Top Header Navigation (Standard h-[72px]) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button (Unified Standard) -->
                 <a href="movement.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅចលនាស្តុក">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">កត់ត្រាចលនាស្តុកថ្មី</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">បង្កើតប័ណ្ណនាំចូល នាំចេញ ផ្ទេររវាងឃ្លាំង ឬកែតម្រូវទំនិញជាក់ស្តែង</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កត់ត្រាចលនាស្តុកថ្មី</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">បង្កើតប័ណ្ណនាំចូល នាំចេញ ផ្ទេររវាងឃ្លាំង ឬកែតម្រូវទំនិញជាក់ស្តែង</p>
                 </div>
             </div>
 
@@ -333,7 +333,7 @@
                 </div>
 
                 <!-- 2. Items List Table -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4 relative z-20">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">2</span>
@@ -346,8 +346,8 @@
                         </button>
                     </div>
 
-                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white">
-                        <table class="w-full text-left text-sm" id="movementLinesTable">
+                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white bms-items-table-wrapper">
+                        <table class="w-full text-left text-sm min-w-[680px] bms-responsive-item-table" id="movementLinesTable">
                             <thead class="bg-slate-50/70 text-xs text-slate-500 border-b border-slate-200">
                                 <tr>
                                     <th class="py-3 px-4 rounded-tl-2xl min-w-[280px]">មុខទំនិញ</th>
@@ -409,9 +409,9 @@
                 </div>
 
                 <!-- 4. Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
                     <a href="movement.html"
-                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
+                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100 text-center">
                         បោះបង់
                     </a>
                     <button type="button" onclick="submitMovementForm('draft')"
@@ -454,7 +454,7 @@
 
             tr.innerHTML = `
                 <!-- Product Selector -->
-                <td class="p-3">
+                <td class="p-3 col-product">
                     <div class="relative bms-custom-select product-select-container">
                         <input type="hidden" class="item-product-sku" value="${defaultProduct ? defaultProduct.id : ''}" />
                         <input type="hidden" class="item-cost" value="${defaultProduct ? defaultProduct.cost : 0}" />
@@ -463,17 +463,21 @@
                             <span class="product-selected-label ${defaultProduct ? 'text-slate-800 font-medium' : 'text-slate-400'} truncate">
                                 ${defaultProduct ? defaultProduct.name : '-- ជ្រើសរើសទំនិញ --'}
                             </span>
-                            <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1"></i>
+                            <i class="fas fa-chevron-down text-[10px] text-slate-400 ml-1 transition-transform duration-200"></i>
                         </button>
-                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[280px] max-h-56 overflow-y-auto space-y-0.5">
+                        <div class="bms-custom-select-menu absolute left-0 right-0 top-full mt-1 bg-white rounded-2xl shadow-2xl border border-slate-200 p-1.5 z-50 hidden text-xs min-w-[300px] max-h-56 overflow-y-auto space-y-0.5">
                             ${MV_PRODUCTS.map(p => `
                                 <div onclick="selectRowProduct(this, '${p.id}', '${p.name}', ${p.currentStock}, ${p.cost})"
-                                    class="p-2 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                    <div>
-                                        <div class="font-medium text-slate-800">${p.name}</div>
-                                        <div class="text-[10px] text-slate-400">${p.id} · ស្តុក: ${p.currentStock}</div>
+                                    class="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-center justify-between transition group border border-transparent hover:border-slate-100">
+                                    <div class="min-w-0 pr-2">
+                                        <div class="font-medium text-slate-800 group-hover:text-primary transition truncate">${p.name}</div>
+                                        <div class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5">
+                                            <span>${p.id}</span>
+                                            <span>·</span>
+                                            <span class="text-slate-500 font-medium">ស្តុក: ${p.currentStock} គ្រឿង</span>
+                                        </div>
                                     </div>
-                                    <span class="text-[11px] text-emerald-700 font-semibold">$${p.cost.toFixed(2)}</span>
+                                    <span class="text-xs text-primary font-bold bg-emerald-50/90 border border-emerald-100/80 px-2 py-1 rounded-lg flex-shrink-0">$${p.cost.toFixed(2)}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -481,30 +485,34 @@
                 </td>
 
                 <!-- Current Stock -->
-                <td class="p-3 text-center text-xs font-semibold text-slate-700 item-current-stock">
-                    ${defaultProduct ? defaultProduct.currentStock + ' គ្រឿង' : '-'}
+                <td class="p-3 text-center text-xs font-semibold text-slate-700 item-current-stock col-stock">
+                    <span class="md:hidden text-[11px] font-medium text-slate-400">ស្តុកបច្ចុប្បន្ន៖ </span>
+                    <span class="item-current-stock-val">${defaultProduct ? defaultProduct.currentStock + ' គ្រឿង' : '-'}</span>
                 </td>
 
                 <!-- Move Qty Input -->
-                <td class="p-3">
+                <td class="p-3 col-qty">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួនផ្លាស់ប្តូរ</label>
                     <input type="number" min="1" value="1" oninput="recalcMovementRow(this)"
                         class="item-move-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
 
                 <!-- Unit Cost -->
-                <td class="p-3 text-right text-xs text-slate-600 font-medium item-cost-display">
-                    ${defaultProduct ? '$' + defaultProduct.cost.toFixed(2) : '$0.00'}
+                <td class="p-3 text-right text-xs text-slate-600 font-medium item-cost-display col-cost">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ថ្លៃដើមឯកតា ($)</label>
+                    <span class="item-cost-val">${defaultProduct ? '$' + defaultProduct.cost.toFixed(2) : '$0.00'}</span>
                 </td>
 
                 <!-- Total Value -->
-                <td class="p-3 text-right text-xs font-bold text-slate-800 item-total-display">
-                    ${defaultProduct ? '$' + defaultProduct.cost.toFixed(2) : '$0.00'}
+                <td class="p-3 text-right text-xs font-bold text-slate-800 item-total-display col-total">
+                    <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                    <span class="item-total-val text-sm font-bold text-slate-900">${defaultProduct ? '$' + defaultProduct.cost.toFixed(2) : '$0.00'}</span>
                 </td>
 
                 <!-- Remove Row Button -->
-                <td class="p-3 text-center">
+                <td class="p-3 text-center col-action">
                     <button type="button" onclick="removeMovementRow('${rowId}')"
-                        class="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 flex items-center justify-center transition">
+                        class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                         <i class="fas fa-trash-can text-xs"></i>
                     </button>
                 </td>
@@ -523,33 +531,59 @@
         }
 
         function toggleRowProductDropdown(btn) {
-            const container = btn.closest('.product-select-container');
-            if (!container) return;
-            const menu = container.querySelector('.bms-custom-select-menu');
-            const isHidden = menu.classList.contains('hidden');
-
-            document.querySelectorAll('#movementLinesTable .bms-custom-select-menu').forEach(m => m.classList.add('hidden'));
-
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                container.classList.add('z-50');
+            if (typeof window.openFloatingDropdown === 'function') {
+                const container = btn.closest('.product-select-container, .bms-custom-select');
+                if (!container) return;
+                const menu = container.querySelector('.bms-custom-select-menu');
+                if (!menu) return;
+                const isCurrentlyOpen = menu.dataset.floatingActive === 'true' && !menu.classList.contains('hidden');
+                if (isCurrentlyOpen) {
+                    window.closeFloatingDropdown(menu);
+                } else {
+                    window.openFloatingDropdown(btn, menu);
+                }
             } else {
-                menu.classList.add('hidden');
-                container.classList.remove('z-50');
+                const container = btn.closest('.product-select-container, .bms-custom-select');
+                if (!container) return;
+                const menu = container.querySelector('.bms-custom-select-menu');
+                if (!menu) return;
+                const isHidden = menu.classList.contains('hidden');
+                document.querySelectorAll('.bms-custom-select-menu').forEach(m => m.classList.add('hidden'));
+
+                if (isHidden) {
+                    const rect = btn.getBoundingClientRect();
+                    const vHeight = window.innerHeight;
+                    const vWidth = window.innerWidth;
+                    const spaceBelow = vHeight - rect.bottom;
+                    const targetWidth = Math.min(Math.max(rect.width, 280), vWidth - 32);
+                    let left = rect.left;
+                    if (left + targetWidth > vWidth - 16) left = Math.max(16, vWidth - targetWidth - 16);
+
+                    menu.style.setProperty('position', 'fixed', 'important');
+                    menu.style.setProperty('z-index', '99999', 'important');
+                    menu.style.setProperty('left', `${left}px`, 'important');
+                    menu.style.setProperty('right', 'auto', 'important');
+                    menu.style.setProperty('width', `${targetWidth}px`, 'important');
+                    menu.style.setProperty('top', `${rect.bottom + 6}px`, 'important');
+                    menu.style.setProperty('max-height', `${Math.min(spaceBelow - 20, 280)}px`, 'important');
+                    menu.classList.remove('hidden');
+                    menu.dataset.floatingActive = 'true';
+                }
             }
         }
 
         function selectRowProduct(optElem, sku, name, currentStock, cost) {
             const tr = optElem.closest('tr');
             if (!tr) return;
+            const td = optElem.closest('td');
 
             const skuInput = tr.querySelector('.item-product-sku');
             const costInput = tr.querySelector('.item-cost');
             const label = tr.querySelector('.product-selected-label');
-            const currentStockElem = tr.querySelector('.item-current-stock');
-            const costDisplay = tr.querySelector('.item-cost-display');
+            const currentStockElem = tr.querySelector('.item-current-stock-val') || tr.querySelector('.item-current-stock');
+            const costDisplay = tr.querySelector('.item-cost-val') || tr.querySelector('.item-cost-display');
             const moveQtyInput = tr.querySelector('.item-move-qty');
-            const menu = tr.querySelector('.bms-custom-select-menu');
+            const menu = tr.querySelector('.bms-custom-select-menu') || optElem.closest('.bms-custom-select-menu');
 
             if (skuInput) skuInput.value = sku;
             if (costInput) costInput.value = cost;
@@ -561,8 +595,12 @@
             if (currentStockElem) currentStockElem.textContent = `${currentStock} គ្រឿង`;
             if (costDisplay) costDisplay.textContent = `$${cost.toFixed(2)}`;
 
-            if (menu) menu.classList.add('hidden');
-            tr.querySelector('.product-select-container')?.classList.remove('z-50');
+            if (typeof window.closeFloatingDropdown === 'function') {
+                window.closeFloatingDropdown(menu);
+            } else if (menu) {
+                menu.classList.add('hidden');
+                menu.removeAttribute('data-floating-active');
+            }
 
             recalcMovementRow(moveQtyInput);
         }
@@ -575,7 +613,7 @@
             const qty = parseInt(inputElem.value) || 0;
             const total = qty * cost;
 
-            const totalDisplay = tr.querySelector('.item-total-display');
+            const totalDisplay = tr.querySelector('.item-total-val') || tr.querySelector('.item-total-display');
             if (totalDisplay) totalDisplay.textContent = `$${total.toFixed(2)}`;
 
             recalcTotalMovement();
@@ -654,9 +692,17 @@
         }
 
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.bms-custom-select')) {
-                document.querySelectorAll('.bms-custom-select-menu').forEach(m => m.classList.add('hidden'));
-                document.querySelectorAll('.bms-custom-select-arrow').forEach(a => a.classList.remove('rotate-180'));
+            const isInsideDropdown = e.target.closest('.bms-custom-select') || 
+                                     e.target.closest('.bms-custom-select-menu') || 
+                                     e.target.closest('.product-select-container') ||
+                                     e.target.closest('button[onclick*="Dropdown"]');
+            if (!isInsideDropdown) {
+                if (typeof window.closeAllFloatingDropdowns === 'function') {
+                    window.closeAllFloatingDropdowns();
+                } else {
+                    document.querySelectorAll('.bms-custom-select-menu').forEach(m => m.classList.add('hidden'));
+                    document.querySelectorAll('.bms-custom-select-arrow').forEach(a => a.classList.remove('rotate-180'));
+                }
             }
         });
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="km">
 
 <head>
@@ -197,36 +197,37 @@
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header (Exact 72px) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button -->
                 <a href="disbursement.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅការទូទាត់ចំណាយ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">ព័ត៌មានលម្អិតប័ណ្ណចំណាយទូទាត់</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">ពិនិត្យមើលប័ណ្ណចំណាយទូទាត់ជាផ្លូវការ អ្នកផ្គត់ផ្គង់ និងការអនុម័ត</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">ព័ត៌មានលម្អិតប័ណ្ណចំណាយទូទាត់</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">ពិនិត្យមើលប័ណ្ណចំណាយទូទាត់ជាផ្លូវការ អ្នកផ្គត់ផ្គង់ និងការអនុម័ត</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
                 <!-- Edit Disbursement Button -->
                 <a id="btnEditDisb" href="edit-disbursement.html"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-file-pen mr-2 text-xs text-slate-500"></i>
-                    <span>កែប្រែប័ណ្ណចំណាយ</span>
+                    class="h-9 sm:h-10 px-2.5 sm:px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center justify-center transition text-xs sm:text-sm font-normal"
+                    title="កែប្រែប័ណ្ណចំណាយ">
+                    <i class="fas fa-file-pen sm:mr-2 text-xs text-slate-500"></i>
+                    <span class="hidden sm:inline">កែប្រែប័ណ្ណចំណាយ</span>
                 </a>
 
                 <!-- Print Button -->
                 <button onclick="window.print()"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="បោះពុម្ពប័ណ្ណចំណាយ">
                     <i class="fas fa-print text-sm"></i>
                 </button>
             
-                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                <div class="h-6 w-px bg-slate-200 mx-0.5 sm:mx-1 hidden sm:block"></div>
 
                 <!-- Notification Bell -->
                 <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
@@ -249,7 +250,7 @@
 
         <!-- Scrollable Content -->
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-6">
-            <div class="printable-document w-full max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200/80 shadow-xs p-8 space-y-8">
+            <div class="printable-document w-full bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
 
                 <!-- 1. Voucher Header -->
                 <div class="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-200 pb-6">
@@ -259,7 +260,7 @@
                                 <img src="../../../assets/logo-mark-transparent.png" alt="DIGITECHKH Logo" class="w-full h-full object-contain">
                             </div>
                             <div>
-                                <h1 class="text-xl font-bold text-slate-900 tracking-tight">DIGITECHKH Co., Ltd.</h1>
+                                <h1 class="text-xl font-bold text-slate-900 tracking-tight">ក្រុមហ៊ុន ឌីជីថេក ខេអេច</h1>
                                 <p class="text-xs text-slate-500">ដំណោះស្រាយប្រព័ន្ធគ្រប់គ្រងអាជីវកម្មឌីជីថល</p>
                             </div>
                         </div>
@@ -312,7 +313,7 @@
                 <div class="bg-emerald-50/60 rounded-2xl border border-emerald-100 p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div>
                         <p class="text-xs text-emerald-800 font-semibold uppercase tracking-wider">ចំនួនទឹកប្រាក់ទូទាត់ចំណាយសរុប</p>
-                        <p class="text-xs text-emerald-600 mt-0.5">ប្រាំពាន់ពីររយហាសិបដុល្លារអាមេរិកគត់ (Five Thousand Two Hundred Fifty USD)</p>
+                        <p class="text-xs text-emerald-600 mt-0.5">ប្រាំពាន់ពីររយហាសិបដុល្លារអាមេរិកគត់</p>
                     </div>
                     <div class="text-3xl font-black text-emerald-700" id="disbTotalAmount">
                         $5,250.00
@@ -320,7 +321,7 @@
                 </div>
 
                 <!-- 4. Signatures Grid -->
-                <div class="grid grid-cols-3 gap-8 pt-12 border-t border-slate-200 text-center text-xs text-slate-500">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-8 sm:pt-12 border-t border-slate-200 text-center text-xs text-slate-500">
                     <div>
                         <p class="mb-16 font-medium">ហត្ថលេខាអ្នកស្នើសុំ</p>
                         <p class="border-t border-slate-300 pt-1.5 w-36 mx-auto font-bold text-slate-800">ពុំ ប្រុសមុន្នី</p>

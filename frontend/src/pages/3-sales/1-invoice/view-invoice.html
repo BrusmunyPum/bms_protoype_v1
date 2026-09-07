@@ -204,47 +204,47 @@
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header (Exact 72px) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button -->
                 <a href="invoice.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅវិក្កយបត្រលក់">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">ព័ត៌មានលម្អិតវិក្កយបត្រលក់</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">ពិនិត្យមើលវិក្កយបត្រលក់ផ្លូវការ ស្ថានភាពទូទាត់ និងប្រវត្តិប្រតិបត្តិការ</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">ព័ត៌មានលម្អិតវិក្កយបត្រលក់</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">ពិនិត្យមើលវិក្កយបត្រលក់ផ្លូវការ ស្ថានភាពទូទាត់ និងប្រវត្តិប្រតិបត្តិការ</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center gap-1.5 sm:gap-3">
                 <!-- Edit Invoice Button -->
-                <a id="btnEditInvoice" href="edit-invoice.html"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-file-pen mr-2 text-xs text-slate-500"></i>
-                    <span>កែប្រែវិក្កយបត្រ</span>
+                <a id="btnEditInvoice" href="edit-invoice.html" title="កែប្រែវិក្កយបត្រ"
+                    class="h-9 sm:h-10 px-3 sm:px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center justify-center transition text-xs sm:text-sm font-normal">
+                    <i class="fas fa-file-pen sm:mr-2 text-xs text-slate-500"></i>
+                    <span class="hidden sm:inline">កែប្រែវិក្កយបត្រ</span>
                 </a>
 
                 <!-- Record Payment Button -->
-                <a id="btnRecordPayment" href="../payment/create-payment.html"
-                    class="h-10 px-4 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
-                    <i class="fas fa-receipt mr-2 text-xs"></i>
-                    <span>កត់ត្រាការទូទាត់</span>
+                <a id="btnRecordPayment" href="../payment/create-payment.html" title="កត់ត្រាការទូទាត់"
+                    class="h-9 sm:h-10 px-3 sm:px-4 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center justify-center shadow-sm hover:shadow transition text-xs sm:text-sm font-normal">
+                    <i class="fas fa-receipt sm:mr-2 text-xs"></i>
+                    <span class="hidden sm:inline">កត់ត្រាការទូទាត់</span>
                 </a>
 
                 <!-- Print Button -->
                 <button onclick="window.print()"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="បោះពុម្ពវិក្កយបត្រ">
                     <i class="fas fa-print text-sm"></i>
                 </button>
             
-                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                <div class="hidden sm:block h-6 w-px bg-slate-200 mx-1"></div>
 
                 <!-- Notification Bell -->
-                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
-                    <i class="fas fa-bell text-xl"></i>
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2 sm:p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer flex-shrink-0" title="ការជូនដំណឹង">
+                    <i class="fas fa-bell text-lg sm:text-xl"></i>
                     <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
@@ -252,9 +252,9 @@
                 </button>
                 
                 <!-- User Profile Avatar Only -->
-                <div class="flex items-center border-l pl-3 md:pl-4">
+                <div class="flex items-center sm:border-l pl-1 sm:pl-3 md:pl-4 flex-shrink-0">
                     <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover shadow-sm border border-slate-200" />
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
                     </button>
                 </div>
@@ -262,8 +262,8 @@
         </header>
 
         <!-- Scrollable Content -->
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-4 md:px-6 py-6">
-            <div class="printable-document w-full max-w-5xl mx-auto bg-white rounded-2xl border border-slate-200/80 shadow-xs p-8 space-y-8">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 px-3 sm:px-6 py-4 sm:py-6">
+            <div class="printable-document w-full bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
 
                 <!-- 1. Header & Invoice Document Info -->
                 <div class="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-200 pb-6">
@@ -313,7 +313,7 @@
                         </div>
                         <div class="flex justify-between py-1 border-b border-slate-200/60">
                             <span class="text-slate-500">កាលកំណត់ទូទាត់៖</span>
-                            <span class="font-semibold text-rose-600" id="invDueDate">14 តុលា 2026 (Net 30 Days)</span>
+                            <span class="font-semibold text-rose-600" id="invDueDate">14 តុលា 2026 (រយៈពេល 30 ថ្ងៃ)</span>
                         </div>
                         <div class="flex justify-between py-1 border-b border-slate-200/60">
                             <span class="text-slate-500">វិធីសាស្ត្រទូទាត់រំពឹងទុក៖</span>
@@ -321,14 +321,14 @@
                         </div>
                         <div class="flex justify-between py-1">
                             <span class="text-slate-500">គណនីធនាគារ ABA៖</span>
-                            <span class="font-bold text-slate-800">000 123 456 (DIGITECHKH CO., LTD.)</span>
+                            <span class="font-bold text-slate-800">000 123 456</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 3. Line Items Table -->
-                <div class="overflow-x-auto rounded-xl border border-slate-200">
-                    <table class="w-full text-left text-xs">
+                <div class="overflow-x-auto rounded-xl border border-slate-200 bms-items-table-wrapper">
+                    <table class="w-full text-left text-xs bms-view-item-table">
                         <thead class="bg-slate-100/80 text-slate-700 uppercase font-semibold border-b border-slate-200">
                             <tr>
                                 <th class="py-3 px-4 w-12 text-center">#</th>
@@ -341,13 +341,21 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100" id="invLinesBody">
                             <tr>
-                                <td class="py-3.5 px-4 text-center text-slate-400">1</td>
-                                <td class="py-3.5 px-4 font-semibold text-slate-800">ទូរស័ព្ទ iPhone 15 Pro Max 256GB</td>
-                                <td class="py-3.5 px-4 text-center text-slate-500">IPH15PM-256</td>
-                                <td class="py-3.5 px-4 text-center font-medium">1 គ្រឿង</td>
-                                <td class="py-3.5 px-4 text-right">$1,250.00</td>
-                                
-                                <td class="py-3.5 px-4 text-right font-bold text-slate-800">$1,250.00</td>
+                                <td class="py-3.5 px-4 text-center text-slate-400 col-num">1</td>
+                                <td class="py-3.5 px-4 font-semibold text-slate-800 col-product">ទូរស័ព្ទ iPhone 15 Pro Max 256GB</td>
+                                <td class="py-3.5 px-4 text-center text-slate-500 col-code">
+                                    <span class="md:hidden mobile-label text-slate-400">កូដ៖ </span>IPH15PM-256
+                                </td>
+                                <td class="py-3.5 px-4 text-center font-medium col-qty">
+                                    <span class="md:hidden mobile-label text-slate-400">ចំនួន៖ </span>1 គ្រឿង
+                                </td>
+                                <td class="py-3.5 px-4 text-right col-price">
+                                    <span class="md:hidden mobile-label text-slate-400">តម្លៃឯកតា៖ </span>$1,250.00
+                                </td>
+                                <td class="py-3.5 px-4 text-right font-bold text-slate-800 col-total">
+                                    <span class="md:hidden mobile-label text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                    <span>$1,250.00</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

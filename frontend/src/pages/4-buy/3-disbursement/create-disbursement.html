@@ -203,16 +203,16 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50">
 
         <!-- Top Header Navigation (Standard h-[72px] matching create-payment.html) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="disbursement.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅការទូទាត់ចំណាយ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">កត់ត្រាការទូទាត់ចំណាយថ្មី</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">បង្កើតប័ណ្ណចំណាយ និងកត់ត្រាប្រតិបត្តិការទូទាត់ជូនអ្នកផ្គត់ផ្គង់</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កត់ត្រាការទូទាត់ចំណាយថ្មី</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">បង្កើតប័ណ្ណចំណាយ និងកត់ត្រាប្រតិបត្តិការទូទាត់ជូនអ្នកផ្គត់ផ្គង់</p>
                 </div>
             </div>
 
@@ -535,9 +535,9 @@
                                             <span>DIGITECHKH - ACLEDA (USD) - 100 892 411</span>
                                             <i class="fas fa-check text-xs text-primary account-check opacity-0"></i>
                                         </div>
-                                        <div onclick="selectAccountOption('បេឡាសាច់ប្រាក់រង (Petty Cash)')"
+                                        <div onclick="selectAccountOption('បេឡាសាច់ប្រាក់រង')"
                                             class="px-3 py-2 rounded-xl text-xs hover:bg-slate-50 cursor-pointer flex items-center justify-between transition">
-                                            <span>បេឡាសាច់ប្រាក់រង (Petty Cash)</span>
+                                            <span>បេឡាសាច់ប្រាក់រង</span>
                                             <i class="fas fa-check text-xs text-primary account-check opacity-0"></i>
                                         </div>
                                     </div>
@@ -625,13 +625,13 @@
                     </div>
 
                     <!-- Bottom Action Bar -->
-                    <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                    <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
                         <a href="disbursement.html"
-                            class="h-10 px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl flex items-center transition text-sm font-medium">
+                            class="h-10 px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl flex items-center justify-center transition text-sm font-medium">
                             <span>បោះបង់</span>
                         </a>
                         <button type="submit"
-                            class="h-10 px-6 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center gap-2 shadow-sm hover:shadow transition text-sm font-medium">
+                            class="h-10 px-6 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center justify-center gap-2 shadow-sm hover:shadow transition text-sm font-medium">
                             <i class="fas fa-save text-xs"></i>
                             <span>រក្សាទុកការទូទាត់</span>
                         </button>
@@ -835,7 +835,7 @@
 
             // Default account change based on method
             if (key === 'cash') {
-                selectAccountOption('បេឡាសាច់ប្រាក់រង (Petty Cash)');
+                selectAccountOption('បេឡាសាច់ប្រាក់រង');
             } else if (key === 'bank_acleda') {
                 selectAccountOption('DIGITECHKH - ACLEDA (USD) - 100 892 411');
             } else {

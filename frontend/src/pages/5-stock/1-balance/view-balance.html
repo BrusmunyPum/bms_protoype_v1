@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="km">
 
 <head>
@@ -197,50 +197,53 @@
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         <!-- Top Header (Exact 72px) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button -->
                 <a href="balance.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅតុល្យភាពស្តុក">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">ព័ត៌មានលម្អិតតុល្យភាពស្តុកទំនិញ</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">មើលស្ថានភាពស្តុកជាក់ស្តែង ចំនួនបម្រុងទុក និងប្រវត្តិចលនាទំនិញ</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">ព័ត៌មានលម្អិតតុល្យភាពស្តុកទំនិញ</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">មើលស្ថានភាពស្តុកជាក់ស្តែង ចំនួនបម្រុងទុក និងប្រវត្តិចលនាទំនិញ</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
                 <!-- Adjust Stock Button -->
                 <a id="btnAdjustStock" href="adjust-balance.html"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-sliders mr-2 text-xs text-slate-500"></i>
-                    <span>កែសម្រួលស្តុក</span>
+                    class="h-9 sm:h-10 px-2.5 sm:px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center justify-center transition text-xs sm:text-sm font-normal"
+                    title="កែសម្រួលស្តុក">
+                    <i class="fas fa-sliders sm:mr-2 text-xs text-slate-500"></i>
+                    <span class="hidden sm:inline">កែសម្រួលស្តុក</span>
                 </a>
 
                 <!-- Edit Stock Item Info -->
                 <a id="btnEditStock" href="edit-balance.html"
-                    class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center transition text-sm font-normal">
-                    <i class="fas fa-pen mr-2 text-xs text-slate-500"></i>
-                    <span>កែប្រែព័ត៌មាន</span>
+                    class="h-9 sm:h-10 px-2.5 sm:px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 rounded-xl flex items-center justify-center transition text-xs sm:text-sm font-normal"
+                    title="កែប្រែព័ត៌មាន">
+                    <i class="fas fa-pen sm:mr-2 text-xs text-slate-500"></i>
+                    <span class="hidden sm:inline">កែប្រែព័ត៌មាន</span>
                 </a>
 
                 <!-- View Master Catalog -->
                 <a id="btnViewCatalog" href="../catalog/view-catalog.html"
-                    class="h-10 px-4 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center shadow-sm hover:shadow transition text-sm font-normal">
-                    <i class="fas fa-list mr-2 text-xs"></i>
-                    <span>មើលកាតាឡុក</span>
+                    class="h-9 sm:h-10 px-2.5 sm:px-4 bg-primary hover:bg-primary-dark text-white rounded-xl flex items-center justify-center shadow-sm hover:shadow transition text-xs sm:text-sm font-normal"
+                    title="មើលកាតាឡុក">
+                    <i class="fas fa-list sm:mr-2 text-xs"></i>
+                    <span class="hidden sm:inline">មើលកាតាឡុក</span>
                 </a>
 
                 <!-- Print Button -->
                 <button onclick="window.print()"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="បោះពុម្ពព័ត៌មានស្តុក">
                     <i class="fas fa-print text-sm"></i>
                 </button>
             
-                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                <div class="h-6 w-px bg-slate-200 mx-0.5 sm:mx-1 hidden sm:block"></div>
 
                 <!-- Notification Bell -->
                 <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
@@ -268,7 +271,7 @@
                 <!-- 1. Product Overview Card -->
                 <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div class="flex items-center gap-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
                             <img id="stockImage" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=160&q=80"
                                 alt="រូបភាពទំនិញ" class="w-20 h-20 rounded-2xl object-cover border border-slate-200 shadow-sm flex-shrink-0" />
                             <div class="space-y-1.5">
@@ -356,8 +359,8 @@
                         </a>
                     </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
+                    <div class="overflow-x-auto bms-items-table-wrapper">
+                        <table class="w-full text-left text-xs min-w-[680px] bms-view-item-table">
                             <thead class="border-b border-slate-100 bg-slate-50/70 text-slate-500 uppercase font-semibold">
                                 <tr>
                                     <th class="py-3 px-4">លេខប័ណ្ណចលនា</th>
@@ -371,30 +374,48 @@
                             </thead>
                             <tbody class="divide-y divide-slate-100">
                                 <tr class="hover:bg-slate-50/60 transition">
-                                    <td class="py-3.5 px-4 font-bold text-slate-800">
+                                    <td class="py-3.5 px-4 font-bold text-slate-800 col-product">
                                         <a href="../movement/view-movement.html?id=MV-2026-003" class="hover:text-primary transition">MV-2026-003</a>
+                                        <span class="ml-2 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">បញ្ចេញលក់</span>
                                     </td>
-                                    <td class="py-3.5 px-4 text-slate-600">14 កញ្ញា 2026</td>
-                                    <td class="py-3.5 px-4 text-center">
+                                    <td class="py-3.5 px-4 text-slate-600 col-code">
+                                        <span class="md:hidden mobile-label text-slate-400">កាលបរិច្ឆេទ៖ </span>14 កញ្ញា 2026
+                                    </td>
+                                    <td class="py-3.5 px-4 text-center hidden md:table-cell">
                                         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">បញ្ចេញលក់</span>
                                     </td>
-                                    <td class="py-3.5 px-4 text-center font-bold text-rose-600">-1 គ្រឿង</td>
-                                    <td class="py-3.5 px-4 text-center font-medium text-slate-800">15 គ្រឿង</td>
-                                    <td class="py-3.5 px-4 text-slate-600">វិក្កយបត្រ INV-2026-008</td>
-                                    <td class="py-3.5 px-4 text-slate-600">ពុំ ប្រុសមុន្នី</td>
+                                    <td class="py-3.5 px-4 text-center font-bold text-rose-600 col-qty">
+                                        <span class="md:hidden mobile-label text-slate-400">ចលនា៖ </span>-1 គ្រឿង
+                                    </td>
+                                    <td class="py-3.5 px-4 text-center font-medium text-slate-800 col-price">
+                                        <span class="md:hidden mobile-label text-slate-400">នៅសល់៖ </span>15 គ្រឿង
+                                    </td>
+                                    <td class="py-3.5 px-4 text-slate-600 col-total" colspan="2">
+                                        <span class="md:hidden mobile-label text-slate-500 font-medium">យោង៖ </span>
+                                        <span>វិក្កយបត្រ INV-2026-008 · ពុំ ប្រុសមុន្នី</span>
+                                    </td>
                                 </tr>
                                 <tr class="hover:bg-slate-50/60 transition">
-                                    <td class="py-3.5 px-4 font-bold text-slate-800">
+                                    <td class="py-3.5 px-4 font-bold text-slate-800 col-product">
                                         <a href="../movement/view-movement.html?id=MV-2026-001" class="hover:text-primary transition">MV-2026-001</a>
+                                        <span class="ml-2 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">នាំចូលពីអ្នកផ្គត់ផ្គង់</span>
                                     </td>
-                                    <td class="py-3.5 px-4 text-slate-600">10 កញ្ញា 2026</td>
-                                    <td class="py-3.5 px-4 text-center">
+                                    <td class="py-3.5 px-4 text-slate-600 col-code">
+                                        <span class="md:hidden mobile-label text-slate-400">កាលបរិច្ឆេទ៖ </span>10 កញ្ញា 2026
+                                    </td>
+                                    <td class="py-3.5 px-4 text-center hidden md:table-cell">
                                         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">នាំចូលពីអ្នកផ្គត់ផ្គង់</span>
                                     </td>
-                                    <td class="py-3.5 px-4 text-center font-bold text-emerald-600">+2 គ្រឿង</td>
-                                    <td class="py-3.5 px-4 text-center font-medium text-slate-800">16 គ្រឿង</td>
-                                    <td class="py-3.5 px-4 text-slate-600">វិក្កយបត្រទិញ BILL-2026-004</td>
-                                    <td class="py-3.5 px-4 text-slate-600">កែវ វណ្ណា</td>
+                                    <td class="py-3.5 px-4 text-center font-bold text-emerald-600 col-qty">
+                                        <span class="md:hidden mobile-label text-slate-400">ចលនា៖ </span>+2 គ្រឿង
+                                    </td>
+                                    <td class="py-3.5 px-4 text-center font-medium text-slate-800 col-price">
+                                        <span class="md:hidden mobile-label text-slate-400">នៅសល់៖ </span>16 គ្រឿង
+                                    </td>
+                                    <td class="py-3.5 px-4 text-slate-600 col-total" colspan="2">
+                                        <span class="md:hidden mobile-label text-slate-500 font-medium">យោង៖ </span>
+                                        <span>វិក្កយបត្រទិញ BILL-2026-004 · កែវ វណ្ណា</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -198,16 +198,16 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header with Back Navigation -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="quote.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅសម្រង់តម្លៃ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">បង្កើតសម្រង់តម្លៃថ្មី</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">បញ្ចូលព័ត៌មានសម្រង់តម្លៃជូនអតិថិជន និងលក្ខខណ្ឌសុពលភាព</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">បង្កើតសម្រង់តម្លៃថ្មី</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">បញ្ចូលព័ត៌មានសម្រង់តម្លៃជូនអតិថិជន និងលក្ខខណ្ឌសុពលភាព</p>
                 </div>
             </div>
 
@@ -438,7 +438,7 @@
                 </div>
 
                 <!-- 2. Line Items Card -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4 relative z-20">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">2</span>
@@ -451,8 +451,8 @@
                         </button>
                     </div>
 
-                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white">
-                        <table class="w-full text-left text-sm" id="pageQuoteLinesTable">
+                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white bms-items-table-wrapper">
+                        <table class="w-full text-left text-sm min-w-[680px] bms-responsive-item-table" id="pageQuoteLinesTable">
                             <thead class="bg-slate-50/70 text-xs text-slate-500 border-b border-slate-200">
                                 <tr>
                                     <th class="py-3 px-4 rounded-tl-2xl">មុខទំនិញ</th>
@@ -465,7 +465,7 @@
                             <tbody class="divide-y divide-slate-100" id="pageQuoteLinesBody">
                                 <!-- Line Row 1 Default -->
                                 <tr class="quote-line-row">
-                                    <td class="p-3">
+                                    <td class="p-3 col-product">
                                         <div class="relative bms-custom-select product-select-container">
                                             <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" />
                                             <button type="button" onclick="toggleProductDropdown(this)"
@@ -497,19 +497,22 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-qty">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                                         <input type="number" min="1" value="1" oninput="recalcPageQuote()"
                                             class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-price">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">តម្លៃរាយ ($)</label>
                                         <input type="number" step="0.01" value="0.00" oninput="recalcPageQuote()"
-                                            class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                            class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                                        $0.00
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                                        <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                        <span class="item-total text-sm font-bold text-slate-900">$0.00</span>
                                     </td>
-                                    <td class="p-3 text-center">
-                                        <button type="button" onclick="removePageQuoteLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                    <td class="p-3 text-center col-action">
+                                        <button type="button" onclick="removePageQuoteLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                                             <i class="fas fa-trash-can text-xs"></i>
                                         </button>
                                     </td>
@@ -544,18 +547,18 @@
 
                         <div class="space-y-2.5 text-xs text-slate-600">
                             <div class="flex justify-between items-center py-1">
-                                <span>សរុបរង (Subtotal)៖</span>
+                                <span>សរុបរងមុខទំនិញ៖</span>
                                 <span class="font-semibold text-slate-800 text-sm" id="pageCalcSubtotal">$0.00</span>
                             </div>
                             <div class="flex justify-between items-center py-1">
-                                <span>បញ្ចុះតម្លៃ ($)៖</span>
+                                <span>ការបញ្ចុះតម្លៃពិសេស ($)៖</span>
                                 <input type="number" id="pageCalcDiscount" min="0" value="0.00" step="0.01" oninput="recalcPageQuote()"
                                     class="w-28 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-right text-xs focus:outline-none focus:bg-white focus:border-primary" />
                             </div>
                             <div class="flex justify-between items-center py-1">
-                                <span>ពន្ធអាករ (VAT 10%)៖</span>
+                                <span>អាករលើតម្លៃបន្ថែម (10%)៖</span>
                                 <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="pageCalcTaxToggle" onchange="recalcPageQuote()" checked class="rounded text-primary focus:ring-0" />
+                                     <input type="checkbox" id="pageCalcTaxToggle" onchange="recalcPageQuote()" checked class="rounded text-primary focus:ring-0" />
                                     <span id="pageCalcTaxAmount" class="font-semibold text-slate-800">$0.00</span>
                                 </label>
                             </div>
@@ -565,7 +568,7 @@
                             </div>
                             <div class="flex justify-between items-center text-[11px] text-emerald-700 bg-emerald-50/70 p-2.5 rounded-xl mt-2 border border-emerald-100">
                                 <span class="font-medium">ប្រាក់ចំណេញរំពឹងទុក៖</span>
-                                <span class="font-bold text-xs" id="pageCalcProfit">+$0.00 (0.0%)</span>
+                                <span class="font-bold text-xs" id="pageCalcProfit">+$0.00 (0.0% កម្រៃ)</span>
                             </div>
                         </div>
                     </div>
@@ -626,7 +629,7 @@
             document.getElementById('pageCalcSubtotal').textContent = `$${subtotal.toFixed(2)}`;
             document.getElementById('pageCalcTaxAmount').textContent = `$${tax.toFixed(2)}`;
             document.getElementById('pageCalcGrandTotal').textContent = `$${grandTotal.toFixed(2)}`;
-            document.getElementById('pageCalcProfit').textContent = `+$${profit.toFixed(2)} (${margin}%)`;
+            document.getElementById('pageCalcProfit').textContent = `+$${profit.toFixed(2)} (${margin}% កម្រៃ)`;
         }
 
         function addPageQuoteLineRow() {
@@ -634,7 +637,7 @@
             const tr = document.createElement('tr');
             tr.className = 'quote-line-row';
             tr.innerHTML = `
-                <td class="p-3">
+                <td class="p-3 col-product">
                     <div class="relative bms-custom-select product-select-container">
                         <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" />
                         <button type="button" onclick="toggleProductDropdown(this)"
@@ -666,19 +669,22 @@
                         </div>
                     </div>
                 </td>
-                <td class="p-3">
+                <td class="p-3 col-qty">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                     <input type="number" min="1" value="1" oninput="recalcPageQuote()"
                         class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3">
+                <td class="p-3 col-price">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">តម្លៃរាយ ($)</label>
                     <input type="number" step="0.01" value="0.00" oninput="recalcPageQuote()"
-                        class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                        class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                    $0.00
+                <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                    <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                    <span class="item-total text-sm font-bold text-slate-900">$0.00</span>
                 </td>
-                <td class="p-3 text-center">
-                    <button type="button" onclick="removePageQuoteLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                <td class="p-3 text-center col-action">
+                    <button type="button" onclick="removePageQuoteLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                         <i class="fas fa-trash-can text-xs"></i>
                     </button>
                 </td>

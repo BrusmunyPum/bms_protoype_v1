@@ -203,17 +203,17 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50">
 
         <!-- Top Header Navigation (Standard h-[72px]) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button (Unified Standard) -->
                 <a href="balance.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅតុល្យភាពស្តុក">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">កែប្រែកម្រិតតុល្យភាពស្តុក</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">កំណត់ទីតាំងធ្នើរ ដែនកំណត់ស្តុកទាបបំផុត និងការបែងចែកស្តុកតាមឃ្លាំង</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កែប្រែកម្រិតតុល្យភាពស្តុក</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">កំណត់ទីតាំងធ្នើរ ដែនកំណត់ស្តុកទាបបំផុត និងការបែងចែកស្តុកតាមឃ្លាំង</p>
                 </div>
             </div>
 
@@ -400,9 +400,9 @@
                 </div>
 
                 <!-- Bottom Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
                     <a href="balance.html"
-                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
+                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100 text-center">
                         បោះបង់
                     </a>
                     <button type="submit"

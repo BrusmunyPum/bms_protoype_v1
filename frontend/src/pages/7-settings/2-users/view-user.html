@@ -206,34 +206,34 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header (Standard h-[72px] with Rule 5 Unified Icon-only Back Button) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="users.html" 
-                   class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70" 
+                   class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0" 
                    title="ត្រឡប់ទៅបញ្ជីអ្នកប្រើ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">ព័ត៌មានលម្អិតអ្នកប្រើប្រាស់</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">ព័ត៌មានគណនី សិទ្ធិប្រតិបត្តិការ និងប្រវត្តិនៃការចូលប្រើ</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">ព័ត៌មានលម្អិតអ្នកប្រើប្រាស់</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">ព័ត៌មានគណនី សិទ្ធិប្រតិបត្តិការ និងប្រវត្តិនៃការចូលប្រើ</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <button type="button" onclick="triggerResetPassword()" class="h-9 px-4 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-medium flex items-center gap-2 transition">
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <button type="button" onclick="triggerResetPassword()" class="h-9 px-3 sm:px-4 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-medium flex items-center gap-2 transition" title="ប្តូរពាក្យសម្ងាត់">
                     <i class="fas fa-key text-slate-400"></i>
-                    <span>ប្តូរពាក្យសម្ងាត់</span>
+                    <span class="hidden sm:inline">ប្តូរពាក្យសម្ងាត់</span>
                 </button>
-                <a href="edit-user.html?id=USR-001" class="h-9 px-4 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm transition">
+                <a href="edit-user.html?id=USR-001" class="h-9 px-3 sm:px-4 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm transition" title="កែប្រែគណនី">
                     <i class="fas fa-pen-to-square"></i>
-                    <span>កែប្រែគណនី</span>
+                    <span class="hidden sm:inline">កែប្រែគណនី</span>
                 </a>
             
-                <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                <div class="h-6 w-px bg-slate-200 hidden sm:block mx-0.5"></div>
 
                 <!-- Notification Bell -->
-                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
-                    <i class="fas fa-bell text-xl"></i>
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2 sm:p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
+                    <i class="fas fa-bell text-lg sm:text-xl"></i>
                     <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
@@ -241,9 +241,9 @@
                 </button>
                 
                 <!-- User Profile Avatar Only -->
-                <div class="flex items-center border-l pl-3 md:pl-4">
+                <div class="flex items-center border-l pl-2 sm:pl-4">
                     <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover shadow-sm border border-slate-200" />
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
                     </button>
                 </div>
@@ -251,7 +251,7 @@
         </header>
 
         <!-- Main Body Content (w-full Full Width) -->
-        <main class="flex-1 overflow-y-auto p-6 w-full space-y-6">
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 w-full space-y-6">
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -399,7 +399,7 @@
                         </div>
 
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
+                            <table class="w-full text-left border-collapse min-w-[620px]">
                                 <thead>
                                     <tr class="bg-slate-50 text-slate-500 text-xs border-b border-slate-100">
                                         <th class="py-3 px-4 font-medium">កាលបរិច្ឆេទ & ម៉ោង</th>

@@ -266,23 +266,23 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header (Standard h-[72px] with Rule 5 Unified Icon-only Back Button) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="users.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅបញ្ជីអ្នកប្រើ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">កែប្រែព័ត៌មានអ្នកប្រើ</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">កែសម្រួលទិន្នន័យគណនី សិទ្ធិ និងស្ថានភាពដំណើរការ</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កែប្រែព័ត៌មានអ្នកប្រើ</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">កែសម្រួលទិន្នន័យគណនី សិទ្ធិ និងស្ថានភាពដំណើរការ</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3 md:space-x-4">
+            <div class="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
                 <!-- Notification Bell -->
-                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
-                    <i class="fas fa-bell text-xl"></i>
+                <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700 relative p-2 sm:p-2.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer" title="ការជូនដំណឹង">
+                    <i class="fas fa-bell text-lg sm:text-xl"></i>
                     <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
@@ -290,9 +290,9 @@
                 </button>
                 
                 <!-- User Profile Avatar Only -->
-                <div class="flex items-center border-l pl-3 md:pl-4">
+                <div class="flex items-center border-l pl-2 sm:pl-4">
                     <button class="relative rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer" title="សុខ ចាន់ថន (អ្នកគ្រប់គ្រងកំពូល)">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200" />
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="សុខ ចាន់ថន" class="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover shadow-sm border border-slate-200" />
                         <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
                     </button>
                 </div>
@@ -300,7 +300,7 @@
         </header>
 
         <!-- Main Body Content (w-full Full Width) -->
-        <main class="flex-1 overflow-y-auto p-6 w-full space-y-6">
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 w-full space-y-6">
 
             <!-- Section 1 & 2 Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -406,14 +406,14 @@
                         </label>
                         <div class="relative">
                             <button type="button" id="roleSelectBtn" onclick="toggleRoleSelectDropdown(event)" class="w-full h-10 px-3.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-700 flex items-center justify-between hover:bg-slate-50 transition">
-                                <span id="currentRoleSelectLabel">ជំនួយការប្រព័ន្ធ (Administrator)</span>
+                                <span id="currentRoleSelectLabel">ជំនួយការប្រព័ន្ធ</span>
                                 <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
                             </button>
                             <div id="roleSelectDropdown" class="custom-select-dropdown hidden">
-                                <button type="button" onclick="selectRole('ជំនួយការប្រព័ន្ធ')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">ជំនួយការប្រព័ន្ធ (Administrator)</button>
-                                <button type="button" onclick="selectRole('អ្នកគ្រប់គ្រង')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">អ្នកគ្រប់គ្រង (Manager)</button>
-                                <button type="button" onclick="selectRole('បុគ្គលិក')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">បុគ្គលិក (Staff)</button>
-                                <button type="button" onclick="selectRole('គណនេយ្យករ')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">គណនេយ្យករ (Accountant)</button>
+                                <button type="button" onclick="selectRole('ជំនួយការប្រព័ន្ធ')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">ជំនួយការប្រព័ន្ធ</button>
+                                <button type="button" onclick="selectRole('អ្នកគ្រប់គ្រង')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">អ្នកគ្រប់គ្រង</button>
+                                <button type="button" onclick="selectRole('បុគ្គលិក')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">បុគ្គលិក</button>
+                                <button type="button" onclick="selectRole('គណនេយ្យករ')" class="w-full px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50 transition">គណនេយ្យករ</button>
                             </div>
                         </div>
                     </div>
@@ -468,7 +468,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
+                    <table class="w-full text-left border-collapse min-w-[580px]">
                         <thead>
                             <tr class="bg-slate-50 text-slate-500 text-xs border-b border-slate-100">
                                 <th class="py-3 px-4 font-medium">ផ្នែក និងមុខងារ</th>
@@ -535,11 +535,11 @@
             </div>
 
             <!-- Bottom Actions Bar -->
-            <div class="flex items-center justify-end gap-3 pt-2 pb-6">
-                <a href="users.html" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-medium transition">
+            <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
+                <a href="users.html" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-medium transition text-center">
                     បោះបង់
                 </a>
-                <button type="button" onclick="submitEditUser()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm transition">
+                <button type="button" onclick="submitEditUser()" class="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-sm transition">
                     <i class="fas fa-save"></i>
                     <span>រក្សាទុកបច្ចុប្បន្នភាព</span>
                 </button>

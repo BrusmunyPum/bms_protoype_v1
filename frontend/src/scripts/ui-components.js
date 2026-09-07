@@ -147,38 +147,133 @@ function showCustomConfirm(options = {}) {
     });
 }
 
-// 3. Custom Dropdown Helpers
-// 3. Custom Dropdown Helpers
+// 3. Custom Dropdown Helpers (Fixed Floating Dropdown Elevation System)
+function openFloatingDropdown(btn, menu) {
+    if (!btn || !menu) return;
+
+    // Close any other open floating dropdowns first
+    closeAllFloatingDropdowns();
+
+    // Mark active and unhide
+    menu.classList.remove('hidden');
+    menu.dataset.floatingActive = 'true';
+
+    const rect = btn.getBoundingClientRect();
+    const vHeight = window.innerHeight;
+    const vWidth = window.innerWidth;
+
+    const spaceBelow = vHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    // Minimum width 280px or match trigger button, capped at screen width
+    const minWidth = 280;
+    const targetWidth = Math.min(Math.max(rect.width, minWidth), vWidth - 32);
+
+    // Keep horizontal coordinates within viewport
+    let left = rect.left;
+    if (left + targetWidth > vWidth - 16) {
+        left = Math.max(16, vWidth - targetWidth - 16);
+    }
+    if (left < 16) {
+        left = 16;
+    }
+
+    // Determine direction: Pop UP if space below is too tight (< 200px) and there's more space above
+    const popUp = (spaceBelow < 200 && spaceAbove > spaceBelow);
+
+    // Apply fixed viewport styles to escape all parent containers, overflows & tables
+    menu.style.setProperty('position', 'fixed', 'important');
+    menu.style.setProperty('z-index', '99999', 'important');
+    menu.style.setProperty('left', `${left}px`, 'important');
+    menu.style.setProperty('right', 'auto', 'important');
+    menu.style.setProperty('width', `${targetWidth}px`, 'important');
+    menu.style.setProperty('margin-top', '0px', 'important');
+    menu.style.setProperty('margin-bottom', '0px', 'important');
+
+    if (popUp) {
+        const maxH = Math.max(120, Math.min(spaceAbove - 20, 280));
+        menu.style.setProperty('top', 'auto', 'important');
+        menu.style.setProperty('bottom', `${vHeight - rect.top + 6}px`, 'important');
+        menu.style.setProperty('max-height', `${maxH}px`, 'important');
+        menu.style.setProperty('transform-origin', 'bottom left', 'important');
+        menu.classList.remove('top-full', 'mt-1');
+        menu.classList.add('bottom-full', 'mb-1');
+    } else {
+        const maxH = Math.max(120, Math.min(spaceBelow - 20, 280));
+        menu.style.setProperty('bottom', 'auto', 'important');
+        menu.style.setProperty('top', `${rect.bottom + 6}px`, 'important');
+        menu.style.setProperty('max-height', `${maxH}px`, 'important');
+        menu.style.setProperty('transform-origin', 'top left', 'important');
+        menu.classList.remove('bottom-full', 'mb-1');
+        menu.classList.add('top-full', 'mt-1');
+    }
+
+    // Rotate chevron arrow
+    const container = btn.closest('.bms-custom-select, .product-select-container') || btn.parentElement;
+    const arrow = (container ? container.querySelector('.fa-chevron-down, .bms-custom-select-arrow, .bms-custom-arrow') : null) || btn.querySelector('.fa-chevron-down');
+    if (arrow) arrow.classList.add('rotate-180');
+
+    // Elevation marking on active row/card for visual consistency
+    if (container) {
+        container.classList.add('z-50', 'relative');
+        const tr = container.closest('tr');
+        if (tr) tr.classList.add('z-40', 'relative', 'bms-row-active');
+        const td = container.closest('td');
+        if (td) td.classList.add('z-40', 'relative', 'bms-cell-active');
+    }
+}
+
+function closeFloatingDropdown(menu) {
+    if (!menu) return;
+    menu.classList.add('hidden');
+    menu.removeAttribute('data-floating-active');
+    menu.style.removeProperty('position');
+    menu.style.removeProperty('z-index');
+    menu.style.removeProperty('left');
+    menu.style.removeProperty('right');
+    menu.style.removeProperty('top');
+    menu.style.removeProperty('bottom');
+    menu.style.removeProperty('width');
+    menu.style.removeProperty('max-height');
+    menu.style.removeProperty('margin-top');
+    menu.style.removeProperty('margin-bottom');
+    menu.style.removeProperty('transform-origin');
+
+    const container = menu.closest('.bms-custom-select, .product-select-container') || menu.parentElement;
+    if (container) {
+        container.classList.remove('z-50');
+        const arrow = container.querySelector('.fa-chevron-down, .bms-custom-select-arrow, .bms-custom-arrow');
+        if (arrow) arrow.classList.remove('rotate-180');
+        const tr = container.closest('tr');
+        if (tr) tr.classList.remove('z-40', 'relative', 'bms-row-active');
+        const td = container.closest('td');
+        if (td) td.classList.remove('z-40', 'relative', 'bms-cell-active');
+    }
+}
+
+function closeAllFloatingDropdowns() {
+    document.querySelectorAll('.bms-custom-select-menu[data-floating-active="true"], .bms-custom-select-menu:not(.hidden)').forEach(menu => {
+        closeFloatingDropdown(menu);
+    });
+    document.querySelectorAll('.bms-card-active').forEach(c => c.classList.remove('bms-card-active'));
+}
+
+window.openFloatingDropdown = openFloatingDropdown;
+window.closeFloatingDropdown = closeFloatingDropdown;
+window.closeAllFloatingDropdowns = closeAllFloatingDropdowns;
+
 function toggleCustomDropdown(dropdownId) {
     const container = document.getElementById(dropdownId);
     if (!container) return;
     const menu = container.querySelector('.bms-custom-select-menu') || container.querySelector('.bms-custom-menu');
-    const arrow = container.querySelector('.bms-custom-select-arrow') || container.querySelector('.bms-custom-arrow');
     if (!menu) return;
-    const isHidden = menu.classList.contains('hidden');
-    
-    // Close other open dropdowns first
-    document.querySelectorAll('.bms-custom-select-menu, .bms-custom-menu').forEach(m => {
-        if (m !== menu) {
-            m.classList.add('hidden');
-            const p = m.closest('.bms-custom-select');
-            if (p) p.classList.remove('z-50');
-            const parentRow = m.closest('tr');
-            if (parentRow) parentRow.classList.remove('z-40', 'relative');
-        }
-    });
-    document.querySelectorAll('.bms-custom-select-arrow, .bms-custom-arrow').forEach(a => {
-        if (a !== arrow) a.classList.remove('rotate-180');
-    });
+    const btn = container.querySelector('button') || container.firstElementChild || container;
+    const isCurrentlyOpen = menu.dataset.floatingActive === 'true' && !menu.classList.contains('hidden');
 
-    if (isHidden) {
-        container.classList.add('z-50', 'relative');
-        menu.classList.remove('hidden');
-        if (arrow) arrow.classList.add('rotate-180');
+    if (isCurrentlyOpen) {
+        closeFloatingDropdown(menu);
     } else {
-        container.classList.remove('z-50');
-        menu.classList.add('hidden');
-        if (arrow) arrow.classList.remove('rotate-180');
+        openFloatingDropdown(btn, menu);
     }
 }
 
@@ -188,7 +283,6 @@ function selectCustomOption(dropdownId, value, displayText) {
     const hiddenInput = container.querySelector('input[type="hidden"]');
     const labelElem = container.querySelector('.selected-label') || container.querySelector('.dropdown-label');
     const menu = container.querySelector('.bms-custom-select-menu') || container.querySelector('.bms-custom-menu');
-    const arrow = container.querySelector('.bms-custom-select-arrow') || container.querySelector('.bms-custom-arrow');
 
     if (hiddenInput) {
         hiddenInput.value = value;
@@ -214,9 +308,7 @@ function selectCustomOption(dropdownId, value, displayText) {
         }
     }
 
-    container.classList.remove('z-50');
-    if (menu) menu.classList.add('hidden');
-    if (arrow) arrow.classList.remove('rotate-180');
+    if (menu) closeFloatingDropdown(menu);
 }
 
 function selectCustomCustomer(dropdownId, customerId, name, phone, avatar, company) {
@@ -225,41 +317,28 @@ function selectCustomCustomer(dropdownId, customerId, name, phone, avatar, compa
 }
 
 function toggleProductDropdown(btn) {
-    const container = btn.closest('.bms-custom-select');
+    const container = btn.closest('.bms-custom-select, .product-select-container');
     if (!container) return;
-    const tr = container.closest('tr');
     const menu = container.querySelector('.bms-custom-select-menu');
-    const isHidden = menu.classList.contains('hidden');
+    if (!menu) return;
+    const isCurrentlyOpen = menu.dataset.floatingActive === 'true' && !menu.classList.contains('hidden');
 
-    // Close all other dropdowns
-    document.querySelectorAll('.bms-custom-select-menu').forEach(m => {
-        if (m !== menu) {
-            m.classList.add('hidden');
-            const p = m.closest('.bms-custom-select');
-            if (p) p.classList.remove('z-50');
-            const parentRow = m.closest('tr');
-            if (parentRow) parentRow.classList.remove('z-40', 'relative');
-        }
-    });
-
-    if (isHidden) {
-        if (tr) tr.classList.add('z-40', 'relative');
-        container.classList.add('z-50', 'relative');
-        menu.classList.remove('hidden');
+    if (isCurrentlyOpen) {
+        closeFloatingDropdown(menu);
     } else {
-        if (tr) tr.classList.remove('z-40', 'relative');
-        container.classList.remove('z-50');
-        menu.classList.add('hidden');
+        openFloatingDropdown(btn, menu);
     }
 }
+window.toggleProductDropdown = toggleProductDropdown;
 
 function selectProductOption(optElem, name, price, cost) {
-    const container = optElem.closest('.bms-custom-select');
+    const container = optElem.closest('.bms-custom-select, .product-select-container');
     if (!container) return;
     const tr = container.closest('tr');
+    const td = container.closest('td');
     const hiddenInput = container.querySelector('.item-product-val');
     const labelElem = container.querySelector('.product-selected-label');
-    const menu = container.querySelector('.bms-custom-select-menu');
+    const menu = container.querySelector('.bms-custom-select-menu') || optElem.closest('.bms-custom-select-menu');
 
     if (hiddenInput) {
         hiddenInput.value = name;
@@ -271,9 +350,7 @@ function selectProductOption(optElem, name, price, cost) {
         labelElem.classList.remove('text-slate-400');
         labelElem.classList.add('text-slate-800', 'font-medium');
     }
-    container.classList.remove('z-50');
-    if (tr) tr.classList.remove('z-40', 'relative');
-    if (menu) menu.classList.add('hidden');
+    if (menu) closeFloatingDropdown(menu);
 
     if (tr) {
         const priceInput = tr.querySelector('.item-price');
@@ -574,19 +651,32 @@ document.addEventListener('click', (e) => {
         document.querySelectorAll('.bms-date-popover').forEach(p => p.classList.add('hidden'));
         document.querySelectorAll('.bms-date-picker').forEach(c => c.classList.remove('z-50'));
     }
-    if (!e.target.closest('.bms-custom-select')) {
-        document.querySelectorAll('.bms-custom-select-menu, .bms-custom-menu').forEach(menu => {
-            menu.classList.add('hidden');
-        });
-        document.querySelectorAll('.bms-custom-select-arrow, .bms-custom-arrow').forEach(arrow => {
-            arrow.classList.remove('rotate-180');
-        });
-        document.querySelectorAll('.bms-custom-select').forEach(c => {
-            c.classList.remove('z-50');
-        });
-        document.querySelectorAll('tr').forEach(r => {
-            r.classList.remove('z-40', 'relative');
-        });
+    const isInsideDropdown = e.target.closest('.bms-custom-select') || 
+                             e.target.closest('.bms-custom-select-menu') || 
+                             e.target.closest('.product-select-container') ||
+                             e.target.closest('button[onclick*="Dropdown"]');
+    if (!isInsideDropdown) {
+        closeAllFloatingDropdowns();
+    }
+});
+
+// Close floating dropdowns on page or table scroll (while allowing internal scroll within menu)
+window.addEventListener('scroll', (e) => {
+    if (e.target && (e.target.classList?.contains('bms-custom-select-menu') || e.target.closest?.('.bms-custom-select-menu'))) {
+        return;
+    }
+    closeAllFloatingDropdowns();
+}, true);
+
+// Close floating dropdowns on window resize
+window.addEventListener('resize', () => {
+    closeAllFloatingDropdowns();
+});
+
+// Close floating dropdowns on Escape key
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAllFloatingDropdowns();
     }
 });
 

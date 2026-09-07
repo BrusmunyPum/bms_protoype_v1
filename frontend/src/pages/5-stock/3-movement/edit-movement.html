@@ -203,17 +203,17 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-50">
 
         <!-- Top Header Navigation (Standard h-[72px]) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <!-- Standard Back Button (Unified Standard) -->
                 <a href="movement.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅចលនាស្តុក">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">កែប្រែព័ត៌មានចលនាស្តុក</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">ធ្វើបច្ចុប្បន្នភាពកំណត់សម្គាល់ លេខឯកសារយោង និងបុគ្គលិកទទួលខុសត្រូវ</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កែប្រែព័ត៌មានចលនាស្តុក</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">ធ្វើបច្ចុប្បន្នភាពកំណត់សម្គាល់ លេខឯកសារយោង និងបុគ្គលិកទទួលខុសត្រូវ</p>
                 </div>
             </div>
 
@@ -294,8 +294,8 @@
                         <span>មុខទំនិញក្នុងប័ណ្ណប្រតិបត្តិការ</span>
                     </h3>
 
-                    <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-                        <table class="w-full text-left text-sm">
+                    <div class="border border-slate-200 rounded-2xl overflow-x-auto bg-white bms-items-table-wrapper">
+                        <table class="w-full text-left text-sm min-w-[680px] bms-view-item-table">
                             <thead class="bg-slate-50 text-xs text-slate-500 border-b border-slate-200">
                                 <tr>
                                     <th class="py-3 px-4">មុខទំនិញ & កូដ</th>
@@ -306,18 +306,19 @@
                             </thead>
                             <tbody class="divide-y divide-slate-100 text-slate-800">
                                 <tr>
-                                    <td class="p-4">
+                                    <td class="p-4 col-product">
                                         <div class="font-bold text-slate-900">Sony WH-1000XM5 Headphone</div>
                                         <div class="text-xs text-slate-400">SKU-SONY-XM5 · ឧបករណ៍សំឡេង</div>
                                     </td>
-                                    <td class="p-4 text-center font-bold text-emerald-600 text-sm">
-                                        +8 គ្រឿង
+                                    <td class="p-4 text-center font-bold text-emerald-600 text-sm col-qty">
+                                        <span class="md:hidden mobile-label text-slate-400">ចំនួន៖ </span>+8 គ្រឿង
                                     </td>
-                                    <td class="p-4 text-right font-medium text-slate-700">
-                                        $280.00
+                                    <td class="p-4 text-right font-medium text-slate-700 col-price">
+                                        <span class="md:hidden mobile-label text-slate-400">ថ្លៃដើម៖ </span>$280.00
                                     </td>
-                                    <td class="p-4 text-right font-bold text-slate-900">
-                                        $2,240.00
+                                    <td class="p-4 text-right font-bold text-slate-900 col-total">
+                                        <span class="md:hidden mobile-label text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                        <span>$2,240.00</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -338,13 +339,13 @@
                 </div>
 
                 <!-- Bottom Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
                     <a href="movement.html"
-                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
+                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100 text-center">
                         បោះបង់
                     </a>
                     <button type="submit"
-                        class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-dark text-white font-medium shadow-sm transition">
+                        class="px-6 py-2.5 rounded-xl text-xs bg-primary hover:bg-primary-dark text-white font-medium shadow-sm transition text-center">
                         រក្សាទុកការកែប្រែ
                     </button>
                 </div>

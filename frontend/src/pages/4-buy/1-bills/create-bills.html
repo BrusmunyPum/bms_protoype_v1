@@ -198,16 +198,16 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header with Back Navigation (72px height standard) -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="bills.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅវិក្កយបត្របញ្ជាទិញ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 leading-tight">បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</h2>
-                    <p class="text-xs font-normal text-gray-500 mt-0.5">បញ្ចូលព័ត៌មានទិញទំនិញចូលស្តុកពីអ្នកផ្គត់ផ្គង់</p>
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">បង្កើតវិក្កយបត្របញ្ញាទិញថ្មី</h2>
+                    <p class="text-xs font-normal text-gray-500 mt-0.5 hidden sm:block truncate">បញ្ចូលព័ត៌មានទិញទំនិញចូលស្តុកពីអ្នកផ្គត់ផ្គង់</p>
                 </div>
             </div>
 
@@ -467,7 +467,7 @@
                 </div>
 
                 <!-- 2. Purchased Items Card -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4 relative z-20">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">2</span>
@@ -480,14 +480,13 @@
                         </button>
                     </div>
 
-                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white">
-                        <table class="w-full text-left text-sm" id="pageBillLinesTable">
+                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white bms-items-table-wrapper">
+                        <table class="w-full text-left text-sm min-w-[680px] bms-responsive-item-table" id="pageBillLinesTable">
                             <thead class="bg-slate-50/70 text-xs text-slate-500 border-b border-slate-200">
                                 <tr>
                                     <th class="py-3 px-4 rounded-tl-2xl">ទំនិញ / ផលិតផល</th>
                                     <th class="py-3 px-3 w-28 text-center">ចំនួន</th>
                                     <th class="py-3 px-3 w-36 text-right">ថ្លៃដើមឯកតា ($)</th>
-                                    <th class="py-3 px-3 w-28 text-right">បញ្ចុះតម្លៃ (%)</th>
                                     <th class="py-3 px-4 w-36 text-right">សរុបទឹកប្រាក់ ($)</th>
                                     <th class="py-3 px-3 w-12 text-center rounded-tr-2xl"></th>
                                 </tr>
@@ -495,7 +494,7 @@
                             <tbody class="divide-y divide-slate-100" id="pageBillLinesBody">
                                 <!-- Line Row 1 Default -->
                                 <tr>
-                                    <td class="p-3">
+                                    <td class="p-3 col-product">
                                         <div class="relative bms-custom-select product-select-container">
                                             <input type="hidden" class="item-product-val" value="" data-cost="0" />
                                             <button type="button" onclick="toggleProductDropdown(this)"
@@ -535,23 +534,22 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-qty">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                                         <input type="number" min="1" value="1" oninput="recalcBill()"
                                             class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-cost">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ថ្លៃដើមឯកតា ($)</label>
                                         <input type="number" step="0.01" value="0.00" oninput="recalcBill()"
                                             class="item-cost w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
-                                        <input type="number" min="0" max="100" value="0" oninput="recalcBill()"
-                                            class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                                        <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                        <span class="item-total text-sm font-bold text-slate-900">$0.00</span>
                                     </td>
-                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                                        $0.00
-                                    </td>
-                                    <td class="p-3 text-center">
-                                        <button type="button" onclick="removeBillLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                    <td class="p-3 text-center col-action">
+                                        <button type="button" onclick="removeBillLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                                             <i class="fas fa-trash-can text-xs"></i>
                                         </button>
                                     </td>
@@ -584,30 +582,52 @@
                         </h3>
 
                         <div class="space-y-2.5 text-xs text-slate-600">
+                            <!-- 1. Subtotal -->
                             <div class="flex justify-between items-center py-1">
-                                <span>សរុបរង៖</span>
+                                <span>សរុបរងមុខទំនិញ៖</span>
                                 <span class="font-semibold text-slate-800 text-sm" id="pageBillCalcSubtotal">$0.00</span>
                             </div>
+                            <!-- 2. Down Payment -->
                             <div class="flex justify-between items-center py-1">
-                                <span>ការបញ្ចុះតម្លៃសរុប៖</span>
-                                <span class="font-semibold text-rose-600" id="pageBillCalcDiscount">-$0.00</span>
+                                <span>ចូលរួមមុន៖</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-slate-400 text-xs">$</span>
+                                    <input type="number" id="pageBillDownPayment" min="0" step="0.01" value="0.00" oninput="recalcBill()"
+                                        class="w-24 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-right text-xs font-semibold text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                </div>
                             </div>
+                            <!-- 3. Special Discount -->
                             <div class="flex justify-between items-center py-1">
-                                <span>អាករលើតម្លៃបន្ថែម 10%៖</span>
+                                <span>ការបញ្ចុះតម្លៃពិសេស៖</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-slate-400 text-xs">-$</span>
+                                    <input type="number" id="pageBillDiscount" min="0" step="0.01" value="0.00" oninput="recalcBill()"
+                                        class="w-24 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-right text-xs font-semibold text-rose-600 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                </div>
+                            </div>
+                            <!-- 4. VAT 10% -->
+                            <div class="flex justify-between items-center py-1">
+                                <span>អាករលើតម្លៃបន្ថែម (10%)៖</span>
                                 <span class="font-semibold text-slate-800" id="pageBillCalcVAT">$0.00</span>
                             </div>
+                            <!-- 5. Grand Total -->
                             <div class="pt-3 border-t border-slate-200 flex justify-between items-center">
                                 <span class="text-sm font-bold text-slate-900">ទឹកប្រាក់សរុបចុងក្រោយ៖</span>
                                 <span class="text-xl font-bold text-primary" id="pageBillCalcGrandTotal">$0.00</span>
+                            </div>
+                            <!-- Balance Due -->
+                            <div class="flex justify-between items-center py-1 font-semibold text-rose-600 border-t border-dashed border-slate-200 pt-2">
+                                <span>ទឹកប្រាក់នៅសល់ត្រូវទូទាត់៖</span>
+                                <span class="text-sm font-bold" id="pageBillCalcBalanceDue">$0.00</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bottom Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-2 pb-6">
+                <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 pb-6">
                     <a href="bills.html"
-                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100">
+                        class="px-5 py-2.5 rounded-xl text-xs text-slate-600 hover:bg-slate-200 font-medium transition bg-slate-100 text-center">
                         បោះបង់
                     </a>
                     <button type="button" onclick="submitBillForm('draft')"
@@ -648,9 +668,13 @@
                 labelElem.classList.remove('text-slate-400');
                 labelElem.classList.add('text-slate-800', 'font-medium');
             }
-            container.classList.remove('z-50');
-            if (tr) tr.classList.remove('z-40', 'relative');
-            if (menu) menu.classList.add('hidden');
+            if (typeof window.closeFloatingDropdown === 'function') {
+                window.closeFloatingDropdown(menu);
+            } else {
+                container.classList.remove('z-50');
+                if (tr) tr.classList.remove('z-40', 'relative');
+                if (menu) menu.classList.add('hidden');
+            }
 
             if (tr) {
                 const costInput = tr.querySelector('.item-cost');
@@ -663,7 +687,7 @@
             const tbody = document.getElementById('pageBillLinesBody');
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td class="p-3">
+                <td class="p-3 col-product">
                     <div class="relative bms-custom-select product-select-container">
                         <input type="hidden" class="item-product-val" value="" data-cost="0" />
                         <button type="button" onclick="toggleProductDropdown(this)"
@@ -703,23 +727,22 @@
                         </div>
                     </div>
                 </td>
-                <td class="p-3">
+                <td class="p-3 col-qty">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                     <input type="number" min="1" value="1" oninput="recalcBill()"
                         class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3">
+                <td class="p-3 col-cost">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ថ្លៃដើមឯកតា ($)</label>
                     <input type="number" step="0.01" value="0.00" oninput="recalcBill()"
                         class="item-cost w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3">
-                    <input type="number" min="0" max="100" value="0" oninput="recalcBill()"
-                        class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                    <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                    <span class="item-total text-sm font-bold text-slate-900">$0.00</span>
                 </td>
-                <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                    $0.00
-                </td>
-                <td class="p-3 text-center">
-                    <button type="button" onclick="removeBillLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                <td class="p-3 text-center col-action">
+                    <button type="button" onclick="removeBillLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                         <i class="fas fa-trash-can text-xs"></i>
                     </button>
                 </td>
@@ -740,32 +763,29 @@
 
         function recalcBill() {
             let subtotal = 0;
-            let totalDiscount = 0;
 
             const rows = document.querySelectorAll('#pageBillLinesBody tr');
             rows.forEach(row => {
                 const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
                 const cost = parseFloat(row.querySelector('.item-cost').value) || 0;
-                const discPct = parseFloat(row.querySelector('.item-disc').value) || 0;
+                const lineTotal = qty * cost;
 
-                const lineGross = qty * cost;
-                const lineDisc = lineGross * (discPct / 100);
-                const lineNet = lineGross - lineDisc;
-
-                row.querySelector('.item-total').textContent = '$' + lineNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                subtotal += lineGross;
-                totalDiscount += lineDisc;
+                row.querySelector('.item-total').textContent = '$' + lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                subtotal += lineTotal;
             });
 
-            const netSubtotal = subtotal - totalDiscount;
-            const vat = netSubtotal * 0.10;
-            const grandTotal = netSubtotal + vat;
+            const downPayment = parseFloat(document.getElementById('pageBillDownPayment')?.value) || 0;
+            const discount = parseFloat(document.getElementById('pageBillDiscount')?.value) || 0;
+            const taxableSubtotal = Math.max(0, subtotal - discount);
+            const vat = taxableSubtotal * 0.10;
+            const grandTotal = taxableSubtotal + vat;
+            const balanceDue = Math.max(0, grandTotal - downPayment);
 
             document.getElementById('pageBillCalcSubtotal').textContent = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('pageBillCalcDiscount').textContent = '-$' + totalDiscount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('pageBillCalcVAT').textContent = '$' + vat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('pageBillCalcGrandTotal').textContent = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const balDueElem = document.getElementById('pageBillCalcBalanceDue');
+            if (balDueElem) balDueElem.textContent = '$' + balanceDue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
         function submitBillForm(mode) {

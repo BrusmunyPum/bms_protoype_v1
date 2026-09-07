@@ -205,6 +205,28 @@ textarea::-webkit-scrollbar {
     position: relative;
 }
 
+.bms-custom-select-menu {
+    z-index: 99999 !important;
+    border: 1px solid rgba(226, 232, 240, 0.95) !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(15, 23, 42, 0.06) !important;
+    background-color: #ffffff !important;
+}
+
+/* Elegant slim scrollbar for custom select menus */
+.bms-custom-select-menu::-webkit-scrollbar {
+    width: 5px;
+}
+.bms-custom-select-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+.bms-custom-select-menu::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+.bms-custom-select-menu::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
 .bms-custom-select-menu,
 .bms-date-popover,
 #rowActionDropdown {
@@ -488,8 +510,8 @@ main {
 
     /* Header Compact Paddings on Mobile/Tablet */
     header {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-left: 0.875rem !important;
+        padding-right: 0.875rem !important;
     }
 }
 
@@ -501,12 +523,362 @@ main {
     -webkit-overflow-scrolling: touch;
 }
 
+.table-responsive-wrapper {
+    min-height: 260px;
+}
+
 .overflow-x-auto > table:not(.no-min-width),
 .table-responsive-wrapper > table:not(.no-min-width) {
     min-width: 680px;
 }
 
-/* 3. Popover & Flyout Viewport Protection */
+/* 3. Printable Document Full-Width Rule (Rule 8 Standard) */
+.printable-document {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 4. Responsive Form Bottom Actions */
+.bms-bottom-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.bms-bottom-actions button,
+.bms-bottom-actions a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .bms-bottom-actions {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    .bms-bottom-actions button,
+    .bms-bottom-actions a {
+        width: auto;
+    }
+}
+
+/* 5. Subpage Header & Printable Adaptation on Mobile (< 640px) */
+@media (max-width: 639px) {
+    header {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        gap: 0.5rem !important;
+    }
+
+    header h2 {
+        font-size: 1.05rem !important;
+        max-width: 145px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    header p {
+        display: none !important;
+    }
+
+    header a[id^="btn"] span,
+    header button[id^="btn"] span {
+        display: none !important;
+    }
+
+    header a[id^="btn"] i,
+    header button[id^="btn"] i {
+        margin-right: 0 !important;
+    }
+
+    header a[id^="btn"],
+    header button[id^="btn"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        border-radius: 0.75rem !important;
+    }
+
+    header .h-6.w-px {
+        display: none !important;
+    }
+
+    .printable-document {
+        padding: 1rem !important;
+        border-radius: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+    }
+}
+
+/* 7. Line Items Table Dropdown Elevation Standard (Pop Over Box) */
+.bms-items-table-wrapper {
+    overflow: visible !important;
+    min-height: auto !important;
+}
+
+.bms-responsive-item-table,
+.bms-view-item-table {
+    overflow: visible !important;
+}
+
+tr:has(.bms-custom-select-menu:not(.hidden)),
+td:has(.bms-custom-select-menu:not(.hidden)),
+tr.bms-row-active,
+td.bms-cell-active {
+    position: relative !important;
+    z-index: 50 !important;
+}
+
+div:has(> .bms-custom-select .bms-custom-select-menu:not(.hidden)),
+div:has(.bms-items-table-wrapper .bms-custom-select-menu:not(.hidden)),
+.bms-card-active {
+    position: relative !important;
+    z-index: 40 !important;
+}
+
+/* 8. Mobile Card Display for Line Items Tables (< 768px) */
+@media (max-width: 767px) {
+    /* Container resets so no forced horizontal scrollbar */
+    .bms-items-table-wrapper {
+        overflow-x: visible !important;
+        min-height: auto !important;
+        border: none !important;
+        background: transparent !important;
+        padding-bottom: 0 !important;
+    }
+
+    .bms-responsive-item-table {
+        display: block !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .bms-responsive-item-table thead {
+        display: none !important;
+    }
+
+    .bms-responsive-item-table tbody {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.875rem !important;
+        width: 100% !important;
+    }
+
+    .bms-responsive-item-table tbody tr {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.625rem !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 1rem !important;
+        padding: 0.875rem !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+        position: relative !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Action (Delete / Trash) positioned at top right */
+    .bms-responsive-item-table td.col-action {
+        position: absolute !important;
+        top: 0.75rem !important;
+        right: 0.75rem !important;
+        padding: 0 !important;
+        width: auto !important;
+        z-index: 20 !important;
+        border: none !important;
+    }
+
+    /* Product dropdown spans full width minus action icon */
+    .bms-responsive-item-table td.col-product {
+        grid-column: span 2 !important;
+        padding: 0 !important;
+        padding-right: 2.25rem !important;
+        border: none !important;
+    }
+
+    /* Stock badge line */
+    .bms-responsive-item-table td.col-stock {
+        grid-column: span 2 !important;
+        padding: 0 !important;
+        text-align: left !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        border: none !important;
+    }
+
+    /* Quantity and Price fields side by side */
+    .bms-responsive-item-table td.col-qty {
+        grid-column: span 1 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .bms-responsive-item-table td.col-price,
+    .bms-responsive-item-table td.col-cost {
+        grid-column: span 1 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    /* Line total at bottom with dashed separator */
+    .bms-responsive-item-table td.col-total {
+        grid-column: span 2 !important;
+        padding: 0.625rem 0 0 0 !important;
+        margin-top: 0.25rem !important;
+        border-top: 1px dashed #e2e8f0 !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: right !important;
+    }
+
+    /* Specialized columns for Stock Adjustment */
+    .bms-responsive-item-table td.col-actual,
+    .bms-responsive-item-table td.col-diff {
+        grid-column: span 1 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .bms-responsive-item-table td.col-val {
+        grid-column: span 2 !important;
+        padding: 0.625rem 0 0 0 !important;
+        margin-top: 0.25rem !important;
+        border-top: 1px dashed #e2e8f0 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    /* View detail document items on mobile */
+    .bms-view-item-table {
+        display: block !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .bms-view-item-table thead {
+        display: none !important;
+    }
+
+    .bms-view-item-table tbody {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+    }
+
+    .bms-view-item-table tbody tr {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.5rem !important;
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 0.875rem !important;
+        padding: 0.75rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .bms-view-item-table td.col-num {
+        display: none !important;
+    }
+
+    .bms-view-item-table td.col-product {
+        grid-column: span 2 !important;
+        padding: 0 !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+    }
+
+    .bms-view-item-table td.col-code {
+        grid-column: span 2 !important;
+        padding: 0 !important;
+        font-size: 0.75rem !important;
+        color: #64748b !important;
+        text-align: left !important;
+    }
+
+    .bms-view-item-table td.col-qty {
+        grid-column: span 1 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .bms-view-item-table td.col-price,
+    .bms-view-item-table td.col-cost {
+        grid-column: span 1 !important;
+        padding: 0 !important;
+        text-align: right !important;
+    }
+
+    .bms-view-item-table td.col-total {
+        grid-column: span 2 !important;
+        padding-top: 0.5rem !important;
+        margin-top: 0.25rem !important;
+        border-top: 1px dashed #cbd5e1 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+}
+
+/* Force standard A4 table layout when printing, regardless of screen media */
+@media print {
+    .bms-view-item-table {
+        display: table !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+    .bms-view-item-table thead {
+        display: table-header-group !important;
+    }
+    .bms-view-item-table tbody {
+        display: table-row-group !important;
+    }
+    .bms-view-item-table tbody tr {
+        display: table-row !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .bms-view-item-table td {
+        display: table-cell !important;
+        padding: 0.75rem 1rem !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+    .bms-view-item-table .mobile-label {
+        display: none !important;
+    }
+}
+
+/* 6. Popover & Flyout Viewport Protection */
 #datePickerPopover,
 .bms-date-popover,
 #bmsUserProfileDropdown,
@@ -976,15 +1348,20 @@ main {
 }
 
 /* 15. Universal Form Line Items Table Responsive Container */
-div:has(> table.w-full),
-div:has(> table#pageBillLinesTable),
-div:has(> table#pageInvLinesTable),
-div:has(> table#pageQuoteLinesTable),
-div:has(> table#movementLinesTable),
-div:has(> table#adjustmentLinesTable) {
+div:has(> table.w-full):not(.bms-items-table-wrapper),
+div:has(> table#pageBillLinesTable):not(.bms-items-table-wrapper),
+div:has(> table#pageInvLinesTable):not(.bms-items-table-wrapper),
+div:has(> table#pageQuoteLinesTable):not(.bms-items-table-wrapper),
+div:has(> table#movementLinesTable):not(.bms-items-table-wrapper),
+div:has(> table#adjustmentLinesTable):not(.bms-items-table-wrapper) {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     max-width: 100% !important;
+}
+
+/* Ensure line items table wrapper always allows dropdown pop-over */
+.bms-items-table-wrapper {
+    overflow: visible !important;
 }
 
 /* 16. Toolbar Action Buttons Text Wrapping Protection */

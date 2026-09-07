@@ -198,21 +198,19 @@
     <div class="flex-1 flex flex-col h-full overflow-hidden">
 
         <!-- Top Header with Back Navigation -->
-        <header class="bg-white px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
-<div class="flex items-center gap-4">
+        <header class="bg-white px-4 sm:px-6 h-[72px] flex justify-between items-center shadow-sm z-10 flex-shrink-0 w-full">
+            <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                 <a href="invoice.html"
-                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70"
+                    class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 flex items-center justify-center transition border border-slate-200/70 flex-shrink-0"
                     title="ត្រឡប់ទៅវិក្កយបត្រ">
                     <i class="fas fa-arrow-left text-sm"></i>
                 </a>
-                <div class="flex items-center gap-3">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h2 class="text-xl font-semibold text-gray-800 leading-tight">កែប្រែវិក្កយបត្រលក់</h2>
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200" id="headerStatusBadge">រង់ចាំទូទាត់</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mt-0.5">លេខកូដវិក្កយបត្រ៖ <span class="font-bold text-slate-700" id="headerInvNumber">INV-2026-0042</span></p>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-base sm:text-xl font-semibold text-gray-800 leading-tight truncate">កែប្រែវិក្កយបត្រលក់</h2>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 flex-shrink-0" id="headerStatusBadge">រង់ចាំទូទាត់</span>
                     </div>
+                    <p class="text-xs text-slate-400 mt-0.5 hidden sm:block truncate">លេខកូដវិក្កយបត្រ៖ <span class="font-bold text-slate-700" id="headerInvNumber">INV-2026-0042</span></p>
                 </div>
             </div>
 
@@ -450,7 +448,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-slate-100">
                         <!-- PO Number -->
                         <div>
-                            <label class="block text-xs font-medium text-slate-700 mb-1.5">លេខបញ្ជាទិញអតិថិជន (PO)</label>
+                            <label class="block text-xs font-medium text-slate-700 mb-1.5">លេខបញ្ជាទិញអតិថិជន</label>
                             <input type="text" id="pageInvPO" value="PO-2026-0042" placeholder="ឧ. PO-2026-088"
                                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary transition" />
                         </div>
@@ -484,7 +482,7 @@
                 </div>
 
                 <!-- 2. Line Items Table Card -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4 relative z-20">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-emerald-50 text-primary text-xs flex items-center justify-center">2</span>
@@ -494,15 +492,14 @@
                     </div>
 
                     <!-- Spacious Items Table -->
-                    <div class="overflow-visible">
-                        <table class="w-full text-left border-collapse">
+                    <div class="border border-slate-200 rounded-2xl overflow-visible bg-white bms-items-table-wrapper">
+                        <table class="w-full text-left border-collapse min-w-[680px] bms-responsive-item-table">
                             <thead>
                                 <tr class="border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                                    <th class="p-3 w-4/12">មុខទំនិញ / សេវាកម្ម</th>
+                                    <th class="p-3 w-5/12">មុខទំនិញ / សេវាកម្ម</th>
                                     <th class="p-3 text-center w-1/12">ស្តុក</th>
                                     <th class="p-3 text-center w-1/12">ចំនួន</th>
                                     <th class="p-3 text-right w-2/12">តម្លៃរាយ ($)</th>
-                                    <th class="p-3 text-right w-1/12">បញ្ចុះតម្លៃ (%)</th>
                                     <th class="p-3 text-right w-2/12">សរុប ($)</th>
                                     <th class="p-3 text-center w-1/12"></th>
                                 </tr>
@@ -510,7 +507,7 @@
                             <tbody id="pageInvLinesBody" class="divide-y divide-slate-100">
                                 <!-- Pre-populated Line 1: iPhone 15 Pro Max -->
                                 <tr>
-                                    <td class="p-3">
+                                    <td class="p-3 col-product">
                                         <div class="relative bms-custom-select product-select-container">
                                             <input type="hidden" class="item-product-val" value="iPhone 15 Pro Max 256GB" data-price="1250" data-cost="950" data-stock="8" />
                                             <button type="button" onclick="toggleProductDropdown(this)"
@@ -542,33 +539,33 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3 text-center text-xs text-slate-500 item-stock-badge">
+                                    <td class="p-3 text-center text-xs text-slate-500 item-stock-badge col-stock">
+                                        <span class="md:hidden text-[11px] text-slate-400">ស្តុកនៅសល់៖</span>
                                         <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-semibold text-[11px]">8</span>
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-qty">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                                         <input type="number" min="1" value="1" oninput="recalcPageInvoice()"
                                             class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-price">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">តម្លៃរាយ ($)</label>
                                         <input type="number" step="0.01" value="1250.00" oninput="recalcPageInvoice()"
                                             class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
-                                        <input type="number" min="0" max="100" value="0" oninput="recalcPageInvoice()"
-                                            class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                                        <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                        <span class="item-total text-sm font-bold text-slate-900">$1,250.00</span>
                                     </td>
-                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                                        $1,250.00
-                                    </td>
-                                    <td class="p-3 text-center">
-                                        <button type="button" onclick="removePageInvLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                    <td class="p-3 text-center col-action">
+                                        <button type="button" onclick="removePageInvLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                                             <i class="fas fa-trash-can text-xs"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 <!-- Pre-populated Line 2: Sony Headphone -->
                                 <tr>
-                                    <td class="p-3">
+                                    <td class="p-3 col-product">
                                         <div class="relative bms-custom-select product-select-container">
                                             <input type="hidden" class="item-product-val" value="Sony WH-1000XM5 Headphone" data-price="380" data-cost="280" data-stock="15" />
                                             <button type="button" onclick="toggleProductDropdown(this)"
@@ -600,26 +597,26 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-3 text-center text-xs text-slate-500 item-stock-badge">
+                                    <td class="p-3 text-center text-xs text-slate-500 item-stock-badge col-stock">
+                                        <span class="md:hidden text-[11px] text-slate-400">ស្តុកនៅសល់៖</span>
                                         <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-semibold text-[11px]">15</span>
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-qty">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                                         <input type="number" min="1" value="1" oninput="recalcPageInvoice()"
                                             class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
+                                    <td class="p-3 col-price">
+                                        <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">តម្លៃរាយ ($)</label>
                                         <input type="number" step="0.01" value="380.00" oninput="recalcPageInvoice()"
                                             class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                                     </td>
-                                    <td class="p-3">
-                                        <input type="number" min="0" max="100" value="5" oninput="recalcPageInvoice()"
-                                            class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                                        <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                                        <span class="item-total text-sm font-bold text-slate-900">$380.00</span>
                                     </td>
-                                    <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                                        $361.00
-                                    </td>
-                                    <td class="p-3 text-center">
-                                        <button type="button" onclick="removePageInvLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                                    <td class="p-3 text-center col-action">
+                                        <button type="button" onclick="removePageInvLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                                             <i class="fas fa-trash-can text-xs"></i>
                                         </button>
                                     </td>
@@ -657,8 +654,8 @@
                         <div>
                             <label class="block text-xs font-medium text-slate-700 mb-1.5">ព័ត៌មានគណនីធនាគារសម្រាប់ទទួលការទូទាត់</label>
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
-                                <p class="font-medium text-slate-800">ធនាគារ វឌ្ឍនៈ (ABA Bank)៖ <span class="font-bold text-primary">001 234 567 (DIGITECHKH CO., LTD)</span></p>
-                                <p>ធនាគារ អេស៊ីលីដា (ACLEDA Bank)៖ <span class="font-medium text-slate-700">1002-8899-7766</span></p>
+                                <p class="font-medium text-slate-800">ធនាគារ អេប៊ីអេ៖ <span class="font-bold text-primary">001 234 567</span></p>
+                                <p>ធនាគារ អេស៊ីលីដា៖ <span class="font-medium text-slate-700">1002-8899-7766</span></p>
                             </div>
                         </div>
                     </div>
@@ -671,25 +668,48 @@
                         </h3>
 
                         <div class="space-y-2.5 text-xs text-slate-600">
+                            <!-- 1. Subtotal -->
                             <div class="flex justify-between items-center py-1">
-                                <span>សរុបរង (Subtotal)៖</span>
+                                <span>សរុបរងមុខទំនិញ៖</span>
                                 <span class="font-semibold text-slate-800 text-sm" id="pageInvCalcSubtotal">$1,630.00</span>
                             </div>
-                            <div class="flex justify-between items-center py-1 text-rose-600">
-                                <span>បញ្ចុះតម្លៃសរុប (Discount)៖</span>
-                                <span class="font-semibold text-sm" id="pageInvCalcDiscount">-$19.00</span>
-                            </div>
+                            <!-- 2. Down Payment -->
                             <div class="flex justify-between items-center py-1">
-                                <span>ពន្ធអាករលើតម្លៃបន្ថែម (VAT 10%)៖</span>
-                                <span class="font-semibold text-slate-800 text-sm" id="pageInvCalcVAT">$161.10</span>
+                                <span>ចូលរួមមុន៖</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-slate-400 text-xs">$</span>
+                                    <input type="number" id="pageInvDownPayment" min="0" step="0.01" value="0.00" oninput="recalcPageInvoice()"
+                                        class="w-24 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-right text-xs font-semibold text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                </div>
                             </div>
+                            <!-- 3. Special Discount -->
+                            <div class="flex justify-between items-center py-1">
+                                <span>ការបញ្ចុះតម្លៃពិសេស៖</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-slate-400 text-xs">-$</span>
+                                    <input type="number" id="pageInvDiscount" min="0" step="0.01" value="0.00" oninput="recalcPageInvoice()"
+                                        class="w-24 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-right text-xs font-semibold text-rose-600 focus:outline-none focus:bg-white focus:border-primary transition" />
+                                </div>
+                            </div>
+                            <!-- 4. VAT 10% -->
+                            <div class="flex justify-between items-center py-1">
+                                <span>អាករលើតម្លៃបន្ថែម (10%)៖</span>
+                                <span class="font-semibold text-slate-800 text-sm" id="pageInvCalcVAT">$163.00</span>
+                            </div>
+                            <!-- 5. Grand Total -->
                             <div class="pt-3 border-t border-slate-200 flex justify-between items-center">
-                                <span class="text-sm font-bold text-slate-900">ទឹកប្រាក់សរុបត្រូវទូទាត់៖</span>
-                                <span class="text-xl font-bold text-primary" id="pageInvCalcGrandTotal">$1,772.10</span>
+                                <span class="text-sm font-bold text-slate-900">ទឹកប្រាក់សរុបចុងក្រោយ៖</span>
+                                <span class="text-xl font-bold text-primary" id="pageInvCalcGrandTotal">$1,793.00</span>
                             </div>
+                            <!-- Balance Due -->
+                            <div class="flex justify-between items-center py-1 font-semibold text-rose-600 border-t border-dashed border-slate-200 pt-2">
+                                <span>ទឹកប្រាក់នៅសល់ត្រូវទូទាត់៖</span>
+                                <span class="text-sm font-bold" id="pageInvCalcBalanceDue">$1,793.00</span>
+                            </div>
+                            <!-- Estimated Profit -->
                             <div class="flex justify-between items-center text-[11px] text-emerald-700 bg-emerald-50/70 p-2.5 rounded-xl mt-2 border border-emerald-100">
-                                <span class="font-medium">ប្រាក់ចំណេញសរុប (Estimated Profit)៖</span>
-                                <span class="font-bold text-xs" id="pageInvCalcProfit">+$381.00 (23.6% កម្រៃ)</span>
+                                <span class="font-medium">ប្រាក់ចំណេញរំពឹងទុក៖</span>
+                                <span class="font-bold text-xs" id="pageInvCalcProfit">+$400.00 (24.5% កម្រៃ)</span>
                             </div>
                         </div>
                     </div>
@@ -750,18 +770,24 @@
                 labelElem.classList.remove('text-slate-400');
                 labelElem.classList.add('text-slate-800', 'font-medium');
             }
-            container.classList.remove('z-50');
-            if (tr) tr.classList.remove('z-40', 'relative');
-            if (menu) menu.classList.add('hidden');
+            if (typeof window.closeFloatingDropdown === 'function') {
+                window.closeFloatingDropdown(menu);
+            } else {
+                container.classList.remove('z-50');
+                if (tr) tr.classList.remove('z-40', 'relative', 'bms-row-active');
+                container.closest('td')?.classList.remove('z-40', 'relative', 'bms-cell-active');
+                if (menu) menu.classList.add('hidden');
+            }
 
             if (tr) {
                 const priceInput = tr.querySelector('.item-price');
                 if (priceInput) priceInput.value = price.toFixed(2);
                 const stockBadge = tr.querySelector('.item-stock-badge');
                 if (stockBadge) {
-                    stockBadge.innerHTML = stock > 5 
+                    const badgeHtml = stock > 5 
                         ? `<span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-semibold text-[11px]">${stock}</span>`
                         : `<span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 font-semibold text-[11px]">${stock} (ជិតអស់)</span>`;
+                    stockBadge.innerHTML = `<span class="md:hidden text-[11px] text-slate-400">ស្តុកនៅសល់៖ </span>` + badgeHtml;
                 }
                 recalcPageInvoice();
             }
@@ -770,38 +796,39 @@
         function recalcPageInvoice() {
             const rows = document.querySelectorAll('#pageInvLinesBody tr');
             let subtotal = 0;
-            let discountAmount = 0;
             let totalCost = 0;
 
             rows.forEach(tr => {
-                const qty = parseFloat(tr.querySelector('.item-qty').value) || 0;
-                const price = parseFloat(tr.querySelector('.item-price').value) || 0;
-                const discPct = parseFloat(tr.querySelector('.item-disc').value) || 0;
+                const qty = parseFloat(tr.querySelector('.item-qty')?.value) || 0;
+                const price = parseFloat(tr.querySelector('.item-price')?.value) || 0;
                 const productInput = tr.querySelector('.item-product-val');
                 const cost = productInput ? (parseFloat(productInput.dataset.cost) || 0) : 0;
 
-                const lineGross = qty * price;
-                const lineDisc = lineGross * (discPct / 100);
-                const lineNet = lineGross - lineDisc;
+                const lineTotal = qty * price;
 
                 const totalElem = tr.querySelector('.item-total');
-                if (totalElem) totalElem.textContent = '$' + lineNet.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                if (totalElem) totalElem.textContent = '$' + lineTotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
-                subtotal += lineGross;
-                discountAmount += lineDisc;
+                subtotal += lineTotal;
                 totalCost += (qty * cost);
             });
+
+            const downPayment = parseFloat(document.getElementById('pageInvDownPayment')?.value) || 0;
+            const discountAmount = parseFloat(document.getElementById('pageInvDiscount')?.value) || 0;
 
             const taxable = Math.max(0, subtotal - discountAmount);
             const vat = taxable * 0.10;
             const grandTotal = taxable + vat;
+            const balanceDue = Math.max(0, grandTotal - downPayment);
             const profit = Math.max(0, taxable - totalCost);
             const marginPct = taxable > 0 ? ((profit / taxable) * 100).toFixed(1) : 0;
 
             document.getElementById('pageInvCalcSubtotal').textContent = '$' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            document.getElementById('pageInvCalcDiscount').textContent = '-$' + discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 });
             document.getElementById('pageInvCalcVAT').textContent = '$' + vat.toLocaleString('en-US', { minimumFractionDigits: 2 });
             document.getElementById('pageInvCalcGrandTotal').textContent = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            if (document.getElementById('pageInvCalcBalanceDue')) {
+                document.getElementById('pageInvCalcBalanceDue').textContent = '$' + balanceDue.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            }
             document.getElementById('pageInvCalcProfit').textContent = `+$${profit.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${marginPct}% កម្រៃ)`;
         }
 
@@ -809,7 +836,7 @@
             const tbody = document.getElementById('pageInvLinesBody');
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td class="p-3">
+                <td class="p-3 col-product">
                     <div class="relative bms-custom-select product-select-container">
                         <input type="hidden" class="item-product-val" value="" data-price="0" data-cost="0" data-stock="0" />
                         <button type="button" onclick="toggleProductDropdown(this)"
@@ -841,24 +868,25 @@
                         </div>
                     </div>
                 </td>
-                <td class="p-3 text-center text-xs text-slate-500 item-stock-badge">-</td>
-                <td class="p-3">
+                <td class="p-3 text-center text-xs text-slate-500 item-stock-badge col-stock">
+                    <span class="md:hidden text-[11px] text-slate-400">ស្តុកនៅសល់៖</span> <span>-</span>
+                </td>
+                <td class="p-3 col-qty">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">ចំនួន</label>
                     <input type="number" min="1" value="1" oninput="recalcPageInvoice()"
                         class="item-qty w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-center text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3">
+                <td class="p-3 col-price">
+                    <label class="block md:hidden text-[11px] font-medium text-slate-500 mb-1">តម្លៃរាយ ($)</label>
                     <input type="number" step="0.01" value="0.00" oninput="recalcPageInvoice()"
                         class="item-price w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
                 </td>
-                <td class="p-3">
-                    <input type="number" min="0" max="100" value="0" oninput="recalcPageInvoice()"
-                        class="item-disc w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-right text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-primary transition" />
+                <td class="p-3 text-right font-semibold text-slate-800 text-xs col-total">
+                    <span class="md:hidden text-xs text-slate-500 font-medium">សរុបទឹកប្រាក់៖</span>
+                    <span class="item-total text-sm font-bold text-slate-900">$0.00</span>
                 </td>
-                <td class="p-3 text-right font-semibold text-slate-800 text-xs item-total">
-                    $0.00
-                </td>
-                <td class="p-3 text-center">
-                    <button type="button" onclick="removePageInvLineRow(this)" class="text-slate-300 hover:text-rose-500 transition">
+                <td class="p-3 text-center col-action">
+                    <button type="button" onclick="removePageInvLineRow(this)" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="លុបមុខទំនិញ">
                         <i class="fas fa-trash-can text-xs"></i>
                     </button>
                 </td>
