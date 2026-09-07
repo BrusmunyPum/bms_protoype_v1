@@ -81,7 +81,7 @@ These are classic scripts declaring globals — no modules, no imports. Everythi
 
 `initUserProfileMenu()`, `initGlobalNotifications()` and `initMobileSidebarDrawer()` find existing elements by heuristic and build the rest of the DOM themselves:
 
-- The **user dropdown** is created next to any `header button img.rounded-full` (or an avatar whose `alt` mentions Avatar / អ្នកប្រើប្រាស់).
+- The **user profile drawer** (`#bmsUserProfileDrawer`) — a full-height slide-over on the right edge, plus its backdrop `#bmsProfileBackdrop`. Both are appended to `<body>`, not to the header, so no header stacking context can clip them. Any `header button img.rounded-full` (or an avatar whose `alt` mentions Avatar / អ្នកប្រើប្រាស់) becomes its trigger. It is a `<div>` on purpose: `custom.css` applies `aside { background: #1b5223 !important }` and an off-canvas `aside` transform below 1024px, which would wreck it. Controlled by `openUserProfileDrawer()` / `closeUserProfileDrawer()` / `toggleUserProfileDrawer()`; goes full-screen under 640px.
 - The **notification flyout** is created next to any `header i.fa-bell`.
 - The **mobile hamburger, drawer backdrop and sidebar close button** are injected automatically. The hamburger is deliberately *skipped* on pages whose header already contains the standard back button (`a i.fa-arrow-left`).
 
@@ -112,7 +112,7 @@ When asked to change navigation, brand colour, the date picker or the header, **
 
 `frontend/src/styles/custom.css` (~2,400 lines) does more than add classes:
 
-- It **overrides Tailwind's type scale globally with `!important`** — `.text-xs` renders at 14.5px, `.text-sm` at 15.5px, `.text-base` at 16.5px, and matching `[class*="text-xs"]` catches arbitrary values too. Tailwind size class names therefore do **not** mean their usual sizes; never debug a font-size problem without checking here first.
+- It **overrides Tailwind's type scale globally with `!important`** — `.text-xs` renders at 14.5px, `.text-sm` at 15.5px, `.text-base` at 16.5px, and matching `[class*="text-xs"]` catches arbitrary values too. Tailwind size class names therefore do **not** mean their usual sizes; never debug a font-size problem without checking here first. Consequence: a component built from `text-xs` titles over `text-[11px]` subtitles renders both at the same size and loses its hierarchy. To restore hierarchy in one component without touching the global scale, add ID-scoped rules (higher specificity + `!important`) — see the `#bmsUserProfileDrawer .pd-*` block at the end of the file for the pattern.
 - It softens `text-slate-900/800` and `text-gray-900/800` globally.
 - It hides all scrollbars globally while preserving scrolling (GEMINI.md §7).
 - It holds the `@media print` rules and the `< 1024px` off-canvas drawer rules (`aside.mobile-open`, `#bmsMobileBackdrop.active`).
