@@ -1,9 +1,9 @@
 # Business Management System (BMS)
 ## Business Requirements & Workflow Specification
 
-**Version:** 0.1 — proposed baseline  
-**Prepared:** 25 August 2026  
-**Status:** ready for owner review; no build work approved by this document  
+**Version:** 0.2 — approved baseline  
+**Prepared:** 25 August 2026  **Revised:** 7 September 2026  
+**Status:** approved for implementation; decisions in Section 19 must be resolved before each affected module is built  
 **Companion document:** `SYSTEM_REBUILD_PLAN.md`
 
 ## 1. Purpose
@@ -425,7 +425,7 @@ Attachments require filename, type, size, creator and time. **Proposed default:*
 | Availability | Graceful health checks and clear outage/error message. |
 | Browser support | Current Chrome, Edge and Firefox desktop versions; responsive tablet layout where practical. |
 | Accessibility | Keyboard-operable forms, labelled controls, readable contrast and clear validation messages. |
-| Language | English interface first; architecture must allow Khmer localisation later. |
+| Language | **100% Khmer user interface.** All labels, buttons, table headers, menus, toasts, dialogs, placeholders and printed documents must be in pure Khmer. All numeric values (dates, amounts, codes, quantities, percentages) use English/Arabic numerals (0–9). No English words may appear in any UI element. |
 | Deployment | Docker Compose on the NAS, application/API behind Nginx, database not publicly exposed. |
 
 ## 18. Testable acceptance checklist
