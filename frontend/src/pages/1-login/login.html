@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGITECHKH - ចូលប្រព័ន្ធតាមតួនាទីសាកល្បង</title>
+    <title>DIGITECHKH - ចូលប្រព័ន្ធ</title>
     <link rel="icon" type="image/png" href="../../assets/favicon.png">
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,59 +37,39 @@
 <body class="bg-gradient-to-br from-[#1b5223] via-[#24692D] to-[#14421b] min-h-screen font-sans flex items-center justify-center p-4 md:p-8 select-none">
 
     <!-- Main Content / Login Card (Centered) -->
-    <main class="w-full max-w-5xl flex items-center justify-center">
-        <div class="bg-white rounded-3xl shadow-2xl border border-white/20 overflow-hidden w-full grid grid-cols-1 lg:grid-cols-12">
+    <main class="w-full max-w-4xl flex items-center justify-center">
+        <div class="bg-white rounded-3xl shadow-2xl border border-white/20 overflow-hidden w-full grid grid-cols-1 md:grid-cols-2">
 
-            <!-- Left Side: Brand Story & System Architecture (5 Columns) -->
-            <div class="lg:col-span-5 relative min-h-[320px] lg:min-h-[640px] bg-slate-900 overflow-hidden group">
+            <!-- Left Side: City Skyline with Brand Story -->
+            <div class="relative h-64 md:h-auto min-h-[420px] bg-slate-900 overflow-hidden group">
                 <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80"
                     alt="City Skyline"
                     class="w-full h-full object-cover object-center transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 flex flex-col justify-between p-8 text-white">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-2 shadow-xl mb-4 flex items-center justify-center">
-                            <img src="../../assets/logo-mark-transparent.png" alt="DIGITECHKH" class="w-full h-full object-contain">
-                        </div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md w-fit mb-3 border border-white/20">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-xs font-medium text-white">ប្រព័ន្ធសុវត្ថិភាពខ្ពស់ និងបែងចែកសិទ្ធិដាច់ដោយឡែក</span>
-                        </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20 flex flex-col justify-end p-8 text-white">
+                    <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-2 shadow-xl mb-4 flex items-center justify-center">
+                        <img src="../../assets/logo-mark-transparent.png" alt="DIGITECHKH" class="w-full h-full object-contain">
                     </div>
-
-                    <div class="space-y-2.5">
-                        <h3 class="text-2xl font-bold tracking-tight text-white leading-tight">
-                            ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្មកម្រិតសហគ្រាស
-                        </h3>
-                        <p class="text-xs text-white/85 leading-relaxed font-light">
-                            ដំណោះស្រាយរួមបញ្ចូលគ្នា All-in-One សម្រាប់ការលក់ ការទិញ ស្តុកទំនិញ គណនេយ្យ ធនធានមនុស្ស និងច្រករបៀងស្វ័យប្រវត្តិតាមតួនាទី។
-                        </p>
-                        
-                        <!-- Mini Security Highlights -->
-                        <div class="pt-3 border-t border-white/15 grid grid-cols-2 gap-2 text-[11px] text-white/80">
-                            <div class="flex items-center gap-1.5">
-                                <i class="fas fa-shield-check text-emerald-400"></i>
-                                <span>ការពារការលេចធ្លាយទិន្នន័យ</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <i class="fas fa-user-lock text-amber-400"></i>
-                                <span>12 តួនាទីជាក់លាក់</span>
-                            </div>
-                        </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md w-fit mb-3 border border-white/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-xs font-medium text-white">ប្រព័ន្ធសុវត្ថិភាពខ្ពស់</span>
                     </div>
+                    <h3 class="text-xl font-bold tracking-tight text-white mb-2">
+                        ប្រព័ន្ធគ្រប់គ្រងអាជីវកម្ម
+                    </h3>
+                    <p class="text-xs text-white/80 leading-relaxed font-light">
+                        ដំណោះស្រាយគ្រប់គ្រងការលក់ ស្តុកទំនិញ និងរបាយការណ៍ហិរញ្ញវត្ថុប្រកបដោយប្រសិទ្ធភាព
+                    </p>
                 </div>
             </div>
 
-            <!-- Right Side: Clean Modern Demo Role Login Form (7 Columns) -->
-            <div class="lg:col-span-7 p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white relative">
+            <!-- Right Side: Clean Modern Login Form -->
+            <div class="p-8 md:p-10 flex flex-col justify-between bg-white">
 
                 <!-- Form Top Header with Cambodia Flag -->
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center justify-between pb-1">
                     <div class="flex items-center gap-2.5">
                         <img src="../../assets/logo-mark-transparent.png" alt="DIGITECHKH" class="w-8 h-8 object-contain">
-                        <div>
-                            <span class="text-sm font-bold tracking-wider text-primary block leading-tight">DIGITECHKH</span>
-                            <span class="text-[10px] text-slate-400 block">ប្រព័ន្ធគ្រប់គ្រងសិទ្ធិអ្នកប្រើប្រាស់</span>
-                        </div>
+                        <span class="text-sm font-bold tracking-wider text-primary">DIGITECHKH</span>
                     </div>
                     <!-- Cambodia Flag -->
                     <div class="w-7 h-5 rounded overflow-hidden shadow-sm border border-slate-200" title="ភាសាខ្មែរ">
@@ -108,308 +88,73 @@
                 </div>
 
                 <!-- Welcome Title -->
-                <div class="my-4">
+                <div class="my-5 text-center">
                     <h2 class="text-xl font-bold text-slate-800 tracking-tight">
-                        ចូលប្រព័ន្ធតាមតួនាទីសាកល្បង
+                        ចូលគណនីរបស់អ្នក
                     </h2>
-                    <p class="text-xs text-slate-500 mt-1 font-normal">
-                        សូមជ្រើសរើសតួនាទីណាមួយខាងក្រោមដើម្បីសាកល្បងមុខងារ និងសិទ្ធិប្រើប្រាស់ជាក់ស្តែង
+                    <p class="text-xs text-slate-500 mt-1.5 font-normal">
+                        សូមបញ្ចូលលេខទូរស័ព្ទ ឬអ៊ីមែល និងពាក្យសម្ងាត់ដើម្បីបន្ត
                     </p>
                 </div>
 
-                <!-- Quick Selection Role Pills (Top Popular Roles) -->
-                <div class="space-y-1.5 mb-4">
-                    <span class="text-xs font-semibold text-slate-600 block">តួនាទីពេញនិយមរហ័ស:</span>
-                    <div class="flex flex-wrap gap-1.5" id="quickRoleChips">
-                        <button type="button" onclick="selectDemoRole('admin')" data-role-chip="admin" 
-                            class="px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border-emerald-300 shadow-sm ring-2 ring-emerald-600/20">
-                            <i class="fas fa-crown text-[11px] text-emerald-600"></i>
-                            <span>អ្នកគ្រប់គ្រងទូទៅ</span>
-                        </button>
-                        <button type="button" onclick="selectDemoRole('super-admin')" data-role-chip="super-admin"
-                            class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
-                            <i class="fas fa-shield-halved text-[11px] text-amber-600"></i>
-                            <span>ស៊ុបភើរ អភិបាល</span>
-                        </button>
-                        <button type="button" onclick="selectDemoRole('cashier')" data-role-chip="cashier"
-                            class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
-                            <i class="fas fa-cash-register text-[11px] text-teal-600"></i>
-                            <span>អ្នកគិតប្រាក់</span>
-                        </button>
-                        <button type="button" onclick="selectDemoRole('sales')" data-role-chip="sales"
-                            class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
-                            <i class="fas fa-hand-holding-dollar text-[11px] text-amber-600"></i>
-                            <span>បុគ្គលិកផ្នែកលក់</span>
-                        </button>
-                        <button type="button" onclick="selectDemoRole('inventory')" data-role-chip="inventory"
-                            class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5">
-                            <i class="fas fa-boxes-stacked text-[11px] text-purple-600"></i>
-                            <span>បុគ្គលិកផ្នែកស្តុក</span>
-                        </button>
-                    </div>
-                </div>
+                <!-- Login Form with Empty Inputs -->
+                <form action="../2-home/dashboard.html" method="GET" class="space-y-4">
 
-                <!-- Custom Role Dropdown Selector (All 12 Roles) -->
-                <div class="relative mb-4">
-                    <label class="block text-xs font-semibold text-slate-700 mb-1.5">
-                        ជ្រើសរើសតួនាទីសាកល្បងពេញលេញ (12 តួនាទី) <span class="text-rose-500">*</span>
-                    </label>
-                    <button type="button" id="roleDropdownTrigger" onclick="toggleCustomRoleDropdown()"
-                        class="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl px-3.5 py-2.5 text-left flex items-center justify-between transition focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10">
-                        <div class="flex items-center gap-3 min-w-0">
-                            <div id="triggerRoleIcon" class="w-8 h-8 rounded-lg bg-[#1b5223] text-white flex items-center justify-center text-xs flex-shrink-0">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <div class="min-w-0">
-                                <p id="triggerRoleName" class="text-xs font-bold text-slate-800 truncate">អ្នកគ្រប់គ្រងទូទៅ</p>
-                                <p id="triggerRoleDesc" class="text-[11px] text-slate-500 truncate">សិទ្ធិពេញលេញលើគ្រប់មុខងារអាជីវកម្ម</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-slate-400 text-xs ml-2 transition-transform duration-200" id="triggerRoleChevron"></i>
-                    </button>
-
-                    <!-- Custom Dropdown Menu -->
-                    <div id="customRoleMenu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 max-h-64 overflow-y-auto scrollbar-hide divide-y divide-slate-100">
-                        <!-- Group 1: Leadership & Admin -->
-                        <div class="p-2">
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 block">ថ្នាក់ដឹកនាំ និងរដ្ឋបាល</span>
-                            <div onclick="selectDemoRole('super-admin')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1a1a2e] text-amber-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-shield-halved"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">ស៊ុបភើរ អភិបាល</p>
-                                        <p class="text-[10px] text-slate-400">គ្រប់គ្រងក្រុមហ៊ុន និងប្រព័ន្ធសកល</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-super-admin"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('admin')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1b5223] text-white flex items-center justify-center text-xs">
-                                        <i class="fas fa-crown"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">អ្នកគ្រប់គ្រងទូទៅ</p>
-                                        <p class="text-[10px] text-slate-400">សិទ្ធិពេញលេញលើអាជីវកម្ម</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary" id="check-admin"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('manager')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1e3a5f] text-white flex items-center justify-center text-xs">
-                                        <i class="fas fa-user-tie"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">អ្នកគ្រប់គ្រង</p>
-                                        <p class="text-[10px] text-slate-400">អនុម័តឯកសារ និងរបាយការណ៍</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-manager"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('hr')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#134e4a] text-cyan-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-id-card-clip"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">បុគ្គលិកធនធានមនុស្ស</p>
-                                        <p class="text-[10px] text-slate-400">បុគ្គលិក វត្តមាន និងប្រាក់ខែ</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-hr"><i class="fas fa-check"></i></span>
-                            </div>
-                        </div>
-
-                        <!-- Group 2: Commercial & Finance -->
-                        <div class="p-2">
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 block">ហិរញ្ញវត្ថុ និងពាណិជ្ជកម្ម</span>
-                            <div onclick="selectDemoRole('accountant')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#2d3748] text-teal-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-calculator"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">គណនេយ្យករ</p>
-                                        <p class="text-[10px] text-slate-400">ការទូទាត់ ពន្ធ និងហិរញ្ញវត្ថុ</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-accountant"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('sales')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#7c2d12] text-amber-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-hand-holding-dollar"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">បុគ្គលិកផ្នែកលក់</p>
-                                        <p class="text-[10px] text-slate-400">វិក្កយបត្រ សម្រង់តម្លៃ និងអតិថិជន</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-sales"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('purchase')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1e3a8a] text-sky-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-cart-shopping"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">បុគ្គលិកផ្នែកលទ្ធកម្ម</p>
-                                        <p class="text-[10px] text-slate-400">បញ្ជាទិញចូល និងអ្នកផ្គត់ផ្គង់</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-purchase"><i class="fas fa-check"></i></span>
-                            </div>
-                        </div>
-
-                        <!-- Group 3: Operations & Retail -->
-                        <div class="p-2">
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 block">ប្រតិបត្តិការស្តុក និងលក់រាយ</span>
-                            <div onclick="selectDemoRole('cashier')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#065f46] text-lime-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-cash-register"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">អ្នកគិតប្រាក់លក់រហ័ស</p>
-                                        <p class="text-[10px] text-slate-400">គិតប្រាក់ Touch POS (ជាប់សោរវេនថ្ងៃនេះ)</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-cashier"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('inventory')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#4a1d96] text-purple-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-boxes-stacked"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">បុគ្គលិកផ្នែកស្តុកទំនិញ</p>
-                                        <p class="text-[10px] text-slate-400">តុល្យភាពស្តុក (លាក់តម្លៃ ១០០%)</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-inventory"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('driver')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#78350f] text-yellow-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-motorcycle"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">បុគ្គលិកដឹកជញ្ជូន</p>
-                                        <p class="text-[10px] text-slate-400">បញ្ជីដឹក និងហត្ថលេខា (គ្មានតម្លៃ)</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-driver"><i class="fas fa-check"></i></span>
-                            </div>
-                        </div>
-
-                        <!-- Group 4: External Portals -->
-                        <div class="p-2">
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 block">ច្រករបៀងដៃគូខាងក្រៅ</span>
-                            <div onclick="selectDemoRole('supplier')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1c1917] text-amber-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-truck-ramp-box"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">ដៃគូផ្គត់ផ្គង់</p>
-                                        <p class="text-[10px] text-slate-400">ពិនិត្យ PO និងដាក់វិក្កយបត្រ</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-supplier"><i class="fas fa-check"></i></span>
-                            </div>
-                            <div onclick="selectDemoRole('customer')" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-7 h-7 rounded-lg bg-[#1e1b4b] text-purple-300 flex items-center justify-center text-xs">
-                                        <i class="fas fa-user-check"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-slate-800">អតិថិជន</p>
-                                        <p class="text-[10px] text-slate-400">វិក្កយបត្រ ស្កេន KHQR និងតាមដានការដឹក</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-primary hidden" id="check-customer"><i class="fas fa-check"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Active Role Badge Card -->
-                <div id="activeRoleCard" class="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 mb-4 flex items-center justify-between">
-                    <div class="flex items-center gap-2.5">
-                        <div id="roleCardIcon" class="w-8 h-8 rounded-xl bg-[#1b5223] text-white flex items-center justify-center text-xs flex-shrink-0">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs font-bold text-slate-800" id="roleCardTitle">អ្នកគ្រប់គ្រងទូទៅ</span>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800" id="roleCardBadge">គណនីសកម្ម</span>
-                            </div>
-                            <p class="text-[11px] text-slate-600 font-medium" id="roleCardScope">សិទ្ធិ: ពេញលេញលើអាជីវកម្មមួយ (លក់ ទិញ ស្តុក និងរបាយការណ៍)</p>
-                        </div>
-                    </div>
-                    <span class="text-emerald-600 text-sm mr-1"><i class="fas fa-circle-check"></i></span>
-                </div>
-
-                <!-- Login Credentials Form -->
-                <form id="demoLoginForm" onsubmit="handleDemoLoginSubmit(event)" class="space-y-3.5">
-
-                    <!-- Username/Phone/Email Field -->
+                    <!-- Username/Phone/Email Field (Empty) -->
                     <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label for="username" class="text-xs font-semibold text-slate-700">
-                                លេខទូរស័ព្ទ ឬអ៊ីមែលគំរូ <span class="text-rose-500">*</span>
-                            </label>
-                            <span class="text-[10px] text-slate-400 font-light">បំពេញស្វ័យប្រវត្តិតាមតួនាទី</span>
-                        </div>
+                        <label for="username" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                            លេខទូរស័ព្ទ ឬអ៊ីមែល <span class="text-rose-500">*</span>
+                        </label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                 <i class="fas fa-user text-sm"></i>
                             </span>
-                            <input type="text" id="username" name="username" value="087 600 064" required
+                            <input type="text" id="username" name="username" value="" required
                                 placeholder="បញ្ចូលលេខទូរស័ព្ទ ឬអ៊ីមែល"
-                                class="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-800 transition outline-none font-medium placeholder:text-slate-400" />
+                                class="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-800 transition outline-none font-medium placeholder:text-slate-400 placeholder:text-xs placeholder:font-normal" />
                         </div>
                     </div>
 
-                    <!-- Password Field -->
+                    <!-- Password Field (Empty) -->
                     <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label for="password" class="text-xs font-semibold text-slate-700">
-                                ពាក្យសម្ងាត់ <span class="text-rose-500">*</span>
-                            </label>
-                            <span class="text-[10px] text-emerald-700 font-medium">សុវត្ថិភាពសាកល្បង</span>
-                        </div>
+                        <label for="password" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                            ពាក្យសម្ងាត់ <span class="text-rose-500">*</span>
+                        </label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                 <i class="fas fa-lock text-sm"></i>
                             </span>
-                            <input type="password" id="password" name="password" value="admin2026" required
+                            <input type="password" id="password" name="password" value="" required
                                 placeholder="បញ្ចូលពាក្យសម្ងាត់"
-                                class="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-xl pl-10 pr-10 py-2.5 text-xs text-slate-800 transition outline-none font-medium tracking-wider placeholder:text-slate-400" />
+                                class="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-xl pl-10 pr-10 py-2.5 text-sm text-slate-800 transition outline-none font-medium tracking-wider placeholder:text-slate-400 placeholder:text-xs placeholder:font-normal" />
                             <button type="button" id="togglePasswordBtn"
-                                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition"
+                                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition cursor-pointer"
                                 aria-label="បង្ហាញពាក្យសម្ងាត់">
                                 <i class="fas fa-eye text-sm" id="eyeIcon"></i>
                             </button>
                         </div>
                     </div>
 
+                    <!-- Forgot Password Link -->
+                    <div class="flex justify-end pt-0.5">
+                        <a href="#" class="text-xs font-medium text-emerald-700 hover:text-primary transition-colors">
+                            ភ្លេចពាក្យសម្ងាត់?
+                        </a>
+                    </div>
+
                     <!-- Action Buttons -->
-                    <div class="pt-2 space-y-2">
+                    <div class="pt-2 space-y-2.5">
                         <button type="submit" id="submitBtn"
                             class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-sm flex items-center justify-center gap-2 cursor-pointer">
-                            <span id="submitBtnText">ចូលប្រព័ន្ធក្នុងនាមជា អ្នកគ្រប់គ្រងទូទៅ</span>
+                            <span>ចូលប្រព័ន្ធ</span>
                             <i class="fas fa-arrow-right text-xs"></i>
                         </button>
 
-                        <!-- All 12 Roles Modal Trigger -->
+                        <!-- Quick Role Switcher Button for Demo -->
                         <button type="button" onclick="toggleRoleModal()"
                             class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl transition text-xs flex items-center justify-center gap-2 border border-slate-200 cursor-pointer">
                             <i class="fas fa-users-gear text-emerald-600"></i>
-                            <span>មើលតារាងតួនាទីទាំង 12 ពេញលេញ</span>
+                            <span>ជ្រើសរើសតួនាទីសាកល្បង</span>
                         </button>
                     </div>
                 </form>
@@ -430,7 +175,7 @@
                     <h3 class="text-lg font-bold">ជ្រើសរើសតួនាទីដើម្បីសាកល្បង</h3>
                     <p class="text-xs text-emerald-100 mt-0.5">ចុចលើតួនាទីណាមួយដើម្បីចូលទៅកាន់ផ្ទាំងការងារជាក់ស្តែងភ្លាមៗ</p>
                 </div>
-                <button onclick="toggleRoleModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+                <button onclick="toggleRoleModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
                     <i class="fas fa-xmark text-sm"></i>
                 </button>
             </div>
@@ -570,222 +315,15 @@
                 </div>
             </div>
             <div class="p-4 bg-slate-50 border-t border-slate-100 text-right">
-                <button onclick="toggleRoleModal()" class="px-5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium text-xs transition">
+                <button onclick="toggleRoleModal()" class="px-5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium text-xs transition cursor-pointer">
                     បិទផ្ទាំង
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Script for Dynamic Demo Role Login Management -->
+    <!-- Interactive script for password toggle & modal -->
     <script>
-        const DEMO_ROLES = {
-            'admin': {
-                name: 'អ្នកគ្រប់គ្រងទូទៅ',
-                icon: 'fa-crown',
-                color: '#1b5223',
-                username: '087 600 064',
-                password: 'password123',
-                scope: 'សិទ្ធិ: ពេញលេញលើអាជីវកម្មមួយ (លក់ ទិញ ស្តុក និងរបាយការណ៍)',
-                dashboard: '../2-home/dashboard.html'
-            },
-            'super-admin': {
-                name: 'ស៊ុបភើរ អភិបាល',
-                icon: 'fa-shield-halved',
-                color: '#1a1a2e',
-                username: 'superadmin@digitechkh.com',
-                password: 'superadmin2026',
-                scope: 'សិទ្ធិ: គ្រប់គ្រង Multi-tenant ក្រុមហ៊ុនទាំងអស់ និងប្រព័ន្ធសកល',
-                dashboard: '../8-super-admin/dashboard.html'
-            },
-            'manager': {
-                name: 'អ្នកគ្រប់គ្រង',
-                icon: 'fa-user-tie',
-                color: '#1e3a5f',
-                username: 'manager@digitechkh.com',
-                password: 'manager2026',
-                scope: 'សិទ្ធិ: អនុម័តវិក្កយបត្រ បញ្ជាទិញ និងរបាយការណ៍សង្ខេប',
-                dashboard: '../9-portals/manager/dashboard.html'
-            },
-            'accountant': {
-                name: 'គណនេយ្យករ',
-                icon: 'fa-calculator',
-                color: '#2d3748',
-                username: 'accountant@digitechkh.com',
-                password: 'account2026',
-                scope: 'សិទ្ធិ: បង្កាន់ដៃទទួល ប័ណ្ណចំណាយទូទាត់ ពន្ធ អតប និងហិរញ្ញវត្ថុ',
-                dashboard: '../9-portals/accountant/dashboard.html'
-            },
-            'sales': {
-                name: 'បុគ្គលិកផ្នែកលក់',
-                icon: 'fa-hand-holding-dollar',
-                color: '#7c2d12',
-                username: 'sales@digitechkh.com',
-                password: 'sales2026',
-                scope: 'សិទ្ធិ: ចេញវិក្កយបត្រ សម្រង់តម្លៃ និងអតិថិជនផ្ទាល់ខ្លួន',
-                dashboard: '../9-portals/sales-staff/dashboard.html'
-            },
-            'purchase': {
-                name: 'បុគ្គលិកផ្នែកលទ្ធកម្ម',
-                icon: 'fa-cart-shopping',
-                color: '#1e3a8a',
-                username: 'purchase@digitechkh.com',
-                password: 'purchase2026',
-                scope: 'សិទ្ធិ: បញ្ជាទិញចូលពីអ្នកផ្គត់ផ្គង់ និងតាមដានការទូទាត់',
-                dashboard: '../9-portals/purchase-staff/dashboard.html'
-            },
-            'inventory': {
-                name: 'បុគ្គលិកផ្នែកស្តុកទំនិញ',
-                icon: 'fa-boxes-stacked',
-                color: '#4a1d96',
-                username: 'stock@digitechkh.com',
-                password: 'inventory2026',
-                scope: 'សិទ្ធិ: តុល្យភាពស្តុក និងចលនា (លាក់តម្លៃទិញ និងលក់ ១០០%)',
-                dashboard: '../9-portals/inventory-staff/dashboard.html'
-            },
-            'cashier': {
-                name: 'អ្នកគិតប្រាក់លក់រហ័ស',
-                icon: 'fa-cash-register',
-                color: '#065f46',
-                username: 'cashier@digitechkh.com',
-                password: 'pos2026',
-                scope: 'សិទ្ធិ: គិតប្រាក់រហ័ស Touch POS ជាប់សោរវេនថ្ងៃនេះ',
-                dashboard: '../9-portals/cashier/dashboard.html'
-            },
-            'driver': {
-                name: 'បុគ្គលិកដឹកជញ្ជូន',
-                icon: 'fa-motorcycle',
-                color: '#78350f',
-                username: 'driver@digitechkh.com',
-                password: 'driver2026',
-                scope: 'សិទ្ធិ: បញ្ជីដឹកជញ្ជូន ថតរូប និងហត្ថលេខាទទួល (គ្មានតម្លៃ)',
-                dashboard: '../9-portals/driver/dashboard.html'
-            },
-            'hr': {
-                name: 'បុគ្គលិកធនធានមនុស្ស',
-                icon: 'fa-id-card-clip',
-                color: '#134e4a',
-                username: 'hr@digitechkh.com',
-                password: 'hr2026',
-                scope: 'សិទ្ធិ: គ្រប់គ្រងបុគ្គលិក វត្តមាន ច្បាប់សម្រាក និងប្រាក់ខែ',
-                dashboard: '../9-portals/hr-staff/dashboard.html'
-            },
-            'supplier': {
-                name: 'ដៃគូផ្គត់ផ្គង់',
-                icon: 'fa-truck-ramp-box',
-                color: '#1c1917',
-                username: 'supplier@cheng.com',
-                password: 'supplier2026',
-                scope: 'សិទ្ធិ: ពិនិត្យការបញ្ជាទិញចូល (PO) និងដាក់ស្នើវិក្កយបត្រទូទាត់',
-                dashboard: '../9-portals/supplier/dashboard.html'
-            },
-            'customer': {
-                name: 'អតិថិជន',
-                icon: 'fa-user-check',
-                color: '#1e1b4b',
-                username: 'customer@sokhum.com',
-                password: 'customer2026',
-                scope: 'សិទ្ធិ: ពិនិត្យវិក្កយបត្រ ស្កេន KHQR បាគង និងតាមដានការដឹក',
-                dashboard: '../9-portals/customer/dashboard.html'
-            }
-        };
-
-        let currentRoleKey = 'admin';
-
-        function selectDemoRole(roleKey) {
-            const role = DEMO_ROLES[roleKey];
-            if (!role) return;
-
-            currentRoleKey = roleKey;
-
-            // Update Trigger Dropdown Button
-            document.getElementById('triggerRoleIcon').innerHTML = `<i class="fas ${role.icon}"></i>`;
-            document.getElementById('triggerRoleIcon').style.backgroundColor = role.color;
-            document.getElementById('triggerRoleName').innerText = role.name;
-            document.getElementById('triggerRoleDesc').innerText = role.scope;
-
-            // Update Active Card
-            document.getElementById('roleCardTitle').innerText = role.name;
-            document.getElementById('roleCardScope').innerText = role.scope;
-            document.getElementById('roleCardIcon').innerHTML = `<i class="fas ${role.icon}"></i>`;
-            document.getElementById('roleCardIcon').style.backgroundColor = role.color;
-
-            // Update Inputs
-            document.getElementById('username').value = role.username;
-            document.getElementById('password').value = role.password;
-
-            // Update Submit Button Text
-            document.getElementById('submitBtnText').innerText = `ចូលប្រព័ន្ធក្នុងនាមជា ${role.name}`;
-
-            // Update Checkmarks in Dropdown
-            Object.keys(DEMO_ROLES).forEach(k => {
-                const el = document.getElementById(`check-${k}`);
-                if (el) {
-                    if (k === roleKey) {
-                        el.classList.remove('hidden');
-                    } else {
-                        el.classList.add('hidden');
-                    }
-                }
-            });
-
-            // Update Quick Chips Styling
-            document.querySelectorAll('[data-role-chip]').forEach(chip => {
-                const chipRole = chip.getAttribute('data-role-chip');
-                if (chipRole === roleKey) {
-                    chip.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border-emerald-300 shadow-sm ring-2 ring-emerald-600/20';
-                } else {
-                    chip.className = 'px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all flex items-center gap-1.5';
-                }
-            });
-
-            // Close Custom Dropdown
-            const menu = document.getElementById('customRoleMenu');
-            const chevron = document.getElementById('triggerRoleChevron');
-            if (menu) menu.classList.add('hidden');
-            if (chevron) chevron.classList.remove('rotate-180');
-        }
-
-        function toggleCustomRoleDropdown() {
-            const menu = document.getElementById('customRoleMenu');
-            const chevron = document.getElementById('triggerRoleChevron');
-            if (!menu) return;
-
-            const isHidden = menu.classList.contains('hidden');
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                if (chevron) chevron.classList.add('rotate-180');
-            } else {
-                menu.classList.add('hidden');
-                if (chevron) chevron.classList.remove('rotate-180');
-            }
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const trigger = document.getElementById('roleDropdownTrigger');
-            const menu = document.getElementById('customRoleMenu');
-            if (trigger && menu && !trigger.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.add('hidden');
-                const chevron = document.getElementById('triggerRoleChevron');
-                if (chevron) chevron.classList.remove('rotate-180');
-            }
-        });
-
-        function handleDemoLoginSubmit(e) {
-            e.preventDefault();
-            const role = DEMO_ROLES[currentRoleKey];
-            if (!role) return;
-
-            if (typeof showToast === 'function') {
-                showToast(`កំពុងចូលប្រព័ន្ធក្នុងនាមជា «${role.name}»...`, 'success');
-            }
-
-            setTimeout(() => {
-                window.location.href = role.dashboard;
-            }, 600);
-        }
-
         const togglePasswordBtn = document.getElementById('togglePasswordBtn');
         const passwordInput = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
