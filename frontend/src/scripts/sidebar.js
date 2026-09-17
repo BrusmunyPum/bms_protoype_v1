@@ -640,166 +640,290 @@ function getPagesRelativePath(targetPage) {
     return resolvedTarget;
 }
 
+/**
+ * User Profile Drawer — a full-height slide-over panel anchored to the right edge.
+ * Built once and appended to <body> so it is never clipped by header stacking contexts.
+ */
+function buildProfileDrawerRow(opts) {
+    const tag = opts.href ? 'a' : 'button';
+    const attrs = opts.href
+        ? `href="${opts.href}"`
+        : `type="button" onclick="${opts.onclick}"`;
+
+    return `
+        <${tag} ${attrs} class="w-full flex items-center gap-4 px-3 py-2.5 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors group text-left cursor-pointer">
+            <i class="fas ${opts.icon} pd-icon text-${opts.tone}-500 w-6 text-center flex-shrink-0 transition-transform group-hover:scale-110"></i>
+            <div class="flex-1 min-w-0">
+                <div class="pd-title text-slate-700 group-hover:text-slate-900 transition-colors truncate">${opts.title}</div>
+                <div class="pd-sub text-slate-400 truncate">${opts.sub}</div>
+            </div>
+            <i class="fas fa-chevron-right pd-chevron text-slate-300 group-hover:text-slate-400 group-hover:translate-x-0.5 transition-all flex-shrink-0"></i>
+        </${tag}>
+    `;
+}
+
 function initUserProfileMenu() {
     const avatarImgs = document.querySelectorAll('header img[alt*="Avatar"], header img[alt*="អ្នកប្រើប្រាស់"], header img[src*="photo-1494790108377"], header button img.rounded-full');
     if (!avatarImgs || avatarImgs.length === 0) return;
 
-    avatarImgs.forEach(img => {
-        const btn = img.closest('button');
-        if (!btn) return;
-        const parentContainer = btn.parentElement;
-        if (!parentContainer) return;
+    const avatarSrc = avatarImgs[0].getAttribute('src') || '';
 
-        // Ensure parent container is relative for absolute popover positioning
-        parentContainer.classList.add('relative');
-        btn.setAttribute('aria-haspopup', 'true');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.style.cursor = 'pointer';
+    // 1. Backdrop (created once)
+    let backdrop = document.getElementById('bmsProfileBackdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'bmsProfileBackdrop';
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(backdrop);
+    }
 
-        // Check if dropdown already exists
-        let dropdown = parentContainer.querySelector('#bmsUserProfileDropdown');
-        if (!dropdown) {
-            dropdown = document.createElement('div');
-            dropdown.id = 'bmsUserProfileDropdown';
-            dropdown.className = 'hidden absolute right-0 top-full mt-2.5 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-100 z-[9999] overflow-hidden transform transition-all duration-200 select-none';
-            
-            const profileUrl = getPagesRelativePath('7-settings/6-profile/profile.html');
-            const companyUrl = getPagesRelativePath('7-settings/1-company/company.html');
-            const systemUrl = getPagesRelativePath('7-settings/5-system/system.html');
-            const loginUrl = getPagesRelativePath('1-login/login.html');
+    // 2. Drawer (created once)
+    let drawer = document.getElementById('bmsUserProfileDrawer');
+    if (!drawer) {
+        // Intentionally a <div>, not an <aside>: custom.css applies global `aside`
+        // rules (dark-green background, off-canvas transform below 1024px) that
+        // are marked !important and would break this panel.
+        drawer = document.createElement('div');
+        drawer.id = 'bmsUserProfileDrawer';
+        drawer.setAttribute('role', 'dialog');
+        drawer.setAttribute('aria-modal', 'true');
+        drawer.setAttribute('aria-label', 'គណនីរបស់ខ្ញុំ');
+        drawer.setAttribute('tabindex', '-1');
 
-            dropdown.innerHTML = `
-                <!-- Profile Header -->
-                <div class="p-4 bg-gradient-to-br from-slate-50 via-emerald-50/20 to-slate-50 border-b border-slate-100">
-                    <div class="flex items-center gap-3">
+        const url = {
+            profile: getPagesRelativePath('7-settings/6-profile/profile.html'),
+            company: getPagesRelativePath('7-settings/1-company/company.html'),
+            users: getPagesRelativePath('7-settings/2-users/users.html'),
+            tax: getPagesRelativePath('7-settings/3-tax/tax.html'),
+            notifications: getPagesRelativePath('7-settings/4-notifications/notifications.html'),
+            system: getPagesRelativePath('7-settings/5-system/system.html')
+        };
+
+        // Brand mark is already resolved in the sidebar, so reuse its URL rather
+        // than recomputing a relative asset path for every nesting depth.
+        const brandLogoSrc = (document.querySelector('aside img[alt="DIGITECHKH"]') || {}).src || '';
+
+        const groupLabel = (text) => `
+            <div class="flex items-center gap-2.5 px-3 mb-2">
+                <p class="pd-group text-slate-400 font-medium flex-shrink-0">${text}</p>
+                <span class="flex-1 h-px bg-slate-100"></span>
+            </div>
+        `;
+
+        drawer.innerHTML = `
+            <!-- Close button — sits outside the panel on the backdrop from 640px up,
+                 and tucks back inside the header on phones where there is no room
+                 beside it. Placement and colours live in custom.css. -->
+            <button type="button" id="bmsProfileDrawerCloseBtn" onclick="closeUserProfileDrawer()"
+                class="w-10 h-10 rounded-xl border flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="បិទផ្ទាំង" title="បិទផ្ទាំង">
+                <i class="fas fa-xmark text-sm"></i>
+            </button>
+
+            <!-- Drawer Header (matches the global 72px header height) -->
+            <div id="bmsProfileDrawerHeader" class="h-[72px] px-4 flex items-center border-b border-slate-100 flex-shrink-0 bg-white transition-shadow">
+                <h3 class="pd-head text-slate-800 w-full text-center px-12 truncate">គណនីរបស់ខ្ញុំ</h3>
+            </div>
+
+            <!-- Scrollable Body -->
+            <div id="bmsProfileDrawerBody" class="flex-1 overflow-y-auto scrollbar-hide">
+                <!-- Identity Block -->
+                <div class="px-4 py-4 bg-gradient-to-br from-slate-50 via-emerald-50/25 to-white border-b border-slate-100">
+                    <div class="flex items-center gap-3.5">
                         <div class="relative flex-shrink-0">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=80" alt="User Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm" />
-                            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                            <img src="${avatarSrc}" alt="រូបភាពអ្នកប្រើប្រាស់"
+                                class="w-16 h-16 rounded-full object-cover border-4 border-white shadow-md" />
+                            <span class="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-bold text-slate-800 truncate leading-tight">សុខ ចាន់ថន</h4>
-                            <p class="text-xs text-slate-500 mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">chanthon.sok@digitechkh.com</p>
-                            <div class="mt-1.5 flex items-center gap-1.5">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100/80 text-emerald-800">
-                                    <i class="fas fa-shield-halved text-[10px]"></i> អ្នកគ្រប់គ្រងកំពូល
-                                </span>
-                            </div>
+                            <h4 class="pd-name text-slate-800 truncate">សុខ ចាន់ថន</h4>
+                            <p class="pd-email text-slate-500 truncate">chanthon.sok@digitechkh.com</p>
+                            <span class="pd-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 mt-1.5 rounded-full font-medium bg-emerald-100/80 text-emerald-800">
+                                <i class="fas fa-shield-halved pd-chevron"></i> អ្នកគ្រប់គ្រងកំពូល
+                            </span>
+                        </div>
+                        <a href="${url.profile}"
+                            class="w-9 h-9 rounded-xl bg-white border border-slate-200 text-slate-500 hover:border-primary hover:text-primary flex items-center justify-center shadow-sm transition-colors flex-shrink-0 cursor-pointer"
+                            title="កែប្រែព័ត៌មាន" aria-label="កែប្រែព័ត៌មាន">
+                            <i class="fas fa-pen-to-square text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Active Company / Branch Context -->
+                <div class="mx-4 mt-4 rounded-2xl border border-slate-200/70 bg-slate-50/60 px-3.5 py-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center overflow-hidden p-1 flex-shrink-0">
+                            ${brandLogoSrc
+                                ? `<img src="${brandLogoSrc}" alt="រូបសញ្ញាក្រុមហ៊ុន" class="w-full h-full object-contain" />`
+                                : `<i class="fas fa-building text-slate-400 text-sm"></i>`}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="pd-title text-slate-700 truncate">ប៊ីអឹមអេស ឌីជីតិច ឯ.ក</div>
+                            <div class="pd-sub text-slate-400 truncate">ការិយាល័យកណ្តាល (ភ្នំពេញ)</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Navigation List -->
-                <div class="p-2 space-y-1">
-                    <a href="${profileUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
-                        <div class="w-8 h-8 rounded-xl bg-emerald-50 text-primary flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-slate-700 group-hover:text-primary transition">កម្រងព័ត៌មានផ្ទាល់ខ្លួន</div>
-                            <div class="text-[11px] text-slate-400 truncate">ព័ត៌មានគណនី និងការអនុញ្ញាត</div>
-                        </div>
-                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition"></i>
-                    </a>
-
-                    <a href="${companyUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
-                        <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-slate-700 group-hover:text-amber-600 transition">ព័ត៌មានក្រុមហ៊ុន</div>
-                            <div class="text-[11px] text-slate-400 truncate">សាខា អាសយដ្ឋាន និងរូបសញ្ញា</div>
-                        </div>
-                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-amber-600 group-hover:translate-x-0.5 transition"></i>
-                    </a>
-
-                    <a href="${systemUrl}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group cursor-pointer">
-                        <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
-                            <i class="fas fa-sliders"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-slate-700 group-hover:text-indigo-600 transition">ការកំណត់ប្រព័ន្ធ</div>
-                            <div class="text-[11px] text-slate-400 truncate">ភាសា រូបិយប័ណ្ណ និងទម្រង់</div>
-                        </div>
-                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition"></i>
-                    </a>
-
-                    <button type="button" onclick="openChangePasswordModal()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition group text-left cursor-pointer">
-                        <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition">ប្តូរពាក្យសម្ងាត់</div>
-                            <div class="text-[11px] text-slate-400 truncate">សុវត្ថិភាព និងលេខកូដសម្ងាត់</div>
-                        </div>
-                        <i class="fas fa-chevron-right text-[10px] text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition"></i>
-                    </button>
-
-                    <div class="my-1 border-t border-slate-100 mx-1"></div>
-
-                    <a href="${loginUrl}" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-50 text-rose-600 transition group text-left cursor-pointer">
-                        <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 group-hover:bg-rose-100 flex items-center justify-center text-sm group-hover:scale-105 transition flex-shrink-0">
-                            <i class="fas fa-arrow-right-from-bracket"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-xs font-semibold text-rose-700">ចាកចេញពីប្រព័ន្ធ</div>
-                            <div class="text-[11px] text-rose-400 truncate">បញ្ចប់សម័យការងារបច្ចុប្បន្ន</div>
-                        </div>
-                        <i class="fas fa-chevron-right text-[10px] text-rose-300 group-hover:text-rose-600 group-hover:translate-x-0.5 transition"></i>
-                    </a>
+                <!-- Group: Account
+                     Tones follow each icon's natural colour so the rows stay
+                     scannable: person blue, brass key gold, brass bell orange. -->
+                <div class="px-3 pt-5 pb-1">
+                    ${groupLabel('គណនី')}
+                    ${buildProfileDrawerRow({ href: url.profile, tone: 'blue', icon: 'fa-user', title: 'កម្រងព័ត៌មានផ្ទាល់ខ្លួន', sub: 'ព័ត៌មានគណនី និងការអនុញ្ញាត' })}
+                    ${buildProfileDrawerRow({ onclick: 'openChangePasswordModal()', tone: 'amber', icon: 'fa-key', title: 'ប្តូរពាក្យសម្ងាត់', sub: 'សុវត្ថិភាព និងលេខកូដសម្ងាត់' })}
+                    ${buildProfileDrawerRow({ href: url.notifications, tone: 'orange', icon: 'fa-bell', title: 'ការជូនដំណឹង', sub: 'កំណត់ការទទួលដំណឹងផ្សេងៗ' })}
                 </div>
-            `;
-            parentContainer.appendChild(dropdown);
-        }
 
-        // Toggle click handler
+                <!-- Group: Administration -->
+                <div class="px-3 pt-4 pb-5">
+                    ${groupLabel('ការគ្រប់គ្រង')}
+                    ${buildProfileDrawerRow({ href: url.company, tone: 'slate', icon: 'fa-building', title: 'ព័ត៌មានក្រុមហ៊ុន', sub: 'សាខា អាសយដ្ឋាន និងរូបសញ្ញា' })}
+                    ${buildProfileDrawerRow({ href: url.users, tone: 'indigo', icon: 'fa-users-gear', title: 'អ្នកប្រើប្រាស់ និងសិទ្ធិ', sub: 'គ្រប់គ្រងគណនី និងតួនាទី' })}
+                    ${buildProfileDrawerRow({ href: url.tax, tone: 'emerald', icon: 'fa-percent', title: 'ការកំណត់ពន្ធ', sub: 'អត្រាអាករ និងលក្ខខណ្ឌគណនា' })}
+                    ${buildProfileDrawerRow({ href: url.system, tone: 'violet', icon: 'fa-sliders', title: 'ការកំណត់ប្រព័ន្ធ', sub: 'ភាសា រូបិយប័ណ្ណ និងទម្រង់' })}
+                </div>
+            </div>
+
+            <!-- Pinned Footer -->
+            <div class="relative px-4 py-3.5 border-t border-slate-100 flex-shrink-0 bg-white">
+                <!-- Fades the list into the footer while more rows remain below -->
+                <div id="bmsProfileScrollFade" class="pointer-events-none absolute left-0 right-0 -top-10 h-10 transition-opacity duration-200"></div>
+                <p class="pd-sub text-slate-400 text-center">DIGITECHKH · កំណែ 1.0</p>
+            </div>
+        `;
+        document.body.appendChild(drawer);
+    }
+
+    // 3. Open / close helpers
+    let lastTrigger = null;
+    // Most pages already carry `overflow-hidden` on <body> as part of their
+    // h-screen layout, so only unlock what we actually locked.
+    let lockedBodyScroll = false;
+
+    window.openUserProfileDrawer = function(trigger) {
+        lastTrigger = trigger || null;
+        drawer.classList.add('open');
+        backdrop.classList.add('active');
+        if (!document.body.classList.contains('overflow-hidden')) {
+            document.body.classList.add('overflow-hidden');
+            lockedBodyScroll = true;
+        }
+        document.querySelectorAll('header button[aria-controls="bmsUserProfileDrawer"]')
+            .forEach(b => b.setAttribute('aria-expanded', 'true'));
+        // Move focus into the dialog itself, not onto the close button: focusing a
+        // real control programmatically makes Chrome paint its :focus-visible ring
+        // even when the panel was opened by mouse or touch.
+        setTimeout(() => drawer.focus({ preventScroll: true }), 320);
+    };
+
+    window.closeUserProfileDrawer = function() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('active');
+        if (lockedBodyScroll) {
+            document.body.classList.remove('overflow-hidden');
+            lockedBodyScroll = false;
+        }
+        document.querySelectorAll('header button[aria-controls="bmsUserProfileDrawer"]')
+            .forEach(b => b.setAttribute('aria-expanded', 'false'));
+        if (lastTrigger) {
+            lastTrigger.focus();
+            lastTrigger = null;
+        }
+    };
+
+    window.toggleUserProfileDrawer = function(trigger) {
+        if (drawer.classList.contains('open')) {
+            window.closeUserProfileDrawer();
+        } else {
+            window.openUserProfileDrawer(trigger);
+        }
+    };
+
+    // 4. Wire every header avatar button to the drawer
+    avatarImgs.forEach(img => {
+        const btn = img.closest('button');
+        if (!btn) return;
+
+        btn.setAttribute('aria-haspopup', 'dialog');
+        btn.setAttribute('aria-controls', 'bmsUserProfileDrawer');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.style.cursor = 'pointer';
+
         btn.onclick = function(e) {
             e.stopPropagation();
-            const isHidden = dropdown.classList.contains('hidden');
-            // Close all other dropdowns
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
-                d.classList.add('hidden');
-                if (d.parentElement) d.parentElement.classList.remove('z-50');
-            });
-            
-            if (isHidden) {
-                dropdown.classList.remove('hidden');
-                btn.setAttribute('aria-expanded', 'true');
-                parentContainer.classList.add('z-50');
-            } else {
-                dropdown.classList.add('hidden');
-                btn.setAttribute('aria-expanded', 'false');
-                parentContainer.classList.remove('z-50');
-            }
+            window.toggleUserProfileDrawer(btn);
         };
     });
 
-    // Close on click outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('#bmsUserProfileDropdown') && !e.target.closest('header button img.rounded-full') && !e.target.closest('header button[aria-haspopup="true"]')) {
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
-                d.classList.add('hidden');
-                if (d.parentElement) d.parentElement.classList.remove('z-50');
-            });
+    // 5. Close on backdrop click, on ESC, and after navigating away
+    backdrop.onclick = () => window.closeUserProfileDrawer();
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+            window.closeUserProfileDrawer();
         }
     });
 
-    // Close on ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
-                d.classList.add('hidden');
-                if (d.parentElement) d.parentElement.classList.remove('z-50');
-            });
+    drawer.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', () => window.closeUserProfileDrawer());
+    });
+
+    // 6. Keep Tab focus inside the panel while it is open (modal dialog behaviour)
+    drawer.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        const focusable = Array.from(
+            drawer.querySelectorAll('a[href], button:not([disabled])')
+        ).filter(el => el.offsetParent !== null);
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
         }
     });
+
+    // 7. Scroll affordances: lift the header once scrolled, and fade the list
+    //    into the footer while more rows remain below (scrollbars are hidden
+    //    application-wide, so these are the only "there is more" cues).
+    const drawerBody = drawer.querySelector('#bmsProfileDrawerBody');
+    const drawerHeader = drawer.querySelector('#bmsProfileDrawerHeader');
+    const scrollFade = drawer.querySelector('#bmsProfileScrollFade');
+
+    const syncDrawerScrollCues = () => {
+        if (!drawerBody) return;
+        if (drawerHeader) {
+            drawerHeader.classList.toggle('is-scrolled', drawerBody.scrollTop > 4);
+        }
+        if (scrollFade) {
+            const atEnd = drawerBody.scrollTop + drawerBody.clientHeight >= drawerBody.scrollHeight - 4;
+            scrollFade.classList.toggle('is-hidden', atEnd);
+        }
+    };
+
+    if (drawerBody) {
+        drawerBody.addEventListener('scroll', syncDrawerScrollCues);
+        window.addEventListener('resize', syncDrawerScrollCues);
+        // Run once the drawer has laid out so the fade starts in the right state
+        setTimeout(syncDrawerScrollCues, 0);
+        drawer.addEventListener('transitionend', syncDrawerScrollCues);
+    }
 }
 
 /**
  * Change Password Modal Dialog
  */
 function openChangePasswordModal() {
-    // Close dropdown
-    document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => d.classList.add('hidden'));
+    // Close the profile drawer first so the modal is not stacked on top of it
+    if (typeof window.closeUserProfileDrawer === 'function') {
+        window.closeUserProfileDrawer();
+    }
 
     let modal = document.getElementById('bmsChangePasswordModal');
     if (!modal) {
@@ -934,6 +1058,50 @@ function submitChangePassword() {
 }
 
 /**
+ * Notification feed (mock). `text` may carry <b> for the emphasised fragment and
+ * <v> for a value that should take the item's own colour.
+ */
+const BMS_NOTIFICATIONS = [
+    {
+        target: 'invoice', tone: 'emerald', icon: 'fa-file-invoice-dollar', unread: true,
+        text: 'វិក្កយបត្រ <b>#INV-2026-0042</b> ត្រូវបានទូទាត់ជោគជ័យ <v>$12,800.00</v>',
+        time: '10 នាទីមុន'
+    },
+    {
+        target: 'stock', tone: 'amber', icon: 'fa-triangle-exclamation', unread: true,
+        text: 'ស្តុកទំនិញ <b>iPhone 15 Pro Max</b> ជិតអស់ពីស្តុក នៅសល់តែ <v>3 គ្រឿង</v>',
+        time: '45 នាទីមុន'
+    },
+    {
+        target: 'customer', tone: 'blue', icon: 'fa-user-plus', unread: true,
+        text: 'អតិថិជនថ្មី <b>សុខ វណ្ណា</b> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ',
+        time: '2 ម៉ោងមុន'
+    },
+    {
+        target: 'bills', tone: 'violet', icon: 'fa-file-invoice', unread: true,
+        text: 'វិក្កយបត្រទិញ <b>#BILL-2026-004</b> ត្រូវបានអនុម័តដោយប្រធានផ្នែក',
+        time: '4 ម៉ោងមុន'
+    }
+];
+
+function buildNotifRow(n, urls) {
+    const body = n.text
+        .replace(/<b>/g, '<span class="nf-strong text-slate-800">').replace(/<\/b>/g, '</span>')
+        .replace(/<v>/g, `<span class="nf-strong text-${n.tone}-700">`).replace(/<\/v>/g, '</span>');
+
+    return `
+        <a href="${urls[n.target]}" class="nf-row ${n.unread ? 'is-unread' : ''} relative flex items-start gap-3.5 px-4 py-3 hover:bg-slate-50 transition-colors group">
+            <i class="fas ${n.icon} nf-icon text-${n.tone}-500 w-5 text-center flex-shrink-0 mt-0.5"></i>
+            <div class="flex-1 min-w-0">
+                <p class="nf-text text-slate-600">${body}</p>
+                <span class="nf-time text-slate-400 block mt-1">${n.time}</span>
+            </div>
+            <span class="notif-dot w-2 h-2 rounded-full bg-${n.tone}-500 mt-1.5 flex-shrink-0"></span>
+        </a>
+    `;
+}
+
+/**
  * Global Notifications Dropdown Manager
  */
 function initGlobalNotifications() {
@@ -973,96 +1141,59 @@ function initGlobalNotifications() {
             const billsUrl = getPagesRelativePath('4-buy/1-bills/bills.html');
             const allNotifsUrl = getPagesRelativePath('7-settings/4-notifications/notifications.html');
 
+            // Mirror BMSActionTracker's tab classes so switching tabs doesn't resize
+            // them. Fall back to the same strings if the tracker hasn't loaded —
+            // an empty fallback would render the tabs completely unstyled.
+            const TAB_BASE = 'bms-nf-tab flex-1 py-2.5 px-3 flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden border-b-2 transition-colors';
+            const TAB_ACTIVE = (window.BMSActionTracker && window.BMSActionTracker.TAB_ACTIVE)
+                || TAB_BASE + ' is-active border-primary text-primary bg-primary/5';
+            const TAB_INACTIVE = (window.BMSActionTracker && window.BMSActionTracker.TAB_INACTIVE)
+                || TAB_BASE + ' border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100/70';
+
             flyout.innerHTML = `
                 <!-- Segmented Tabs (Action Timeline vs Notifications) -->
-                <div class="flex border-b border-slate-100 bg-slate-50/50 overflow-hidden">
-                    <button type="button" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
-                        class="flex-1 py-2.5 px-3 text-xs font-semibold text-primary border-b-2 border-primary bg-primary/5 transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
-                        <i class="fas fa-clock-rotate-left text-xs flex-shrink-0"></i>
+                <div class="flex items-stretch border-b border-slate-100 bg-slate-50/60" role="tablist">
+                    <button type="button" role="tab" aria-selected="true" id="bmsTabActionsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('actions')"
+                        class="${TAB_ACTIVE}">
+                        <i class="fas fa-clock-rotate-left nf-tab-icon flex-shrink-0"></i>
                         <span class="truncate">ដំណើរការសកម្មភាព</span>
-                        <span id="bmsActionCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex-shrink-0">3</span>
+                        <span id="bmsActionCountBadge" class="nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-slate-200/70 text-slate-600 flex-shrink-0">3</span>
                     </button>
-                    <button type="button" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
-                        class="flex-1 py-2.5 px-3 text-xs font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap overflow-hidden">
-                        <i class="fas fa-bell text-xs flex-shrink-0"></i>
+                    <button type="button" role="tab" aria-selected="false" id="bmsTabNotifsBtn" onclick="window.BMSActionTracker && window.BMSActionTracker.switchTab('notifications')"
+                        class="${TAB_INACTIVE}">
+                        <i class="fas fa-bell nf-tab-icon flex-shrink-0"></i>
                         <span class="truncate">ការជូនដំណឹង</span>
-                        <span id="bmsNotifCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-100 flex-shrink-0">4 ថ្មី</span>
+                        <span id="bmsNotifCountBadge" class="nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-rose-500 text-white flex-shrink-0">4</span>
+                    </button>
+                    <button type="button" id="bmsMarkAllReadBtn" onclick="markAllNotificationsAsRead()"
+                        class="px-3.5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-100/70 border-b-2 border-transparent transition-colors cursor-pointer flex-shrink-0"
+                        title="សម្គាល់ថាបានអានទាំងអស់" aria-label="សម្គាល់ថាបានអានទាំងអស់">
+                        <i class="fas fa-check-double nf-tab-icon"></i>
                     </button>
                 </div>
 
                 <!-- Tab 1: Action Timeline List -->
-                <div id="bmsActionTimelineList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto">
+                <div id="bmsActionTimelineList" class="nf-list divide-y divide-slate-50 max-h-96 overflow-y-auto scrollbar-hide">
                     <!-- Injected dynamically by BMSActionTracker -->
                 </div>
 
                 <!-- Tab 2: Notification List -->
-                <div id="bmsNotificationItemsList" class="divide-y divide-slate-50 max-h-96 overflow-y-auto hidden">
-                    <!-- Notification 1 -->
-                    <a href="${invoiceUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រ <span class="font-semibold text-slate-800">#INV-2026-0042</span> ត្រូវបានទូទាត់ជោគជ័យ <span class="font-semibold text-emerald-700">$12,800.00</span>
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 10 នាទីមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 2 -->
-                    <a href="${stockUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-triangle-exclamation"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                ស្តុកទំនិញ <span class="font-semibold text-slate-800">iPhone 15 Pro Max</span> ជិតអស់ពីស្តុក (នៅសល់តែ 3 គ្រឿង)
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 45 នាទីមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 3 -->
-                    <a href="${customerUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                អតិថិជនថ្មី <span class="font-semibold text-slate-800">សុខ វណ្ណា (ក្រុមហ៊ុន សុខ វណ្ណា ត្រេឌីង)</span> បានចុះឈ្មោះចូលក្នុងប្រព័ន្ធ
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 2 ម៉ោងមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
-
-                    <!-- Notification 4 -->
-                    <a href="${billsUrl}" class="flex items-start gap-3 p-3 px-4 hover:bg-slate-50 transition group">
-                        <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm flex-shrink-0 group-hover:scale-105 transition">
-                            <i class="fas fa-file-invoice"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                                វិក្កយបត្រទិញ <span class="font-semibold text-slate-800">#BILL-2026-004</span> ត្រូវបានអនុម័តដោយប្រធានផ្នែក
-                            </p>
-                            <span class="text-[11px] text-slate-400 mt-1 inline-flex items-center gap-1">
-                                <i class="fas fa-clock text-[10px]"></i> 4 ម៉ោងមុន
-                            </span>
-                        </div>
-                        <span class="w-2 h-2 rounded-full bg-purple-500 mt-2 flex-shrink-0 notif-dot"></span>
-                    </a>
+                <div id="bmsNotificationItemsList" class="nf-list divide-y divide-slate-50 max-h-96 overflow-y-auto scrollbar-hide hidden">
+                    ${BMS_NOTIFICATIONS.map(n => buildNotifRow(n, {
+                        invoice: invoiceUrl, stock: stockUrl, customer: customerUrl, bills: billsUrl
+                    })).join('')}
                 </div>
+
+                <!-- Fades the last row into the panel edge while more remain below -->
+                <div id="bmsNotifScrollFade" class="pointer-events-none absolute left-0 right-0 bottom-0 h-9 transition-opacity duration-200"></div>
             `;
             wrapper.appendChild(flyout);
+
+            // Scrollbars are hidden application-wide, so the bottom fade is the
+            // only cue that more rows exist below the fold.
+            flyout.querySelectorAll('.nf-list').forEach(listEl => {
+                listEl.addEventListener('scroll', () => window.syncNotifScrollFade());
+            });
         }
 
         // Toggle click handler
@@ -1070,11 +1201,10 @@ function initGlobalNotifications() {
             e.stopPropagation();
             const isHidden = flyout.classList.contains('hidden');
             
-            // Close profile dropdown if open
-            document.querySelectorAll('#bmsUserProfileDropdown').forEach(d => {
-                d.classList.add('hidden');
-                if (d.parentElement) d.parentElement.classList.remove('z-50');
-            });
+            // Close the profile drawer if open
+            if (typeof window.closeUserProfileDrawer === 'function') {
+                window.closeUserProfileDrawer();
+            }
             // Close other notification flyouts
             document.querySelectorAll('#bmsNotificationFlyout').forEach(f => {
                 f.classList.add('hidden');
@@ -1089,6 +1219,7 @@ function initGlobalNotifications() {
                     window.BMSActionTracker.renderTimeline('bmsActionTimelineList');
                     window.BMSActionTracker.updateBadge();
                 }
+                window.syncNotifScrollFade();
             } else {
                 flyout.classList.add('hidden');
                 btn.setAttribute('aria-expanded', 'false');
@@ -1118,19 +1249,45 @@ function initGlobalNotifications() {
     });
 }
 
+/**
+ * Shows the bottom fade on whichever list is visible, but only while it can
+ * still be scrolled further. Exposed globally so BMSActionTracker can call it
+ * after re-rendering the timeline or switching tabs.
+ */
+window.syncNotifScrollFade = function() {
+    document.querySelectorAll('#bmsNotificationFlyout').forEach(flyout => {
+        const fade = flyout.querySelector('#bmsNotifScrollFade');
+        if (!fade) return;
+
+        const list = [...flyout.querySelectorAll('.nf-list')]
+            .find(el => !el.classList.contains('hidden'));
+
+        if (!list) {
+            fade.classList.add('is-hidden');
+            return;
+        }
+
+        const atEnd = list.scrollTop + list.clientHeight >= list.scrollHeight - 4;
+        fade.classList.toggle('is-hidden', atEnd);
+    });
+};
+
 function markAllNotificationsAsRead() {
-    // Hide dots
+    // Clear the unread tint and the per-row dots
+    document.querySelectorAll('#bmsNotificationFlyout .nf-row').forEach(row => row.classList.remove('is-unread'));
     document.querySelectorAll('.notif-dot').forEach(dot => dot.classList.add('hidden'));
-    
-    // Update count badge
+
+    // Fade the tab counter down to a neutral zero
     const badge = document.getElementById('bmsNotifCountBadge');
     if (badge) {
-        badge.textContent = '0 ថ្មី';
-        badge.className = 'px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500 border border-slate-200';
+        badge.textContent = '0';
+        badge.className = 'nf-chip px-1.5 py-0.5 rounded-full font-semibold bg-slate-200/70 text-slate-500 flex-shrink-0';
     }
 
-    // Hide ping animation on the bells
-    document.querySelectorAll('header button .animate-ping').forEach(ping => ping.parentElement.remove());
+    // Drop the pulsing indicator on the header bells
+    document.querySelectorAll('header button .animate-ping').forEach(ping => {
+        if (ping.parentElement) ping.parentElement.remove();
+    });
 
     if (typeof showToast === 'function') {
         showToast('បានសម្គាល់ការជូនដំណឹងទាំងអស់ថាបានអានរួចរាល់!', 'success');

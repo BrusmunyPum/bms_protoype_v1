@@ -488,8 +488,6 @@ main {
         width: 100vw !important;
         height: 100vh !important;
         background-color: rgba(15, 23, 42, 0.6) !important;
-        backdrop-filter: blur(4px) !important;
-        -webkit-backdrop-filter: blur(4px) !important;
         z-index: 45 !important;
         opacity: 0;
         pointer-events: none;
@@ -881,14 +879,12 @@ div:has(.bms-items-table-wrapper .bms-custom-select-menu:not(.hidden)),
 /* 6. Popover & Flyout Viewport Protection */
 #datePickerPopover,
 .bms-date-popover,
-#bmsUserProfileDropdown,
 #bmsNotificationFlyout {
     max-width: calc(100vw - 1.5rem);
 }
 
 @media (max-width: 639px) {
-    #bmsNotificationFlyout,
-    #bmsUserProfileDropdown {
+    #bmsNotificationFlyout {
         position: fixed !important;
         top: 72px !important;
         left: 0.75rem !important;
@@ -1116,8 +1112,7 @@ div:has(.bms-items-table-wrapper .bms-custom-select-menu:not(.hidden)),
         display: none !important; /* Hide page title subtitle on mobile to preserve exact 72px seamless line */
     }
 
-    #bmsNotificationFlyout p,
-    #bmsUserProfileDropdown p {
+    #bmsNotificationFlyout p {
         display: block !important;
     }
 
@@ -2382,3 +2377,331 @@ main .toolbar-actions a {
 
 
 
+
+/* =========================================================
+   User Profile Drawer — full-height slide-over on the right
+   Built and injected by scripts/sidebar.js (initUserProfileMenu)
+   ========================================================= */
+#bmsProfileBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.45);
+    z-index: 9990;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+#bmsProfileBackdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#bmsUserProfileDrawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 448px;
+    max-width: 94vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #ffffff;
+    border-left: 1px solid #e2e8f0;
+    z-index: 9991;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease;
+    box-shadow: none;
+    will-change: transform;
+    user-select: none;
+}
+
+#bmsUserProfileDrawer.open {
+    transform: translateX(0);
+    box-shadow: -24px 0 60px -20px rgba(15, 23, 42, 0.35);
+}
+
+/* Full-screen on phones (< 640px). Anything narrower than a small tablet would
+   otherwise leave a useless sliver of page beside a 448px panel. */
+@media (max-width: 639px) {
+    #bmsUserProfileDrawer {
+        width: 100vw;
+        max-width: 100vw;
+        border-left: none;
+    }
+
+    /* Keep the logout button clear of the iOS home indicator */
+    #bmsUserProfileDrawer > div:last-child {
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* Scoped type scale.
+   The global Khmer readability block above forces .text-xs / .text-[11px] / etc.
+   to one size with !important, which flattens this panel's hierarchy. These
+   ID-scoped rules restore it without touching the global scale. */
+#bmsUserProfileDrawer .pd-head {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+}
+
+#bmsUserProfileDrawer .pd-name {
+    font-size: 17px !important;
+    line-height: 1.45 !important;
+    font-weight: 600 !important;
+}
+
+#bmsUserProfileDrawer .pd-email {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+}
+
+#bmsUserProfileDrawer .pd-badge {
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+}
+
+#bmsUserProfileDrawer .pd-group {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+}
+
+#bmsUserProfileDrawer .pd-title {
+    font-size: 14.5px !important;
+    line-height: 1.45 !important;
+    font-weight: 500 !important;
+}
+
+#bmsUserProfileDrawer .pd-sub {
+    font-size: 11.5px !important;
+    line-height: 1.45 !important;
+}
+
+#bmsUserProfileDrawer .pd-chevron {
+    font-size: 10px !important;
+    line-height: 1 !important;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    #bmsUserProfileDrawer,
+    #bmsProfileBackdrop,
+    #bmsUserProfileDrawer #bmsProfileDrawerCloseBtn,
+    #bmsUserProfileDrawer .pd-icon,
+    #bmsUserProfileDrawer .pd-chevron {
+        transition: none !important;
+        transform: none;
+    }
+
+    #bmsUserProfileDrawer {
+        transform: translateX(100%);
+    }
+
+    #bmsUserProfileDrawer.open {
+        transform: translateX(0);
+    }
+}
+
+@media print {
+    #bmsUserProfileDrawer,
+    #bmsProfileBackdrop {
+        display: none !important;
+    }
+}
+
+/* Header lift once the drawer body scrolls */
+#bmsUserProfileDrawer #bmsProfileDrawerHeader.is-scrolled {
+    box-shadow: 0 4px 14px -8px rgba(15, 23, 42, 0.28);
+    border-bottom-color: transparent;
+}
+
+/* The panel itself takes focus on open (tabindex="-1"); never paint a ring for it */
+#bmsUserProfileDrawer:focus,
+#bmsUserProfileDrawer:focus-visible {
+    outline: none;
+}
+
+/* Visible keyboard focus inside the drawer (mouse/touch stays clean).
+   No border-radius here — each control keeps its own shape, so the ring
+   follows the close button's left-only rounding instead of boxing it. */
+#bmsUserProfileDrawer a:focus-visible,
+#bmsUserProfileDrawer button:focus-visible {
+    outline: 2px solid #24692d;
+    outline-offset: 2px;
+}
+
+/* Bottom scroll fade — visible only while more rows remain below */
+#bmsUserProfileDrawer #bmsProfileScrollFade {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+    opacity: 1;
+}
+
+#bmsUserProfileDrawer #bmsProfileScrollFade.is-hidden {
+    opacity: 0;
+}
+
+/* Close button — sits outside the panel but flush against its left edge, so it
+   reads as a tab attached to the panel rather than a floating control.
+   Vertically centred against the 72px header band. */
+#bmsUserProfileDrawer #bmsProfileDrawerCloseBtn {
+    position: absolute;
+    top: 1rem;
+    left: -2.5rem;
+    z-index: 1;
+    border-radius: 0.75rem 0 0 0.75rem;
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    border-right-color: transparent;
+    color: #64748b;
+    box-shadow: -10px 0 24px -14px rgba(15, 23, 42, 0.45);
+    /* The button overhangs the panel's left edge, so it would still be on-screen
+       when the closed panel is parked at translateX(100%). Keep it hidden until
+       the panel is actually open. */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+#bmsUserProfileDrawer.open #bmsProfileDrawerCloseBtn {
+    opacity: 1;
+    visibility: visible;
+}
+
+#bmsUserProfileDrawer #bmsProfileDrawerCloseBtn:hover {
+    background-color: #f8fafc;
+    color: #334155;
+}
+
+/* On phones the panel is full-screen, so the button tucks back inside the header */
+@media (max-width: 639px) {
+    #bmsUserProfileDrawer #bmsProfileDrawerCloseBtn {
+        top: 1rem;
+        left: 1rem;
+        border-radius: 0.75rem;
+        background-color: #f8fafc;
+        border-color: rgba(226, 232, 240, 0.7);
+        border-right-color: rgba(226, 232, 240, 0.7);
+        color: #64748b;
+        box-shadow: none;
+    }
+
+    #bmsUserProfileDrawer #bmsProfileDrawerCloseBtn:hover {
+        background-color: #f1f5f9;
+        border-color: #e2e8f0;
+        color: #334155;
+    }
+}
+
+/* Bare row icons (no tinted chip behind them) */
+#bmsUserProfileDrawer .pd-icon {
+    font-size: 16px !important;
+    line-height: 1 !important;
+}
+
+/* =========================================================
+   Notification Flyout (#bmsNotificationFlyout)
+   Built and injected by scripts/sidebar.js + BMSActionTracker
+   ========================================================= */
+
+/* Scoped type scale. The global Khmer readability block above flattens
+   .text-xs / .text-[11px] / .text-[10px] to one size with !important, which
+   made the message, the timestamp and the badge all render identically.
+   These ID-scoped rules restore the hierarchy without touching that scale. */
+#bmsNotificationFlyout .nf-tab-icon {
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+#bmsNotificationFlyout .bms-nf-tab {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+}
+
+#bmsNotificationFlyout .bms-nf-tab.is-active {
+    font-weight: 600 !important;
+}
+
+#bmsNotificationFlyout .nf-chip {
+    font-size: 10.5px !important;
+    line-height: 1.45 !important;
+}
+
+#bmsNotificationFlyout .nf-icon {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+}
+
+/* Notification message */
+#bmsNotificationFlyout .nf-text {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    font-weight: 400 !important;
+}
+
+#bmsNotificationFlyout .nf-strong {
+    font-weight: 600 !important;
+}
+
+/* Timeline row: title / detail / time */
+#bmsNotificationFlyout .nf-title {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+}
+
+#bmsNotificationFlyout .nf-sub {
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+}
+
+#bmsNotificationFlyout .nf-time {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+}
+
+/* Unread rows carry a faint brand wash plus a left marker; read rows sit plain */
+#bmsNotificationFlyout .nf-row.is-unread {
+    background-color: rgba(36, 105, 45, 0.055);
+    box-shadow: inset 2px 0 0 0 rgba(36, 105, 45, 0.35);
+}
+
+#bmsNotificationFlyout .nf-row.is-unread:hover {
+    background-color: rgba(36, 105, 45, 0.09);
+}
+
+/* Separate the mark-all-read action from the two tabs */
+#bmsNotificationFlyout #bmsMarkAllReadBtn {
+    border-left: 1px solid #f1f5f9;
+}
+
+/* Bottom scroll fade — visible only while more rows remain below */
+#bmsNotificationFlyout #bmsNotifScrollFade {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+    opacity: 1;
+}
+
+#bmsNotificationFlyout #bmsNotifScrollFade.is-hidden {
+    opacity: 0;
+}
+
+/* Keyboard focus, matching the profile drawer */
+#bmsNotificationFlyout a:focus-visible,
+#bmsNotificationFlyout button:focus-visible {
+    outline: 2px solid #24692d;
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #bmsNotificationFlyout #bmsNotifScrollFade {
+        transition: none !important;
+    }
+}
