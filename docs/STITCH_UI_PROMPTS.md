@@ -10,6 +10,8 @@ Use this document to generate BMS UI screens in Google Stitch.
 4. When you approve the first 2–3 screens, use Stitch’s design-system/theme controls so all later screens use the same visual language. Export/save its `DESIGN.md` when available.
 5. Upload an image only when you have a useful reference: your company logo, an approved colour/brand reference, or a hand-drawn/screenshot layout. Stitch accepts common raster images such as PNG, JPG and WebP; it also supports text, image and code inputs. [Google Stitch overview](https://developers.googleblog.com/en/stitch-a-new-way-to-design-uis/)
 
+The most useful existing BMS reference is `FRONTEND_FLOW.md`. Read it yourself while prompting, but paste only the relevant screen prompt into Stitch.
+
 ## Project brief — paste once
 
 ```text

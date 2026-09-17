@@ -17,7 +17,7 @@
 | ID | Task | Depends on | Done when |
 |---|---|---|---|
 | BMS-001 | Create Git repository and initial README | — | Repository has `main`, `.gitignore`, README, and the existing docs committed. |
-| BMS-002 | Add project folder structure | BMS-001 | `apps/web`, `apps/api`, `infra/compose`, and `infra/nginx` exist with README files explaining their purpose. |
+| BMS-002 | Add project folder structure | BMS-001 | `apps/web`, `apps/bms-api`, `infra/compose`, and `infra/nginx` exist with README files explaining their purpose. |
 | BMS-003 | Create local PostgreSQL development database | BMS-002 | A local `bms_dev` database and non-production application account exist; connection values are kept outside Git. |
 | BMS-004 | Create Spring Boot API application | BMS-002 | API starts locally and exposes unauthenticated `GET /actuator/health` returning UP. |
 | BMS-005 | Connect API to PostgreSQL | BMS-003, BMS-004 | API starts against the Compose database using environment variables only. |

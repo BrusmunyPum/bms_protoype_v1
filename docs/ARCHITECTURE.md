@@ -260,4 +260,4 @@ No phase begins until the previous phase has automated tests and the relevant bu
 
 The first actual code milestone will create only the foundation folders/apps and a healthy empty application. It will not attempt invoices or stock before the security, database migration and testing base are working.
 
-All approved requirement documents are already committed to `docs/`. Begin with **BMS-001** from `IMPLEMENTATION_TASK_BACKLOG.md`. Create the Angular and Spring Boot applications using their official generators rather than hand-writing framework configuration.
+Before generating the project, copy the approved requirements into `bms/docs/BUSINESS_REQUIREMENTS.md` and complete the decision log. Then create the Angular and Spring Boot applications using their official generators, rather than hand-creating framework configuration.
